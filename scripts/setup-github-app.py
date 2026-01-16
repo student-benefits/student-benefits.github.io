@@ -23,7 +23,7 @@ PERMISSIONS = {
     "contents": "write",
     "issues": "write",
     "pull_requests": "write",
-    "models": "read",
+    "organization_models": "read",  # GitHub Models API access
 }
 
 
