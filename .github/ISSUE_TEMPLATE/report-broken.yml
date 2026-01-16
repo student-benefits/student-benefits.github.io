@@ -1,0 +1,71 @@
+name: Report Broken or Changed Benefit
+description: Report a benefit that has a broken link, changed terms, or no longer exists
+title: "[Report]: "
+labels: ["report", "needs-review"]
+body:
+  - type: dropdown
+    id: benefit
+    attributes:
+      label: Which benefit?
+      description: Select the benefit you're reporting
+      options:
+        - GitHub Student Developer Pack
+        - GitHub Copilot Pro
+        - Cursor Pro
+        - JetBrains IDEs
+        - Perplexity Pro
+        - 1Password
+        - Microsoft Azure
+        - DigitalOcean
+        - AWS Educate
+        - MongoDB Atlas
+        - Heroku
+        - Netlify
+        - Namecheap Free Domain
+        - Figma Education
+        - Canva for Education
+        - Autodesk
+        - Notion Education
+        - Obsidian
+        - Grammarly
+        - Microsoft 365 Education
+        - Linear
+        - Spotify Premium Student
+        - Amazon Prime Student
+        - Apple Education Pricing
+        - UNiDAYS
+        - LinkedIn Learning
+        - Coursera for Campus
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: What's the issue?
+      options:
+        - Link is broken (404 or redirect)
+        - Terms/pricing have changed
+        - Student program no longer exists
+        - Information is outdated
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Provide more context about the issue
+      placeholder: |
+        Example: The link now redirects to a generic pricing page. The student discount seems to have been discontinued as of January 2025.
+    validations:
+      required: true
+
+  - type: input
+    id: correct-link
+    attributes:
+      label: Correct link (if known)
+      description: If you know the new/correct URL, please provide it
+      placeholder: https://example.com/students

@@ -1,0 +1,145 @@
+name: Verify Benefits Still Active
+
+on:
+  schedule:
+    - cron: '0 10 1 * *' # First day of each month at 10am UTC
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate app token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: Verify benefits with AI
+        uses: actions/github-script@v7
+        env:
+          MODELS_TOKEN: ${{ steps.app-token.outputs.token }}
+        with:
+          script: |
+            const token = process.env.MODELS_TOKEN;
+            if (!token) {
+              console.log('No MODELS_TOKEN configured');
+              return;
+            }
+
+            const fs = require('fs');
+            const benefits = JSON.parse(fs.readFileSync('src/data/benefits.json', 'utf8'));
+
+            // Sample 5 random benefits to verify each month (to manage API costs)
+            const shuffled = benefits.sort(() => 0.5 - Math.random());
+            const toVerify = shuffled.slice(0, 5);
+
+            console.log('Verifying', toVerify.length, 'benefits:', toVerify.map(b => b.name).join(', '));
+
+            const prompt = [
+              'You are verifying whether student discount/benefit programs still exist.',
+              '',
+              'For each benefit below, use your knowledge to determine if:',
+              '1. The student program still exists (as of your knowledge cutoff)',
+              '2. The terms are approximately correct',
+              '3. The URL is likely still the correct signup page',
+              '',
+              'BENEFITS TO VERIFY:',
+              JSON.stringify(toVerify.map(b => ({
+                name: b.name,
+                description: b.description,
+                link: b.link
+              })), null, 2),
+              '',
+              'RESPOND WITH JSON ONLY:',
+              '{',
+              '  "results": [',
+              '    {',
+              '      "name": "Benefit Name",',
+              '      "status": "active" | "changed" | "discontinued" | "uncertain",',
+              '      "notes": "Brief explanation if changed, discontinued, or uncertain"',
+              '    }',
+              '  ]',
+              '}',
+              '',
+              'Be conservative: only mark as "discontinued" if you are confident the program no longer exists.',
+              'Mark as "changed" if terms have significantly changed.',
+              'Mark as "uncertain" if you cannot verify.'
+            ].join('\n');
+
+            const response = await fetch('https://models.inference.ai.azure.com/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                model: 'gpt-4o',
+                messages: [{ role: 'user', content: prompt }],
+                temperature: 0.2
+              })
+            });
+
+            if (!response.ok) {
+              console.log('API error:', await response.text());
+              return;
+            }
+
+            const data = await response.json();
+            const aiResponse = data.choices[0].message.content;
+            console.log('AI response:', aiResponse);
+
+            let result;
+            try {
+              const jsonStr = aiResponse.replace(/```json\n?|\n?```/g, '').trim();
+              result = JSON.parse(jsonStr);
+            } catch (e) {
+              console.log('Failed to parse response');
+              return;
+            }
+
+            const issues = result.results.filter(r =>
+              r.status === 'changed' || r.status === 'discontinued'
+            );
+
+            if (issues.length === 0) {
+              console.log('All verified benefits appear active!');
+              return;
+            }
+
+            // Create issues for benefits that need attention
+            for (const issue of issues) {
+              const issueBody = [
+                '### Automated Verification Alert',
+                '',
+                '**Benefit:** ' + issue.name,
+                '**Status:** ' + issue.status,
+                '',
+                '**Notes:** ' + issue.notes,
+                '',
+                '---',
+                '_This issue was created by automated verification. Please manually verify and update or close if no action needed._'
+              ].join('\n');
+
+              try {
+                const created = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: '[Verify]: ' + issue.name + ' - ' + issue.status,
+                  body: issueBody,
+                  labels: ['needs-review', 'auto-verified']
+                });
+                console.log('Created issue for', issue.name, ':', created.data.html_url);
+              } catch (e) {
+                console.log('Failed to create issue for', issue.name, ':', e);
+              }
+
+              await new Promise(r => setTimeout(r, 1000));
+            }
