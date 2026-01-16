@@ -1,64 +1,14 @@
 name: Submit New Benefit
-description: Suggest a student benefit to add to the directory
+description: Suggest a student benefit to add
 title: "[Benefit]: "
 labels: ["new-benefit"]
 body:
-  - type: input
-    id: name
-    attributes:
-      label: Benefit Name
-      placeholder: e.g., GitHub Copilot
-    validations:
-      required: true
-
-  - type: dropdown
-    id: category
-    attributes:
-      label: Category
-      options:
-        - AI & Dev Tools
-        - Cloud & Hosting
-        - Learning
-        - Design
-        - Productivity
-        - Lifestyle
-        - Domains & Security
-        - Other
-    validations:
-      required: true
-
   - type: textarea
     id: description
     attributes:
-      label: Description
-      description: Brief description of the benefit (1-2 sentences)
-      placeholder: What does this benefit offer students?
+      label: Describe the benefit
+      description: Tell us about the student benefit - what is it, what do students get, and where can they sign up?
+      placeholder: |
+        Example: Cursor offers one free year of Cursor Pro for university students. It's an AI-powered code editor with 500 fast requests per month. Students can sign up at cursor.com/students
     validations:
       required: true
-
-  - type: input
-    id: link
-    attributes:
-      label: Link
-      description: URL to the student benefit signup page
-      placeholder: https://example.com/students
-    validations:
-      required: true
-
-  - type: input
-    id: tags
-    attributes:
-      label: Tags
-      description: Comma-separated tags for search
-      placeholder: AI, Coding, Free
-    validations:
-      required: true
-
-  - type: input
-    id: repo
-    attributes:
-      label: GitHub Repo (optional)
-      description: If this is an open-source tool, provide the repo
-      placeholder: owner/repo
-    validations:
-      required: false
