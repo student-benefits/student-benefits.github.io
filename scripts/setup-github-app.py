@@ -84,13 +84,24 @@ class CallbackHandler(BaseHTTPRequestHandler):
 
 
 def main():
-    print(f"Creating GitHub App: {APP_NAME}")
-    print("This requires ONE browser click (GitHub security requirement).\n")
+    print(f"Creating GitHub App: {APP_NAME}\n")
+
+    print("Configuration:")
+    print(f"  Name:     {APP_NAME}")
+    print(f"  Homepage: {HOMEPAGE}")
+    print(f"  Webhook:  Disabled")
+    print(f"  Public:   No (only you can install)")
+    print()
+    print("Permissions:")
+    for perm, level in MANIFEST["default_permissions"].items():
+        print(f"  {perm}: {level}")
+    print()
+
+    input("Press Enter to open browser and create the app...")
 
     manifest = {**MANIFEST, "redirect_url": f"http://localhost:{PORT}"}
     url = f"https://github.com/settings/apps/new?manifest={json.dumps(manifest)}"
 
-    print("Opening browser - click 'Create GitHub App'...")
     webbrowser.open(url)
 
     HTTPServer(("localhost", PORT), CallbackHandler).handle_request()
