@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { benefits } from './data/benefits';
 import BenefitCard from './components/BenefitCard';
 import FilterBar from './components/FilterBar';
@@ -6,6 +6,19 @@ import FilterBar from './components/FilterBar';
 function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
+        searchRef.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const filteredBenefits = useMemo(() => {
     return benefits.filter(benefit => {
@@ -45,6 +58,7 @@ function App() {
               </svg>
             </div>
             <input
+              ref={searchRef}
               type="text"
               placeholder="Search tools, categories, or tags..."
               className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-2xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-all duration-300 shadow-lg shadow-black/20 backdrop-blur-sm"
