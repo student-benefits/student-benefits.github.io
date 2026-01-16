@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Benefit } from '../data/benefits';
 
 interface BenefitCardProps {
@@ -13,6 +14,8 @@ function formatStars(stars: number): string {
 }
 
 const BenefitCard = ({ benefit, stars }: BenefitCardProps) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div className="group relative flex flex-col h-full bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 overflow-hidden">
 
@@ -44,9 +47,20 @@ const BenefitCard = ({ benefit, stars }: BenefitCardProps) => {
           {benefit.name}
         </h3>
 
-        <p className="text-slate-400 text-sm mb-6 leading-relaxed line-clamp-3">
+        <p
+          className={`text-slate-400 text-sm mb-2 leading-relaxed cursor-pointer ${expanded ? '' : 'line-clamp-3'}`}
+          onClick={() => setExpanded(!expanded)}
+        >
           {benefit.description}
         </p>
+        {benefit.description.length > 120 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="text-xs text-indigo-400 hover:text-indigo-300 mb-4"
+          >
+            {expanded ? 'Show less' : 'Show more'}
+          </button>
+        )}
 
         <div className="flex flex-wrap gap-2 mt-auto">
           {benefit.tags.map(tag => (
