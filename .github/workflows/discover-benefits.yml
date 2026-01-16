@@ -15,10 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Scrape Reddit and analyze
         uses: actions/github-script@v7
         env:
-          MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+          MODELS_TOKEN: ${{ steps.app-token.outputs.token }}
         with:
           script: |
             const token = process.env.MODELS_TOKEN;
