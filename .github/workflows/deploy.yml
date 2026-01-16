@@ -1,82 +1,46 @@
 name: Deploy
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    runs-on: ubuntu-24.04-arm
-    timeout-minutes: 360
-    permissions:
-      contents: read
-      packages: read
-      actions: write
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Log in to GHCR
-        uses: docker/login-action@v3
+      - uses: actions/setup-node@v4
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '22'
+          cache: npm
 
-      - name: Pull image
-        run: docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+      - run: npm ci
 
-      - name: Start container
-        run: |
-          docker run -d \
-            --name student-benefits-hub \
-            -p 8080:80 \
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+      - run: npm run build
 
-      - name: Wait for container health
-        run: |
-          for i in $(seq 1 30); do
-            if curl -sf http://localhost:8080 > /dev/null; then
-              echo "Container is healthy"
-              exit 0
-            fi
-            echo "Waiting for container... ($i/30)"
-            sleep 2
-          done
-          echo "Container failed to become healthy"
-          exit 1
+      - uses: actions/configure-pages@v4
 
-      - name: Setup Cloudflare Tunnel
-        run: |
-          curl -L -o cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
-          chmod +x cloudflared
-          ./cloudflared tunnel --no-autoupdate run --token ${{ secrets.STUDENT_BENEFITS_TUNNEL_TOKEN }} &
-          sleep 5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
-      - name: Cancel previous deployment
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          CURRENT_RUN_ID=${{ github.run_id }}
-          PREVIOUS_RUN=$(gh run list --workflow=deploy.yml --status=in_progress --json databaseId -q ".[].databaseId" | grep -v "^${CURRENT_RUN_ID}$" | head -1)
-          if [ -n "$PREVIOUS_RUN" ]; then
-            echo "Cancelling previous deployment: $PREVIOUS_RUN"
-            gh run cancel "$PREVIOUS_RUN" || true
-            sleep 30
-          fi
-
-      - name: Keep alive
-        run: |
-          echo "Deployment running. Container accessible via Cloudflare tunnel."
-          while true; do
-            if ! docker ps | grep -q student-benefits-hub; then
-              echo "Container stopped unexpectedly"
-              exit 1
-            fi
-            echo "$(date): Container running"
-            sleep 300
-          done
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
