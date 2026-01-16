@@ -23,7 +23,7 @@ deploy:
 
 # GitHub App setup
 setup:
-	python3 scripts/setup-models.py
+	python3 scripts/setup-github-app.py
 
 # Trigger benefit discovery from Reddit
 discover:
