@@ -2,24 +2,14 @@ import { useState, useMemo, useEffect, useRef } from 'react';
 import { benefits } from './data/benefits';
 import BenefitCard from './components/BenefitCard';
 import FilterBar from './components/FilterBar';
+import { useGitHubStars } from './hooks/useGitHubStars';
 
-const CACHE_KEY = 'github-stars-cache';
-const CACHE_TTL = 1000 * 60 * 60; // 1 hour
-
-type StarsCache = Record<string, { stars: number; ts: number }>;
-
-function getStarsCache(): StarsCache {
-  try {
-    return JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
-  } catch {
-    return {};
-  }
-}
+const repos = benefits.map(b => b.repo);
 
 function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [starsMap, setStarsMap] = useState<Record<string, number>>({});
+  const starsMap = useGitHubStars(repos);
   const searchRef = useRef<HTMLInputElement>(null);
 
   // Keyboard shortcut for search
@@ -33,41 +23,6 @@ function App() {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  // Fetch GitHub stars for all repos
-  useEffect(() => {
-    const cache = getStarsCache();
-    const reposToFetch: string[] = [];
-    const initialStars: Record<string, number> = {};
-
-    benefits.forEach(b => {
-      if (!b.repo) return;
-      const cached = cache[b.repo];
-      if (cached && Date.now() - cached.ts < CACHE_TTL) {
-        initialStars[b.repo] = cached.stars;
-      } else {
-        reposToFetch.push(b.repo);
-      }
-    });
-
-    setStarsMap(initialStars);
-
-    // Fetch uncached repos
-    reposToFetch.forEach(repo => {
-      fetch(`https://api.github.com/repos/${repo}`)
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.stargazers_count) {
-            const stars = data.stargazers_count;
-            setStarsMap(prev => ({ ...prev, [repo]: stars }));
-            const newCache = getStarsCache();
-            newCache[repo] = { stars, ts: Date.now() };
-            localStorage.setItem(CACHE_KEY, JSON.stringify(newCache));
-          }
-        })
-        .catch(() => {});
-    });
   }, []);
 
   const filteredBenefits = useMemo(() => {
