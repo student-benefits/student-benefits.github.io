@@ -30,7 +30,8 @@ export const benefits: Benefit[] = [
     description: "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more. The essential starting point for student developers.",
     link: "https://education.github.com/pack",
     tags: ["Free Tools", "Dev Pack", "Essential"],
-    popularity: 10
+    popularity: 10,
+    redditMentions: 847
   },
   {
     id: "github-copilot",
@@ -178,7 +179,8 @@ export const benefits: Benefit[] = [
     description: "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
     link: "https://www.notion.so/product/notion-for-education",
     tags: ["Notes", "Planning", "Knowledge"],
-    popularity: 10
+    popularity: 10,
+    redditMentions: 412
   },
   {
     id: "obsidian",
@@ -225,7 +227,8 @@ export const benefits: Benefit[] = [
     description: "$6.99/month (50% off) with Hulu included. Ad-free music, offline downloads, unlimited skips. Valid for up to 4 years.",
     link: "https://www.spotify.com/us/student/",
     tags: ["Music", "Streaming", "Hulu"],
-    popularity: 10
+    popularity: 10,
+    redditMentions: 1243
   },
   {
     id: "amazon-prime-student",
@@ -234,7 +237,8 @@ export const benefits: Benefit[] = [
     description: "6-month free trial, then $7.49/month (50% off). Free shipping, Prime Video, Music, Grubhub+, and 5% cash back.",
     link: "https://www.amazon.com/joinstudent",
     tags: ["Shopping", "Shipping", "Streaming"],
-    popularity: 10
+    popularity: 10,
+    redditMentions: 956
   },
   {
     id: "apple-education",
