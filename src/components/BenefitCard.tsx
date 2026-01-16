@@ -13,13 +13,11 @@ function formatStars(stars: number): string {
   return stars.toString();
 }
 
-const BenefitCard = ({ benefit, stars }: BenefitCardProps) => {
+function BenefitCard({ benefit, stars }: BenefitCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
     <div className="group relative flex flex-col h-full bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-slate-700/50 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1 overflow-hidden">
-
-      {/* Glow effect on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
       <div className="p-6 flex-grow relative z-10">

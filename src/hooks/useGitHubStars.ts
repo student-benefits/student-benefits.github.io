@@ -13,8 +13,9 @@ function getStarsCache(): StarsCache {
   }
 }
 
-export function useGitHubStars(repos: (string | undefined)[]) {
+export function useGitHubStars(repos: (string | undefined)[]): Record<string, number> {
   const [starsMap, setStarsMap] = useState<Record<string, number>>({});
+  const reposKey = repos.filter(Boolean).sort().join(',');
 
   useEffect(() => {
     const cache = getStarsCache();
@@ -45,11 +46,9 @@ export function useGitHubStars(repos: (string | undefined)[]) {
             localStorage.setItem(CACHE_KEY, JSON.stringify(newCache));
           }
         })
-        .catch(err => {
-          console.warn(`Failed to fetch GitHub stars for ${repo}:`, err.message);
-        });
+        .catch(() => {});
     });
-  }, [repos]);
+  }, [reposKey]);
 
   return starsMap;
 }

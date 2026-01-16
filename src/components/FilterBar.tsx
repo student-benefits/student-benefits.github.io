@@ -1,4 +1,3 @@
-import React from 'react';
 import { categories } from '../data/benefits';
 
 interface FilterBarProps {
@@ -6,7 +5,7 @@ interface FilterBarProps {
   setActiveCategory: (category: string) => void;
 }
 
-const FilterBar: React.FC<FilterBarProps> = ({ activeCategory, setActiveCategory }) => {
+function FilterBar({ activeCategory, setActiveCategory }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-2 justify-center max-w-4xl mx-auto">
       {categories.map(category => (

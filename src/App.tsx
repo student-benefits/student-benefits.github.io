@@ -12,7 +12,6 @@ function App() {
   const starsMap = useGitHubStars(repos);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // Keyboard shortcut for search
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
