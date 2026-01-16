@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """
 Creates a GitHub App via manifest flow.
-One browser click required (GitHub security requirement), everything else automated.
-Once created, install on any repo - no manual tokens needed.
 """
 
 import json
@@ -15,7 +13,6 @@ APP_NAME = "student-benefits-hub-models"
 HOMEPAGE = "https://agentivo.github.io/student-benefits-hub/"
 PORT = 3456
 
-# App permissions - includes Models access
 MANIFEST = {
     "name": APP_NAME,
     "url": HOMEPAGE,
@@ -29,6 +26,30 @@ MANIFEST = {
     },
     "default_events": []
 }
+
+
+def exchange_code(code):
+    """Exchange the code for app credentials."""
+    print("Exchanging code for app credentials...")
+
+    result = subprocess.run(
+        ["gh", "api", f"/app-manifests/{code}/conversions", "-X", "POST"],
+        capture_output=True, text=True
+    )
+
+    if result.returncode != 0:
+        print(f"Error: {result.stderr}")
+        return None
+
+    app = json.loads(result.stdout)
+    print(f"\nApp created: {app['name']} (ID: {app['id']})")
+
+    print("Saving APP_ID and APP_PRIVATE_KEY secrets...")
+    subprocess.run(["gh", "secret", "set", "APP_ID"], input=str(app["id"]), text=True, check=True)
+    subprocess.run(["gh", "secret", "set", "APP_PRIVATE_KEY"], input=app["pem"], text=True, check=True)
+
+    print(f"\nDone! Install the app: https://github.com/settings/apps/{app['slug']}/installations")
+    return app
 
 
 class CallbackHandler(BaseHTTPRequestHandler):
@@ -45,42 +66,25 @@ class CallbackHandler(BaseHTTPRequestHandler):
             self.send_error(400, "Missing code")
             return
 
-        print("Exchanging code for app credentials...")
-
-        # Exchange code via gh api
-        result = subprocess.run(
-            ["gh", "api", f"/app-manifests/{code}/conversions", "-X", "POST"],
-            capture_output=True, text=True
-        )
-
-        if result.returncode != 0:
-            print(f"Error: {result.stderr}")
-            self.send_error(500, "Failed")
-            return
-
-        app = json.loads(result.stdout)
+        app = exchange_code(code)
         CallbackHandler.app_data = app
-
-        print(f"\nApp created: {app['name']} (ID: {app['id']})")
-
-        # Save credentials
-        print("Saving APP_ID and APP_PRIVATE_KEY secrets...")
-        subprocess.run(["gh", "secret", "set", "APP_ID"], input=str(app["id"]), text=True, check=True)
-        subprocess.run(["gh", "secret", "set", "APP_PRIVATE_KEY"], input=app["pem"], text=True, check=True)
-
-        install_url = f"https://github.com/settings/apps/{app['slug']}/installations"
 
         self.send_response(200)
         self.send_header("Content-Type", "text/html")
         self.end_headers()
-        self.wfile.write(f"""
-            <html><body style="font-family:system-ui;text-align:center;padding:40px">
-            <h1>Done</h1>
-            <p>App: <strong>{app['name']}</strong> (ID: {app['id']})</p>
-            <p>Secrets added to repo.</p>
-            <p><a href="{install_url}">Install the app on your repos</a></p>
-            </body></html>
-        """.encode())
+
+        if app:
+            install_url = f"https://github.com/settings/apps/{app['slug']}/installations"
+            self.wfile.write(f"""
+                <html><body style="font-family:system-ui;text-align:center;padding:40px">
+                <h1>Done</h1>
+                <p>App: <strong>{app['name']}</strong> (ID: {app['id']})</p>
+                <p>Secrets added to repo.</p>
+                <p><a href="{install_url}">Install the app</a></p>
+                </body></html>
+            """.encode())
+        else:
+            self.wfile.write(b"<html><body><h1>Failed</h1></body></html>")
 
 
 def main():
@@ -90,26 +94,62 @@ def main():
     print(f"  Name:     {APP_NAME}")
     print(f"  Homepage: {HOMEPAGE}")
     print(f"  Webhook:  Disabled")
-    print(f"  Public:   No (only you can install)")
     print()
     print("Permissions:")
     for perm, level in MANIFEST["default_permissions"].items():
         print(f"  {perm}: {level}")
     print()
+    print(f"Callback:   http://localhost:{PORT}")
+    print()
 
-    input("Press Enter to open browser and create the app...")
+    input("Press Enter to open browser...")
 
     manifest = {**MANIFEST, "redirect_url": f"http://localhost:{PORT}"}
     url = f"https://github.com/settings/apps/new?manifest={json.dumps(manifest)}"
 
+    print(f"\nWaiting for callback on http://localhost:{PORT}")
+    print("After clicking 'Create GitHub App', your browser will redirect here.\n")
+    print("If redirect fails, copy the URL from your browser's address bar")
+    print("and paste it here (or Ctrl+C to cancel):\n")
+
+    # Start server in background thread
+    import threading
+    server = HTTPServer(("localhost", PORT), CallbackHandler)
+    server.timeout = 120
+
+    def serve():
+        server.handle_request()
+
+    thread = threading.Thread(target=serve)
+    thread.daemon = True
+    thread.start()
+
     webbrowser.open(url)
 
-    HTTPServer(("localhost", PORT), CallbackHandler).handle_request()
+    # Wait for callback or manual input
+    while thread.is_alive():
+        try:
+            import select
+            import sys
+            if select.select([sys.stdin], [], [], 0.5)[0]:
+                manual_url = input().strip()
+                if "code=" in manual_url:
+                    code = parse_qs(urlparse(manual_url).query).get("code", [None])[0]
+                    if code:
+                        exchange_code(code)
+                        return
+        except:
+            pass
 
-    if CallbackHandler.app_data:
-        slug = CallbackHandler.app_data['slug']
-        print(f"\nNext: Install the app at https://github.com/settings/apps/{slug}/installations")
-        print("Once installed, workflows will use the app for GitHub Models access.")
+    if not CallbackHandler.app_data:
+        print("\nNo callback received. If you created the app manually:")
+        print("1. Go to https://github.com/settings/apps")
+        print("2. Click on your app")
+        print("3. Note the App ID")
+        print("4. Generate a private key")
+        print("5. Run:")
+        print("   gh secret set APP_ID")
+        print("   gh secret set APP_PRIVATE_KEY < private-key.pem")
 
 
 if __name__ == "__main__":
