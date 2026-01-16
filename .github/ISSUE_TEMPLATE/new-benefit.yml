@@ -1,14 +1,52 @@
 name: Submit New Benefit
-description: Suggest a student benefit to add
+description: Suggest a student benefit to add (AI will handle the details)
 title: "[Benefit]: "
 labels: ["new-benefit"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        **Just tell us about the benefit - be as brief or detailed as you like.**
+
+        Our AI will identify the product, find the correct signup URL, and extract all the details. You don't need to be formal or include every detail.
+
   - type: textarea
     id: description
     attributes:
-      label: Describe the benefit
-      description: Tell us about the student benefit - what is it, what do students get, and where can they sign up?
+      label: What's the benefit?
+      description: Describe it however you want - a sentence, a few words, or a detailed explanation all work fine.
       placeholder: |
-        Example: Cursor offers one free year of Cursor Pro for university students. It's an AI-powered code editor with 500 fast requests per month. Students can sign up at cursor.com/students
+        Examples of valid submissions:
+
+        "Notion is free for students"
+        "JetBrains gives free IDEs"
+        "check out figma education"
+        "Spotify has 50% off for students - includes Hulu"
+
+        Or be more detailed if you prefer:
+        "Cursor offers one free year of Cursor Pro for verified university students. It's an AI-powered code editor with 500 fast requests per month. Sign up at cursor.com/students"
     validations:
       required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      description: If you know the signup URL, include it - otherwise we'll find it
+      placeholder: https://example.com/students
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category (optional)
+      description: Pick one if you want, or leave it for us to categorize
+      options:
+        - ""
+        - AI & Dev Tools
+        - Cloud & Hosting
+        - Learning
+        - Design
+        - Productivity
+        - Lifestyle
+        - Domains & Security
+        - Other

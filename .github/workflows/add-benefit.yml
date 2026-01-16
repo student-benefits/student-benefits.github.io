@@ -34,6 +34,13 @@ jobs:
             const issue = context.payload.issue;
             const issueBody = issue.body || '';
             const issueTitle = issue.title || '';
+
+            // Parse optional fields from issue body
+            const linkMatch = issueBody.match(/### Link \(optional\)\s*\n\n([^\n]+)/);
+            const categoryMatch = issueBody.match(/### Category \(optional\)\s*\n\n([^\n]+)/);
+            const userLink = linkMatch ? linkMatch[1].trim() : null;
+            const userCategory = categoryMatch && categoryMatch[1].trim() !== '' ? categoryMatch[1].trim() : null;
+
             const input = issueTitle + '\n' + issueBody;
 
             const token = process.env.MODELS_TOKEN;
@@ -47,21 +54,44 @@ jobs:
               return '';
             }
 
+            // Read current benefits for duplicate checking
+            const fs = require('fs');
+            const currentBenefits = JSON.parse(fs.readFileSync('src/data/benefits.json', 'utf8'));
+            const existingNames = currentBenefits.map(b => b.name.toLowerCase());
+            const existingUrls = currentBenefits.map(b => {
+              try {
+                return new URL(b.link).hostname.replace('www.', '');
+              } catch { return ''; }
+            });
+
             const prompt = [
               'You are an assistant that processes student benefit submissions for a directory website.',
+              'Users can submit casually - your job is to identify the product and extract/generate the structured data.',
               '',
               'USER SUBMISSION:',
               input,
               '',
+              userLink ? 'USER PROVIDED LINK: ' + userLink : '',
+              userCategory ? 'USER PROVIDED CATEGORY: ' + userCategory : '',
+              '',
+              'EXISTING BENEFITS (check for duplicates):',
+              existingNames.join(', '),
+              '',
+              'EXISTING DOMAINS (check for duplicates):',
+              existingUrls.filter(Boolean).join(', '),
+              '',
               'YOUR TASK:',
-              '1. Identify what product/service the user is referring to',
-              '2. Determine if this product/service actually offers a student discount or free access',
-              '3. If valid, extract the structured data. If not valid or unclear, explain why.',
+              '1. Identify what product/service the user is referring to (even from casual/brief descriptions)',
+              '2. Check if this is a duplicate (same product OR same domain as existing benefit)',
+              '3. Determine if this product/service actually offers a student discount or free access',
+              '4. Extract/generate the structured data. Use user-provided link/category if given, otherwise find them.',
               '',
               'RESPOND WITH ONLY JSON in this exact format:',
               '{',
               '  "valid": true or false,',
-              '  "reason": "If not valid, explain why (e.g., no student program exists, unclear what product is meant, already in our list, etc.)",',
+              '  "reason": "If not valid, explain why (e.g., no student program exists, unclear what product is meant, duplicate of existing benefit, etc.)",',
+              '  "isDuplicate": true or false,',
+              '  "duplicateOf": "Name of existing benefit if duplicate",',
               '  "benefit": {',
               '    "name": "Official Product/Service Name",',
               '    "category": "AI & Dev Tools | Cloud & Hosting | Learning | Design | Productivity | Lifestyle | Domains & Security | Other",',
@@ -73,10 +103,14 @@ jobs:
               '}',
               '',
               'IMPORTANT:',
+              '- Accept casual submissions like "notion is free for students" - identify the product and fill in details',
               '- Only mark as valid if you are confident the product has a real student program',
-              '- Use your knowledge to find the correct student discount URL',
+              '- Mark as duplicate if product name is similar OR if URL domain matches an existing benefit',
+              '- Use your knowledge to find the correct student discount URL if not provided',
+              '- If user provided a link, validate it looks correct but prefer it over guessing',
+              '- If user provided a category, use it',
               '- Be specific in the description (e.g., "Free Pro plan for 1 year" not "Student discount available")',
-              '- If the submission is too vague to identify the product, mark as invalid'
+              '- Only mark as invalid if you truly cannot identify what product they mean'
             ].join('\n');
 
             let response;
@@ -135,6 +169,17 @@ jobs:
               return '';
             }
 
+            // Check for duplicate
+            if (result.isDuplicate) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '**Duplicate detected:** This appears to be the same as **' + (result.duplicateOf || 'an existing benefit') + '** already in our directory.\n\nIf you believe this is different, please provide more details.'
+              });
+              return '';
+            }
+
             if (!result.valid) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
@@ -146,13 +191,47 @@ jobs:
             }
 
             const benefit = result.benefit;
+
+            // Validate URL is reachable
+            console.log('Validating URL:', benefit.link);
+            try {
+              const urlCheck = await fetch(benefit.link, {
+                method: 'HEAD',
+                redirect: 'follow',
+                headers: { 'User-Agent': 'StudentBenefitsHub/1.0' }
+              });
+              if (!urlCheck.ok && urlCheck.status !== 405) {
+                // 405 means HEAD not allowed, try GET
+                const getCheck = await fetch(benefit.link, {
+                  method: 'GET',
+                  redirect: 'follow',
+                  headers: { 'User-Agent': 'StudentBenefitsHub/1.0' }
+                });
+                if (!getCheck.ok) {
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    body: '**URL validation failed:** The link `' + benefit.link + '` returned status ' + getCheck.status + '.\n\nPlease verify the URL is correct and try again.'
+                  });
+                  return '';
+                }
+              }
+            } catch (e) {
+              console.log('URL check failed:', e);
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: '**URL validation failed:** Could not reach `' + benefit.link + '`.\n\nPlease verify the URL is correct and try again.'
+              });
+              return '';
+            }
+
             const id = benefit.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-            const fs = require('fs');
-            const filePath = 'src/data/benefits.ts';
-            let content = fs.readFileSync(filePath, 'utf8');
-
-            if (content.includes('id: "' + id + '"')) {
+            // Check for exact ID match
+            if (currentBenefits.some(b => b.id === id)) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -162,22 +241,22 @@ jobs:
               return '';
             }
 
-            let entry = '  {\n';
-            entry += '    id: "' + id + '",\n';
-            entry += '    name: "' + benefit.name + '",\n';
-            entry += '    category: "' + benefit.category + '",\n';
-            entry += '    description: "' + benefit.description.replace(/"/g, '\\"') + '",\n';
-            entry += '    link: "' + benefit.link + '",\n';
-            entry += '    tags: [' + benefit.tags.map(t => '"' + t + '"').join(', ') + '],\n';
-            entry += '    popularity: 5';
+            // Add the new benefit to JSON
+            const newBenefit = {
+              id: id,
+              name: benefit.name,
+              category: benefit.category,
+              description: benefit.description,
+              link: benefit.link,
+              tags: benefit.tags,
+              popularity: 5
+            };
             if (benefit.repo && benefit.repo !== 'null' && benefit.repo !== null) {
-              entry += ',\n    repo: "' + benefit.repo + '"';
+              newBenefit.repo = benefit.repo;
             }
-            entry += '\n  },';
 
-            const insertPoint = content.lastIndexOf('  {');
-            content = content.slice(0, insertPoint) + entry + '\n' + content.slice(insertPoint);
-            fs.writeFileSync(filePath, content);
+            currentBenefits.push(newBenefit);
+            fs.writeFileSync('src/data/benefits.json', JSON.stringify(currentBenefits, null, 2) + '\n');
 
             return JSON.stringify({
               name: benefit.name,
@@ -204,7 +283,7 @@ jobs:
 
           BRANCH="add-benefit-$ID"
           git checkout -b "$BRANCH"
-          git add src/data/benefits.ts
+          git add src/data/benefits.json
           git commit -m "Add benefit: $NAME"
           git push origin "$BRANCH"
 
