@@ -16,44 +16,42 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Parse benefit with AI and create PR
+      - name: Parse benefit with AI
+        id: parse
         uses: actions/github-script@v7
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          result-encoding: string
           script: |
             const issue = context.payload.issue;
             const issueBody = issue.body;
 
-            // Call GitHub Models to parse the benefit
-            const prompt = `You are parsing a student benefit submission. Extract structured data from this text and respond with ONLY valid JSON, no markdown or explanation.
-
-            Text to parse:
-            "${issueBody}"
-
-            Respond with this exact JSON structure:
-            {
-              "name": "Product/Service Name",
-              "category": "one of: AI & Dev Tools, Cloud & Hosting, Learning, Design, Productivity, Lifestyle, Domains & Security, Other",
-              "description": "Concise description of what students get (max 150 chars)",
-              "link": "https://url-to-student-signup-page",
-              "tags": ["Tag1", "Tag2", "Tag3"],
-              "repo": "owner/repo or null if not applicable"
-            }
-
-            If you cannot find a valid URL in the text, use the most likely student page URL based on the product name.
-            For category, choose the most appropriate one.
-            Keep description factual and specific about what students get.`;
+            const prompt = [
+              'You are parsing a student benefit submission. Extract structured data from this text and respond with ONLY valid JSON, no markdown or explanation.',
+              '',
+              'Text to parse:',
+              issueBody,
+              '',
+              'Respond with this exact JSON structure:',
+              '{',
+              '  "name": "Product/Service Name",',
+              '  "category": "one of: AI & Dev Tools, Cloud & Hosting, Learning, Design, Productivity, Lifestyle, Domains & Security, Other",',
+              '  "description": "Concise description of what students get (max 150 chars)",',
+              '  "link": "https://url-to-student-signup-page",',
+              '  "tags": ["Tag1", "Tag2", "Tag3"],',
+              '  "repo": "owner/repo or null if not applicable"',
+              '}',
+              '',
+              'If you cannot find a valid URL in the text, use the most likely student page URL based on the product name.',
+              'For category, choose the most appropriate one.',
+              'Keep description factual and specific about what students get.'
+            ].join('\n');
 
             const response = await fetch('https://models.inference.ai.azure.com/chat/completions', {
               method: 'POST',
               headers: {
-                'Authorization': `Bearer ${process.env.GH_TOKEN}`,
+                'Authorization': 'Bearer ' + process.env.GH_TOKEN,
                 'Content-Type': 'application/json'
               },
               body: JSON.stringify({
@@ -70,9 +68,9 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                body: '❌ Could not parse the benefit description. Please try again with more details.'
+                body: 'Could not parse the benefit description. Please try again with more details.'
               });
-              return;
+              return '';
             }
 
             const data = await response.json();
@@ -80,7 +78,6 @@ jobs:
 
             let benefit;
             try {
-              // Clean the response in case it has markdown code blocks
               const jsonStr = aiResponse.replace(/```json\n?|\n?```/g, '').trim();
               benefit = JSON.parse(jsonStr);
             } catch (e) {
@@ -89,103 +86,99 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                body: '❌ Could not parse the AI response. Please try again.'
+                body: 'Could not parse the AI response. Please try again.'
               });
-              return;
+              return '';
             }
 
-            // Generate ID from name
             const id = benefit.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-            // Read current benefits file
             const fs = require('fs');
-            const path = 'src/data/benefits.ts';
-            let content = fs.readFileSync(path, 'utf8');
+            const filePath = 'src/data/benefits.ts';
+            let content = fs.readFileSync(filePath, 'utf8');
 
-            // Check if benefit already exists
-            if (content.includes(`id: "${id}"`)) {
+            if (content.includes('id: "' + id + '"')) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
-                body: `❌ A benefit with ID "${id}" already exists.`
+                body: 'A benefit with ID "' + id + '" already exists.'
               });
-              return;
+              return '';
             }
 
-            // Build the new benefit entry
-            let entry = `  {
-    id: "${id}",
-    name: "${benefit.name}",
-    category: "${benefit.category}",
-    description: "${benefit.description.replace(/"/g, '\\"')}",
-    link: "${benefit.link}",
-    tags: [${benefit.tags.map(t => `"${t}"`).join(', ')}],
-    popularity: 5`;
-
+            let entry = '  {\n';
+            entry += '    id: "' + id + '",\n';
+            entry += '    name: "' + benefit.name + '",\n';
+            entry += '    category: "' + benefit.category + '",\n';
+            entry += '    description: "' + benefit.description.replace(/"/g, '\\"') + '",\n';
+            entry += '    link: "' + benefit.link + '",\n';
+            entry += '    tags: [' + benefit.tags.map(t => '"' + t + '"').join(', ') + '],\n';
+            entry += '    popularity: 5';
             if (benefit.repo && benefit.repo !== 'null' && benefit.repo !== null) {
-              entry += `,\n    repo: "${benefit.repo}"`;
+              entry += ',\n    repo: "' + benefit.repo + '"';
             }
             entry += '\n  },';
 
-            // Insert before the last item
             const insertPoint = content.lastIndexOf('  {');
             content = content.slice(0, insertPoint) + entry + '\n' + content.slice(insertPoint);
+            fs.writeFileSync(filePath, content);
 
-            fs.writeFileSync(path, content);
-
-            // Store for git operations
-            core.exportVariable('BENEFIT_NAME', benefit.name);
-            core.exportVariable('BENEFIT_ID', id);
-            core.exportVariable('ISSUE_NUMBER', issue.number);
-            core.exportVariable('PARSED_DATA', JSON.stringify(benefit, null, 2));
+            return JSON.stringify({
+              name: benefit.name,
+              id: id,
+              issueNumber: issue.number,
+              parsed: benefit
+            });
 
       - name: Create Pull Request
-        if: env.BENEFIT_NAME
+        if: steps.parse.outputs.result != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PARSE_RESULT: ${{ steps.parse.outputs.result }}
         run: |
+          BENEFIT_NAME=$(echo "$PARSE_RESULT" | jq -r '.name')
+          BENEFIT_ID=$(echo "$PARSE_RESULT" | jq -r '.id')
+          ISSUE_NUMBER=$(echo "$PARSE_RESULT" | jq -r '.issueNumber')
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          BRANCH="add-benefit-${{ env.BENEFIT_ID }}"
+          BRANCH="add-benefit-$BENEFIT_ID"
           git checkout -b "$BRANCH"
           git add src/data/benefits.ts
-          git commit -m "Add benefit: ${{ env.BENEFIT_NAME }}"
+          git commit -m "Add benefit: $BENEFIT_NAME"
           git push origin "$BRANCH"
 
           gh pr create \
-            --title "Add benefit: ${{ env.BENEFIT_NAME }}" \
-            --body "$(cat <<EOF
-          Adds **${{ env.BENEFIT_NAME }}** to the benefits directory.
+            --title "Add benefit: $BENEFIT_NAME" \
+            --body "Adds **$BENEFIT_NAME** to the benefits directory.
 
-          **Parsed from issue #${{ env.ISSUE_NUMBER }}:**
-          \`\`\`json
-          ${{ env.PARSED_DATA }}
-          \`\`\`
-
-          Closes #${{ env.ISSUE_NUMBER }}
-          EOF
-          )" \
+          Closes #$ISSUE_NUMBER" \
             --base main \
             --head "$BRANCH"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment on issue
-        if: env.BENEFIT_NAME
+        if: steps.parse.outputs.result != ''
         uses: actions/github-script@v7
+        env:
+          PARSE_RESULT: ${{ steps.parse.outputs.result }}
         with:
           script: |
-            const parsed = JSON.parse(process.env.PARSED_DATA);
+            const result = JSON.parse(process.env.PARSE_RESULT);
+            const parsed = result.parsed;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: parseInt(process.env.ISSUE_NUMBER),
-              body: `✅ PR created to add **${process.env.BENEFIT_NAME}**!
-
-            **Parsed details:**
-            - Category: ${parsed.category}
-            - Link: ${parsed.link}
-            - Tags: ${parsed.tags.join(', ')}
-
-            The PR will be reviewed and merged shortly.`
+              issue_number: result.issueNumber,
+              body: [
+                'PR created to add **' + result.name + '**!',
+                '',
+                '**Parsed details:**',
+                '- Category: ' + parsed.category,
+                '- Link: ' + parsed.link,
+                '- Tags: ' + parsed.tags.join(', '),
+                '',
+                'The PR will be reviewed and merged shortly.'
+              ].join('\n')
             });
