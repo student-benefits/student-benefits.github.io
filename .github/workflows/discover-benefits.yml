@@ -1,0 +1,180 @@
+name: Discover New Benefits
+
+on:
+  schedule:
+    - cron: '0 9 * * 1' # Every Monday at 9am UTC
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scrape Reddit and analyze
+        uses: actions/github-script@v7
+        env:
+          MODELS_TOKEN: ${{ secrets.GH_MODELS_TOKEN }}
+        with:
+          script: |
+            const token = process.env.MODELS_TOKEN;
+            if (!token) {
+              console.log('No MODELS_TOKEN secret configured');
+              return;
+            }
+
+            // Read current benefits to avoid duplicates
+            const fs = require('fs');
+            const currentBenefits = fs.readFileSync('src/data/benefits.ts', 'utf8');
+
+            // Scrape Reddit searches
+            const searches = [
+              'https://www.reddit.com/search.json?q=student+benefits&t=month&sort=top&limit=25',
+              'https://www.reddit.com/search.json?q=student+discounts&t=month&sort=top&limit=25',
+              'https://www.reddit.com/search.json?q=free+for+students&t=month&sort=top&limit=25',
+              'https://www.reddit.com/search.json?q=github+student+pack&t=month&sort=top&limit=10'
+            ];
+
+            let allPosts = [];
+
+            for (const url of searches) {
+              try {
+                const res = await fetch(url, {
+                  headers: { 'User-Agent': 'StudentBenefitsHub/1.0' }
+                });
+                if (res.ok) {
+                  const data = await res.json();
+                  const posts = data.data.children.map(c => ({
+                    title: c.data.title,
+                    selftext: (c.data.selftext || '').slice(0, 500),
+                    subreddit: c.data.subreddit,
+                    score: c.data.score,
+                    url: c.data.url,
+                    permalink: 'https://reddit.com' + c.data.permalink
+                  }));
+                  allPosts = allPosts.concat(posts);
+                }
+              } catch (e) {
+                console.log('Error fetching:', url, e);
+              }
+              // Rate limit
+              await new Promise(r => setTimeout(r, 1000));
+            }
+
+            // Dedupe by title
+            const seen = new Set();
+            allPosts = allPosts.filter(p => {
+              const key = p.title.toLowerCase();
+              if (seen.has(key)) return false;
+              seen.add(key);
+              return true;
+            });
+
+            console.log('Found', allPosts.length, 'unique posts');
+
+            if (allPosts.length === 0) return;
+
+            // Send to AI for analysis
+            const prompt = [
+              'You are analyzing Reddit posts about student discounts/benefits.',
+              '',
+              'CURRENT BENEFITS IN OUR DIRECTORY (do not suggest these):',
+              currentBenefits.match(/name: "([^"]+)"/g)?.map(m => m.replace(/name: "|"/g, '')).join(', ') || 'none',
+              '',
+              'REDDIT POSTS TO ANALYZE:',
+              JSON.stringify(allPosts.slice(0, 30), null, 2),
+              '',
+              'YOUR TASK:',
+              'Find NEW student benefits mentioned in these posts that:',
+              '1. Are NOT already in our directory',
+              '2. Are legitimate, verifiable student discounts/free offers',
+              '3. Are from real companies (not scams, referral schemes, or expired deals)',
+              '4. Would be useful to many students',
+              '',
+              'RESPOND WITH JSON ONLY:',
+              '{',
+              '  "benefits": [',
+              '    {',
+              '      "name": "Product Name",',
+              '      "reason": "Why this should be added (what students get)",',
+              '      "source": "Reddit post title or URL that mentioned it",',
+              '      "confidence": "high/medium/low"',
+              '    }',
+              '  ]',
+              '}',
+              '',
+              'Only include benefits with medium or high confidence.',
+              'Return empty array if no good new benefits found.',
+              'Maximum 5 benefits.'
+            ].join('\n');
+
+            const response = await fetch('https://models.inference.ai.azure.com/chat/completions', {
+              method: 'POST',
+              headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                model: 'gpt-4o',
+                messages: [{ role: 'user', content: prompt }],
+                temperature: 0.2
+              })
+            });
+
+            if (!response.ok) {
+              console.log('AI API error:', await response.text());
+              return;
+            }
+
+            const aiData = await response.json();
+            const aiResponse = aiData.choices[0].message.content;
+            console.log('AI response:', aiResponse);
+
+            let result;
+            try {
+              const jsonStr = aiResponse.replace(/```json\n?|\n?```/g, '').trim();
+              result = JSON.parse(jsonStr);
+            } catch (e) {
+              console.log('Failed to parse AI response');
+              return;
+            }
+
+            if (!result.benefits || result.benefits.length === 0) {
+              console.log('No new benefits found');
+              return;
+            }
+
+            // Create issues for each discovered benefit
+            for (const benefit of result.benefits) {
+              if (benefit.confidence === 'low') continue;
+
+              const issueBody = [
+                '### Describe the benefit',
+                '',
+                benefit.name + ': ' + benefit.reason,
+                '',
+                '---',
+                '*Discovered from Reddit: ' + benefit.source + '*',
+                '*Confidence: ' + benefit.confidence + '*'
+              ].join('\n');
+
+              try {
+                const issue = await github.rest.issues.create({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  title: '[Benefit]: ' + benefit.name,
+                  body: issueBody,
+                  labels: ['new-benefit', 'auto-discovered']
+                });
+                console.log('Created issue:', issue.data.html_url);
+              } catch (e) {
+                console.log('Failed to create issue for', benefit.name, e);
+              }
+
+              // Avoid rate limits
+              await new Promise(r => setTimeout(r, 2000));
+            }
