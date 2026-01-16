@@ -27,7 +27,7 @@ Student Benefits Hub helps students discover the perks they're entitled to. From
 
 ## Contributing
 
-To add a benefit, edit `src/data/benefits.ts` and submit a pull request.
+Know a student benefit we're missing? [Submit it here](https://github.com/agentivo/student-benefits-hub/issues/new?template=new-benefit.yml) — no coding required.
 
 ## License
 

@@ -106,7 +106,7 @@ function App() {
         {/* Footer */}
         <footer className="mt-24 pt-10 border-t border-slate-800 text-center">
           <p className="text-slate-500 text-sm">
-            Curated with 💜 for students. Open source on GitHub.
+            Curated with 💜 for students. <a href="https://github.com/agentivo/student-benefits-hub/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 transition-colors">Submit a benefit</a>
           </p>
         </footer>
       </div>
