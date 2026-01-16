@@ -23,6 +23,7 @@ body:
         - Productivity
         - Lifestyle
         - Domains & Security
+        - Other
     validations:
       required: true
 

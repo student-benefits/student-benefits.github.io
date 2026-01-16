@@ -17,7 +17,8 @@ export const categories = [
   "Design",
   "Productivity",
   "Lifestyle",
-  "Domains & Security"
+  "Domains & Security",
+  "Other"
 ];
 
 export const benefits: Benefit[] = [
