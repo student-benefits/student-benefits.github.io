@@ -26,6 +26,8 @@ jobs:
         uses: actions/github-script@v7
         env:
           MODELS_TOKEN: ${{ steps.app-token.outputs.token }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
         with:
           script: |
             const token = process.env.MODELS_TOKEN;
@@ -34,24 +36,54 @@ jobs:
               return;
             }
 
+            const redditClientId = process.env.REDDIT_CLIENT_ID;
+            const redditClientSecret = process.env.REDDIT_CLIENT_SECRET;
+            if (!redditClientId || !redditClientSecret) {
+              console.log('No Reddit credentials configured. Run: python scripts/setup-reddit-app.py');
+              return;
+            }
+
+            // Get Reddit OAuth token
+            const authResponse = await fetch('https://www.reddit.com/api/v1/access_token', {
+              method: 'POST',
+              headers: {
+                'Authorization': 'Basic ' + Buffer.from(redditClientId + ':' + redditClientSecret).toString('base64'),
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'User-Agent': 'StudentBenefitsHub/1.0'
+              },
+              body: 'grant_type=client_credentials'
+            });
+
+            if (!authResponse.ok) {
+              console.log('Reddit auth failed:', authResponse.status, await authResponse.text());
+              return;
+            }
+
+            const authData = await authResponse.json();
+            const redditToken = authData.access_token;
+            console.log('Reddit auth successful');
+
             // Read current benefits to avoid duplicates
             const fs = require('fs');
             const currentBenefits = fs.readFileSync('src/data/benefits.ts', 'utf8');
 
-            // Scrape Reddit searches
+            // Search Reddit using OAuth API
             const searches = [
-              'https://www.reddit.com/search.json?q=student+benefits&t=month&sort=top&limit=25',
-              'https://www.reddit.com/search.json?q=student+discounts&t=month&sort=top&limit=25',
-              'https://www.reddit.com/search.json?q=free+for+students&t=month&sort=top&limit=25',
-              'https://www.reddit.com/search.json?q=github+student+pack&t=month&sort=top&limit=10'
+              '/search?q=student+benefits&t=month&sort=top&limit=25',
+              '/search?q=student+discounts&t=month&sort=top&limit=25',
+              '/search?q=free+for+students&t=month&sort=top&limit=25',
+              '/search?q=github+student+pack&t=month&sort=top&limit=10'
             ];
 
             let allPosts = [];
 
-            for (const url of searches) {
+            for (const path of searches) {
               try {
-                const res = await fetch(url, {
-                  headers: { 'User-Agent': 'StudentBenefitsHub/1.0' }
+                const res = await fetch('https://oauth.reddit.com' + path, {
+                  headers: {
+                    'Authorization': 'Bearer ' + redditToken,
+                    'User-Agent': 'StudentBenefitsHub/1.0'
+                  }
                 });
                 if (res.ok) {
                   const data = await res.json();
@@ -64,9 +96,11 @@ jobs:
                     permalink: 'https://reddit.com' + c.data.permalink
                   }));
                   allPosts = allPosts.concat(posts);
+                } else {
+                  console.log('Reddit search failed:', res.status, path);
                 }
               } catch (e) {
-                console.log('Error fetching:', url, e);
+                console.log('Error fetching:', path, e);
               }
               // Rate limit
               await new Promise(r => setTimeout(r, 1000));
