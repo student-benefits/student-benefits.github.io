@@ -34,9 +34,8 @@ function App() {
         return matchesCategory && matchesSearch;
       })
       .sort((a, b) => {
-        const starsA = a.repo ? (starsMap[a.repo] || 0) : 0;
-        const starsB = b.repo ? (starsMap[b.repo] || 0) : 0;
-        // Sort by stars first, then by popularity as tiebreaker
+        const starsA = starsMap[a.repo ?? ''] ?? 0;
+        const starsB = starsMap[b.repo ?? ''] ?? 0;
         if (starsB !== starsA) return starsB - starsA;
         return b.popularity - a.popularity;
       });

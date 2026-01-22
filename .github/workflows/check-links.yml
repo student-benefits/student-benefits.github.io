@@ -100,31 +100,31 @@ jobs:
               state: 'open'
             });
 
+            // Build report body
+            let body = '## Weekly Link Health Report\n\n';
+            body += '_Last checked: ' + new Date().toISOString().split('T')[0] + '_\n\n';
+
+            if (brokenLinks.length > 0) {
+              body += '### Broken Links\n\n';
+              body += '| Benefit | Link | Status |\n';
+              body += '|---------|------|--------|\n';
+              for (const b of brokenLinks) {
+                body += '| ' + b.name + ' | ' + b.link + ' | ' + b.status + ' |\n';
+              }
+              body += '\n';
+            }
+
+            if (redirectedLinks.length > 0) {
+              body += '### Suspicious Redirects\n\n';
+              body += '| Benefit | Original | Redirects To |\n';
+              body += '|---------|----------|-------------|\n';
+              for (const r of redirectedLinks) {
+                body += '| ' + r.name + ' | ' + r.link + ' | ' + r.redirectTo + ' |\n';
+              }
+            }
+
             if (existingIssues.data.length > 0) {
-              // Update existing issue
               const issue = existingIssues.data[0];
-              let body = '## Weekly Link Health Report\n\n';
-              body += '_Last checked: ' + new Date().toISOString().split('T')[0] + '_\n\n';
-
-              if (brokenLinks.length > 0) {
-                body += '### Broken Links\n\n';
-                body += '| Benefit | Link | Status |\n';
-                body += '|---------|------|--------|\n';
-                for (const b of brokenLinks) {
-                  body += '| ' + b.name + ' | ' + b.link + ' | ' + b.status + ' |\n';
-                }
-                body += '\n';
-              }
-
-              if (redirectedLinks.length > 0) {
-                body += '### Suspicious Redirects\n\n';
-                body += '| Benefit | Original | Redirects To |\n';
-                body += '|---------|----------|-------------|\n';
-                for (const r of redirectedLinks) {
-                  body += '| ' + r.name + ' | ' + r.link + ' | ' + r.redirectTo + ' |\n';
-                }
-              }
-
               await github.rest.issues.update({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -133,29 +133,6 @@ jobs:
               });
               console.log('Updated existing issue:', issue.html_url);
             } else {
-              // Create new issue
-              let body = '## Weekly Link Health Report\n\n';
-              body += '_Last checked: ' + new Date().toISOString().split('T')[0] + '_\n\n';
-
-              if (brokenLinks.length > 0) {
-                body += '### Broken Links\n\n';
-                body += '| Benefit | Link | Status |\n';
-                body += '|---------|------|--------|\n';
-                for (const b of brokenLinks) {
-                  body += '| ' + b.name + ' | ' + b.link + ' | ' + b.status + ' |\n';
-                }
-                body += '\n';
-              }
-
-              if (redirectedLinks.length > 0) {
-                body += '### Suspicious Redirects\n\n';
-                body += '| Benefit | Original | Redirects To |\n';
-                body += '|---------|----------|-------------|\n';
-                for (const r of redirectedLinks) {
-                  body += '| ' + r.name + ' | ' + r.link + ' | ' + r.redirectTo + ' |\n';
-                }
-              }
-
               const issue = await github.rest.issues.create({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
