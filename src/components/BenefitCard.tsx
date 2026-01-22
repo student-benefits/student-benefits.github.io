@@ -86,7 +86,7 @@ function BenefitCard({ benefit, stars }: BenefitCardProps) {
           rel="noopener noreferrer"
           className="flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all duration-200 group-hover:shadow-lg group-hover:shadow-indigo-500/20"
         >
-          <span>Get Deal</span>
+          <span>Visit</span>
           <svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
           </svg>

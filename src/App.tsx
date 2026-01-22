@@ -56,7 +56,7 @@ function App() {
             Student <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-400">Benefits Hub</span>
           </h1>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-            A curated collection of exclusive offers, free tools, and resources to power your education.
+            Free tools and resources available to students.
           </p>
 
           {/* Search Input */}
@@ -82,7 +82,7 @@ function App() {
         {/* Results Info */}
         <div className="mb-6 flex justify-between items-end border-b border-slate-800 pb-4">
           <span className="text-slate-400 font-medium">
-            Found <span className="text-white">{filteredBenefits.length}</span> {filteredBenefits.length === 1 ? 'perk' : 'perks'}
+            Found <span className="text-white">{filteredBenefits.length}</span> {filteredBenefits.length === 1 ? 'resource' : 'resources'}
           </span>
           {searchQuery && (
             <button
