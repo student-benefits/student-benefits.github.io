@@ -43,7 +43,7 @@ function App() {
   }, [activeCategory, searchQuery, starsMap]);
 
   return (
-    <div className="min-h-screen w-full py-8 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-screen w-full py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
 
       {/* Decorative background elements */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 mix-blend-screen animate-pulse"></div>
@@ -51,23 +51,26 @@ function App() {
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <header className="text-center mb-8 relative">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+        <header className="text-center mb-16 relative">
+                    <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
             Student <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-pink-400">Benefits Hub</span>
           </h1>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Free tools and resources available to students.
+          </p>
 
           {/* Search Input */}
-          <div className="relative max-w-md mx-auto mb-6 group">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <svg className="h-4 w-4 text-slate-400 group-focus-within:text-indigo-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="relative max-w-xl mx-auto mb-10 group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               ref={searchRef}
               type="text"
-              placeholder="Search..."
-              className="block w-full pl-9 pr-4 py-2.5 border border-slate-700/50 rounded-xl text-sm bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-all duration-300"
+              placeholder="Search tools, categories, or tags..."
+              className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-2xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-all duration-300 shadow-lg shadow-black/20 backdrop-blur-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
