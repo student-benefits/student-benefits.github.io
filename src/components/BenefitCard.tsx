@@ -60,7 +60,7 @@ function BenefitCard({ benefit, stars }: BenefitCardProps) {
           {benefit.name}
         </h3>
 
-        <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">
+        <p className="text-slate-400 text-sm leading-relaxed">
           {benefit.description}
         </p>
 
