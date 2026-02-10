@@ -28,6 +28,15 @@
     "repo": "getcursor/cursor"
   },
   {
+    "id": "google-antigravity",
+    "name": "Google Antigravity",
+    "category": "AI & Dev Tools",
+    "description": "Free during public preview. Agent-first IDE powered by Gemini 3 with autonomous AI agents that plan, code, and test in parallel. Students with Google AI Pro get higher rate limits.",
+    "link": "https://antigravity.google",
+    "tags": ["AI", "IDE", "Google", "Agents"],
+    "popularity": 9
+  },
+  {
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
     "category": "AI & Dev Tools",
