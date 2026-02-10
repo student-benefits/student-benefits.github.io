@@ -42,7 +42,7 @@
     "name": "Perplexity Pro",
     "category": "AI & Dev Tools",
     "description": "$4.99/month (75% off) for students. Includes Study Mode with flashcards, 10x more citations, unlimited uploads, and Research Mode.",
-    "link": "https://www.perplexity.ai/students",
+    "link": "https://www.perplexity.ai/pro",
     "tags": ["AI", "Search", "Research"],
     "popularity": 8
   },
@@ -106,7 +106,7 @@
     "name": "Netlify",
     "category": "Cloud & Hosting",
     "description": "Pro tier free for students via GitHub Student Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
-    "link": "https://www.netlify.com/github-students/",
+    "link": "https://education.github.com/pack/offers#netlify",
     "tags": ["Hosting", "JAMstack"],
     "popularity": 7,
     "repo": "netlify/cli"
@@ -134,7 +134,7 @@
     "name": "Canva for Education",
     "category": "Design",
     "description": "Free premium features for K-12 via teacher invite. Higher ed students: check if your university has Canva Campus access.",
-    "link": "https://www.canva.com/education/",
+    "link": "https://www.canva.com/edu-signup/",
     "tags": ["Design", "Graphics", "Marketing"],
     "popularity": 9
   },
@@ -143,7 +143,7 @@
     "name": "Autodesk",
     "category": "Design",
     "description": "Free 1-year access to AutoCAD, Revit, Maya, 3ds Max, Fusion, and 100+ products. Renewable while enrolled.",
-    "link": "https://www.autodesk.com/education/edu-software/overview",
+    "link": "https://www.autodesk.com/education/home",
     "tags": ["3D", "CAD", "Engineering"],
     "popularity": 8
   },
@@ -235,7 +235,7 @@
     "name": "LinkedIn Learning",
     "category": "Learning",
     "description": "Free access through many universities. Check your school's library or career services for complimentary access.",
-    "link": "https://www.linkedin.com/learning/subscription/higher-education",
+    "link": "https://www.linkedin.com/learning/",
     "tags": ["Courses", "Professional", "Skills"],
     "popularity": 8
   },
@@ -244,7 +244,7 @@
     "name": "Coursera for Campus",
     "category": "Learning",
     "description": "Many universities provide free access to Coursera courses and certificates. Financial aid available for individual learners.",
-    "link": "https://www.coursera.org/for-university-and-college-students",
+    "link": "https://www.coursera.org/campus",
     "tags": ["Online Courses", "Certificates"],
     "popularity": 9
   },
