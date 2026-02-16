@@ -1,0 +1,46 @@
+name: Claude Code PR Review
+
+# Manual trigger — run when you want a substantive review.
+# Actions → "Run workflow" → enter PR number.
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to review"
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: anthropics/claude-code-action@28f83620103c48a57093dcc2837eec89e036bb9f
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_ACCESS_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          use_sticky_comment: true
+          direct_prompt: |
+            Review PR #${{ github.event.inputs.pr_number }} for the Student Benefits Hub.
+
+            Read `benefits.json` to understand the current dataset and the PR diff to see what changed.
+
+            Check:
+            - **Schema compliance** — id is unique and URL-safe, category matches one of the 9 valid values exactly, description ≤ 120 chars, link is a direct student signup URL
+            - **Duplicates** — no existing entry with the same name or same hostname
+            - **JSON hygiene** — valid JSON, 2-space indent, trailing newline preserved
+            - **Link quality** — the link should go to the actual student program page, not a generic marketing or homepage URL
+            - **Description quality** — must state what students specifically get (e.g. "Free Pro plan for 1 year"), not vague ("Student discount available")
+
+            Valid categories (exact strings): AI & Dev Tools, Cloud & Hosting, Learning, Design, Productivity, Lifestyle, Domains & Security, Other
+
+            Format your review as:
+            - **Summary** (1–2 sentences)
+            - **Issues** (blocking, numbered) — if any
+            - **Suggestions** (non-blocking, numbered) — if any
+            - **Verdict**: Approve / Request Changes / Comment
