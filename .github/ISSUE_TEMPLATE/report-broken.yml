@@ -3,40 +3,11 @@ description: Report a benefit that has a broken link, changed terms, or no longe
 title: "[Report]: "
 labels: ["report", "needs-review"]
 body:
-  - type: dropdown
+  - type: input
     id: benefit
     attributes:
       label: Which benefit?
-      description: Select the benefit you're reporting
-      options:
-        - GitHub Student Developer Pack
-        - GitHub Copilot Pro
-        - Cursor Pro
-        - JetBrains IDEs
-        - Perplexity Pro
-        - 1Password
-        - Microsoft Azure
-        - DigitalOcean
-        - AWS Educate
-        - MongoDB Atlas
-        - Heroku
-        - Netlify
-        - Namecheap Free Domain
-        - Figma Education
-        - Canva for Education
-        - Autodesk
-        - Notion Education
-        - Obsidian
-        - Grammarly
-        - Microsoft 365 Education
-        - Linear
-        - Spotify Premium Student
-        - Amazon Prime Student
-        - Apple Education Pricing
-        - UNiDAYS
-        - LinkedIn Learning
-        - Coursera for Campus
-        - Other (specify in description)
+      placeholder: e.g. GitHub Copilot Pro
     validations:
       required: true
 
