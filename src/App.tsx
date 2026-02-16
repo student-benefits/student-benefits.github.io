@@ -46,8 +46,8 @@ function App() {
     <div className="min-h-dvh w-full py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
 
       {/* Decorative background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 mix-blend-screen" aria-hidden="true"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -z-10 mix-blend-screen" aria-hidden="true"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10" aria-hidden="true"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -z-10" aria-hidden="true"></div>
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
@@ -69,8 +69,8 @@ function App() {
             <input
               ref={searchRef}
               type="search"
-              placeholder="Search tools, categories, or tags..."
-              className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-colors shadow-lg shadow-black/20 backdrop-blur-sm"
+              placeholder="Search..."
+              className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-colors shadow-lg shadow-black/20"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -108,8 +108,8 @@ function App() {
           </div>
         ) : (
           <div className="text-center py-24 bg-slate-800/30 rounded-xl border border-dashed border-slate-700">
-            <h2 className="text-2xl font-bold text-white mb-2">No benefits found</h2>
-            <p className="text-slate-400">Try adjusting your search terms or selecting a different category.</p>
+            <h2 className="text-2xl font-bold text-white mb-2">No results</h2>
+            <p className="text-slate-400">Try a different search or category.</p>
           </div>
         )}
 

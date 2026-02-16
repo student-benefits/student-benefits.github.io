@@ -9,7 +9,6 @@ export interface Benefit {
   tags: string[];
   popularity: number;
   repo?: string;
-  redditMentions?: number;
 }
 
 export const categories = [
