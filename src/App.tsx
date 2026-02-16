@@ -28,9 +28,10 @@ function App() {
     return benefits
       .filter(benefit => {
         const matchesCategory = activeCategory === 'All' || benefit.category === activeCategory;
-        const matchesSearch = benefit.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                             benefit.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                             benefit.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        const query = searchQuery.toLowerCase();
+        const matchesSearch = benefit.name.toLowerCase().includes(query) ||
+                             benefit.description.toLowerCase().includes(query) ||
+                             benefit.tags.some(tag => tag.toLowerCase().includes(query));
         return matchesCategory && matchesSearch;
       })
       .sort((a, b) => {
@@ -42,11 +43,11 @@ function App() {
   }, [activeCategory, searchQuery, starsMap]);
 
   return (
-    <div className="min-h-screen w-full py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="min-h-dvh w-full py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
 
       {/* Decorative background elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 mix-blend-screen animate-pulse"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -z-10 mix-blend-screen animate-pulse delay-1000"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10 mix-blend-screen" aria-hidden="true"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl -z-10 mix-blend-screen" aria-hidden="true"></div>
 
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
@@ -59,17 +60,17 @@ function App() {
           </p>
 
           {/* Search Input */}
-          <div className="relative max-w-xl mx-auto mb-10 group">
+          <div role="search" className="relative max-w-xl mx-auto mb-10 group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               ref={searchRef}
-              type="text"
+              type="search"
               placeholder="Search tools, categories, or tags..."
-              className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-2xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-all duration-300 shadow-lg shadow-black/20 backdrop-blur-sm"
+              className="block w-full pl-11 pr-4 py-4 border border-slate-700/50 rounded-xl leading-5 bg-slate-800/50 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500/50 focus:bg-slate-800 transition-colors shadow-lg shadow-black/20 backdrop-blur-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -86,10 +87,10 @@ function App() {
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1"
+              className="text-sm text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1 min-h-[44px] min-w-[44px] justify-center"
             >
               <span>Clear search</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           )}
         </div>
@@ -106,8 +107,7 @@ function App() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-24 bg-slate-800/30 rounded-3xl border border-dashed border-slate-700">
-            <div className="text-6xl mb-6 opacity-50">🔍</div>
+          <div className="text-center py-24 bg-slate-800/30 rounded-xl border border-dashed border-slate-700">
             <h2 className="text-2xl font-bold text-white mb-2">No benefits found</h2>
             <p className="text-slate-400">Try adjusting your search terms or selecting a different category.</p>
           </div>
@@ -116,7 +116,9 @@ function App() {
         {/* Footer */}
         <footer className="mt-24 pt-10 border-t border-slate-800 text-center">
           <p className="text-slate-500 text-sm">
-            Curated with 💜 for students by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 transition-colors">jonasneves</a>. <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 transition-colors">Submit a benefit</a>
+            Curated for students by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">jonasneves</a>
+            {' · '}
+            <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2 transition-colors">Submit a benefit</a>
           </p>
         </footer>
       </div>
