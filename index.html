@@ -1,14 +1,538 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0f172a" />
-    <title>Student Benefits Hub</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
+  <title>Student Benefits Hub</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --indigo-400: #818cf8;
+      --indigo-200: #c7d2fe;
+      --indigo-300: #a5b4fc;
+      --pink-400: #f472b6;
+      --font: system-ui, -apple-system, sans-serif;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--slate-900);
+      background-image:
+        radial-gradient(circle at 15% 50%, rgba(79, 70, 229, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(236, 72, 153, 0.15), transparent 25%);
+      background-attachment: fixed;
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100dvh;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--indigo-400);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--slate-900); }
+    ::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--slate-600); }
+
+    .page {
+      padding: 3rem 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 80rem;
+      margin: 0 auto;
+    }
+
+    .blur-orb {
+      position: absolute;
+      width: 24rem;
+      height: 24rem;
+      border-radius: 9999px;
+      filter: blur(48px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .blur-orb--top { top: 0; left: 25%; background: rgba(99, 102, 241, 0.1); }
+    .blur-orb--bottom { bottom: 0; right: 25%; background: rgba(236, 72, 153, 0.1); }
+
+    header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+
+    .gradient-text {
+      background: linear-gradient(to right, var(--indigo-400), var(--pink-400));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--slate-400);
+      max-width: 42rem;
+      margin: 0 auto 2.5rem;
+      line-height: 1.5;
+    }
+
+    .search-wrap {
+      position: relative;
+      max-width: 36rem;
+      margin: 0 auto 2.5rem;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.25rem;
+      height: 1.25rem;
+      color: var(--slate-400);
+      pointer-events: none;
+      transition: color 0.15s;
+    }
+
+    .search-wrap:focus-within .search-icon { color: var(--indigo-400); }
+
+    .search-input {
+      display: block;
+      width: 100%;
+      padding: 1rem 1rem 1rem 2.75rem;
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      border-radius: var(--radius-lg);
+      background: rgba(30, 41, 59, 0.5);
+      color: #fff;
+      font-size: 1rem;
+      font-family: var(--font);
+      line-height: 1.25;
+      transition: background 0.15s, border-color 0.15s;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-input::placeholder { color: var(--slate-500); }
+
+    .search-input:focus {
+      outline: none;
+      background: var(--slate-800);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      max-width: 56rem;
+      margin: 0 auto;
+    }
+
+    .filter-tab {
+      padding: 0.625rem 1rem;
+      min-height: 44px;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      font-family: var(--font);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      background: rgba(30, 41, 59, 0.4);
+      color: var(--slate-400);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .filter-tab:hover {
+      background: rgba(51, 65, 85, 0.5);
+      color: #fff;
+      border-color: var(--slate-600);
+    }
+
+    .filter-tab[aria-selected="true"] {
+      background: #fff;
+      color: var(--slate-900);
+      border-color: #fff;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    }
+
+    .results-bar {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--slate-800);
+      padding-bottom: 1rem;
+    }
+
+    .results-count {
+      color: var(--slate-400);
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .results-count strong { color: #fff; font-weight: 500; }
+
+    .clear-btn {
+      font-size: 0.875rem;
+      color: var(--indigo-400);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      min-height: 44px;
+      min-width: 44px;
+      justify-content: center;
+      transition: color 0.15s;
+    }
+
+    .clear-btn:hover { color: var(--indigo-300); }
+    .clear-btn svg { width: 1rem; height: 1rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: rgba(30, 41, 59, 0.4);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-body { padding: 1rem; flex-grow: 1; }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: rgba(51, 65, 85, 0.5);
+      color: var(--indigo-300);
+      border: 1px solid rgba(71, 85, 105, 0.5);
+    }
+
+    .card-name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+      transition: color 0.15s;
+    }
+
+    .card:hover .card-name { color: var(--indigo-200); }
+
+    .card-desc {
+      color: var(--slate-400);
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      color: var(--slate-500);
+      background: rgba(30, 41, 59, 0.8);
+      padding: 0.125rem 0.375rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+    }
+
+    .empty {
+      text-align: center;
+      padding: 6rem 1rem;
+      background: rgba(30, 41, 59, 0.3);
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--slate-700);
+    }
+
+    .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .empty p { color: var(--slate-400); }
+
+    footer {
+      margin-top: 6rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--slate-800);
+      text-align: center;
+    }
+
+    footer p { color: var(--slate-500); font-size: 0.875rem; }
+
+    footer a {
+      color: var(--indigo-400);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.15s;
+    }
+
+    footer a:hover { color: var(--indigo-300); }
+
+    .skeleton {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .skeleton-card {
+      height: 180px;
+      background: rgba(30, 41, 59, 0.4);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    @media (min-width: 640px) {
+      .page { padding: 3rem 1.5rem; }
+    }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 3.75rem; }
+      .grid, .skeleton { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (min-width: 1024px) {
+      .page { padding: 3rem 2rem; }
+      .grid, .skeleton { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 1280px) {
+      .grid, .skeleton { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="blur-orb blur-orb--top" aria-hidden="true"></div>
+    <div class="blur-orb blur-orb--bottom" aria-hidden="true"></div>
+
+    <div class="container">
+      <header>
+        <h1>Student <span class="gradient-text">Benefits Hub</span></h1>
+        <p class="subtitle">Free tools and resources available to students.</p>
+
+        <div role="search" class="search-wrap">
+          <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+          <input id="search" type="search" class="search-input" placeholder="Search..." aria-label="Search benefits">
+        </div>
+
+        <div id="filter-bar" role="tablist" aria-label="Filter by category" class="filter-bar"></div>
+      </header>
+
+      <div id="results-bar" class="results-bar"></div>
+
+      <div id="content">
+        <div class="skeleton">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          Curated for students by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer">jonasneves</a>
+          &middot;
+          <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer">Submit a benefit</a>
+        </p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const CATEGORIES = [
+      'All', 'AI & Dev Tools', 'Cloud & Hosting', 'Learning',
+      'Design', 'Productivity', 'Lifestyle', 'Domains & Security', 'Other'
+    ];
+
+    let benefits = [];
+    let activeCategory = 'All';
+    let searchQuery = '';
+
+    const searchInput = document.getElementById('search');
+    const filterBar = document.getElementById('filter-bar');
+    const resultsBar = document.getElementById('results-bar');
+    const content = document.getElementById('content');
+
+    function renderFilters() {
+      filterBar.innerHTML = CATEGORIES.map(cat =>
+        `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab">${cat}</button>`
+      ).join('');
+    }
+
+    filterBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-tab');
+      if (!btn) return;
+      activeCategory = btn.textContent;
+      renderFilters();
+      render();
+    });
+
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value;
+      render();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
+        searchInput.focus();
+      }
+    });
+
+    function getFiltered() {
+      const q = searchQuery.toLowerCase();
+      return benefits
+        .filter(b => {
+          const catMatch = activeCategory === 'All' || b.category === activeCategory;
+          const searchMatch = b.name.toLowerCase().includes(q) ||
+            b.description.toLowerCase().includes(q) ||
+            b.tags.some(t => t.toLowerCase().includes(q));
+          return catMatch && searchMatch;
+        })
+        .sort((a, b) => b.popularity - a.popularity);
+    }
+
+    function esc(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    function renderCard(b) {
+      const tags = b.tags.slice(0, 3).map(t => `<span class="tag">#${esc(t)}</span>`).join('');
+      return `<article class="card" data-href="${esc(b.link)}">
+        <div class="card-body">
+          <div class="card-top">
+            <span class="badge">${esc(b.category)}</span>
+          </div>
+          <h3 class="card-name">${esc(b.name)}</h3>
+          <p class="card-desc">${esc(b.description)}</p>
+          <div class="tags">${tags}</div>
+        </div>
+      </article>`;
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const n = filtered.length;
+      let bar = `<span class="results-count">Found <strong>${n}</strong> ${n === 1 ? 'resource' : 'resources'}</span>`;
+      if (searchQuery) {
+        bar += `<button class="clear-btn" id="clear-btn">
+          <span>Clear search</span>
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>`;
+      }
+      resultsBar.innerHTML = bar;
+
+      const clearBtn = document.getElementById('clear-btn');
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          searchQuery = '';
+          searchInput.value = '';
+          render();
+        });
+      }
+
+      if (filtered.length > 0) {
+        content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
+      } else {
+        content.innerHTML = `<div class="empty">
+          <h2>No results</h2>
+          <p>Try a different search or category.</p>
+        </div>`;
+      }
+    }
+
+    content.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      if (!card) return;
+      window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
+    });
+
+    fetch('benefits.json')
+      .then(r => r.json())
+      .then(data => {
+        benefits = data;
+        renderFilters();
+        render();
+      });
+  </script>
+</body>
 </html>

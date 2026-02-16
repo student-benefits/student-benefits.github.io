@@ -30,7 +30,7 @@ You verify that student benefit programs listed in this repository are still act
 
 ## Step 1: Read benefits.json
 
-Read `src/data/benefits.json` from the repository.
+Read `benefits.json` from the repository.
 
 ## Step 2: Pick 5 random benefits
 

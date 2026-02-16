@@ -38,7 +38,7 @@ jobs:
 
             // Read current benefits to avoid duplicates
             const fs = require('fs');
-            const currentBenefits = JSON.parse(fs.readFileSync('src/data/benefits.json', 'utf8'));
+            const currentBenefits = JSON.parse(fs.readFileSync('benefits.json', 'utf8'));
             const existingNames = currentBenefits.map(b => b.name.toLowerCase());
 
             let allPosts = [];

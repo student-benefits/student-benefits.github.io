@@ -41,7 +41,7 @@ Users submit casually (e.g. "Notion is free for students") — your job is to id
 
 ## Step 2: Read benefits.json and check for duplicates
 
-Read `src/data/benefits.json` from the repository. Check for duplicates by:
+Read `benefits.json` from the repository. Check for duplicates by:
 
 1. **Name match**: Does any existing benefit have a similar name (case-insensitive)?
 2. **Domain match**: Does any existing benefit link share the same hostname (ignoring `www.`)?
@@ -102,7 +102,7 @@ If the user provided a link, prefer it. If the user provided a category, use it.
 
 ## Step 5: Update benefits.json
 
-Use the edit tool to append the new benefit object to the array in `src/data/benefits.json`. Maintain the existing JSON formatting (2-space indent, trailing newline).
+Use the edit tool to append the new benefit object to the array in `benefits.json`. Maintain the existing JSON formatting (2-space indent, trailing newline).
 
 ## Step 6: Create a pull request
 

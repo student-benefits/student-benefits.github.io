@@ -20,7 +20,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const benefits = JSON.parse(fs.readFileSync('src/data/benefits.json', 'utf8'));
+            const benefits = JSON.parse(fs.readFileSync('benefits.json', 'utf8'));
 
             const brokenLinks = [];
             const redirectedLinks = [];
