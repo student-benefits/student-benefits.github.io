@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   assign:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-slim
     steps:
       - uses: actions/github-script@v7
         with:
