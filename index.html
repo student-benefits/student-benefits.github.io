@@ -139,7 +139,6 @@
 
     .filter-wrap {
       position: relative;
-      max-width: 56rem;
       margin: 0 auto;
     }
 
@@ -165,6 +164,15 @@
     }
 
     .filter-bar::-webkit-scrollbar { display: none; }
+
+    @media (min-width: 768px) {
+      .filter-wrap::after { display: none; }
+      .filter-bar {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        justify-content: center;
+      }
+    }
 
     .filter-tab {
       padding: 0.625rem 1rem;
