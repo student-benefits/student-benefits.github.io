@@ -19,6 +19,8 @@
       --indigo-200: #c7d2fe;
       --indigo-300: #a5b4fc;
       --pink-400: #f472b6;
+      --amber-300: #fcd34d;
+      --amber-400: #f59e0b;
       --font: system-ui, -apple-system, sans-serif;
       --radius-sm: 0.25rem;
       --radius-md: 0.5rem;
@@ -313,6 +315,33 @@
     .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
     .empty p { color: var(--slate-400); }
 
+    .contribute-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      margin: 0 auto 2.5rem;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--amber-300);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .contribute-banner:hover {
+      background: rgba(245, 158, 11, 0.14);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: var(--amber-300);
+    }
+
+    .contribute-banner svg {
+      width: 0.875rem;
+      height: 0.875rem;
+      flex-shrink: 0;
+    }
+
     footer {
       margin-top: 6rem;
       padding-top: 2.5rem;
@@ -379,6 +408,11 @@
         <h1>Student <span class="gradient-text">Benefits Hub</span></h1>
         <p class="subtitle">Free tools and resources available to students.</p>
 
+        <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+          Community-maintained &mdash; submit a benefit
+        </a>
+
         <div role="search" class="search-wrap">
           <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
@@ -407,8 +441,6 @@
       <footer>
         <p>
           Curated for students by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer">jonasneves</a>
-          &middot;
-          <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer">Submit a benefit</a>
         </p>
       </footer>
     </div>
