@@ -4,6 +4,12 @@ description: |
   validates the benefit, checks for duplicates against benefits.json,
   and creates a PR with the new entry if valid.
 
+strict: false
+
+engine:
+  id: copilot
+  model: claude-sonnet-4
+
 on:
   issues:
     types: [labeled]
@@ -18,11 +24,29 @@ safe-outputs:
     labels: [new-benefit]
   add-comment:
 
+mcp-servers:
+  tavily:
+    command: npx
+    args: ["-y", "@tavily/mcp-server"]
+    env:
+      TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
+    allowed: ["search", "search_news"]
+
 tools:
   github:
     toolsets: [issues, repos]
+  web-fetch:
   edit:
-    paths: ["benefits.json"]
+
+network:
+  allowed:
+    - defaults
+    - "*.com"
+    - "*.org"
+    - "*.edu"
+    - "*.io"
+    - "*.dev"
+    - "*.net"
 
 timeout-minutes: 10
 ---
@@ -57,22 +81,20 @@ Read `benefits.json` from the repository. Check for duplicates by:
 2. **Domain match**: Does any existing benefit link share the same hostname (ignoring `www.`)?
 
 If the submission is a duplicate, comment on the issue:
-> **Duplicate detected:** This appears to be the same as **{existing benefit name}** already in our directory.
->
-> If you believe this is different, please provide more details.
+> **Duplicate:** Already in the directory as **{existing benefit name}**. If this is different, add more details.
 
 Then stop — do not create a PR.
 
 ## Step 3: Validate the benefit
 
-Determine whether this is a real student discount or free-access program. Use your knowledge of the product/service. Only accept if you are confident the program exists.
+Determine whether this is a real student discount or free-access program. Do not rely solely on your training data, as programs may have launched or changed recently.
+
+**You must call the Tavily `search` tool** (not `web-fetch` on a search URL) with a query like "{product name} student discount" or "{product name} higher education free". Then use `web-fetch` to open the most relevant result and confirm the program exists and get the correct signup URL. Do not skip this step or substitute it with a Google search URL fetch.
+
+Only reject if after using Tavily search and fetching the top results you are confident no student program exists.
 
 If invalid, comment on the issue:
-> **Cannot add this benefit:**
->
-> {reason — e.g. no known student program, unclear what product is meant}
->
-> Please provide more details or submit a different benefit.
+> **Cannot add:** {reason — e.g. no known student program, unclear what product is meant}
 
 Then stop — do not create a PR.
 
@@ -138,15 +160,7 @@ Create a PR with the changes. Use this format:
 After creating the PR, add a comment on issue #${{ github.event.issue.number }}:
 
 ```
-PR created to add **{name}**!
+Added **{name}** ({category}) — {description}
 
-| Field | Value |
-|-------|-------|
-| Category | {category} |
-| Link | {link} |
-| Tags | {tags, comma-separated} |
-
-> {description}
-
-The PR will be reviewed and merged shortly.
+PR: {pr_url}
 ```

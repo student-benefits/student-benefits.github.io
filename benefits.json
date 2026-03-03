@@ -5,7 +5,11 @@
     "category": "AI & Dev Tools",
     "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more. The essential starting point for student developers.",
     "link": "https://education.github.com/pack",
-    "tags": ["Free Tools", "Dev Pack", "Essential"],
+    "tags": [
+      "Free Tools",
+      "Dev Pack",
+      "Essential"
+    ],
     "popularity": 10
   },
   {
@@ -14,7 +18,11 @@
     "category": "AI & Dev Tools",
     "description": "Free access to Copilot Pro while you're a student. AI pair programmer with unlimited completions, chat, and GPT-4 powered suggestions.",
     "link": "https://github.com/education/students",
-    "tags": ["AI", "Coding", "GitHub"],
+    "tags": [
+      "AI",
+      "Coding",
+      "GitHub"
+    ],
     "popularity": 10
   },
   {
@@ -23,7 +31,11 @@
     "category": "AI & Dev Tools",
     "description": "One free year of Cursor Pro for verified university students. AI-powered code editor with 500 fast requests/month and unlimited slow requests.",
     "link": "https://cursor.com/students",
-    "tags": ["AI", "Editor", "IDE"],
+    "tags": [
+      "AI",
+      "Editor",
+      "IDE"
+    ],
     "popularity": 9,
     "repo": "getcursor/cursor"
   },
@@ -33,7 +45,12 @@
     "category": "AI & Dev Tools",
     "description": "Free during public preview. Agent-first IDE powered by Gemini 3 with autonomous AI agents that plan, code, and test in parallel. Students with Google AI Pro get higher rate limits.",
     "link": "https://antigravity.google",
-    "tags": ["AI", "IDE", "Google", "Agents"],
+    "tags": [
+      "AI",
+      "IDE",
+      "Google",
+      "Agents"
+    ],
     "popularity": 9
   },
   {
@@ -42,7 +59,12 @@
     "category": "AI & Dev Tools",
     "description": "Free access to all JetBrains professional IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.) while you're a student. Renewable annually.",
     "link": "https://www.jetbrains.com/community/education/#students",
-    "tags": ["IDE", "Programming", "Java", "Python"],
+    "tags": [
+      "IDE",
+      "Programming",
+      "Java",
+      "Python"
+    ],
     "popularity": 9,
     "repo": "JetBrains/intellij-community"
   },
@@ -50,9 +72,13 @@
     "id": "perplexity",
     "name": "Perplexity Pro",
     "category": "AI & Dev Tools",
-    "description": "$4.99/month (75% off) for students. Includes Study Mode with flashcards, 10x more citations, unlimited uploads, and Research Mode.",
+    "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
     "link": "https://www.perplexity.ai/students",
-    "tags": ["AI", "Search", "Research"],
+    "tags": [
+      "AI",
+      "Search",
+      "Research"
+    ],
     "popularity": 8
   },
   {
@@ -61,7 +87,11 @@
     "category": "AI & Dev Tools",
     "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent, CLI integration, and secure credential sharing.",
     "link": "https://1password.com/developers/students",
-    "tags": ["Security", "Passwords", "GitHub"],
+    "tags": [
+      "Security",
+      "Passwords",
+      "GitHub"
+    ],
     "popularity": 8
   },
   {
@@ -70,7 +100,11 @@
     "category": "Cloud & Hosting",
     "description": "$100 free credits yearly (renewable while enrolled), no credit card required. Access to 55+ Azure services including VMs, AI, and databases.",
     "link": "https://azure.microsoft.com/en-us/free/students",
-    "tags": ["Azure", "Microsoft", "Cloud"],
+    "tags": [
+      "Azure",
+      "Microsoft",
+      "Cloud"
+    ],
     "popularity": 9
   },
   {
@@ -79,7 +113,11 @@
     "category": "Cloud & Hosting",
     "description": "$200 in credits valid for 1 year via GitHub Student Pack. Deploy droplets, databases, and Kubernetes clusters.",
     "link": "https://www.digitalocean.com/github-students",
-    "tags": ["Cloud", "VPS", "Hosting"],
+    "tags": [
+      "Cloud",
+      "VPS",
+      "Hosting"
+    ],
     "popularity": 8
   },
   {
@@ -88,7 +126,11 @@
     "category": "Cloud & Hosting",
     "description": "$100 in AWS credits for students, no credit card required. Access to hands-on labs, learning paths, and job board.",
     "link": "https://aws.amazon.com/education/awseducate/",
-    "tags": ["AWS", "Cloud", "Learning"],
+    "tags": [
+      "AWS",
+      "Cloud",
+      "Learning"
+    ],
     "popularity": 9
   },
   {
@@ -97,7 +139,11 @@
     "category": "Cloud & Hosting",
     "description": "$50 in credits plus free MongoDB University access via GitHub Student Pack. Cloud database with generous free tier.",
     "link": "https://www.mongodb.com/students",
-    "tags": ["Database", "NoSQL", "Cloud"],
+    "tags": [
+      "Database",
+      "NoSQL",
+      "Cloud"
+    ],
     "popularity": 7,
     "repo": "mongodb/mongo"
   },
@@ -107,16 +153,23 @@
     "category": "Cloud & Hosting",
     "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
-    "tags": ["PaaS", "Hosting", "GitHub"],
+    "tags": [
+      "PaaS",
+      "Hosting",
+      "GitHub"
+    ],
     "popularity": 6
   },
   {
     "id": "netlify",
     "name": "Netlify",
     "category": "Cloud & Hosting",
-    "description": "Pro tier free for students via GitHub Student Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
-    "link": "https://www.netlify.com/github-students/",
-    "tags": ["Hosting", "JAMstack"],
+    "description": "Pro tier free via GitHub Student Developer Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
+    "link": "https://education.github.com/pack",
+    "tags": [
+      "Hosting",
+      "JAMstack"
+    ],
     "popularity": 7,
     "repo": "netlify/cli"
   },
@@ -126,7 +179,11 @@
     "category": "Domains & Security",
     "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
     "link": "https://nc.me/",
-    "tags": ["Domain", "SSL", "Security"],
+    "tags": [
+      "Domain",
+      "SSL",
+      "Security"
+    ],
     "popularity": 8
   },
   {
@@ -135,7 +192,11 @@
     "category": "Design",
     "description": "Free Figma Professional for 2 years. Unlimited files, version history, and team libraries. Verify with school email.",
     "link": "https://www.figma.com/education/",
-    "tags": ["Design", "UI/UX", "Collaboration"],
+    "tags": [
+      "Design",
+      "UI/UX",
+      "Collaboration"
+    ],
     "popularity": 10
   },
   {
@@ -143,8 +204,12 @@
     "name": "Canva for Education",
     "category": "Design",
     "description": "Free premium features for K-12 via teacher invite. Higher ed students: check if your university has Canva Campus access.",
-    "link": "https://www.canva.com/education/",
-    "tags": ["Design", "Graphics", "Marketing"],
+    "link": "https://www.canva.com/education/students/",
+    "tags": [
+      "Design",
+      "Graphics",
+      "Marketing"
+    ],
     "popularity": 9
   },
   {
@@ -152,8 +217,12 @@
     "name": "Autodesk",
     "category": "Design",
     "description": "Free 1-year access to AutoCAD, Revit, Maya, 3ds Max, Fusion, and 100+ products. Renewable while enrolled.",
-    "link": "https://www.autodesk.com/education/edu-software/overview",
-    "tags": ["3D", "CAD", "Engineering"],
+    "link": "https://www.autodesk.com/education/home",
+    "tags": [
+      "3D",
+      "CAD",
+      "Engineering"
+    ],
     "popularity": 8
   },
   {
@@ -162,7 +231,11 @@
     "category": "Productivity",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
     "link": "https://www.notion.so/product/notion-for-education",
-    "tags": ["Notes", "Planning", "Knowledge"],
+    "tags": [
+      "Notes",
+      "Planning",
+      "Knowledge"
+    ],
     "popularity": 10
   },
   {
@@ -171,7 +244,11 @@
     "category": "Productivity",
     "description": "App is free for everyone. Students get 40% off Sync ($29/year) and Publish for cloud backup and publishing.",
     "link": "https://obsidian.md/pricing",
-    "tags": ["Notes", "Markdown", "PKM"],
+    "tags": [
+      "Notes",
+      "Markdown",
+      "PKM"
+    ],
     "popularity": 9,
     "repo": "obsidianmd/obsidian-releases"
   },
@@ -179,9 +256,13 @@
     "id": "grammarly",
     "name": "Grammarly",
     "category": "Productivity",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access—check with your school.",
+    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
     "link": "https://www.grammarly.com/students",
-    "tags": ["Writing", "AI", "Grammar"],
+    "tags": [
+      "Writing",
+      "AI",
+      "Grammar"
+    ],
     "popularity": 8
   },
   {
@@ -190,7 +271,11 @@
     "category": "Productivity",
     "description": "Free Word, Excel, PowerPoint, OneNote, Teams, and 1TB OneDrive storage with valid school email address.",
     "link": "https://www.microsoft.com/en-us/education/products/office",
-    "tags": ["Office", "Documents", "Microsoft"],
+    "tags": [
+      "Office",
+      "Documents",
+      "Microsoft"
+    ],
     "popularity": 9
   },
   {
@@ -199,7 +284,10 @@
     "category": "Productivity",
     "description": "Discounted rates on paid plans for students. Free tier available with 250 active issues. Email support@linear.app with .edu email to apply.",
     "link": "https://linear.app/pricing",
-    "tags": ["Project Management", "Agile"],
+    "tags": [
+      "Project Management",
+      "Agile"
+    ],
     "popularity": 7,
     "repo": "linear/linear"
   },
@@ -209,7 +297,11 @@
     "category": "Lifestyle",
     "description": "$6.99/month (50% off) with Hulu included. Ad-free music, offline downloads, unlimited skips. Valid for up to 4 years.",
     "link": "https://www.spotify.com/us/student/",
-    "tags": ["Music", "Streaming", "Hulu"],
+    "tags": [
+      "Music",
+      "Streaming",
+      "Hulu"
+    ],
     "popularity": 10
   },
   {
@@ -218,7 +310,11 @@
     "category": "Lifestyle",
     "description": "6-month free trial, then $7.49/month (50% off). Free shipping, Prime Video, Music, Grubhub+, and 5% cash back.",
     "link": "https://www.amazon.com/joinstudent",
-    "tags": ["Shopping", "Shipping", "Streaming"],
+    "tags": [
+      "Shopping",
+      "Shipping",
+      "Streaming"
+    ],
     "popularity": 10
   },
   {
@@ -227,7 +323,11 @@
     "category": "Lifestyle",
     "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season. Available to current and admitted students.",
     "link": "https://www.apple.com/us-edu/store",
-    "tags": ["Hardware", "Apple", "MacBook"],
+    "tags": [
+      "Hardware",
+      "Apple",
+      "MacBook"
+    ],
     "popularity": 9
   },
   {
@@ -236,7 +336,10 @@
     "category": "Lifestyle",
     "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
     "link": "https://www.myunidays.com/",
-    "tags": ["Discounts", "Shopping"],
+    "tags": [
+      "Discounts",
+      "Shopping"
+    ],
     "popularity": 8
   },
   {
@@ -244,8 +347,12 @@
     "name": "LinkedIn Learning",
     "category": "Learning",
     "description": "Free access through many universities. Check your school's library or career services for complimentary access.",
-    "link": "https://www.linkedin.com/learning/subscription/higher-education",
-    "tags": ["Courses", "Professional", "Skills"],
+    "link": "https://learning.linkedin.com/for-higher-education",
+    "tags": [
+      "Courses",
+      "Professional",
+      "Skills"
+    ],
     "popularity": 8
   },
   {
@@ -253,8 +360,11 @@
     "name": "Coursera for Campus",
     "category": "Learning",
     "description": "Many universities provide free access to Coursera courses and certificates. Financial aid available for individual learners.",
-    "link": "https://www.coursera.org/for-university-and-college-students",
-    "tags": ["Online Courses", "Certificates"],
+    "link": "https://www.coursera.org/campus",
+    "tags": [
+      "Online Courses",
+      "Certificates"
+    ],
     "popularity": 9
   },
   {
@@ -263,7 +373,11 @@
     "category": "AI & Dev Tools",
     "description": "Free 12-month Google AI Pro plan for students (~$240 value). Includes Gemini 2.5 Pro, Deep Research, NotebookLM Plus, and 2TB storage. Sign up by Jan 31, 2026.",
     "link": "https://gemini.google/students/",
-    "tags": ["AI", "Google", "Research"],
+    "tags": [
+      "AI",
+      "Google",
+      "Research"
+    ],
     "popularity": 10
   },
   {
@@ -272,7 +386,11 @@
     "category": "Cloud & Hosting",
     "description": "$300 free credits for students plus always-free tier. Access through Google for Education or the standard free trial.",
     "link": "https://cloud.google.com/edu/students",
-    "tags": ["Cloud", "Google", "GCP"],
+    "tags": [
+      "Cloud",
+      "Google",
+      "GCP"
+    ],
     "popularity": 9
   },
   {
@@ -281,7 +399,11 @@
     "category": "Lifestyle",
     "description": "$5.99/month (45% off) with free Apple TV+ included. Verify via UNiDAYS, valid up to 4 years.",
     "link": "https://music.apple.com/us/student",
-    "tags": ["Music", "Streaming", "Apple"],
+    "tags": [
+      "Music",
+      "Streaming",
+      "Apple"
+    ],
     "popularity": 9
   },
   {
@@ -290,7 +412,11 @@
     "category": "Lifestyle",
     "description": "$7.99/month (50% off). Ad-free videos, offline downloads, YouTube Music included. Verify via SheerID, valid up to 4 years.",
     "link": "https://www.youtube.com/premium/student",
-    "tags": ["Video", "Streaming", "Music"],
+    "tags": [
+      "Video",
+      "Streaming",
+      "Music"
+    ],
     "popularity": 9
   },
   {
@@ -299,7 +425,11 @@
     "category": "Cloud & Hosting",
     "description": "Free Workers Paid Plan for 1 year (normally $5/month). Includes Workers, Pages Functions, KV, and Durable Objects. US students with .edu email.",
     "link": "https://www.cloudflare.com/students/",
-    "tags": ["Serverless", "Edge", "Hosting"],
+    "tags": [
+      "Serverless",
+      "Edge",
+      "Hosting"
+    ],
     "popularity": 8
   },
   {
@@ -308,7 +438,11 @@
     "category": "Design",
     "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Verify via SheerID, renewable annually.",
     "link": "https://unity.com/products/unity-student",
-    "tags": ["Game Dev", "3D", "Engine"],
+    "tags": [
+      "Game Dev",
+      "3D",
+      "Engine"
+    ],
     "popularity": 8
   },
   {
@@ -317,7 +451,11 @@
     "category": "Productivity",
     "description": "Free for 2 years. Unlimited boards, high-res exports, and custom templates. Apply with student documentation.",
     "link": "https://miro.com/education-whiteboard/",
-    "tags": ["Whiteboard", "Collaboration", "Planning"],
+    "tags": [
+      "Whiteboard",
+      "Collaboration",
+      "Planning"
+    ],
     "popularity": 8
   },
   {
@@ -326,7 +464,11 @@
     "category": "Design",
     "description": "Free for students and educators for 1 year. Professional UI/UX design tool for Mac with prototyping and collaboration.",
     "link": "https://www.sketch.com/education/",
-    "tags": ["Design", "UI/UX", "Mac"],
+    "tags": [
+      "Design",
+      "UI/UX",
+      "Mac"
+    ],
     "popularity": 7
   },
   {
@@ -335,7 +477,11 @@
     "category": "Productivity",
     "description": "Free Loom Pro for verified students via Atlassian. Unlimited recordings with premium features for video messaging.",
     "link": "https://support.atlassian.com/loom/docs/education-plan-faq/",
-    "tags": ["Video", "Recording", "Communication"],
+    "tags": [
+      "Video",
+      "Recording",
+      "Communication"
+    ],
     "popularity": 7
   },
   {
@@ -344,7 +490,11 @@
     "category": "Learning",
     "description": "Free API training and certification program. Learn API fundamentals, earn a digital badge, and join the student community.",
     "link": "https://www.postman.com/student-program/student-expert/",
-    "tags": ["API", "Certification", "Dev Tools"],
+    "tags": [
+      "API",
+      "Certification",
+      "Dev Tools"
+    ],
     "popularity": 8
   },
   {
@@ -353,7 +503,11 @@
     "category": "Learning",
     "description": "Free access to 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized digital credentials.",
     "link": "https://skillsbuild.org/",
-    "tags": ["Courses", "Certifications", "IBM"],
+    "tags": [
+      "Courses",
+      "Certifications",
+      "IBM"
+    ],
     "popularity": 8
   },
   {
@@ -362,7 +516,11 @@
     "category": "AI & Dev Tools",
     "description": "6 months free via GitHub Student Pack, then 80% off while a student. Git GUI client with GitLens VS Code extension.",
     "link": "https://www.gitkraken.com/github-student-developer-pack-bundle",
-    "tags": ["Git", "GitHub", "Dev Tools"],
+    "tags": [
+      "Git",
+      "GitHub",
+      "Dev Tools"
+    ],
     "popularity": 7
   },
   {
@@ -371,7 +529,11 @@
     "category": "Learning",
     "description": "6 months free via GitHub Student Pack (~$2000 value). 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
-    "tags": ["Courses", "Interview Prep", "GitHub"],
+    "tags": [
+      "Courses",
+      "Interview Prep",
+      "GitHub"
+    ],
     "popularity": 8
   },
   {
@@ -380,7 +542,10 @@
     "category": "Lifestyle",
     "description": "Free platform with 10,000+ student discounts on fashion, tech, food, and travel. Digital student ID included.",
     "link": "https://www.studentbeans.com/us",
-    "tags": ["Discounts", "Shopping"],
+    "tags": [
+      "Discounts",
+      "Shopping"
+    ],
     "popularity": 8
   },
   {
@@ -389,7 +554,11 @@
     "category": "Productivity",
     "description": "Free Team plan for 6-24 months. Instant 120-day trial with .edu email, then apply for extended access.",
     "link": "https://support.airtable.com/docs/nonprofit-and-educational-plans-faqs",
-    "tags": ["Database", "No-Code", "Spreadsheet"],
+    "tags": [
+      "Database",
+      "No-Code",
+      "Spreadsheet"
+    ],
     "popularity": 7
   },
   {
@@ -398,7 +567,11 @@
     "category": "Learning",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
     "link": "https://www.hackthebox.com/higher-education",
-    "tags": ["Cybersecurity", "Hacking", "Labs"],
+    "tags": [
+      "Cybersecurity",
+      "Hacking",
+      "Labs"
+    ],
     "popularity": 7
   },
   {
@@ -407,7 +580,11 @@
     "category": "Learning",
     "description": "20-30% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
     "link": "https://tryhackme.com/pricing",
-    "tags": ["Cybersecurity", "Learning", "Labs"],
+    "tags": [
+      "Cybersecurity",
+      "Learning",
+      "Labs"
+    ],
     "popularity": 7
   },
   {
@@ -416,7 +593,11 @@
     "category": "Lifestyle",
     "description": "Up to 30% off Galaxy phones, tablets, laptops, and accessories. Verify with .edu email or ID.me.",
     "link": "https://www.samsung.com/us/shop/offer-program/education/",
-    "tags": ["Hardware", "Phones", "Laptops"],
+    "tags": [
+      "Hardware",
+      "Phones",
+      "Laptops"
+    ],
     "popularity": 8
   },
   {
@@ -425,7 +606,11 @@
     "category": "Productivity",
     "description": "40% off Evernote Professional via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
     "link": "https://evernote.com/unidays",
-    "tags": ["Notes", "Organization", "Productivity"],
+    "tags": [
+      "Notes",
+      "Organization",
+      "Productivity"
+    ],
     "popularity": 6
   },
   {
@@ -434,7 +619,11 @@
     "category": "Productivity",
     "description": "50% student discount ($5/month). Mac productivity launcher with AI, cloud sync, and custom themes.",
     "link": "https://www.raycast.com/pricing",
-    "tags": ["Mac", "Productivity", "AI"],
+    "tags": [
+      "Mac",
+      "Productivity",
+      "AI"
+    ],
     "popularity": 7
   },
   {
@@ -443,7 +632,11 @@
     "category": "Productivity",
     "description": "Free Starter plan for students via Goodstack verification. Project management with timelines, boards, and collaboration.",
     "link": "https://asana.com/industry/students",
-    "tags": ["Project Management", "Tasks", "Collaboration"],
+    "tags": [
+      "Project Management",
+      "Tasks",
+      "Collaboration"
+    ],
     "popularity": 7
   },
   {
@@ -452,7 +645,11 @@
     "category": "Cloud & Hosting",
     "description": "$300 free credits plus always-free tier via Oracle Academy. Includes Autonomous Database, VMs, and storage.",
     "link": "https://academy.oracle.com/en/solutions-cloud-program.html",
-    "tags": ["Cloud", "Database", "Enterprise"],
+    "tags": [
+      "Cloud",
+      "Database",
+      "Enterprise"
+    ],
     "popularity": 6
   },
   {
@@ -461,7 +658,11 @@
     "category": "Learning",
     "description": "Free skill certifications in Python, JavaScript, SQL, and more. Recognized by 2000+ employers for job applications.",
     "link": "https://www.hackerrank.com/skills-verification",
-    "tags": ["Certifications", "Coding", "Interview Prep"],
+    "tags": [
+      "Certifications",
+      "Coding",
+      "Interview Prep"
+    ],
     "popularity": 8
   },
   {
@@ -470,7 +671,11 @@
     "category": "Learning",
     "description": "Free coding practice and mock interviews. Peer-matched practice sessions with structured learning paths.",
     "link": "https://www.interviewbit.com/",
-    "tags": ["Interview Prep", "Coding", "Practice"],
+    "tags": [
+      "Interview Prep",
+      "Coding",
+      "Practice"
+    ],
     "popularity": 7
   },
   {
@@ -479,7 +684,11 @@
     "category": "Learning",
     "description": "Free GPU compute (30hr/week), 50,000+ datasets, and ML competitions. Jupyter notebooks with P100/T4 GPUs.",
     "link": "https://www.kaggle.com/",
-    "tags": ["Data Science", "ML", "GPU"],
+    "tags": [
+      "Data Science",
+      "ML",
+      "GPU"
+    ],
     "popularity": 8
   },
   {
@@ -488,7 +697,11 @@
     "category": "Learning",
     "description": "Academic discounts on GPUs, free DLI courses, and research grants. Jetson developer kits at reduced prices for students.",
     "link": "https://developer.nvidia.com/higher-education-and-research",
-    "tags": ["GPU", "AI", "Hardware"],
+    "tags": [
+      "GPU",
+      "AI",
+      "Hardware"
+    ],
     "popularity": 7
   },
   {
@@ -497,7 +710,11 @@
     "category": "Cloud & Hosting",
     "description": "Free RHEL subscription for up to 16 systems. Full access to updates and self-service support. Renewable annually.",
     "link": "https://developers.redhat.com/",
-    "tags": ["Linux", "Enterprise", "DevOps"],
+    "tags": [
+      "Linux",
+      "Enterprise",
+      "DevOps"
+    ],
     "popularity": 6
   },
   {
@@ -506,7 +723,11 @@
     "category": "Learning",
     "description": "Free course audits from Harvard, MIT, and top universities. 200+ fully free courses, certificates available for purchase.",
     "link": "https://www.edx.org/",
-    "tags": ["Courses", "Universities", "Certificates"],
+    "tags": [
+      "Courses",
+      "Universities",
+      "Certificates"
+    ],
     "popularity": 8
   },
   {
@@ -515,7 +736,11 @@
     "category": "Learning",
     "description": "50,000+ free courses on programming, design, business, and more. Lifetime access once enrolled.",
     "link": "https://www.udemy.com/courses/free/",
-    "tags": ["Courses", "Skills", "Free"],
+    "tags": [
+      "Courses",
+      "Skills",
+      "Free"
+    ],
     "popularity": 7
   },
   {
@@ -524,7 +749,11 @@
     "category": "Learning",
     "description": "Join 2,100+ campus clubs for workshops, networking, and Google Solution Challenge. Free resources and community.",
     "link": "https://developers.google.com/community/gdsc",
-    "tags": ["Google", "Community", "Events"],
+    "tags": [
+      "Google",
+      "Community",
+      "Events"
+    ],
     "popularity": 7
   }
 ]

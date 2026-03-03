@@ -47,7 +47,8 @@ jobs:
 
                 const status = response.status;
 
-                if (status >= 400) {
+                // 403 commonly means bot-blocking, not a broken link — skip it
+                if (status >= 400 && status !== 403) {
                   brokenLinks.push({
                     name: benefit.name,
                     link: benefit.link,
