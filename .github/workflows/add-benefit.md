@@ -4,6 +4,10 @@ description: |
   validates the benefit, checks for duplicates against benefits.json,
   and creates a PR with the new entry if valid.
 
+engine:
+  id: copilot
+  model: claude-sonnet-4
+
 on:
   issues:
     types: [labeled]
