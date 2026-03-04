@@ -48,7 +48,7 @@ jobs:
     if: >
       (needs.pre_activation.outputs.activated == 'true') && ((github.event_name != 'issues') || ((github.event.action != 'labeled') ||
       (github.event.label.name == 'new-benefit')))
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04-arm
     permissions:
       contents: read
       issues: write
@@ -84,7 +84,7 @@ jobs:
 
   agent:
     needs: activation
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions: read-all
     env:
       DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
@@ -844,7 +844,7 @@ jobs:
       - safe_outputs
       - unlock
     if: (always()) && (needs.agent.result != 'skipped')
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04-arm
     permissions:
       contents: write
       discussions: write
@@ -950,7 +950,7 @@ jobs:
   detection:
     needs: agent
     if: needs.agent.outputs.output_types != '' || needs.agent.outputs.has_patch == 'true'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions: {}
     timeout-minutes: 10
     outputs:
@@ -1047,7 +1047,7 @@ jobs:
 
   pre_activation:
     if: (github.event_name != 'issues') || ((github.event.action != 'labeled') || (github.event.label.name == 'new-benefit'))
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04-arm
     outputs:
       activated: ${{ steps.check_membership.outputs.is_team_member == 'true' }}
     steps:
@@ -1075,7 +1075,7 @@ jobs:
       - detection
       - unlock
     if: ((!cancelled()) && (needs.agent.result != 'skipped')) && (needs.detection.outputs.success == 'true')
-    runs-on: ubuntu-slim
+    runs-on: ubuntu-24.04-arm
     permissions:
       contents: write
       discussions: write
@@ -1154,7 +1154,7 @@ jobs:
       - agent
       - detection
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     permissions:
       issues: write
     timeout-minutes: 5
