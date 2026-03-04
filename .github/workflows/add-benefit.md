@@ -161,7 +161,7 @@ Create a PR with the changes. Use this format:
 
 - **Title**: `Add benefit: {name}` (the safe-output title-prefix handles the prefix, so just use the benefit name)
 - **Branch**: `add-benefit-{id}`
-- **Body**:
+- **Body** (plain text, no code fences):
   ```
   ## {name}
 
@@ -173,6 +173,7 @@ Create a PR with the changes. Use this format:
   ---
   Closes #{issue_number}
   ```
+  Important: the `Closes #N` line must be plain text — not wrapped in backticks — so GitHub links and closes the issue on merge.
 
 ## Step 7: Comment on the issue
 
