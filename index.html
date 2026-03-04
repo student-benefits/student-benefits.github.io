@@ -355,6 +355,35 @@
     .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
     .empty p { color: var(--slate-400); }
 
+    .grant-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      border-radius: var(--radius-sm);
+      color: var(--slate-400);
+      font-size: 0.8125rem;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .grant-badge:hover {
+      color: #fff;
+      border-color: var(--slate-600);
+    }
+
+    .grant-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      flex-shrink: 0;
+      box-shadow: 0 0 6px #4ade80;
+    }
+
     .contribute-banner {
       display: inline-flex;
       align-items: center;
@@ -443,6 +472,10 @@
       <header>
         <div class="header-row">
           <h1>Student Benefits Hub</h1>
+          <a href="/agent/" class="grant-badge">
+            <span class="grant-dot"></span>
+            Curated by Grant
+          </a>
           <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             Submit a benefit
@@ -479,7 +512,7 @@
 
       <footer>
         <p>
-          Curated by <a href="/agent/">Grant</a> · an AI agent powered by Claude Sonnet 4 · started by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer">jonasneves</a>
+          Built by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer">jonasneves</a>
         </p>
       </footer>
     </div>
