@@ -420,7 +420,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      margin-top: 1.25rem;
     }
     .sim-btn {
       display: inline-flex;
@@ -447,6 +447,76 @@
     .sim-hidden { display: none !important; }
     .sim-visible { animation: step-in 0.3s var(--ease) forwards; }
 
+    /* ── Agent property chips ───────────────────────────────────── */
+    .prop-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .prop-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.875rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 120ms, color 120ms, background 120ms;
+    }
+    .prop-chip:hover { border-color: var(--grant-border); color: var(--grant-color); }
+    .prop-chip[aria-expanded="true"] {
+      border-color: var(--grant-color);
+      color: var(--grant-color);
+      background: var(--grant-bg);
+      box-shadow: 0 0 0 1px var(--grant-color);
+    }
+    .prop-chip-icon { width: 13px; height: 13px; stroke-width: 2; flex-shrink: 0; }
+    .prop-detail-slot { min-height: 80px; margin-bottom: 1.25rem; }
+
+    /* ── Outcomes ────────────────────────────────────────────────── */
+    .outcomes-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+    }
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    .outcome-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid;
+      padding: 0.875rem 1rem;
+    }
+    .outcome-card.accepted  { background: var(--outcome-accepted-bg);  border-color: var(--tavily-border); }
+    .outcome-card.rejected  { background: var(--outcome-rejected-bg);  border-color: var(--grant-border); }
+    .outcome-card.duplicate { background: var(--outcome-duplicate-bg); border-color: #e8d8b8; }
+    .outcome-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.375rem;
+    }
+    .outcome-card.accepted  .outcome-label { color: var(--outcome-accepted-color); }
+    .outcome-card.rejected  .outcome-label { color: var(--outcome-rejected-color); }
+    .outcome-card.duplicate .outcome-label { color: var(--outcome-duplicate-color); }
+    .outcome-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
+
+    @media (max-width: 540px) {
+      .outcomes-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── Code block (sim) ───────────────────────────────────────── */
     .sim-code {
       background: var(--code-bg);
@@ -461,6 +531,107 @@
       color: var(--code-text);
       white-space: pre;
       line-height: 1.6;
+    }
+
+    /* ── Architecture diagram ───────────────────────────────────── */
+    .arch-diagram {
+      margin-top: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .arch-nodes {
+      display: flex;
+      align-items: center;
+      min-width: max-content;
+    }
+    .arch-node-wrap--stacked {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .arch-node {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.625rem 0.875rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid;
+      background: var(--surface);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font);
+      transition: box-shadow 120ms, transform 120ms;
+      min-width: 96px;
+    }
+    .arch-node:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .arch-node-label { font-size: 0.8rem; font-weight: 700; }
+    .arch-node-sublabel { font-size: 0.68rem; margin-top: 0.125rem; opacity: 0.75; }
+
+    .arch-node--github { border-color: var(--github-border); color: var(--github-color); }
+    .arch-node--github[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--github-color); }
+
+    .arch-node--grant  { border-color: var(--grant-border);  color: var(--grant-color);  background: var(--grant-bg); }
+    .arch-node--grant[aria-expanded="true"]  { box-shadow: 0 0 0 2px var(--grant-color); }
+
+    .arch-node--tavily { border-color: var(--tavily-border); color: var(--tavily-color); }
+    .arch-node--tavily[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--tavily-color); }
+
+    .arch-node--web    { border-color: var(--web-border);    color: var(--web-color); }
+    .arch-node--web[aria-expanded="true"]    { box-shadow: 0 0 0 2px var(--web-color); }
+
+    .arch-connector {
+      flex: 1;
+      min-width: 32px;
+      position: relative;
+      height: 2px;
+      background: var(--border-subtle);
+      align-self: center;
+      overflow: visible;
+    }
+    .packet {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .packet-req    { background: var(--grant-color);  animation: pkt-fwd 2.4s ease-in-out infinite; }
+    .packet-res    { background: var(--github-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.2s; }
+    .packet-query  { background: var(--tavily-color); animation: pkt-fwd 2.4s ease-in-out infinite; animation-delay: 0.4s; }
+    .packet-result { background: var(--tavily-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.6s; }
+    @keyframes pkt-fwd {
+      0%   { left: 0%;   opacity: 0; }
+      6%   { opacity: 1; }
+      94%  { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    @keyframes pkt-rev {
+      0%   { left: 100%; opacity: 0; }
+      6%   { opacity: 1; }
+      94%  { opacity: 1; }
+      100% { left: 0%;   opacity: 0; }
+    }
+
+    .node-panels-slot {
+      min-height: 88px;
+      margin-top: 1rem;
+    }
+    .node-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.125rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+    .node-panel-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.375rem;
     }
 
     @media (max-width: 540px) {
@@ -491,37 +662,85 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that automatically curates this directory. When someone opens a GitHub Issue to suggest a student benefit, Grant reads the submission, searches the web to verify the program exists, checks for duplicates, and opens a pull request to add it — all without human intervention.
+      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention.
     </p>
   </section>
 
-  <!-- How it works -->
+  <!-- Architecture -->
   <section class="section">
-    <p class="section-label">How it works</p>
-    <div class="steps-grid">
-      <div class="step-chip">
-        <p class="step-num">Step 1</p>
-        <p class="step-title">Read the issue</p>
-        <p class="step-desc">Fetches the GitHub issue to extract the benefit name and any link the submitter provided.</p>
-        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
+    <p class="section-label">Architecture</p>
+    <div class="arch-diagram" role="region" aria-label="Interactive architecture diagram. Click any node to learn what it does.">
+      <div class="arch-nodes">
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--github" id="node-issue" aria-expanded="false" aria-controls="panel-issue" onclick="togglePanel('issue')">
+            <span class="arch-node-label">GitHub</span>
+            <span class="arch-node-sublabel">issue trigger</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+        </div>
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--grant" id="node-grant" aria-expanded="false" aria-controls="panel-grant" onclick="togglePanel('grant')">
+            <span class="arch-node-label">Grant</span>
+            <span class="arch-node-sublabel">Claude Sonnet 4</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-query"></span>
+          <span class="packet packet-result"></span>
+        </div>
+
+        <div class="arch-node-wrap arch-node-wrap--stacked">
+          <button class="arch-node arch-node--tavily" id="node-tavily" aria-expanded="false" aria-controls="panel-tavily" onclick="togglePanel('tavily')">
+            <span class="arch-node-label">Tavily</span>
+            <span class="arch-node-sublabel">web search</span>
+          </button>
+          <button class="arch-node arch-node--web" id="node-web" aria-expanded="false" aria-controls="panel-web" onclick="togglePanel('web')">
+            <span class="arch-node-label">Web Fetch</span>
+            <span class="arch-node-sublabel">page content</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+          <span class="packet packet-res"></span>
+        </div>
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output" onclick="togglePanel('output')">
+            <span class="arch-node-label">GitHub</span>
+            <span class="arch-node-sublabel">PR + comment</span>
+          </button>
+        </div>
+
       </div>
-      <div class="step-chip">
-        <p class="step-num">Step 2</p>
-        <p class="step-title">Check for duplicates</p>
-        <p class="step-desc">Reads <code>benefits.json</code> and checks for existing entries with a matching name or hostname.</p>
-        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
-      </div>
-      <div class="step-chip">
-        <p class="step-num">Step 3</p>
-        <p class="step-title">Verify with Tavily</p>
-        <p class="step-desc">Runs a live web search to confirm the program is real and find the correct student signup URL.</p>
-        <span class="step-chip-actor step-chip-actor-tavily">Tavily</span>
-      </div>
-      <div class="step-chip">
-        <p class="step-num">Step 4</p>
-        <p class="step-title">Open a PR</p>
-        <p class="step-desc">Commits the validated benefit to <code>benefits.json</code> and opens a pull request for human review.</p>
-        <span class="step-chip-actor step-chip-actor-grant">Grant</span>
+
+      <div class="node-panels-slot">
+        <div id="panel-issue" class="node-panel" hidden>
+          <p class="node-panel-title">GitHub Issue</p>
+          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs — everything else Grant discovers on its own.</p>
+        </div>
+        <div id="panel-grant" class="node-panel" hidden>
+          <p class="node-panel-title">Grant · Claude Sonnet 4</p>
+          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome — without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
+        </div>
+        <div id="panel-tavily" class="node-panel" hidden>
+          <p class="node-panel-title">Tavily Search</p>
+          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists — searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
+        </div>
+        <div id="panel-web" class="node-panel" hidden>
+          <p class="node-panel-title">Web Fetch</p>
+          <p>After Tavily returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only. No forms submitted, no side effects.</p>
+        </div>
+        <div id="panel-output" class="node-panel" hidden>
+          <p class="node-panel-title">GitHub Output</p>
+          <p>If valid and new: Grant opens a pull request adding the entry to <code>benefits.json</code> and comments on the issue with the PR link. If rejected or duplicate: it comments with the reason and closes the issue. All writes go through GitHub's API.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -538,15 +757,82 @@
       <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
     </div>
 
+    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
+
     <div class="sim-controls">
-      <button class="sim-btn" id="sim-btn" onclick="simPlay()">
+      <button class="sim-btn" id="sim-btn" onclick="simNext()">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        Watch Grant work
+        Start
       </button>
       <span class="sim-hint" id="sim-hint"></span>
     </div>
+  </section>
 
-    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
+  <!-- What makes this an agent -->
+  <section class="section">
+    <p class="section-label">What makes this an agent?</p>
+
+    <div class="prop-chips">
+      <button class="prop-chip" id="pchip-tool" aria-expanded="false" onclick="toggleProp('tool')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v8M8 12h8"/></svg>
+        Tool use
+      </button>
+      <button class="prop-chip" id="pchip-decision" aria-expanded="false" onclick="toggleProp('decision')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v9m0 0l-4 4m4-4l4 4M8 20h8"/></svg>
+        Decision-making
+      </button>
+      <button class="prop-chip" id="pchip-autonomy" aria-expanded="false" onclick="toggleProp('autonomy')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Autonomy
+      </button>
+      <button class="prop-chip" id="pchip-memory" aria-expanded="false" onclick="toggleProp('memory')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        Memory
+      </button>
+      <button class="prop-chip" id="pchip-self" aria-expanded="false" onclick="toggleProp('self')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Self-direction
+      </button>
+    </div>
+
+    <div class="prop-detail-slot">
+      <div id="ppanel-tool" class="node-panel" hidden>
+        <p class="node-panel-title">Tool use</p>
+        <p>An agent selects tools based on what it finds, not a fixed sequence. Grant calls GitHub, Tavily, and web fetch in an order that varies with every submission.</p>
+      </div>
+      <div id="ppanel-decision" class="node-panel" hidden>
+        <p class="node-panel-title">Decision-making</p>
+        <p>An agent uses LLM reasoning to choose a path at each step. Grant decides to accept (open a PR), reject (close and log to memory), or flag as duplicate based on what it finds.</p>
+      </div>
+      <div id="ppanel-autonomy" class="node-panel" hidden>
+        <p class="node-panel-title">Autonomy</p>
+        <p>An agent runs end-to-end without a human approving intermediate results. From issue trigger to PR or issue close, no human is in the loop.</p>
+      </div>
+      <div id="ppanel-memory" class="node-panel" hidden>
+        <p class="node-panel-title">Memory</p>
+        <p>An agent persists state across runs. Grant saves rejected programs in <code>rejected.json</code>. Future submissions for the same product skip re-verification entirely.</p>
+      </div>
+      <div id="ppanel-self" class="node-panel" hidden>
+        <p class="node-panel-title">Self-direction</p>
+        <p>An agent generates its own tasks rather than waiting for human input. Grant runs monthly, searches for new student benefits, and creates issues for itself to process.</p>
+      </div>
+    </div>
+
+    <p class="outcomes-label">Same input, three possible outcomes</p>
+    <div class="outcomes-grid">
+      <div class="outcome-card accepted">
+        <p class="outcome-label">✓ Accepted</p>
+        <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
+      </div>
+      <div class="outcome-card rejected">
+        <p class="outcome-label">✗ Rejected</p>
+        <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
+      </div>
+      <div class="outcome-card duplicate">
+        <p class="outcome-label">⚠ Duplicate</p>
+        <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Last run -->
@@ -585,6 +871,38 @@
     create_pull_request: 'Creates a GitHub pull request with the change for human review before it goes live.',
     add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
   };
+
+  function toggleProp(id) {
+    const panel = document.getElementById('ppanel-' + id);
+    const chip  = document.getElementById('pchip-' + id);
+    const isOpen = !panel.hidden;
+    document.querySelectorAll('[id^="ppanel-"]').forEach(p => { p.hidden = true; });
+    document.querySelectorAll('.prop-chip').forEach(c => c.setAttribute('aria-expanded', 'false'));
+    if (!isOpen) {
+      panel.hidden = false;
+      panel.style.animation = 'none';
+      panel.offsetHeight;
+      panel.style.animation = '';
+      chip.setAttribute('aria-expanded', 'true');
+    }
+  }
+
+  function togglePanel(id) {
+    const panel = document.getElementById('panel-' + id);
+    const btn   = document.getElementById('node-' + id);
+    const isOpen = !panel.hidden;
+
+    document.querySelectorAll('.node-panel').forEach(p => { p.hidden = true; });
+    document.querySelectorAll('.arch-node').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+    if (!isOpen) {
+      panel.hidden = false;
+      panel.style.animation = 'none';
+      panel.offsetHeight; // force reflow to restart animation
+      panel.style.animation = '';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
 
   function esc(s) {
     return String(s)
@@ -708,7 +1026,7 @@
       stepClass: 'actor-tavily', badge: 'badge-tavily', badgeLabel: 'Tavily',
       headLabel: 'search', detail: 'Notion student free plan education',
       primary: '5 results found. Top result: <code>notion.so/product/notion-for-education</code>',
-      annotation: 'Searches the live web to confirm the program is real and currently active — not just from training data.'
+      annotation: 'Searches the live web to confirm the program is real and currently active. Not just from training data.'
     },
     {
       stepClass: 'actor-web', badge: 'badge-web', badgeLabel: 'Web',
@@ -743,40 +1061,41 @@
     }
   ];
 
-  let simRunning = false;
+  let simStep = 0;
 
-  function simPlay() {
-    const btn = document.getElementById('sim-btn');
-    const hint = document.getElementById('sim-hint');
+  const SVG_PLAY   = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+  const SVG_NEXT   = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+  const SVG_REPLAY = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`;
+
+  function simNext() {
+    const btn   = document.getElementById('sim-btn');
+    const hint  = document.getElementById('sim-hint');
     const trace = document.getElementById('sim-trace');
 
     if (btn.dataset.state === 'replay') {
       trace.innerHTML = '';
+      simStep = 0;
       btn.dataset.state = '';
-      btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Watch Grant work`;
+      btn.innerHTML = SVG_PLAY + ' Start';
       hint.textContent = '';
       return;
     }
 
-    if (simRunning) return;
-    simRunning = true;
-    btn.disabled = true;
+    if (simStep >= SIM_STEPS.length) return;
 
-    SIM_STEPS.forEach((step, i) => {
-      setTimeout(() => {
-        addSimStep(step, trace);
-        hint.textContent = `${i + 1} / ${SIM_STEPS.length}`;
-        if (i === SIM_STEPS.length - 1) {
-          simRunning = false;
-          btn.disabled = false;
-          btn.dataset.state = 'replay';
-          btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Replay`;
-        }
-      }, i * 650);
-    });
+    addSimStep(SIM_STEPS[simStep], trace, btn);
+    simStep++;
+    hint.textContent = `${simStep} / ${SIM_STEPS.length}`;
+
+    if (simStep === SIM_STEPS.length) {
+      btn.dataset.state = 'replay';
+      btn.innerHTML = SVG_REPLAY + ' Replay';
+    } else {
+      btn.innerHTML = SVG_NEXT + ' Next step';
+    }
   }
 
-  function addSimStep(step, trace) {
+  function addSimStep(step, trace, btn) {
     const codeHtml = step.code
       ? `<div class="sim-code"><pre>${step.code}</pre></div>`
       : '';
@@ -803,8 +1122,8 @@
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.classList.remove('sim-hidden');
       el.classList.add('sim-visible');
+      if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }));
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   fetch('last-run.json')
