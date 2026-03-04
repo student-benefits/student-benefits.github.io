@@ -420,7 +420,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      margin-bottom: 1.5rem;
+      margin-top: 1.25rem;
     }
     .sim-btn {
       display: inline-flex;
@@ -667,7 +667,7 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that automatically curates this directory — verifying submissions, checking for duplicates, and opening pull requests without human intervention.
+      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention.
     </p>
   </section>
 
@@ -740,7 +740,7 @@
         </div>
         <div id="panel-web" class="node-panel" hidden>
           <p class="node-panel-title">Web Fetch</p>
-          <p>After Tavily returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only — no forms submitted, no side effects.</p>
+          <p>After Tavily returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only. No forms submitted, no side effects.</p>
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Output</p>
@@ -762,15 +762,15 @@
       <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
     </div>
 
+    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
+
     <div class="sim-controls">
-      <button class="sim-btn" id="sim-btn" onclick="simPlay()">
+      <button class="sim-btn" id="sim-btn" onclick="simNext()">
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        Watch Grant work
+        Start
       </button>
       <span class="sim-hint" id="sim-hint"></span>
     </div>
-
-    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
   </section>
 
   <!-- What makes this an agent -->
@@ -778,8 +778,8 @@
     <p class="section-label">What makes this an agent?</p>
 
     <p class="agent-intro">
-      A plain automation follows a fixed script — the outcome is predetermined before it runs.
-      Grant uses LLM reasoning to make decisions at each step. The same submission can
+      A plain automation follows a fixed script. The outcome is predetermined before it runs.
+      Grant uses LLM reasoning to make decisions at each step, so the same submission can
       produce three different outcomes depending on what Grant finds.
     </p>
 
@@ -805,11 +805,11 @@
     <div class="characteristics">
       <div class="char-row">
         <span class="char-check yes">✓</span>
-        <span><span class="char-label">Memory</span> <span class="char-desc">— stores rejected programs in <code>rejected.json</code> to avoid re-checking them</span></span>
+        <span><span class="char-label">Memory</span> <span class="char-desc">: stores rejected programs in <code>rejected.json</code> to avoid re-checking them</span></span>
       </div>
       <div class="char-row">
         <span class="char-check yes">✓</span>
-        <span><span class="char-label">Self-direction</span> <span class="char-desc">— runs monthly to discover new benefits and create its own submissions</span></span>
+        <span><span class="char-label">Self-direction</span> <span class="char-desc">: runs monthly to discover new benefits and create its own submissions</span></span>
       </div>
     </div>
   </section>
@@ -1025,37 +1025,40 @@
     }
   ];
 
-  let simRunning = false;
+  let simStep = 0;
 
-  function simPlay() {
-    const btn = document.getElementById('sim-btn');
-    const hint = document.getElementById('sim-hint');
+  const SVG_PLAY   = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+  const SVG_NEXT   = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+  const SVG_REPLAY = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`;
+
+  function simNext() {
+    const btn   = document.getElementById('sim-btn');
+    const hint  = document.getElementById('sim-hint');
     const trace = document.getElementById('sim-trace');
 
     if (btn.dataset.state === 'replay') {
       trace.innerHTML = '';
+      simStep = 0;
       btn.dataset.state = '';
-      btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Watch Grant work`;
+      btn.innerHTML = SVG_PLAY + ' Start';
       hint.textContent = '';
       return;
     }
 
-    if (simRunning) return;
-    simRunning = true;
-    btn.disabled = true;
+    if (simStep >= SIM_STEPS.length) return;
 
-    SIM_STEPS.forEach((step, i) => {
-      setTimeout(() => {
-        addSimStep(step, trace);
-        hint.textContent = `${i + 1} / ${SIM_STEPS.length}`;
-        if (i === SIM_STEPS.length - 1) {
-          simRunning = false;
-          btn.disabled = false;
-          btn.dataset.state = 'replay';
-          btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Replay`;
-        }
-      }, i * 650);
-    });
+    addSimStep(SIM_STEPS[simStep], trace);
+    simStep++;
+    hint.textContent = `${simStep} / ${SIM_STEPS.length}`;
+
+    if (simStep === SIM_STEPS.length) {
+      btn.dataset.state = 'replay';
+      btn.innerHTML = SVG_REPLAY + ' Replay';
+    } else {
+      btn.innerHTML = SVG_NEXT + ' Next step';
+    }
+
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function addSimStep(step, trace) {
@@ -1086,7 +1089,6 @@
       el.classList.remove('sim-hidden');
       el.classList.add('sim-visible');
     }));
-    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   fetch('last-run.json')
