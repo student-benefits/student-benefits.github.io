@@ -11,26 +11,18 @@ A community directory of student discounts, free tiers, and perks — curated by
 Submissions come in as GitHub Issues. Grant — an AI agent running on Claude Sonnet 4 — picks them up, validates them against live web data, and opens a pull request if the benefit checks out. A human reviews and merges. The site deploys automatically.
 
 ```mermaid
-flowchart TD
-    A([👤 Anyone opens an Issue]) --> B[Issue labeled\nnew-benefit]
-    B --> C{Grant reads issue\nand checks for duplicates}
+flowchart LR
+    A([Issue]) --> B{Grant}
+    B -->|duplicate\nor invalid| C[Comment\n+ close]
+    B -->|new| D[Tavily\nsearch]
+    D -->|not found| C
+    D -->|verified| E[Edit\nbenefits.json]
+    E --> F[Open PR]
+    F --> G([Human\nmerges])
+    G --> H[Site\ndeploys]
 
-    C -->|duplicate| D[💬 Comments: already listed\nCloses issue]
-    C -->|new| E[🔍 Tavily search\nverify program exists]
-
-    E -->|not found| F[💬 Comments: cannot add\nCloses issue]
-    E -->|confirmed| G[✏️ Adds entry to\nbenefits.json]
-
-    G --> H[📝 Updates agent/last-run.json\nwith run summary]
-    H --> I[🔀 Opens Pull Request]
-    I --> J([👤 Human reviews & merges])
-    J --> K[🚀 GitHub Pages deploys\nsite updates live]
-
-    style A fill:#f5f5f0,stroke:#d8d5ce
-    style J fill:#f5f5f0,stroke:#d8d5ce
-    style D fill:#fdf3ef,stroke:#e8c4b8
-    style F fill:#fdf3ef,stroke:#e8c4b8
-    style K fill:#f0faf4,stroke:#b8e0c8
+    style C fill:#fdf3ef,stroke:#e8c4b8
+    style H fill:#f0faf4,stroke:#b8e0c8
 ```
 
 The full workflow lives in [`.github/workflows/add-benefit.md`](.github/workflows/add-benefit.md) — a Markdown file with a YAML frontmatter block that configures the agent (model, tools, network access, safe outputs) and a plain-English prompt that tells it what to do.
