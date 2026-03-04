@@ -24,6 +24,14 @@ safe-outputs:
     labels: [new-benefit]
   add-comment:
 
+mcp-servers:
+  tavily:
+    command: npx
+    args: ["-y", "@tavily/mcp-server"]
+    env:
+      TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
+    allowed: ["search", "search_news"]
+
 tools:
   github:
     toolsets: [issues, repos]
@@ -81,7 +89,9 @@ Then stop — do not create a PR.
 
 ## Step 3: Validate the benefit
 
-Determine whether this is a real student discount or free-access program. Use web-fetch to search for and verify the student program page — do not rely solely on your training data, as programs may have launched or changed recently. Search for "{product name} student discount" or "{product name} higher education" and fetch the most relevant result to confirm the program exists and get the correct signup URL.
+Determine whether this is a real student discount or free-access program. Do not rely solely on your training data, as programs may have launched or changed recently.
+
+Use the Tavily `search` tool to search for "{product name} student discount" or "{product name} higher education free". Then use `web-fetch` to open the most relevant result and confirm the program exists and get the correct signup URL.
 
 Only reject if you are confident no student program exists after attempting to verify online.
 
