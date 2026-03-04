@@ -4,6 +4,8 @@ description: |
   validates the benefit, checks for duplicates against benefits.json,
   and creates a PR with the new entry if valid.
 
+strict: false
+
 engine:
   id: copilot
   model: claude-sonnet-4
@@ -27,6 +29,16 @@ tools:
     toolsets: [issues, repos]
   web-fetch:
   edit:
+
+network:
+  allowed:
+    - defaults
+    - "*.com"
+    - "*.org"
+    - "*.edu"
+    - "*.io"
+    - "*.dev"
+    - "*.net"
 
 timeout-minutes: 10
 ---
