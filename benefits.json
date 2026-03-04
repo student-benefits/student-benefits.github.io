@@ -755,5 +755,19 @@
       "Events"
     ],
     "popularity": 7
+  },
+  {
+    "id": "google-colab",
+    "name": "Google Colab",
+    "category": "AI Tools",
+    "description": "Free Jupyter notebook environment in the cloud. Includes free GPU/TPU access for machine learning and AI research.",
+    "link": "https://colab.research.google.com/",
+    "tags": [
+      "AI",
+      "Jupyter",
+      "Python",
+      "GPU"
+    ],
+    "popularity": 5
   }
 ]
