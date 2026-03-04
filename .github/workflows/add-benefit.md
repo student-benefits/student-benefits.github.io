@@ -22,7 +22,6 @@ tools:
   github:
     toolsets: [issues, repos]
   edit:
-    paths: ["benefits.json"]
 
 timeout-minutes: 10
 ---
