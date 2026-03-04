@@ -35,6 +35,7 @@ body:
       description: If you know the signup URL, include it - otherwise we'll find it
       placeholder: https://example.com/students
 
+  # Category options must be kept in sync with categories.json (GitHub forms don't support dynamic content)
   - type: dropdown
     id: category
     attributes:

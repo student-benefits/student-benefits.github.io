@@ -31,13 +31,13 @@ jobs:
             Read `benefits.json` to understand the current dataset and the PR diff to see what changed.
 
             Check:
-            - **Schema compliance** — id is unique and URL-safe, category matches one of the 9 valid values exactly, description ≤ 120 chars, link is a direct student signup URL
+            - **Schema compliance** — id is unique and URL-safe, category exactly matches one of the values in `categories.json`, description ≤ 120 chars, link is a direct student signup URL
             - **Duplicates** — no existing entry with the same name or same hostname
             - **JSON hygiene** — valid JSON, 2-space indent, trailing newline preserved
             - **Link quality** — the link should go to the actual student program page, not a generic marketing or homepage URL
             - **Description quality** — must state what students specifically get (e.g. "Free Pro plan for 1 year"), not vague ("Student discount available")
 
-            Valid categories (exact strings): AI & Dev Tools, Cloud & Hosting, Learning, Design, Productivity, Lifestyle, Domains & Security, Other
+            Valid categories: read from `categories.json` in the repository root (exact string match required).
 
             Format your review as:
             - **Summary** (1–2 sentences)

@@ -486,11 +486,7 @@
   </div>
 
   <script>
-    const CATEGORIES = [
-      'All', 'AI Tools', 'Dev Tools', 'Cloud & Hosting', 'Learning',
-      'Design', 'Productivity', 'Lifestyle', 'Domains & Security'
-    ];
-
+    let CATEGORIES = ['All'];
     let benefits = [];
     let activeCategory = 'All';
     let searchQuery = '';
@@ -622,13 +618,15 @@
       window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
     });
 
-    fetch('benefits.json')
-      .then(r => r.json())
-      .then(data => {
-        benefits = data;
-        renderFilters();
-        render();
-      });
+    Promise.all([
+      fetch('benefits.json').then(r => r.json()),
+      fetch('categories.json').then(r => r.json())
+    ]).then(([data, cats]) => {
+      benefits = data;
+      CATEGORIES = ['All', ...cats];
+      renderFilters();
+      render();
+    });
   </script>
 </body>
 </html>
