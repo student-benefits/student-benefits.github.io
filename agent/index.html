@@ -364,6 +364,105 @@
     }
     .site-footer a { color: var(--grant-color); text-underline-offset: 2px; }
 
+    /* ── Step chip actor badges ─────────────────────────────────── */
+    .step-chip-actor {
+      display: inline-block;
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 1px 5px;
+      border-radius: 2px;
+      margin-top: 0.625rem;
+    }
+    .step-chip-actor-github { background: var(--github-bg); color: var(--github-color); border: 1px solid var(--github-border); }
+    .step-chip-actor-tavily { background: var(--tavily-bg); color: var(--tavily-color); border: 1px solid var(--tavily-border); }
+    .step-chip-actor-grant  { background: var(--grant-bg);  color: var(--grant-color);  border: 1px solid var(--grant-border); }
+
+    /* ── Simulation section ──────────────────────────────────────── */
+    .sim-task {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1rem;
+    }
+    .sim-task-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--surface-raised);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sim-task-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+    .sim-task-num {
+      font-size: 0.7rem;
+      font-family: var(--mono);
+      color: var(--github-color);
+      margin-left: auto;
+    }
+    .sim-task-body {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .sim-task-body strong { color: var(--text); font-style: normal; }
+
+    .sim-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .sim-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0 1.125rem;
+      height: 40px;
+      background: var(--grant-color);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 120ms;
+    }
+    .sim-btn:hover { opacity: 0.88; }
+    .sim-btn:focus-visible { outline: 2px solid var(--grant-color); outline-offset: 2px; }
+    .sim-btn:disabled { opacity: 0.5; cursor: default; }
+    .sim-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .sim-hint { font-size: 0.8rem; color: var(--text-muted); }
+
+    .sim-hidden { display: none !important; }
+    .sim-visible { animation: step-in 0.3s var(--ease) forwards; }
+
+    /* ── Code block (sim) ───────────────────────────────────────── */
+    .sim-code {
+      background: var(--code-bg);
+      border-radius: var(--radius);
+      padding: 0.625rem 0.875rem;
+      margin-top: 0.5rem;
+      overflow-x: auto;
+    }
+    .sim-code pre {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--code-text);
+      white-space: pre;
+      line-height: 1.6;
+    }
+
     @media (max-width: 540px) {
       .main { padding: 2rem 1.25rem 4rem; }
       .header-inner { padding: 0 1.25rem; }
@@ -403,24 +502,51 @@
       <div class="step-chip">
         <p class="step-num">Step 1</p>
         <p class="step-title">Read the issue</p>
-        <p class="step-desc">Fetches the GitHub issue and extracts the benefit name, optional link, and category.</p>
+        <p class="step-desc">Fetches the GitHub issue to extract the benefit name and any link the submitter provided.</p>
+        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
       </div>
       <div class="step-chip">
         <p class="step-num">Step 2</p>
         <p class="step-title">Check for duplicates</p>
-        <p class="step-desc">Reads <code>benefits.json</code> and compares by name and domain to avoid adding the same thing twice.</p>
+        <p class="step-desc">Reads <code>benefits.json</code> and checks for existing entries with a matching name or hostname.</p>
+        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
       </div>
       <div class="step-chip">
         <p class="step-num">Step 3</p>
         <p class="step-title">Verify with Tavily</p>
-        <p class="step-desc">Searches the web using Tavily to confirm the student program is real and find the correct signup URL.</p>
+        <p class="step-desc">Runs a live web search to confirm the program is real and find the correct student signup URL.</p>
+        <span class="step-chip-actor step-chip-actor-tavily">Tavily</span>
       </div>
       <div class="step-chip">
         <p class="step-num">Step 4</p>
         <p class="step-title">Open a PR</p>
-        <p class="step-desc">Adds the validated entry to <code>benefits.json</code> and creates a pull request for human review.</p>
+        <p class="step-desc">Commits the validated benefit to <code>benefits.json</code> and opens a pull request for human review.</p>
+        <span class="step-chip-actor step-chip-actor-grant">Grant</span>
       </div>
     </div>
+  </section>
+
+  <!-- Simulation -->
+  <section class="section">
+    <p class="section-label">See it in action</p>
+
+    <div class="sim-task">
+      <div class="sim-task-head">
+        <span class="sim-task-label">GitHub Issue</span>
+        <span class="sim-task-num">#42</span>
+      </div>
+      <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
+    </div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="sim-btn" onclick="simPlay()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Watch Grant work
+      </button>
+      <span class="sim-hint" id="sim-hint"></span>
+    </div>
+
+    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
   </section>
 
   <!-- Last run -->
@@ -556,6 +682,129 @@
     }
 
     document.getElementById('run-output').innerHTML = html;
+  }
+
+  // ── Simulation ────────────────────────────────────────────────
+  const SIM_STEPS = [
+    {
+      stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
+      headLabel: 'get_issue', detail: 'issue #42',
+      primary: 'User submitted: <em>"Notion is free for students"</em>',
+      annotation: 'Reads the issue body to extract the benefit name and any optional link provided by the submitter.'
+    },
+    {
+      stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
+      headLabel: 'get_file_contents', detail: 'benefits.json',
+      primary: '59 existing benefits loaded. Checking for name and hostname matches…',
+      annotation: 'Scans all existing entries before doing any web research to avoid duplicates.'
+    },
+    {
+      stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
+      headLabel: 'no duplicate found', detail: null,
+      primary: '<code>notion.so</code> not in existing entries. Proceeding to verify.',
+      annotation: null
+    },
+    {
+      stepClass: 'actor-tavily', badge: 'badge-tavily', badgeLabel: 'Tavily',
+      headLabel: 'search', detail: 'Notion student free plan education',
+      primary: '5 results found. Top result: <code>notion.so/product/notion-for-education</code>',
+      annotation: 'Searches the live web to confirm the program is real and currently active — not just from training data.'
+    },
+    {
+      stepClass: 'actor-web', badge: 'badge-web', badgeLabel: 'Web',
+      headLabel: 'web_fetch', detail: 'notion.so/product/notion-for-education',
+      primary: 'Confirmed: free Plus plan for verified students with .edu email.',
+      annotation: 'Opens the actual signup page to extract exact terms and the correct URL.'
+    },
+    {
+      stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
+      headLabel: 'edit', detail: 'benefits.json',
+      primary: 'Added <strong>Notion Education</strong> · Productivity',
+      code: `<span style="color:#5a5a4e">{</span>
+  <span style="color:#e0b060">"id"</span>: <span style="color:#7ec890">"notion"</span>,
+  <span style="color:#e0b060">"name"</span>: <span style="color:#7ec890">"Notion Education"</span>,
+  <span style="color:#e0b060">"category"</span>: <span style="color:#7ec890">"Productivity"</span>,
+  <span style="color:#e0b060">"description"</span>: <span style="color:#7ec890">"Free Plus plan with unlimited blocks..."</span>,
+  <span style="color:#e0b060">"popularity"</span>: <span style="color:#7eb8e0">5</span>
+<span style="color:#5a5a4e">}</span>`,
+      annotation: 'Appends the validated benefit with all required fields to benefits.json.'
+    },
+    {
+      stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
+      headLabel: 'create_pull_request', detail: 'PR #43',
+      primary: 'Opened PR #43: <em>"Add benefit: Notion Education"</em>',
+      annotation: 'Creates a pull request for human review. The benefit goes live only after it\'s merged.'
+    },
+    {
+      stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
+      headLabel: 'add_comment', detail: 'issue #42',
+      primary: 'Commented on issue #42 with the PR link.',
+      annotation: 'Closes the loop — the submitter gets notified their suggestion was processed.'
+    }
+  ];
+
+  let simRunning = false;
+
+  function simPlay() {
+    const btn = document.getElementById('sim-btn');
+    const hint = document.getElementById('sim-hint');
+    const trace = document.getElementById('sim-trace');
+
+    if (btn.dataset.state === 'replay') {
+      trace.innerHTML = '';
+      btn.dataset.state = '';
+      btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Watch Grant work`;
+      hint.textContent = '';
+      return;
+    }
+
+    if (simRunning) return;
+    simRunning = true;
+    btn.disabled = true;
+
+    SIM_STEPS.forEach((step, i) => {
+      setTimeout(() => {
+        addSimStep(step, trace);
+        hint.textContent = `${i + 1} / ${SIM_STEPS.length}`;
+        if (i === SIM_STEPS.length - 1) {
+          simRunning = false;
+          btn.disabled = false;
+          btn.dataset.state = 'replay';
+          btn.innerHTML = `<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg> Replay`;
+        }
+      }, i * 650);
+    });
+  }
+
+  function addSimStep(step, trace) {
+    const codeHtml = step.code
+      ? `<div class="sim-code"><pre>${step.code}</pre></div>`
+      : '';
+    const el = document.createElement('div');
+    el.className = `trace-step ${step.stepClass} sim-hidden`;
+    el.innerHTML = `
+      <div class="trace-gutter">
+        <div class="trace-dot"></div>
+        <div class="trace-line"></div>
+      </div>
+      <div class="trace-card">
+        <div class="trace-head">
+          <span class="actor-badge ${esc(step.badge)}">${esc(step.badgeLabel)}</span>
+          <span class="trace-head-label">${esc(step.headLabel)}</span>
+          ${step.detail ? `<span class="trace-head-detail">${esc(step.detail)}</span>` : ''}
+        </div>
+        <div class="trace-body">
+          <p class="trace-primary">${step.primary}</p>
+          ${codeHtml}
+          ${step.annotation ? `<p class="trace-annotation">${step.annotation}</p>` : ''}
+        </div>
+      </div>`;
+    trace.appendChild(el);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.classList.remove('sim-hidden');
+      el.classList.add('sim-visible');
+    }));
+    el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   fetch('last-run.json')
