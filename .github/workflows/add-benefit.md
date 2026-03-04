@@ -128,6 +128,33 @@ If the user provided a link, prefer it. If the user provided a category, use it.
 
 Use the edit tool to append the new benefit object to the array in `benefits.json`. Maintain the existing JSON formatting (2-space indent, trailing newline).
 
+## Step 5b: Update the agent run log
+
+Before creating the PR, replace the entire content of `agent/last-run.json` with a structured summary of this run. Use valid JSON with 2-space indentation:
+
+```json
+{
+  "issue": <issue_number>,
+  "title": "<issue title, lowercase>",
+  "timestamp": "<current UTC time as ISO 8601>",
+  "outcome": "accepted",
+  "tools": [
+    { "name": "<tool_name>", "summary": "<one-line description of what it did>" }
+  ],
+  "benefit": {
+    "name": "<name>",
+    "category": "<category>",
+    "description": "<description>"
+  },
+  "run_url": ""
+}
+```
+
+Rules:
+- `tools`: include every tool called during this run, in order. For `tavily_search`, include `"query": "<search query used>"` instead of `"summary"`. For `web_fetch`, include `"url": "<url fetched>"` instead of `"summary"`.
+- `run_url`: always set to empty string `""` (the URL is not available at runtime).
+- Write the complete file — do not append; replace the entire content.
+
 ## Step 6: Create a pull request
 
 Create a PR with the changes. Use this format:
@@ -157,30 +184,3 @@ Added **{name}** ({category}) — {description}
 PR: {pr_url}
 ```
 
-## Step 8: Update the agent run log
-
-Replace the entire content of `agent/last-run.json` with a structured summary of this run. Use valid JSON with 2-space indentation:
-
-```json
-{
-  "issue": <issue_number>,
-  "title": "<issue title, lowercase>",
-  "timestamp": "<current UTC time as ISO 8601>",
-  "outcome": "<accepted | rejected | duplicate>",
-  "tools": [
-    { "name": "<tool_name>", "summary": "<one-line description of what it did>" }
-  ],
-  "benefit": {
-    "name": "<name>",
-    "category": "<category>",
-    "description": "<description>"
-  },
-  "run_url": ""
-}
-```
-
-Rules:
-- `tools`: include every tool called during this run, in order. For `tavily_search`, include `"query": "<search query used>"` instead of `"summary"`. For `web_fetch`, include `"url": "<url fetched>"` instead of `"summary"`.
-- `benefit`: include only if `outcome` is `accepted`; omit the field entirely otherwise.
-- `run_url`: always set to empty string `""` (the URL is not available at runtime).
-- Write the complete file — do not append; replace the entire content.
