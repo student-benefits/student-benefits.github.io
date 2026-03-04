@@ -566,39 +566,8 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that automatically curates this directory. When someone opens a GitHub Issue to suggest a student benefit, Grant reads the submission, searches the web to verify the program exists, checks for duplicates, and opens a pull request to add it — all without human intervention.
+      Grant is an AI agent that automatically curates this directory — verifying submissions, checking for duplicates, and opening pull requests without human intervention.
     </p>
-  </section>
-
-  <!-- How it works -->
-  <section class="section">
-    <p class="section-label">How it works</p>
-    <div class="steps-grid">
-      <div class="step-chip">
-        <p class="step-num">Step 1</p>
-        <p class="step-title">Read the issue</p>
-        <p class="step-desc">Fetches the GitHub issue to extract the benefit name and any link the submitter provided.</p>
-        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
-      </div>
-      <div class="step-chip">
-        <p class="step-num">Step 2</p>
-        <p class="step-title">Check for duplicates</p>
-        <p class="step-desc">Reads <code>benefits.json</code> and checks for existing entries with a matching name or hostname.</p>
-        <span class="step-chip-actor step-chip-actor-github">GitHub</span>
-      </div>
-      <div class="step-chip">
-        <p class="step-num">Step 3</p>
-        <p class="step-title">Verify with Tavily</p>
-        <p class="step-desc">Runs a live web search to confirm the program is real and find the correct student signup URL.</p>
-        <span class="step-chip-actor step-chip-actor-tavily">Tavily</span>
-      </div>
-      <div class="step-chip">
-        <p class="step-num">Step 4</p>
-        <p class="step-title">Open a PR</p>
-        <p class="step-desc">Commits the validated benefit to <code>benefits.json</code> and opens a pull request for human review.</p>
-        <span class="step-chip-actor step-chip-actor-grant">Grant</span>
-      </div>
-    </div>
   </section>
 
   <!-- Simulation -->
@@ -651,19 +620,9 @@
 
     <p class="agent-note">The path isn't fixed. That's the difference.</p>
 
+    <p class="agent-intro">Two properties push it beyond typical automation:</p>
+
     <div class="characteristics">
-      <div class="char-row">
-        <span class="char-check yes">✓</span>
-        <span><span class="char-label">Tool use</span> <span class="char-desc">— dynamically calls GitHub, Tavily, and web fetch based on what it finds</span></span>
-      </div>
-      <div class="char-row">
-        <span class="char-check yes">✓</span>
-        <span><span class="char-label">Decision-making</span> <span class="char-desc">— branches on accept / reject / duplicate; outcome not predetermined</span></span>
-      </div>
-      <div class="char-row">
-        <span class="char-check yes">✓</span>
-        <span><span class="char-label">Autonomy</span> <span class="char-desc">— runs end-to-end without human intervention after the trigger</span></span>
-      </div>
       <div class="char-row">
         <span class="char-check yes">✓</span>
         <span><span class="char-label">Memory</span> <span class="char-desc">— stores rejected programs in <code>rejected.json</code> to avoid re-checking them</span></span>
