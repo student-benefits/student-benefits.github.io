@@ -447,76 +447,71 @@
     .sim-hidden { display: none !important; }
     .sim-visible { animation: step-in 0.3s var(--ease) forwards; }
 
-    /* ── Agent characteristics ──────────────────────────────────── */
-    .agent-intro {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      max-width: 560px;
-      margin-bottom: 1.25rem;
+    /* ── Agent property chips ───────────────────────────────────── */
+    .prop-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
     }
+    .prop-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.875rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-family: var(--font);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 120ms, color 120ms, background 120ms;
+    }
+    .prop-chip:hover { border-color: var(--grant-border); color: var(--grant-color); }
+    .prop-chip[aria-expanded="true"] {
+      border-color: var(--grant-color);
+      color: var(--grant-color);
+      background: var(--grant-bg);
+      box-shadow: 0 0 0 1px var(--grant-color);
+    }
+    .prop-chip-icon { width: 13px; height: 13px; stroke-width: 2; flex-shrink: 0; }
+    .prop-detail-slot { min-height: 80px; margin-bottom: 1.25rem; }
 
+    /* ── Outcomes ────────────────────────────────────────────────── */
+    .outcomes-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+    }
     .outcomes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
-      margin-bottom: 1.25rem;
     }
-
     .outcome-card {
       border-radius: var(--radius-lg);
       border: 1px solid;
       padding: 0.875rem 1rem;
     }
-    .outcome-card.accepted { background: var(--outcome-accepted-bg); border-color: var(--tavily-border); }
-    .outcome-card.rejected { background: var(--outcome-rejected-bg); border-color: var(--grant-border); }
+    .outcome-card.accepted  { background: var(--outcome-accepted-bg);  border-color: var(--tavily-border); }
+    .outcome-card.rejected  { background: var(--outcome-rejected-bg);  border-color: var(--grant-border); }
     .outcome-card.duplicate { background: var(--outcome-duplicate-bg); border-color: #e8d8b8; }
-
     .outcome-label {
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.375rem;
     }
     .outcome-card.accepted  .outcome-label { color: var(--outcome-accepted-color); }
     .outcome-card.rejected  .outcome-label { color: var(--outcome-rejected-color); }
     .outcome-card.duplicate .outcome-label { color: var(--outcome-duplicate-color); }
-
-    .outcome-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .agent-note {
-      font-size: 0.825rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-
-    .characteristics {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-    }
-    .char-row {
-      display: flex;
-      align-items: baseline;
-      gap: 0.625rem;
-      font-size: 0.875rem;
-    }
-    .char-check {
-      font-size: 0.7rem;
-      font-weight: 700;
-      flex-shrink: 0;
-      width: 1.25rem;
-    }
-    .char-check.yes { color: var(--outcome-accepted-color); }
-    .char-check.no  { color: var(--text-muted); }
-    .char-label { font-weight: 600; margin-right: 0.25rem; }
-    .char-desc  { color: var(--text-muted); }
+    .outcome-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.45; }
 
     @media (max-width: 540px) {
       .outcomes-grid { grid-template-columns: 1fr; }
@@ -536,46 +531,6 @@
       color: var(--code-text);
       white-space: pre;
       line-height: 1.6;
-    }
-
-    /* ── Agent properties grid ──────────────────────────────────── */
-    .agent-props {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-    }
-    .agent-prop {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1rem 1.125rem;
-      box-shadow: var(--shadow-sm);
-    }
-    .prop-name {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .prop-generic {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-      margin-bottom: 0.625rem;
-      padding-bottom: 0.625rem;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .prop-example {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.4rem;
-    }
-    .prop-example .actor-badge { flex-shrink: 0; margin-top: 1px; }
-    .prop-example-text {
-      font-size: 0.775rem;
-      color: var(--text-muted);
-      line-height: 1.5;
     }
 
     /* ── Architecture diagram ───────────────────────────────────── */
@@ -817,65 +772,65 @@
   <section class="section">
     <p class="section-label">What makes this an agent?</p>
 
-    <p class="agent-intro">An AI agent differs from a plain script in five ways. Here is how Grant demonstrates each one.</p>
+    <div class="prop-chips">
+      <button class="prop-chip" id="pchip-tool" aria-expanded="false" onclick="toggleProp('tool')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v8M8 12h8"/></svg>
+        Tool use
+      </button>
+      <button class="prop-chip" id="pchip-decision" aria-expanded="false" onclick="toggleProp('decision')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v9m0 0l-4 4m4-4l4 4M8 20h8"/></svg>
+        Decision-making
+      </button>
+      <button class="prop-chip" id="pchip-autonomy" aria-expanded="false" onclick="toggleProp('autonomy')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Autonomy
+      </button>
+      <button class="prop-chip" id="pchip-memory" aria-expanded="false" onclick="toggleProp('memory')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        Memory
+      </button>
+      <button class="prop-chip" id="pchip-self" aria-expanded="false" onclick="toggleProp('self')">
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        Self-direction
+      </button>
+    </div>
 
-    <div class="agent-props">
-      <div class="agent-prop">
-        <p class="prop-name">Tool use</p>
-        <p class="prop-generic">Selects and calls external tools based on context, not a fixed sequence.</p>
-        <div class="prop-example">
-          <span class="actor-badge badge-grant">Grant</span>
-          <span class="prop-example-text">Calls GitHub, Tavily search, and web fetch in a sequence that varies per submission.</span>
-        </div>
+    <div class="prop-detail-slot">
+      <div id="ppanel-tool" class="node-panel" hidden>
+        <p class="node-panel-title">Tool use</p>
+        <p>An agent selects tools based on what it finds, not a fixed sequence. Grant calls GitHub, Tavily, and web fetch in an order that varies with every submission.</p>
       </div>
-      <div class="agent-prop">
-        <p class="prop-name">Decision-making</p>
-        <p class="prop-generic">Uses LLM reasoning to decide what to do next, without a predetermined path.</p>
-        <div class="prop-example">
-          <span class="actor-badge badge-grant">Grant</span>
-          <span class="prop-example-text">After verifying, chooses to accept and open a PR, reject and close with a reason, or flag as duplicate.</span>
-        </div>
+      <div id="ppanel-decision" class="node-panel" hidden>
+        <p class="node-panel-title">Decision-making</p>
+        <p>An agent uses LLM reasoning to choose a path at each step. Grant decides to accept (open a PR), reject (close and log to memory), or flag as duplicate based on what it finds.</p>
       </div>
-      <div class="agent-prop">
-        <p class="prop-name">Autonomy</p>
-        <p class="prop-generic">Runs end-to-end on a goal without human approval at each step.</p>
-        <div class="prop-example">
-          <span class="actor-badge badge-grant">Grant</span>
-          <span class="prop-example-text">From issue trigger to final PR or comment, no human reviews intermediate results.</span>
-        </div>
+      <div id="ppanel-autonomy" class="node-panel" hidden>
+        <p class="node-panel-title">Autonomy</p>
+        <p>An agent runs end-to-end without a human approving intermediate results. From issue trigger to PR or issue close, no human is in the loop.</p>
       </div>
-      <div class="agent-prop">
-        <p class="prop-name">Memory</p>
-        <p class="prop-generic">Persists information across runs to inform future decisions.</p>
-        <div class="prop-example">
-          <span class="actor-badge badge-grant">Grant</span>
-          <span class="prop-example-text">Stores rejected programs in <code>rejected.json</code>. Future submissions skip re-verification.</span>
-        </div>
+      <div id="ppanel-memory" class="node-panel" hidden>
+        <p class="node-panel-title">Memory</p>
+        <p>An agent persists state across runs. Grant saves rejected programs in <code>rejected.json</code>. Future submissions for the same product skip re-verification entirely.</p>
       </div>
-      <div class="agent-prop">
-        <p class="prop-name">Self-direction</p>
-        <p class="prop-generic">Generates its own tasks rather than waiting for human input.</p>
-        <div class="prop-example">
-          <span class="actor-badge badge-grant">Grant</span>
-          <span class="prop-example-text">Runs monthly to discover new benefits and creates issues for itself to process.</span>
-        </div>
+      <div id="ppanel-self" class="node-panel" hidden>
+        <p class="node-panel-title">Self-direction</p>
+        <p>An agent generates its own tasks rather than waiting for human input. Grant runs monthly, searches for new student benefits, and creates issues for itself to process.</p>
       </div>
     </div>
 
-    <p class="agent-intro">Those five properties produce different outcomes for the same input. A plain script would always follow the same path:</p>
-
+    <p class="outcomes-label">Same input, three possible outcomes</p>
     <div class="outcomes-grid">
       <div class="outcome-card accepted">
         <p class="outcome-label">✓ Accepted</p>
-        <p class="outcome-desc">Program verified real. No duplicate. Entry added to <code>benefits.json</code> and PR opened for review.</p>
+        <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
       </div>
       <div class="outcome-card rejected">
         <p class="outcome-label">✗ Rejected</p>
-        <p class="outcome-desc">After web search, no student program found. Issue closed with explanation. Domain saved to memory.</p>
+        <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
       </div>
       <div class="outcome-card duplicate">
         <p class="outcome-label">⚠ Duplicate</p>
-        <p class="outcome-desc">Name or hostname already in the directory. Issue closed, submitter pointed to the existing entry.</p>
+        <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
       </div>
     </div>
   </section>
@@ -916,6 +871,21 @@
     create_pull_request: 'Creates a GitHub pull request with the change for human review before it goes live.',
     add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
   };
+
+  function toggleProp(id) {
+    const panel = document.getElementById('ppanel-' + id);
+    const chip  = document.getElementById('pchip-' + id);
+    const isOpen = !panel.hidden;
+    document.querySelectorAll('[id^="ppanel-"]').forEach(p => { p.hidden = true; });
+    document.querySelectorAll('.prop-chip').forEach(c => c.setAttribute('aria-expanded', 'false'));
+    if (!isOpen) {
+      panel.hidden = false;
+      panel.style.animation = 'none';
+      panel.offsetHeight;
+      panel.style.animation = '';
+      chip.setAttribute('aria-expanded', 'true');
+    }
+  }
 
   function togglePanel(id) {
     const panel = document.getElementById('panel-' + id);
