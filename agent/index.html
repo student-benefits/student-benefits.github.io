@@ -538,6 +538,107 @@
       line-height: 1.6;
     }
 
+    /* ── Architecture diagram ───────────────────────────────────── */
+    .arch-diagram {
+      margin-top: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .arch-nodes {
+      display: flex;
+      align-items: center;
+      min-width: max-content;
+    }
+    .arch-node-wrap--stacked {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .arch-node {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.625rem 0.875rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid;
+      background: var(--surface);
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font);
+      transition: box-shadow 120ms, transform 120ms;
+      min-width: 96px;
+    }
+    .arch-node:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .arch-node-label { font-size: 0.8rem; font-weight: 700; }
+    .arch-node-sublabel { font-size: 0.68rem; margin-top: 0.125rem; opacity: 0.75; }
+
+    .arch-node--github { border-color: var(--github-border); color: var(--github-color); }
+    .arch-node--github[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--github-color); }
+
+    .arch-node--grant  { border-color: var(--grant-border);  color: var(--grant-color);  background: var(--grant-bg); }
+    .arch-node--grant[aria-expanded="true"]  { box-shadow: 0 0 0 2px var(--grant-color); }
+
+    .arch-node--tavily { border-color: var(--tavily-border); color: var(--tavily-color); }
+    .arch-node--tavily[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--tavily-color); }
+
+    .arch-node--web    { border-color: var(--web-border);    color: var(--web-color); }
+    .arch-node--web[aria-expanded="true"]    { box-shadow: 0 0 0 2px var(--web-color); }
+
+    .arch-connector {
+      flex: 1;
+      min-width: 32px;
+      position: relative;
+      height: 2px;
+      background: var(--border-subtle);
+      align-self: center;
+      overflow: visible;
+    }
+    .packet {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .packet-req    { background: var(--grant-color);  animation: pkt-fwd 2.4s ease-in-out infinite; }
+    .packet-res    { background: var(--github-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.2s; }
+    .packet-query  { background: var(--tavily-color); animation: pkt-fwd 2.4s ease-in-out infinite; animation-delay: 0.4s; }
+    .packet-result { background: var(--tavily-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.6s; }
+    @keyframes pkt-fwd {
+      0%   { left: 0%;   opacity: 0; }
+      6%   { opacity: 1; }
+      94%  { opacity: 1; }
+      100% { left: 100%; opacity: 0; }
+    }
+    @keyframes pkt-rev {
+      0%   { left: 100%; opacity: 0; }
+      6%   { opacity: 1; }
+      94%  { opacity: 1; }
+      100% { left: 0%;   opacity: 0; }
+    }
+
+    .node-panels-slot {
+      min-height: 88px;
+      margin-top: 1rem;
+    }
+    .node-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.125rem;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      box-shadow: var(--shadow-sm);
+    }
+    .node-panel-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.375rem;
+    }
+
     @media (max-width: 540px) {
       .main { padding: 2rem 1.25rem 4rem; }
       .header-inner { padding: 0 1.25rem; }
@@ -568,6 +669,85 @@
     <p class="identity-desc">
       Grant is an AI agent that automatically curates this directory — verifying submissions, checking for duplicates, and opening pull requests without human intervention.
     </p>
+  </section>
+
+  <!-- Architecture -->
+  <section class="section">
+    <p class="section-label">Architecture</p>
+    <div class="arch-diagram" role="region" aria-label="Interactive architecture diagram. Click any node to learn what it does.">
+      <div class="arch-nodes">
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--github" id="node-issue" aria-expanded="false" aria-controls="panel-issue" onclick="togglePanel('issue')">
+            <span class="arch-node-label">GitHub</span>
+            <span class="arch-node-sublabel">issue trigger</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+        </div>
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--grant" id="node-grant" aria-expanded="false" aria-controls="panel-grant" onclick="togglePanel('grant')">
+            <span class="arch-node-label">Grant</span>
+            <span class="arch-node-sublabel">Claude Sonnet 4</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-query"></span>
+          <span class="packet packet-result"></span>
+        </div>
+
+        <div class="arch-node-wrap arch-node-wrap--stacked">
+          <button class="arch-node arch-node--tavily" id="node-tavily" aria-expanded="false" aria-controls="panel-tavily" onclick="togglePanel('tavily')">
+            <span class="arch-node-label">Tavily</span>
+            <span class="arch-node-sublabel">web search</span>
+          </button>
+          <button class="arch-node arch-node--web" id="node-web" aria-expanded="false" aria-controls="panel-web" onclick="togglePanel('web')">
+            <span class="arch-node-label">Web Fetch</span>
+            <span class="arch-node-sublabel">page content</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+          <span class="packet packet-res"></span>
+        </div>
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output" onclick="togglePanel('output')">
+            <span class="arch-node-label">GitHub</span>
+            <span class="arch-node-sublabel">PR + comment</span>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="node-panels-slot">
+        <div id="panel-issue" class="node-panel" hidden>
+          <p class="node-panel-title">GitHub Issue</p>
+          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs — everything else Grant discovers on its own.</p>
+        </div>
+        <div id="panel-grant" class="node-panel" hidden>
+          <p class="node-panel-title">Grant · Claude Sonnet 4</p>
+          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome — without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
+        </div>
+        <div id="panel-tavily" class="node-panel" hidden>
+          <p class="node-panel-title">Tavily Search</p>
+          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists — searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
+        </div>
+        <div id="panel-web" class="node-panel" hidden>
+          <p class="node-panel-title">Web Fetch</p>
+          <p>After Tavily returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only — no forms submitted, no side effects.</p>
+        </div>
+        <div id="panel-output" class="node-panel" hidden>
+          <p class="node-panel-title">GitHub Output</p>
+          <p>If valid and new: Grant opens a pull request adding the entry to <code>benefits.json</code> and comments on the issue with the PR link. If rejected or duplicate: it comments with the reason and closes the issue. All writes go through GitHub's API.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Simulation -->
@@ -670,6 +850,23 @@
     create_pull_request: 'Creates a GitHub pull request with the change for human review before it goes live.',
     add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
   };
+
+  function togglePanel(id) {
+    const panel = document.getElementById('panel-' + id);
+    const btn   = document.getElementById('node-' + id);
+    const isOpen = !panel.hidden;
+
+    document.querySelectorAll('.node-panel').forEach(p => { p.hidden = true; });
+    document.querySelectorAll('.arch-node').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+    if (!isOpen) {
+      panel.hidden = false;
+      panel.style.animation = 'none';
+      panel.offsetHeight; // force reflow to restart animation
+      panel.style.animation = '';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
 
   function esc(s) {
     return String(s)
