@@ -538,6 +538,46 @@
       line-height: 1.6;
     }
 
+    /* ── Agent properties grid ──────────────────────────────────── */
+    .agent-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .agent-prop {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.125rem;
+      box-shadow: var(--shadow-sm);
+    }
+    .prop-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .prop-generic {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 0.625rem;
+      padding-bottom: 0.625rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .prop-example {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.4rem;
+    }
+    .prop-example .actor-badge { flex-shrink: 0; margin-top: 1px; }
+    .prop-example-text {
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
     /* ── Architecture diagram ───────────────────────────────────── */
     .arch-diagram {
       margin-top: 0.75rem;
@@ -777,11 +817,52 @@
   <section class="section">
     <p class="section-label">What makes this an agent?</p>
 
-    <p class="agent-intro">
-      A plain automation follows a fixed script. The outcome is predetermined before it runs.
-      Grant uses LLM reasoning to make decisions at each step, so the same submission can
-      produce three different outcomes depending on what Grant finds.
-    </p>
+    <p class="agent-intro">An AI agent differs from a plain script in five ways. Here is how Grant demonstrates each one.</p>
+
+    <div class="agent-props">
+      <div class="agent-prop">
+        <p class="prop-name">Tool use</p>
+        <p class="prop-generic">Selects and calls external tools based on context, not a fixed sequence.</p>
+        <div class="prop-example">
+          <span class="actor-badge badge-grant">Grant</span>
+          <span class="prop-example-text">Calls GitHub, Tavily search, and web fetch in a sequence that varies per submission.</span>
+        </div>
+      </div>
+      <div class="agent-prop">
+        <p class="prop-name">Decision-making</p>
+        <p class="prop-generic">Uses LLM reasoning to decide what to do next, without a predetermined path.</p>
+        <div class="prop-example">
+          <span class="actor-badge badge-grant">Grant</span>
+          <span class="prop-example-text">After verifying, chooses to accept and open a PR, reject and close with a reason, or flag as duplicate.</span>
+        </div>
+      </div>
+      <div class="agent-prop">
+        <p class="prop-name">Autonomy</p>
+        <p class="prop-generic">Runs end-to-end on a goal without human approval at each step.</p>
+        <div class="prop-example">
+          <span class="actor-badge badge-grant">Grant</span>
+          <span class="prop-example-text">From issue trigger to final PR or comment, no human reviews intermediate results.</span>
+        </div>
+      </div>
+      <div class="agent-prop">
+        <p class="prop-name">Memory</p>
+        <p class="prop-generic">Persists information across runs to inform future decisions.</p>
+        <div class="prop-example">
+          <span class="actor-badge badge-grant">Grant</span>
+          <span class="prop-example-text">Stores rejected programs in <code>rejected.json</code>. Future submissions skip re-verification.</span>
+        </div>
+      </div>
+      <div class="agent-prop">
+        <p class="prop-name">Self-direction</p>
+        <p class="prop-generic">Generates its own tasks rather than waiting for human input.</p>
+        <div class="prop-example">
+          <span class="actor-badge badge-grant">Grant</span>
+          <span class="prop-example-text">Runs monthly to discover new benefits and creates issues for itself to process.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="agent-intro">Those five properties produce different outcomes for the same input. A plain script would always follow the same path:</p>
 
     <div class="outcomes-grid">
       <div class="outcome-card accepted">
@@ -795,21 +876,6 @@
       <div class="outcome-card duplicate">
         <p class="outcome-label">⚠ Duplicate</p>
         <p class="outcome-desc">Name or hostname already in the directory. Issue closed, submitter pointed to the existing entry.</p>
-      </div>
-    </div>
-
-    <p class="agent-note">The path isn't fixed. That's the difference.</p>
-
-    <p class="agent-intro">Two properties push it beyond typical automation:</p>
-
-    <div class="characteristics">
-      <div class="char-row">
-        <span class="char-check yes">✓</span>
-        <span><span class="char-label">Memory</span> <span class="char-desc">: stores rejected programs in <code>rejected.json</code> to avoid re-checking them</span></span>
-      </div>
-      <div class="char-row">
-        <span class="char-check yes">✓</span>
-        <span><span class="char-label">Self-direction</span> <span class="char-desc">: runs monthly to discover new benefits and create its own submissions</span></span>
       </div>
     </div>
   </section>
@@ -990,7 +1056,7 @@
       stepClass: 'actor-tavily', badge: 'badge-tavily', badgeLabel: 'Tavily',
       headLabel: 'search', detail: 'Notion student free plan education',
       primary: '5 results found. Top result: <code>notion.so/product/notion-for-education</code>',
-      annotation: 'Searches the live web to confirm the program is real and currently active — not just from training data.'
+      annotation: 'Searches the live web to confirm the program is real and currently active. Not just from training data.'
     },
     {
       stepClass: 'actor-web', badge: 'badge-web', badgeLabel: 'Web',
@@ -1047,7 +1113,7 @@
 
     if (simStep >= SIM_STEPS.length) return;
 
-    addSimStep(SIM_STEPS[simStep], trace);
+    addSimStep(SIM_STEPS[simStep], trace, btn);
     simStep++;
     hint.textContent = `${simStep} / ${SIM_STEPS.length}`;
 
@@ -1057,11 +1123,9 @@
     } else {
       btn.innerHTML = SVG_NEXT + ' Next step';
     }
-
-    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  function addSimStep(step, trace) {
+  function addSimStep(step, trace, btn) {
     const codeHtml = step.code
       ? `<div class="sim-code"><pre>${step.code}</pre></div>`
       : '';
@@ -1088,6 +1152,7 @@
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.classList.remove('sim-hidden');
       el.classList.add('sim-visible');
+      if (btn) btn.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }));
   }
 
