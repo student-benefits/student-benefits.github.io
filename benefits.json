@@ -755,5 +755,19 @@
       "Events"
     ],
     "popularity": 7
+  },
+  {
+    "id": "google-colab",
+    "name": "Google Colab",
+    "category": "AI Tools", 
+    "description": "Free Jupyter notebooks with GPU/TPU access. No setup required - perfect for machine learning, data science, and education.",
+    "link": "https://colab.research.google.com/",
+    "tags": [
+      "Jupyter",
+      "GPU",
+      "ML",
+      "Free"
+    ],
+    "popularity": 5
   }
 ]
