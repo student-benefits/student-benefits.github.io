@@ -769,5 +769,19 @@
       "GPU"
     ],
     "popularity": 5
+  },
+  {
+    "id": "overleaf",
+    "name": "Overleaf",
+    "category": "Productivity",
+    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features through institutional access.",
+    "link": "https://www.overleaf.com/",
+    "tags": [
+      "LaTeX",
+      "Writing",
+      "Academic",
+      "Collaboration"
+    ],
+    "popularity": 5
   }
 ]

@@ -1,20 +1,20 @@
 {
-  "issue": 8,
-  "title": "google colab student discount",
-  "timestamp": "2026-03-04T18:50:20Z",
+  "issue": 31,
+  "title": "overleaf has a free plan for students",
+  "timestamp": "2026-03-04T21:06:30.000Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "get_issue", "summary": "Read issue #8" },
-    { "name": "get_file_contents", "summary": "Read benefits.json, checked for duplicates" },
-    { "name": "tavily_search", "query": "google colab higher education free student" },
-    { "name": "web_fetch", "url": "https://colab.research.google.com/signup" },
-    { "name": "edit", "summary": "Added Google Colab entry to benefits.json" },
-    { "name": "create_pull_request", "summary": "Opened PR #17: Add benefit: Google Colab" }
+    { "name": "github-issue_read", "summary": "Read issue #31 to extract benefit submission details" },
+    { "name": "view", "summary": "Read benefits.json to check for duplicates" },
+    { "name": "view", "summary": "Read categories.json to validate category options" },
+    { "name": "grep", "summary": "Search for existing Overleaf entries in benefits.json" },
+    { "name": "web_fetch", "summary": "Validated Overleaf's educational offerings and pricing structure" },
+    { "name": "edit", "summary": "Added Overleaf benefit to benefits.json" }
   ],
   "benefit": {
-    "name": "Google Colab",
-    "category": "AI & Dev Tools",
-    "description": "Free GPU/TPU notebooks for students and researchers via Google Workspace for Education"
+    "name": "Overleaf",
+    "category": "Productivity",
+    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features through institutional access."
   },
-  "run_url": "https://github.com/student-benefits/student-benefits.github.io/actions/runs/22684184939"
+  "run_url": ""
 }
