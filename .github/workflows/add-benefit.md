@@ -25,6 +25,7 @@ safe-outputs:
 tools:
   github:
     toolsets: [issues, repos]
+  web-fetch:
   edit:
 
 timeout-minutes: 10
@@ -68,7 +69,9 @@ Then stop — do not create a PR.
 
 ## Step 3: Validate the benefit
 
-Determine whether this is a real student discount or free-access program. Use your knowledge of the product/service. Only accept if you are confident the program exists.
+Determine whether this is a real student discount or free-access program. Use web-fetch to search for and verify the student program page — do not rely solely on your training data, as programs may have launched or changed recently. Search for "{product name} student discount" or "{product name} higher education" and fetch the most relevant result to confirm the program exists and get the correct signup URL.
+
+Only reject if you are confident no student program exists after attempting to verify online.
 
 If invalid, comment on the issue:
 > **Cannot add this benefit:**
