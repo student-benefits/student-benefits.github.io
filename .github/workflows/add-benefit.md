@@ -23,6 +23,7 @@ safe-outputs:
     title-prefix: "Add benefit: "
     labels: [new-benefit]
   add-comment:
+  close-issue:
 
 mcp-servers:
   tavily:
@@ -82,7 +83,7 @@ Read `benefits.json` from the repository. Check for duplicates by:
 If the submission is a duplicate, comment on the issue:
 > **Duplicate:** Already in the directory as **{existing benefit name}**. If this is different, add more details.
 
-Then stop — do not create a PR.
+Then close the issue and stop — do not create a PR.
 
 ## Step 3: Validate the benefit
 
@@ -95,7 +96,7 @@ Only reject if after using Tavily search and fetching the top results you are co
 If invalid, comment on the issue:
 > **Cannot add:** {reason — e.g. no known student program, unclear what product is meant}
 
-Then stop — do not create a PR.
+Then close the issue and stop — do not create a PR.
 
 ## Step 4: Generate the benefit entry
 
