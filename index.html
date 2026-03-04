@@ -16,10 +16,8 @@
       --slate-500: #64748b;
       --slate-400: #94a3b8;
       --indigo-400: #818cf8;
-      --indigo-200: #c7d2fe;
       --indigo-300: #a5b4fc;
       --amber-300: #fcd34d;
-      --amber-400: #f59e0b;
       --font: system-ui, -apple-system, sans-serif;
       --radius-sm: 0.25rem;
       --radius-md: 0.5rem;
@@ -174,11 +172,6 @@
       }
     }
 
-    .filter-count {
-      font-size: 0.75rem;
-      opacity: 0.6;
-    }
-
     .filter-tab {
       padding: 0.625rem 1rem;
       min-height: 44px;
@@ -199,7 +192,7 @@
       border-color: var(--slate-600);
     }
 
-    .filter-tab[aria-selected="true"] {
+    .filter-tab[aria-pressed="true"] {
       background: #fff;
       color: var(--slate-900);
       border-color: #fff;
@@ -302,7 +295,58 @@
       font-weight: 500;
       background: rgba(51, 65, 85, 0.5);
       color: var(--indigo-300);
-      border: 1px solid rgba(71, 85, 105, 0.5);
+    }
+
+    .badge[data-cat="AI Tools"]           { color: #a78bfa; }
+    .badge[data-cat="Dev Tools"]          { color: #60a5fa; }
+    .badge[data-cat="Cloud & Hosting"]    { color: #38bdf8; }
+    .badge[data-cat="Learning"]           { color: #fbbf24; }
+    .badge[data-cat="Design"]             { color: #f472b6; }
+    .badge[data-cat="Productivity"]       { color: #4ade80; }
+    .badge[data-cat="Lifestyle"]          { color: #fb923c; }
+    .badge[data-cat="Domains & Security"] { color: #f87171; }
+
+    .offer-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .offer-free { background: rgba(74, 222, 128, 0.1); color: #4ade80; }
+    .offer-discount { background: rgba(251, 191, 36, 0.1); color: #fbbf24; }
+    .offer-credits { background: rgba(96, 165, 250, 0.1); color: #60a5fa; }
+    .offer-trial { background: rgba(167, 139, 250, 0.1); color: #a78bfa; }
+
+    .free-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.625rem 1rem;
+      min-height: 44px;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: var(--font);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      background: rgba(74, 222, 128, 0.06);
+      color: #4ade80;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .free-toggle:hover { background: rgba(74, 222, 128, 0.12); border-color: rgba(74, 222, 128, 0.5); }
+
+    .free-toggle[aria-pressed="true"] {
+      background: rgba(74, 222, 128, 0.18);
+      border-color: #4ade80;
+      box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.35);
     }
 
     .card-name {
@@ -313,7 +357,7 @@
       transition: color 0.15s;
     }
 
-    .card:hover .card-name { color: var(--indigo-200); }
+    .card:hover .card-name { color: #c7d2fe; }
 
     .card-desc {
       color: var(--slate-400);
@@ -349,7 +393,7 @@
       padding: 6rem 1rem;
       background: rgba(30, 41, 59, 0.3);
       border-radius: var(--radius-lg);
-      border: 1px dashed var(--slate-700);
+      border: 1px solid var(--slate-700);
     }
 
     .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -374,7 +418,6 @@
       border-radius: 50%;
       background: #4ade80;
       flex-shrink: 0;
-      box-shadow: 0 0 6px #4ade80;
     }
 
     .contribute-banner {
@@ -471,7 +514,7 @@
           </a>
         </div>
         <p class="subtitle">
-          Free tools and resources available to students.<br>
+          Student discounts, free tiers, and perks.<br>
           <a href="/agent/" class="grant-badge">
             <span class="grant-dot"></span>
             Curated by Grant
@@ -486,7 +529,7 @@
         </div>
 
         <div class="filter-wrap">
-          <div id="filter-bar" role="tablist" aria-label="Filter by category" class="filter-bar"></div>
+          <div id="filter-bar" role="group" aria-label="Filter by category" class="filter-bar"></div>
         </div>
       </header>
 
@@ -494,10 +537,6 @@
 
       <div id="content">
         <div class="skeleton">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
@@ -514,87 +553,75 @@
   </div>
 
   <script>
-    let CATEGORIES = ['All'];
+    let categories = ['All'];
     let benefits = [];
     let activeCategory = 'All';
     let searchQuery = '';
     let sortOrder = 'popularity';
+    let freeOnly = false;
+
+    const OFFER_LABELS = { free: 'Free', discount: 'Discount', credits: 'Credits', trial: 'Trial' };
 
     const searchInput = document.getElementById('search');
     const filterBar = document.getElementById('filter-bar');
     const resultsBar = document.getElementById('results-bar');
     const content = document.getElementById('content');
 
-    function renderFilters() {
-      const counts = {};
-      benefits.forEach(b => { counts[b.category] = (counts[b.category] || 0) + 1; });
-      filterBar.innerHTML = CATEGORIES.map(cat => {
-        const count = cat === 'All' ? benefits.length : (counts[cat] || 0);
-        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${cat}">${cat} <span class="filter-count">${count}</span></button>`;
-      }).join('');
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     }
 
-    filterBar.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-tab');
-      if (!btn) return;
-      activeCategory = btn.dataset.cat;
-      renderFilters();
-      render();
-    });
-
-    searchInput.addEventListener('input', () => {
-      searchQuery = searchInput.value;
-      render();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
-        searchInput.focus();
-      }
-    });
-
-    function getFiltered() {
+    function getFilteredAndSorted() {
       const q = searchQuery.toLowerCase();
       return benefits
-        .filter(b => {
+        .filter(function (b) {
           const catMatch = activeCategory === 'All' || b.category === activeCategory;
           const searchMatch = b.name.toLowerCase().includes(q) ||
             b.description.toLowerCase().includes(q) ||
-            b.tags.some(t => t.toLowerCase().includes(q));
-          return catMatch && searchMatch;
+            b.tags.some(function (t) { return t.toLowerCase().includes(q); });
+          return catMatch && searchMatch && (!freeOnly || b.offer_type === 'free');
         })
-        .sort((a, b) => sortOrder === 'alpha'
-          ? a.name.localeCompare(b.name)
-          : b.popularity - a.popularity
-        );
+        .sort(function (x, y) {
+          if (sortOrder === 'alpha') return x.name.localeCompare(y.name);
+          return y.popularity - x.popularity;
+        });
     }
 
-    function esc(str) {
-      const d = document.createElement('div');
-      d.textContent = str;
-      return d.innerHTML;
+    function renderFilters() {
+      const freeOnlyToggle = `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
+      const tabs = categories.map(function (cat) {
+        return `<button aria-pressed="${cat === activeCategory}" class="filter-tab" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`;
+      }).join('');
+      filterBar.innerHTML = freeOnlyToggle + tabs;
     }
 
     function renderCard(b) {
-      const tags = b.tags.slice(0, 3).map(t => `<span class="tag" data-tag="${esc(t)}">#${esc(t)}</span>`).join('');
-      return `<article class="card" data-href="${esc(b.link)}">
+      const tags = b.tags.slice(0, 3).map(function (t) {
+        return `<span class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`;
+      }).join('');
+      const pill = b.offer_type
+        ? `<span class="offer-pill offer-${b.offer_type}">${OFFER_LABELS[b.offer_type]}</span>`
+        : '';
+      return `<article class="card" data-href="${escapeHtml(b.link)}">
         <div class="card-body">
           <div class="card-top">
-            <span class="badge">${esc(b.category)}</span>
+            <span class="badge" data-cat="${escapeHtml(b.category)}">${escapeHtml(b.category)}</span>
+            ${pill}
           </div>
-          <h3 class="card-name">${esc(b.name)}</h3>
-          <p class="card-desc">${esc(b.description)}</p>
+          <h3 class="card-name">${escapeHtml(b.name)}</h3>
+          <p class="card-desc">${escapeHtml(b.description)}</p>
           <div class="tags">${tags}</div>
         </div>
       </article>`;
     }
 
     function render() {
-      const filtered = getFiltered();
-      const n = filtered.length;
-      let bar = `<span class="results-count">Found <strong>${n}</strong> ${n === 1 ? 'resource' : 'resources'}</span>`;
+      const filtered = getFilteredAndSorted();
+      const count = filtered.length;
+      const label = count === 1 ? 'resource' : 'resources';
+      let bar = `<span class="results-count">Found <strong>${count}</strong> ${label}</span>`;
       bar += `<div class="bar-right">`;
       bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
         <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Popular</option>
@@ -609,20 +636,6 @@
       bar += `</div>`;
       resultsBar.innerHTML = bar;
 
-      document.getElementById('sort-select').addEventListener('change', (e) => {
-        sortOrder = e.target.value;
-        render();
-      });
-
-      const clearBtn = document.getElementById('clear-btn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          searchQuery = '';
-          searchInput.value = '';
-          render();
-        });
-      }
-
       if (filtered.length > 0) {
         content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
       } else {
@@ -633,7 +646,50 @@
       }
     }
 
-    content.addEventListener('click', (e) => {
+    resultsBar.addEventListener('change', function (e) {
+      if (e.target.id === 'sort-select') {
+        sortOrder = e.target.value;
+        render();
+      }
+    });
+
+    resultsBar.addEventListener('click', function (e) {
+      if (e.target.closest('#clear-btn')) {
+        searchQuery = '';
+        searchInput.value = '';
+        render();
+      }
+    });
+
+    filterBar.addEventListener('click', function (e) {
+      if (e.target.closest('#free-toggle')) {
+        freeOnly = !freeOnly;
+        renderFilters();
+        render();
+        return;
+      }
+      const btn = e.target.closest('.filter-tab');
+      if (!btn) return;
+      activeCategory = btn.dataset.cat;
+      renderFilters();
+      render();
+    });
+
+    searchInput.addEventListener('input', function () {
+      searchQuery = searchInput.value;
+      render();
+    });
+
+    // Focus search when typing alphanumeric keys outside inputs
+    document.addEventListener('keydown', function (e) {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
+        searchInput.focus();
+      }
+    });
+
+    content.addEventListener('click', function (e) {
       const tag = e.target.closest('.tag');
       if (tag) {
         searchQuery = tag.dataset.tag;
@@ -647,11 +703,11 @@
     });
 
     Promise.all([
-      fetch('benefits.json').then(r => r.json()),
-      fetch('categories.json').then(r => r.json())
-    ]).then(([data, cats]) => {
-      benefits = data;
-      CATEGORIES = ['All', ...cats];
+      fetch('benefits.json').then(function (r) { return r.json(); }),
+      fetch('categories.json').then(function (r) { return r.json(); })
+    ]).then(function (results) {
+      benefits = results[0];
+      categories = ['All'].concat(results[1]);
       renderFilters();
       render();
     });

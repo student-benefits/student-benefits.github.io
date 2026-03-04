@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f0">
-  <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub — see how it works and what it did last.">
+  <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub. See how it works and what it did last.">
   <title>Grant · AI Agent · Student Benefits Hub</title>
   <style>
     :root {
@@ -72,7 +72,6 @@
       font-size: 15px;
     }
 
-    /* ── Header ─────────────────────────────────────────────── */
     .site-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -100,14 +99,12 @@
     .header-sep { color: var(--border); font-size: 0.8rem; }
     .header-title { font-size: 0.8rem; font-weight: 600; color: var(--text); }
 
-    /* ── Main ───────────────────────────────────────────────── */
     .main {
       max-width: 760px;
       margin: 0 auto;
       padding: 3rem 2rem 6rem;
     }
 
-    /* ── Identity block ─────────────────────────────────────── */
     .identity {
       margin-bottom: 3rem;
     }
@@ -135,7 +132,6 @@
       line-height: 1.65;
     }
 
-    /* ── How it works ───────────────────────────────────────── */
     .section { margin-bottom: 3rem; }
     .section-label {
       font-size: 0.7rem;
@@ -177,7 +173,6 @@
       line-height: 1.5;
     }
 
-    /* ── Last run card ──────────────────────────────────────── */
     .run-meta {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -240,7 +235,6 @@
       text-underline-offset: 2px;
     }
 
-    /* ── Trace ──────────────────────────────────────────────── */
     .trace { display: flex; flex-direction: column; }
 
     .trace-step {
@@ -345,7 +339,6 @@
     }
     .trace-annotation strong { color: var(--text); font-style: normal; }
 
-    /* ── Loading / error ────────────────────────────────────── */
     .state-loading, .state-error {
       text-align: center;
       padding: 3rem 1rem;
@@ -353,7 +346,6 @@
       font-size: 0.9rem;
     }
 
-    /* ── Footer ─────────────────────────────────────────────── */
     .site-footer {
       margin-top: 6rem;
       border-top: 1px solid var(--border);
@@ -364,22 +356,6 @@
     }
     .site-footer a { color: var(--grant-color); text-underline-offset: 2px; }
 
-    /* ── Step chip actor badges ─────────────────────────────────── */
-    .step-chip-actor {
-      display: inline-block;
-      font-size: 0.62rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      padding: 1px 5px;
-      border-radius: 2px;
-      margin-top: 0.625rem;
-    }
-    .step-chip-actor-github { background: var(--github-bg); color: var(--github-color); border: 1px solid var(--github-border); }
-    .step-chip-actor-tavily { background: var(--tavily-bg); color: var(--tavily-color); border: 1px solid var(--tavily-border); }
-    .step-chip-actor-grant  { background: var(--grant-bg);  color: var(--grant-color);  border: 1px solid var(--grant-border); }
-
-    /* ── Simulation section ──────────────────────────────────────── */
     .sim-task {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -447,7 +423,6 @@
     .sim-hidden { display: none !important; }
     .sim-visible { animation: step-in 0.3s var(--ease) forwards; }
 
-    /* ── Agent property chips ───────────────────────────────────── */
     .prop-chips {
       display: flex;
       flex-wrap: wrap;
@@ -479,19 +454,11 @@
     .prop-chip-icon { width: 13px; height: 13px; stroke-width: 2; flex-shrink: 0; }
     .prop-detail-slot { min-height: 80px; margin-bottom: 1.25rem; }
 
-    /* ── Outcomes ────────────────────────────────────────────────── */
-    .outcomes-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 0.875rem;
-    }
     .outcomes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
+      margin-top: 0.875rem;
     }
     .outcome-card {
       border-radius: var(--radius-lg);
@@ -517,7 +484,6 @@
       .outcomes-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── Code block (sim) ───────────────────────────────────────── */
     .sim-code {
       background: var(--code-bg);
       border-radius: var(--radius);
@@ -532,8 +498,11 @@
       white-space: pre;
       line-height: 1.6;
     }
+    .sim-code .c-dim  { color: var(--code-dim); }
+    .sim-code .c-hl   { color: var(--code-hl); }
+    .sim-code .c-grn  { color: var(--code-grn); }
+    .sim-code .c-blue { color: var(--code-blue); }
 
-    /* ── Architecture diagram ───────────────────────────────────── */
     .arch-diagram {
       margin-top: 0.75rem;
       overflow-x: auto;
@@ -634,6 +603,32 @@
       margin-bottom: 0.375rem;
     }
 
+    .added-banner {
+      margin-top: 1.25rem;
+      padding: 0.875rem 1rem;
+      background: var(--tavily-bg);
+      border: 1px solid var(--tavily-border);
+      border-radius: var(--radius-lg);
+    }
+    .added-banner-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--tavily-color);
+      margin-bottom: 0.375rem;
+    }
+    .added-banner-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .added-banner-name span { font-weight: 400; color: var(--text-muted); }
+    .added-banner-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
     @media (max-width: 540px) {
       .main { padding: 2rem 1.25rem 4rem; }
       .header-inner { padding: 0 1.25rem; }
@@ -662,7 +657,7 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention.
+      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention. This page explains how it works, walks through a simulated run, and shows the latest real one.
     </p>
   </section>
 
@@ -723,15 +718,15 @@
       <div class="node-panels-slot">
         <div id="panel-issue" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Issue</p>
-          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs — everything else Grant discovers on its own.</p>
+          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs. Everything else Grant discovers on its own.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · Claude Sonnet 4</p>
-          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome — without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
+          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome, all without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
         </div>
         <div id="panel-tavily" class="node-panel" hidden>
           <p class="node-panel-title">Tavily Search</p>
-          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists — searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
+          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists by searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
         </div>
         <div id="panel-web" class="node-panel" hidden>
           <p class="node-panel-title">Web Fetch</p>
@@ -742,29 +737,6 @@
           <p>If valid and new: Grant opens a pull request adding the entry to <code>benefits.json</code> and comments on the issue with the PR link. If rejected or duplicate: it comments with the reason and closes the issue. All writes go through GitHub's API.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Simulation -->
-  <section class="section">
-    <p class="section-label">See it in action</p>
-
-    <div class="sim-task">
-      <div class="sim-task-head">
-        <span class="sim-task-label">GitHub Issue</span>
-        <span class="sim-task-num">#42</span>
-      </div>
-      <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
-    </div>
-
-    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
-
-    <div class="sim-controls">
-      <button class="sim-btn" id="sim-btn" onclick="simNext()">
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        Start
-      </button>
-      <span class="sim-hint" id="sim-hint"></span>
     </div>
   </section>
 
@@ -802,7 +774,21 @@
       </div>
       <div id="ppanel-decision" class="node-panel" hidden>
         <p class="node-panel-title">Decision-making</p>
-        <p>An agent uses LLM reasoning to choose a path at each step. Grant decides to accept (open a PR), reject (close and log to memory), or flag as duplicate based on what it finds.</p>
+        <p>An agent uses LLM reasoning to choose a path at each step, not a fixed branching script. Every submission ends in one of three outcomes:</p>
+        <div class="outcomes-grid">
+          <div class="outcome-card accepted">
+            <p class="outcome-label">✓ Accepted</p>
+            <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
+          </div>
+          <div class="outcome-card rejected">
+            <p class="outcome-label">✗ Rejected</p>
+            <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
+          </div>
+          <div class="outcome-card duplicate">
+            <p class="outcome-label">⚠ Duplicate</p>
+            <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
+          </div>
+        </div>
       </div>
       <div id="ppanel-autonomy" class="node-panel" hidden>
         <p class="node-panel-title">Autonomy</p>
@@ -818,20 +804,28 @@
       </div>
     </div>
 
-    <p class="outcomes-label">Same input, three possible outcomes</p>
-    <div class="outcomes-grid">
-      <div class="outcome-card accepted">
-        <p class="outcome-label">✓ Accepted</p>
-        <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
+  </section>
+
+  <!-- Simulation -->
+  <section class="section">
+    <p class="section-label">See it in action</p>
+
+    <div class="sim-task">
+      <div class="sim-task-head">
+        <span class="sim-task-label">GitHub Issue</span>
+        <span class="sim-task-num">#42</span>
       </div>
-      <div class="outcome-card rejected">
-        <p class="outcome-label">✗ Rejected</p>
-        <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
-      </div>
-      <div class="outcome-card duplicate">
-        <p class="outcome-label">⚠ Duplicate</p>
-        <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
-      </div>
+      <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
+    </div>
+
+    <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
+
+    <div class="sim-controls">
+      <button class="sim-btn" id="sim-btn" onclick="simNext()">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        Start
+      </button>
+      <span class="sim-hint" id="sim-hint"></span>
     </div>
   </section>
 
@@ -846,7 +840,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>Grant is open source — <a href="https://github.com/student-benefits/student-benefits.github.io/blob/main/.github/workflows/add-benefit.md" target="_blank" rel="noopener noreferrer">read the workflow</a></p>
+  <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io/blob/main/.github/workflows/add-benefit.md" target="_blank" rel="noopener noreferrer">Read the workflow</a> to see exactly what it does, or open an issue to suggest a new benefit and watch it run for real.</p>
 </footer>
 
 <script>
@@ -872,39 +866,32 @@
     add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
   };
 
-  function toggleProp(id) {
-    const panel = document.getElementById('ppanel-' + id);
-    const chip  = document.getElementById('pchip-' + id);
-    const isOpen = !panel.hidden;
-    document.querySelectorAll('[id^="ppanel-"]').forEach(p => { p.hidden = true; });
-    document.querySelectorAll('.prop-chip').forEach(c => c.setAttribute('aria-expanded', 'false'));
-    if (!isOpen) {
-      panel.hidden = false;
-      panel.style.animation = 'none';
-      panel.offsetHeight;
-      panel.style.animation = '';
-      chip.setAttribute('aria-expanded', 'true');
-    }
-  }
+  function toggleDisclosure(panelId, triggerId, panelSelector, triggerSelector) {
+    const panel   = document.getElementById(panelId);
+    const trigger = document.getElementById(triggerId);
+    const isOpen  = !panel.hidden;
 
-  function togglePanel(id) {
-    const panel = document.getElementById('panel-' + id);
-    const btn   = document.getElementById('node-' + id);
-    const isOpen = !panel.hidden;
-
-    document.querySelectorAll('.node-panel').forEach(p => { p.hidden = true; });
-    document.querySelectorAll('.arch-node').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    document.querySelectorAll(panelSelector).forEach(function (p) { p.hidden = true; });
+    document.querySelectorAll(triggerSelector).forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
 
     if (!isOpen) {
       panel.hidden = false;
       panel.style.animation = 'none';
       panel.offsetHeight; // force reflow to restart animation
       panel.style.animation = '';
-      btn.setAttribute('aria-expanded', 'true');
+      trigger.setAttribute('aria-expanded', 'true');
     }
   }
 
-  function esc(s) {
+  function toggleProp(id) {
+    toggleDisclosure('ppanel-' + id, 'pchip-' + id, '[id^="ppanel-"]', '.prop-chip');
+  }
+
+  function togglePanel(id) {
+    toggleDisclosure('panel-' + id, 'node-' + id, '.node-panel', '.arch-node');
+  }
+
+  function escapeHtml(s) {
     return String(s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
@@ -925,14 +912,18 @@
     } catch { return iso; }
   }
 
+  const OUTCOME_LABELS = {
+    accepted:  '✓ Accepted',
+    rejected:  '✗ Rejected',
+    duplicate: '⚠ Duplicate'
+  };
+
   function outcomeClass(outcome) {
-    if (outcome === 'accepted') return 'accepted';
-    if (outcome === 'rejected') return 'rejected';
-    return 'duplicate';
+    return outcome;
   }
 
   function outcomeLabel(outcome) {
-    return { accepted: '✓ Accepted', rejected: '✗ Rejected', duplicate: '⚠ Duplicate' }[outcome] || outcome;
+    return OUTCOME_LABELS[outcome] || outcome;
   }
 
   function renderRun(data) {
@@ -942,20 +933,20 @@
       <div class="run-meta">
         <div class="run-meta-head">
           <span class="run-meta-issue">
-            <a href="${esc(issueUrl)}" target="_blank" rel="noopener noreferrer">Issue #${esc(String(data.issue))}</a>
-            — ${esc(data.title)}
+            <a href="${escapeHtml(issueUrl)}" target="_blank" rel="noopener noreferrer">Issue #${escapeHtml(String(data.issue))}</a>
+            — ${escapeHtml(data.title)}
           </span>
-          <span class="run-meta-time">${esc(fmtTime(data.timestamp))}</span>
+          <span class="run-meta-time">${escapeHtml(fmtTime(data.timestamp))}</span>
         </div>
         <div class="run-meta-body">
-          <span class="run-outcome ${esc(outcomeClass(data.outcome))}">${outcomeLabel(data.outcome)}</span>`;
+          <span class="run-outcome ${escapeHtml(outcomeClass(data.outcome))}">${outcomeLabel(data.outcome)}</span>`;
 
     if (data.benefit) {
-      html += `<span class="benefit-pill"><strong>${esc(data.benefit.name)}</strong> · ${esc(data.benefit.category)}</span>`;
+      html += `<span class="benefit-pill"><strong>${escapeHtml(data.benefit.name)}</strong> · ${escapeHtml(data.benefit.category)}</span>`;
     }
 
     if (data.run_url) {
-      html += `<a class="run-link" href="${esc(data.run_url)}" target="_blank" rel="noopener noreferrer">View run →</a>`;
+      html += `<a class="run-link" href="${escapeHtml(data.run_url)}" target="_blank" rel="noopener noreferrer">View run →</a>`;
     }
 
     html += `</div></div>`;
@@ -969,19 +960,19 @@
       const detail = fmtDetail(tool);
 
       html += `
-        <div class="trace-step ${esc(info.stepClass)}">
+        <div class="trace-step ${escapeHtml(info.stepClass)}">
           <div class="trace-gutter">
             <div class="trace-dot"></div>
             <div class="trace-line"></div>
           </div>
           <div class="trace-card">
             <div class="trace-head">
-              <span class="actor-badge ${esc(info.badge)}">${esc(info.label)}</span>
-              <span class="trace-head-label">${esc(tool.name.replace(/_/g, '_\u200b'))}</span>
-              ${detail ? `<span class="trace-head-detail">${esc(detail)}</span>` : ''}
+              <span class="actor-badge ${escapeHtml(info.badge)}">${escapeHtml(info.label)}</span>
+              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b'))}</span>
+              ${detail ? `<span class="trace-head-detail">${escapeHtml(detail)}</span>` : ''}
             </div>
             <div class="trace-body">
-              ${tool.summary ? `<p class="trace-primary">${esc(tool.summary)}</p>` : ''}
+              ${tool.summary ? `<p class="trace-primary">${escapeHtml(tool.summary)}</p>` : ''}
               ${explain ? `<p class="trace-annotation">${explain}</p>` : ''}
             </div>
           </div>
@@ -992,10 +983,10 @@
 
     if (data.benefit && data.outcome === 'accepted') {
       html += `
-        <div style="margin-top:1.25rem; padding:0.875rem 1rem; background:var(--tavily-bg); border:1px solid var(--tavily-border); border-radius:var(--radius-lg);">
-          <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--tavily-color);margin-bottom:0.375rem;">Added to directory</p>
-          <p style="font-size:0.875rem;font-weight:600;">${esc(data.benefit.name)} <span style="font-weight:400;color:var(--text-muted)">· ${esc(data.benefit.category)}</span></p>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">${esc(data.benefit.description)}</p>
+        <div class="added-banner">
+          <p class="added-banner-label">Added to directory</p>
+          <p class="added-banner-name">${escapeHtml(data.benefit.name)} <span>· ${escapeHtml(data.benefit.category)}</span></p>
+          <p class="added-banner-desc">${escapeHtml(data.benefit.description)}</p>
         </div>`;
     }
 
@@ -1038,13 +1029,13 @@
       stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
       headLabel: 'edit', detail: 'benefits.json',
       primary: 'Added <strong>Notion Education</strong> · Productivity',
-      code: `<span style="color:#5a5a4e">{</span>
-  <span style="color:#e0b060">"id"</span>: <span style="color:#7ec890">"notion"</span>,
-  <span style="color:#e0b060">"name"</span>: <span style="color:#7ec890">"Notion Education"</span>,
-  <span style="color:#e0b060">"category"</span>: <span style="color:#7ec890">"Productivity"</span>,
-  <span style="color:#e0b060">"description"</span>: <span style="color:#7ec890">"Free Plus plan with unlimited blocks..."</span>,
-  <span style="color:#e0b060">"popularity"</span>: <span style="color:#7eb8e0">5</span>
-<span style="color:#5a5a4e">}</span>`,
+      code: `<span class="c-dim">{</span>
+  <span class="c-hl">"id"</span>: <span class="c-grn">"notion"</span>,
+  <span class="c-hl">"name"</span>: <span class="c-grn">"Notion Education"</span>,
+  <span class="c-hl">"category"</span>: <span class="c-grn">"Productivity"</span>,
+  <span class="c-hl">"description"</span>: <span class="c-grn">"Free Plus plan with unlimited blocks..."</span>,
+  <span class="c-hl">"popularity"</span>: <span class="c-blue">5</span>
+<span class="c-dim">}</span>`,
       annotation: 'Appends the validated benefit with all required fields to benefits.json.'
     },
     {
@@ -1057,7 +1048,7 @@
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
       headLabel: 'add_comment', detail: 'issue #42',
       primary: 'Commented on issue #42 with the PR link.',
-      annotation: 'Closes the loop — the submitter gets notified their suggestion was processed.'
+      annotation: 'Closes the loop. The submitter gets notified their suggestion was processed.'
     }
   ];
 
@@ -1108,9 +1099,9 @@
       </div>
       <div class="trace-card">
         <div class="trace-head">
-          <span class="actor-badge ${esc(step.badge)}">${esc(step.badgeLabel)}</span>
-          <span class="trace-head-label">${esc(step.headLabel)}</span>
-          ${step.detail ? `<span class="trace-head-detail">${esc(step.detail)}</span>` : ''}
+          <span class="actor-badge ${escapeHtml(step.badge)}">${escapeHtml(step.badgeLabel)}</span>
+          <span class="trace-head-label">${escapeHtml(step.headLabel)}</span>
+          ${step.detail ? `<span class="trace-head-detail">${escapeHtml(step.detail)}</span>` : ''}
         </div>
         <div class="trace-body">
           <p class="trace-primary">${step.primary}</p>
@@ -1127,11 +1118,11 @@
   }
 
   fetch('last-run.json')
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(renderRun)
-    .catch(() => {
+    .catch(function () {
       document.getElementById('run-output').innerHTML =
-        '<div class="state-error">No run data yet — Grant hasn\'t processed a submission yet.</div>';
+        '<div class="state-error">No run data yet. Grant hasn\'t processed a submission yet.</div>';
     });
 </script>
 </body>

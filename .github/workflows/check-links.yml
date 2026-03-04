@@ -47,16 +47,15 @@ jobs:
 
                 const status = response.status;
 
-                // 403 commonly means bot-blocking, not a broken link — skip it
+                // 403 commonly means bot-blocking, not a broken link. Skip it.
                 if (status >= 400 && status !== 403) {
                   brokenLinks.push({
                     name: benefit.name,
                     link: benefit.link,
-                    status: status
+                    status
                   });
                 } else if (status >= 300 && status < 400) {
                   const location = response.headers.get('location');
-                  // Check if redirect is to a different domain (potential issue)
                   try {
                     const originalHost = new URL(benefit.link).hostname;
                     const newHost = location ? new URL(location, benefit.link).hostname : null;
@@ -65,7 +64,7 @@ jobs:
                         name: benefit.name,
                         link: benefit.link,
                         redirectTo: location,
-                        status: status
+                        status
                       });
                     }
                   } catch (e) {
