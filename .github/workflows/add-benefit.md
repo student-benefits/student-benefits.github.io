@@ -119,14 +119,14 @@ If the product is open source, also include `"repo": "owner/repo"`.
 **ID generation**: Lowercase the name, replace non-alphanumeric characters with hyphens, strip leading/trailing hyphens. Verify the ID doesn't already exist in benefits.json.
 
 **Valid categories** (use exactly one):
-- AI & Dev Tools
+- AI Tools
+- Dev Tools
 - Cloud & Hosting
 - Learning
 - Design
 - Productivity
 - Lifestyle
 - Domains & Security
-- Other
 
 If the user provided a link, prefer it. If the user provided a category, use it. Otherwise, use your knowledge to find the correct student discount URL and pick the best category.
 

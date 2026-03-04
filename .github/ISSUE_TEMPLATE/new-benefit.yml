@@ -42,11 +42,11 @@ body:
       description: Pick one if you want, or leave it for us to categorize
       options:
         - ""
-        - AI & Dev Tools
+        - AI Tools
+        - Dev Tools
         - Cloud & Hosting
         - Learning
         - Design
         - Productivity
         - Lifestyle
         - Domains & Security
-        - Other

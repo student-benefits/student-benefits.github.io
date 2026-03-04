@@ -2,7 +2,7 @@
   {
     "id": "github-student-pack",
     "name": "GitHub Student Developer Pack",
-    "category": "AI & Dev Tools",
+    "category": "Dev Tools",
     "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more. The essential starting point for student developers.",
     "link": "https://education.github.com/pack",
     "tags": [
@@ -15,7 +15,7 @@
   {
     "id": "github-copilot",
     "name": "GitHub Copilot Pro",
-    "category": "AI & Dev Tools",
+    "category": "AI Tools",
     "description": "Free access to Copilot Pro while you're a student. AI pair programmer with unlimited completions, chat, and GPT-4 powered suggestions.",
     "link": "https://github.com/education/students",
     "tags": [
@@ -28,7 +28,7 @@
   {
     "id": "cursor-pro",
     "name": "Cursor Pro",
-    "category": "AI & Dev Tools",
+    "category": "AI Tools",
     "description": "One free year of Cursor Pro for verified university students. AI-powered code editor with 500 fast requests/month and unlimited slow requests.",
     "link": "https://cursor.com/students",
     "tags": [
@@ -42,7 +42,7 @@
   {
     "id": "google-antigravity",
     "name": "Google Antigravity",
-    "category": "AI & Dev Tools",
+    "category": "AI Tools",
     "description": "Free during public preview. Agent-first IDE powered by Gemini 3 with autonomous AI agents that plan, code, and test in parallel. Students with Google AI Pro get higher rate limits.",
     "link": "https://antigravity.google",
     "tags": [
@@ -56,7 +56,7 @@
   {
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
-    "category": "AI & Dev Tools",
+    "category": "Dev Tools",
     "description": "Free access to all JetBrains professional IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.) while you're a student. Renewable annually.",
     "link": "https://www.jetbrains.com/community/education/#students",
     "tags": [
@@ -71,7 +71,7 @@
   {
     "id": "perplexity",
     "name": "Perplexity Pro",
-    "category": "AI & Dev Tools",
+    "category": "AI Tools",
     "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
     "link": "https://www.perplexity.ai/students",
     "tags": [
@@ -84,7 +84,7 @@
   {
     "id": "1password",
     "name": "1Password",
-    "category": "AI & Dev Tools",
+    "category": "Domains & Security",
     "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent, CLI integration, and secure credential sharing.",
     "link": "https://1password.com/developers/students",
     "tags": [
@@ -370,7 +370,7 @@
   {
     "id": "google-gemini-pro",
     "name": "Google Gemini Pro",
-    "category": "AI & Dev Tools",
+    "category": "AI Tools",
     "description": "Free 12-month Google AI Pro plan for students (~$240 value). Includes Gemini 2.5 Pro, Deep Research, NotebookLM Plus, and 2TB storage. Sign up by Jan 31, 2026.",
     "link": "https://gemini.google/students/",
     "tags": [
@@ -513,7 +513,7 @@
   {
     "id": "gitkraken",
     "name": "GitKraken",
-    "category": "AI & Dev Tools",
+    "category": "Dev Tools",
     "description": "6 months free via GitHub Student Pack, then 80% off while a student. Git GUI client with GitLens VS Code extension.",
     "link": "https://www.gitkraken.com/github-student-developer-pack-bundle",
     "tags": [

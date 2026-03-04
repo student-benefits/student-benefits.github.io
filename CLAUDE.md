@@ -38,8 +38,8 @@ benefits — all data must go through this file.
 ```
 
 - `id`: lowercase, hyphens, no leading/trailing hyphens, unique
-- `category`: must be exactly one of: `AI & Dev Tools`, `Cloud & Hosting`,
-  `Learning`, `Design`, `Productivity`, `Lifestyle`, `Domains & Security`, `Other`
+- `category`: must be exactly one of: `AI Tools`, `Dev Tools`, `Cloud & Hosting`,
+  `Learning`, `Design`, `Productivity`, `Lifestyle`, `Domains & Security`
 - `description`: specific about what students actually get (e.g. "Free Pro plan
   for 1 year", not "Student discount available"); max 120 chars
 - `popularity`: integer 1–10; use 5 as default for new entries
@@ -72,7 +72,7 @@ Check the run URL in issue #5 for the exact secret name needed.
 When reviewing PRs (especially those created by the add-benefit workflow):
 
 - [ ] `id` is unique, URL-safe, matches the name
-- [ ] `category` is one of the 9 valid values (exact string match)
+- [ ] `category` is one of the 8 valid values (exact string match)
 - [ ] `description` is ≤ 120 chars and specific about what students get
 - [ ] `link` goes to the actual student signup page, not a marketing page
 - [ ] No duplicate: same name or same hostname doesn't already exist
