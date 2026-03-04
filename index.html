@@ -19,7 +19,6 @@
       --indigo-200: #c7d2fe;
       --indigo-300: #a5b4fc;
       --amber-300: #fcd34d;
-      --amber-400: #f59e0b;
       --font: system-ui, -apple-system, sans-serif;
       --radius-sm: 0.25rem;
       --radius-md: 0.5rem;
@@ -514,7 +513,7 @@
   </div>
 
   <script>
-    let CATEGORIES = ['All'];
+    let categories = ['All'];
     let benefits = [];
     let activeCategory = 'All';
     let searchQuery = '';
@@ -525,60 +524,41 @@
     const resultsBar = document.getElementById('results-bar');
     const content = document.getElementById('content');
 
-    function renderFilters() {
-      const counts = {};
-      benefits.forEach(b => { counts[b.category] = (counts[b.category] || 0) + 1; });
-      filterBar.innerHTML = CATEGORIES.map(cat => {
-        const count = cat === 'All' ? benefits.length : (counts[cat] || 0);
-        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${cat}">${cat} <span class="filter-count">${count}</span></button>`;
-      }).join('');
+    function esc(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
     }
-
-    filterBar.addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-tab');
-      if (!btn) return;
-      activeCategory = btn.dataset.cat;
-      renderFilters();
-      render();
-    });
-
-    searchInput.addEventListener('input', () => {
-      searchQuery = searchInput.value;
-      render();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
-        searchInput.focus();
-      }
-    });
 
     function getFiltered() {
       const q = searchQuery.toLowerCase();
       return benefits
-        .filter(b => {
+        .filter(function (b) {
           const catMatch = activeCategory === 'All' || b.category === activeCategory;
           const searchMatch = b.name.toLowerCase().includes(q) ||
             b.description.toLowerCase().includes(q) ||
-            b.tags.some(t => t.toLowerCase().includes(q));
+            b.tags.some(function (t) { return t.toLowerCase().includes(q); });
           return catMatch && searchMatch;
         })
-        .sort((a, b) => sortOrder === 'alpha'
-          ? a.name.localeCompare(b.name)
-          : b.popularity - a.popularity
-        );
+        .sort(function (a, b) {
+          if (sortOrder === 'alpha') return a.name.localeCompare(b.name);
+          return b.popularity - a.popularity;
+        });
     }
 
-    function esc(str) {
-      const d = document.createElement('div');
-      d.textContent = str;
-      return d.innerHTML;
+    function renderFilters() {
+      const counts = {};
+      benefits.forEach(function (b) { counts[b.category] = (counts[b.category] || 0) + 1; });
+      filterBar.innerHTML = categories.map(function (cat) {
+        const count = cat === 'All' ? benefits.length : (counts[cat] || 0);
+        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${esc(cat)}">${esc(cat)} <span class="filter-count">${count}</span></button>`;
+      }).join('');
     }
 
     function renderCard(b) {
-      const tags = b.tags.slice(0, 3).map(t => `<span class="tag" data-tag="${esc(t)}">#${esc(t)}</span>`).join('');
+      const tags = b.tags.slice(0, 3).map(function (t) {
+        return `<span class="tag" data-tag="${esc(t)}">#${esc(t)}</span>`;
+      }).join('');
       return `<article class="card" data-href="${esc(b.link)}">
         <div class="card-body">
           <div class="card-top">
@@ -594,7 +574,8 @@
     function render() {
       const filtered = getFiltered();
       const n = filtered.length;
-      let bar = `<span class="results-count">Found <strong>${n}</strong> ${n === 1 ? 'resource' : 'resources'}</span>`;
+      const label = n === 1 ? 'resource' : 'resources';
+      let bar = `<span class="results-count">Found <strong>${n}</strong> ${label}</span>`;
       bar += `<div class="bar-right">`;
       bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
         <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Popular</option>
@@ -609,20 +590,6 @@
       bar += `</div>`;
       resultsBar.innerHTML = bar;
 
-      document.getElementById('sort-select').addEventListener('change', (e) => {
-        sortOrder = e.target.value;
-        render();
-      });
-
-      const clearBtn = document.getElementById('clear-btn');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', () => {
-          searchQuery = '';
-          searchInput.value = '';
-          render();
-        });
-      }
-
       if (filtered.length > 0) {
         content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
       } else {
@@ -633,7 +600,45 @@
       }
     }
 
-    content.addEventListener('click', (e) => {
+    // Event delegation on resultsBar avoids re-attaching listeners on every render
+    resultsBar.addEventListener('change', function (e) {
+      if (e.target.id === 'sort-select') {
+        sortOrder = e.target.value;
+        render();
+      }
+    });
+
+    resultsBar.addEventListener('click', function (e) {
+      if (e.target.closest('#clear-btn')) {
+        searchQuery = '';
+        searchInput.value = '';
+        render();
+      }
+    });
+
+    filterBar.addEventListener('click', function (e) {
+      const btn = e.target.closest('.filter-tab');
+      if (!btn) return;
+      activeCategory = btn.dataset.cat;
+      renderFilters();
+      render();
+    });
+
+    searchInput.addEventListener('input', function () {
+      searchQuery = searchInput.value;
+      render();
+    });
+
+    // Focus search when typing alphanumeric keys outside inputs
+    document.addEventListener('keydown', function (e) {
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
+        searchInput.focus();
+      }
+    });
+
+    content.addEventListener('click', function (e) {
       const tag = e.target.closest('.tag');
       if (tag) {
         searchQuery = tag.dataset.tag;
@@ -647,11 +652,11 @@
     });
 
     Promise.all([
-      fetch('benefits.json').then(r => r.json()),
-      fetch('categories.json').then(r => r.json())
-    ]).then(([data, cats]) => {
-      benefits = data;
-      CATEGORIES = ['All', ...cats];
+      fetch('benefits.json').then(function (r) { return r.json(); }),
+      fetch('categories.json').then(function (r) { return r.json(); })
+    ]).then(function (results) {
+      benefits = results[0];
+      categories = ['All'].concat(results[1]);
       renderFilters();
       render();
     });

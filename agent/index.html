@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f0">
-  <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub — see how it works and what it did last.">
+  <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub. See how it works and what it did last.">
   <title>Grant · AI Agent · Student Benefits Hub</title>
   <style>
     :root {
@@ -364,21 +364,6 @@
     }
     .site-footer a { color: var(--grant-color); text-underline-offset: 2px; }
 
-    /* ── Step chip actor badges ─────────────────────────────────── */
-    .step-chip-actor {
-      display: inline-block;
-      font-size: 0.62rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      padding: 1px 5px;
-      border-radius: 2px;
-      margin-top: 0.625rem;
-    }
-    .step-chip-actor-github { background: var(--github-bg); color: var(--github-color); border: 1px solid var(--github-border); }
-    .step-chip-actor-tavily { background: var(--tavily-bg); color: var(--tavily-color); border: 1px solid var(--tavily-border); }
-    .step-chip-actor-grant  { background: var(--grant-bg);  color: var(--grant-color);  border: 1px solid var(--grant-border); }
-
     /* ── Simulation section ──────────────────────────────────────── */
     .sim-task {
       background: var(--surface);
@@ -480,18 +465,11 @@
     .prop-detail-slot { min-height: 80px; margin-bottom: 1.25rem; }
 
     /* ── Outcomes ────────────────────────────────────────────────── */
-    .outcomes-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 0.875rem;
-    }
     .outcomes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0.75rem;
+      margin-top: 0.875rem;
     }
     .outcome-card {
       border-radius: var(--radius-lg);
@@ -634,6 +612,33 @@
       margin-bottom: 0.375rem;
     }
 
+    /* ── Added-to-directory banner ──────────────────────────── */
+    .added-banner {
+      margin-top: 1.25rem;
+      padding: 0.875rem 1rem;
+      background: var(--tavily-bg);
+      border: 1px solid var(--tavily-border);
+      border-radius: var(--radius-lg);
+    }
+    .added-banner-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--tavily-color);
+      margin-bottom: 0.375rem;
+    }
+    .added-banner-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .added-banner-name span { font-weight: 400; color: var(--text-muted); }
+    .added-banner-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
     @media (max-width: 540px) {
       .main { padding: 2rem 1.25rem 4rem; }
       .header-inner { padding: 0 1.25rem; }
@@ -662,7 +667,7 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention.
+      Grant is an AI agent that automatically curates this directory by verifying submissions, checking for duplicates, and opening pull requests without human intervention. This page explains how it works, walks through a simulated run, and shows the latest real one.
     </p>
   </section>
 
@@ -723,15 +728,15 @@
       <div class="node-panels-slot">
         <div id="panel-issue" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Issue</p>
-          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs — everything else Grant discovers on its own.</p>
+          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs. Everything else Grant discovers on its own.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · Claude Sonnet 4</p>
-          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome — without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
+          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome, all without any human in the loop. Its instructions are a Markdown file checked into this repository.</p>
         </div>
         <div id="panel-tavily" class="node-panel" hidden>
           <p class="node-panel-title">Tavily Search</p>
-          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists — searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
+          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists by searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
         </div>
         <div id="panel-web" class="node-panel" hidden>
           <p class="node-panel-title">Web Fetch</p>
@@ -779,7 +784,21 @@
       </div>
       <div id="ppanel-decision" class="node-panel" hidden>
         <p class="node-panel-title">Decision-making</p>
-        <p>An agent uses LLM reasoning to choose a path at each step. Grant decides to accept (open a PR), reject (close and log to memory), or flag as duplicate based on what it finds.</p>
+        <p>An agent uses LLM reasoning to choose a path at each step, not a fixed branching script. Every submission ends in one of three outcomes:</p>
+        <div class="outcomes-grid">
+          <div class="outcome-card accepted">
+            <p class="outcome-label">✓ Accepted</p>
+            <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
+          </div>
+          <div class="outcome-card rejected">
+            <p class="outcome-label">✗ Rejected</p>
+            <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
+          </div>
+          <div class="outcome-card duplicate">
+            <p class="outcome-label">⚠ Duplicate</p>
+            <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
+          </div>
+        </div>
       </div>
       <div id="ppanel-autonomy" class="node-panel" hidden>
         <p class="node-panel-title">Autonomy</p>
@@ -795,21 +814,6 @@
       </div>
     </div>
 
-    <p class="outcomes-label">Same input, three possible outcomes</p>
-    <div class="outcomes-grid">
-      <div class="outcome-card accepted">
-        <p class="outcome-label">✓ Accepted</p>
-        <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
-      </div>
-      <div class="outcome-card rejected">
-        <p class="outcome-label">✗ Rejected</p>
-        <p class="outcome-desc">No student program found after search. Issue closed, domain logged.</p>
-      </div>
-      <div class="outcome-card duplicate">
-        <p class="outcome-label">⚠ Duplicate</p>
-        <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
-      </div>
-    </div>
   </section>
 
   <!-- Simulation -->
@@ -846,7 +850,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>Grant is open source — <a href="https://github.com/student-benefits/student-benefits.github.io/blob/main/.github/workflows/add-benefit.md" target="_blank" rel="noopener noreferrer">read the workflow</a></p>
+  <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io/blob/main/.github/workflows/add-benefit.md" target="_blank" rel="noopener noreferrer">Read the workflow</a> to see exactly what it does, or open an issue to suggest a new benefit and watch it run for real.</p>
 </footer>
 
 <script>
@@ -872,36 +876,29 @@
     add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
   };
 
-  function toggleProp(id) {
-    const panel = document.getElementById('ppanel-' + id);
-    const chip  = document.getElementById('pchip-' + id);
-    const isOpen = !panel.hidden;
-    document.querySelectorAll('[id^="ppanel-"]').forEach(p => { p.hidden = true; });
-    document.querySelectorAll('.prop-chip').forEach(c => c.setAttribute('aria-expanded', 'false'));
-    if (!isOpen) {
-      panel.hidden = false;
-      panel.style.animation = 'none';
-      panel.offsetHeight;
-      panel.style.animation = '';
-      chip.setAttribute('aria-expanded', 'true');
-    }
-  }
+  function toggleDisclosure(panelId, triggerId, panelSelector, triggerSelector) {
+    const panel   = document.getElementById(panelId);
+    const trigger = document.getElementById(triggerId);
+    const isOpen  = !panel.hidden;
 
-  function togglePanel(id) {
-    const panel = document.getElementById('panel-' + id);
-    const btn   = document.getElementById('node-' + id);
-    const isOpen = !panel.hidden;
-
-    document.querySelectorAll('.node-panel').forEach(p => { p.hidden = true; });
-    document.querySelectorAll('.arch-node').forEach(b => b.setAttribute('aria-expanded', 'false'));
+    document.querySelectorAll(panelSelector).forEach(function (p) { p.hidden = true; });
+    document.querySelectorAll(triggerSelector).forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
 
     if (!isOpen) {
       panel.hidden = false;
       panel.style.animation = 'none';
       panel.offsetHeight; // force reflow to restart animation
       panel.style.animation = '';
-      btn.setAttribute('aria-expanded', 'true');
+      trigger.setAttribute('aria-expanded', 'true');
     }
+  }
+
+  function toggleProp(id) {
+    toggleDisclosure('ppanel-' + id, 'pchip-' + id, '[id^="ppanel-"]', '.prop-chip');
+  }
+
+  function togglePanel(id) {
+    toggleDisclosure('panel-' + id, 'node-' + id, '.node-panel', '.arch-node');
   }
 
   function esc(s) {
@@ -925,14 +922,18 @@
     } catch { return iso; }
   }
 
+  const OUTCOME_LABELS = {
+    accepted:  '✓ Accepted',
+    rejected:  '✗ Rejected',
+    duplicate: '⚠ Duplicate'
+  };
+
   function outcomeClass(outcome) {
-    if (outcome === 'accepted') return 'accepted';
-    if (outcome === 'rejected') return 'rejected';
-    return 'duplicate';
+    return OUTCOME_LABELS[outcome] ? outcome : 'duplicate';
   }
 
   function outcomeLabel(outcome) {
-    return { accepted: '✓ Accepted', rejected: '✗ Rejected', duplicate: '⚠ Duplicate' }[outcome] || outcome;
+    return OUTCOME_LABELS[outcome] || outcome;
   }
 
   function renderRun(data) {
@@ -992,10 +993,10 @@
 
     if (data.benefit && data.outcome === 'accepted') {
       html += `
-        <div style="margin-top:1.25rem; padding:0.875rem 1rem; background:var(--tavily-bg); border:1px solid var(--tavily-border); border-radius:var(--radius-lg);">
-          <p style="font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--tavily-color);margin-bottom:0.375rem;">Added to directory</p>
-          <p style="font-size:0.875rem;font-weight:600;">${esc(data.benefit.name)} <span style="font-weight:400;color:var(--text-muted)">· ${esc(data.benefit.category)}</span></p>
-          <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">${esc(data.benefit.description)}</p>
+        <div class="added-banner">
+          <p class="added-banner-label">Added to directory</p>
+          <p class="added-banner-name">${esc(data.benefit.name)} <span>· ${esc(data.benefit.category)}</span></p>
+          <p class="added-banner-desc">${esc(data.benefit.description)}</p>
         </div>`;
     }
 
@@ -1057,7 +1058,7 @@
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
       headLabel: 'add_comment', detail: 'issue #42',
       primary: 'Commented on issue #42 with the PR link.',
-      annotation: 'Closes the loop — the submitter gets notified their suggestion was processed.'
+      annotation: 'Closes the loop. The submitter gets notified their suggestion was processed.'
     }
   ];
 
@@ -1127,11 +1128,11 @@
   }
 
   fetch('last-run.json')
-    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(renderRun)
-    .catch(() => {
+    .catch(function () {
       document.getElementById('run-output').innerHTML =
-        '<div class="state-error">No run data yet — Grant hasn\'t processed a submission yet.</div>';
+        '<div class="state-error">No run data yet. Grant hasn\'t processed a submission yet.</div>';
     });
 </script>
 </body>

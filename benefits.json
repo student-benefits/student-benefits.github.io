@@ -3,7 +3,7 @@
     "id": "github-student-pack",
     "name": "GitHub Student Developer Pack",
     "category": "Dev Tools",
-    "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more. The essential starting point for student developers.",
+    "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more.",
     "link": "https://education.github.com/pack",
     "tags": [
       "Free Tools",
@@ -16,7 +16,7 @@
     "id": "github-copilot",
     "name": "GitHub Copilot Pro",
     "category": "AI Tools",
-    "description": "Free access to Copilot Pro while you're a student. AI pair programmer with unlimited completions, chat, and GPT-4 powered suggestions.",
+    "description": "Free Copilot Pro while you're a student. AI pair programmer with unlimited completions and chat.",
     "link": "https://github.com/education/students",
     "tags": [
       "AI",
@@ -29,7 +29,7 @@
     "id": "cursor-pro",
     "name": "Cursor Pro",
     "category": "AI Tools",
-    "description": "One free year of Cursor Pro for verified university students. AI-powered code editor with 500 fast requests/month and unlimited slow requests.",
+    "description": "Free year of Cursor Pro for verified university students. AI code editor with 500 fast requests/month.",
     "link": "https://cursor.com/students",
     "tags": [
       "AI",
@@ -43,7 +43,7 @@
     "id": "google-antigravity",
     "name": "Google Antigravity",
     "category": "AI Tools",
-    "description": "Free during public preview. Agent-first IDE powered by Gemini 3 with autonomous AI agents that plan, code, and test in parallel. Students with Google AI Pro get higher rate limits.",
+    "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
     "link": "https://antigravity.google",
     "tags": [
       "AI",
@@ -57,7 +57,7 @@
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
     "category": "Dev Tools",
-    "description": "Free access to all JetBrains professional IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.) while you're a student. Renewable annually.",
+    "description": "Free access to all JetBrains professional IDEs (IntelliJ, PyCharm, WebStorm, etc.). Renewable annually.",
     "link": "https://www.jetbrains.com/community/education/#students",
     "tags": [
       "IDE",
@@ -85,7 +85,7 @@
     "id": "1password",
     "name": "1Password",
     "category": "Domains & Security",
-    "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent, CLI integration, and secure credential sharing.",
+    "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent and CLI integration.",
     "link": "https://1password.com/developers/students",
     "tags": [
       "Security",
@@ -98,7 +98,7 @@
     "id": "azure-credits",
     "name": "Microsoft Azure",
     "category": "Cloud & Hosting",
-    "description": "$100 free credits yearly (renewable while enrolled), no credit card required. Access to 55+ Azure services including VMs, AI, and databases.",
+    "description": "$100 free credits yearly (renewable while enrolled), no credit card required. 55+ Azure services.",
     "link": "https://azure.microsoft.com/en-us/free/students",
     "tags": [
       "Azure",
@@ -282,7 +282,7 @@
     "id": "linear",
     "name": "Linear",
     "category": "Productivity",
-    "description": "Discounted rates on paid plans for students. Free tier available with 250 active issues. Email support@linear.app with .edu email to apply.",
+    "description": "Discounted paid plans for students. Free tier with 250 active issues. Email support@linear.app to apply.",
     "link": "https://linear.app/pricing",
     "tags": [
       "Project Management",
@@ -321,7 +321,7 @@
     "id": "apple-education",
     "name": "Apple Education Pricing",
     "category": "Lifestyle",
-    "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season. Available to current and admitted students.",
+    "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season.",
     "link": "https://www.apple.com/us-edu/store",
     "tags": [
       "Hardware",
@@ -359,7 +359,7 @@
     "id": "coursera",
     "name": "Coursera for Campus",
     "category": "Learning",
-    "description": "Many universities provide free access to Coursera courses and certificates. Financial aid available for individual learners.",
+    "description": "Many universities provide free Coursera access. Financial aid available for individual learners.",
     "link": "https://www.coursera.org/campus",
     "tags": [
       "Online Courses",
@@ -371,7 +371,7 @@
     "id": "google-gemini-pro",
     "name": "Google Gemini Pro",
     "category": "AI Tools",
-    "description": "Free 12-month Google AI Pro plan for students (~$240 value). Includes Gemini 2.5 Pro, Deep Research, NotebookLM Plus, and 2TB storage. Sign up by Jan 31, 2026.",
+    "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
     "link": "https://gemini.google/students/",
     "tags": [
       "AI",
@@ -410,7 +410,7 @@
     "id": "youtube-premium-student",
     "name": "YouTube Premium Student",
     "category": "Lifestyle",
-    "description": "$7.99/month (50% off). Ad-free videos, offline downloads, YouTube Music included. Verify via SheerID, valid up to 4 years.",
+    "description": "$7.99/month (50% off). Ad-free videos, offline downloads, YouTube Music included. Valid up to 4 years.",
     "link": "https://www.youtube.com/premium/student",
     "tags": [
       "Video",
@@ -423,7 +423,7 @@
     "id": "cloudflare-workers",
     "name": "Cloudflare Workers (Student)",
     "category": "Cloud & Hosting",
-    "description": "Free Workers Paid Plan for 1 year (normally $5/month). Includes Workers, Pages Functions, KV, and Durable Objects. US students with .edu email.",
+    "description": "Free Workers Paid Plan for 1 year. Includes Workers, Pages Functions, KV, and Durable Objects.",
     "link": "https://www.cloudflare.com/students/",
     "tags": [
       "Serverless",
@@ -436,7 +436,7 @@
     "id": "unity-student",
     "name": "Unity Student",
     "category": "Design",
-    "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Verify via SheerID, renewable annually.",
+    "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Renewable.",
     "link": "https://unity.com/products/unity-student",
     "tags": [
       "Game Dev",
@@ -488,7 +488,7 @@
     "id": "postman-student",
     "name": "Postman Student Expert",
     "category": "Learning",
-    "description": "Free API training and certification program. Learn API fundamentals, earn a digital badge, and join the student community.",
+    "description": "Free API training and certification. Learn API fundamentals, earn a digital badge, and join the community.",
     "link": "https://www.postman.com/student-program/student-expert/",
     "tags": [
       "API",
@@ -501,7 +501,7 @@
     "id": "ibm-skillsbuild",
     "name": "IBM SkillsBuild",
     "category": "Learning",
-    "description": "Free access to 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized digital credentials.",
+    "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
     "link": "https://skillsbuild.org/",
     "tags": [
       "Courses",
@@ -527,7 +527,7 @@
     "id": "educative",
     "name": "Educative.io",
     "category": "Learning",
-    "description": "6 months free via GitHub Student Pack (~$2000 value). 70+ interactive courses on programming, system design, and interviews.",
+    "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
     "tags": [
       "Courses",
@@ -721,7 +721,7 @@
     "id": "edx",
     "name": "edX",
     "category": "Learning",
-    "description": "Free course audits from Harvard, MIT, and top universities. 200+ fully free courses, certificates available for purchase.",
+    "description": "Free course audits from Harvard, MIT, and top universities. 200+ free courses, certificates for purchase.",
     "link": "https://www.edx.org/",
     "tags": [
       "Courses",
@@ -774,7 +774,7 @@
     "id": "overleaf",
     "name": "Overleaf",
     "category": "Productivity",
-    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features through institutional access.",
+    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features.",
     "link": "https://www.overleaf.com/",
     "tags": [
       "LaTeX",
