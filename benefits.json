@@ -839,5 +839,19 @@
       "Academic"
     ],
     "popularity": 5
+  },
+  {
+    "id": "termius-pro",
+    "name": "Termius Pro",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing.",
+    "link": "https://account.termius.com/student",
+    "tags": [
+      "SSH",
+      "Terminal",
+      "GitHub"
+    ],
+    "popularity": 5
   }
 ]
