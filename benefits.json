@@ -3,6 +3,7 @@
     "id": "github-student-pack",
     "name": "GitHub Student Developer Pack",
     "category": "Dev Tools",
+    "offer_type": "free",
     "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more.",
     "link": "https://education.github.com/pack",
     "tags": [
@@ -16,6 +17,7 @@
     "id": "github-copilot",
     "name": "GitHub Copilot Pro",
     "category": "AI Tools",
+    "offer_type": "free",
     "description": "Free Copilot Pro while you're a student. AI pair programmer with unlimited completions and chat.",
     "link": "https://github.com/education/students",
     "tags": [
@@ -29,6 +31,7 @@
     "id": "cursor-pro",
     "name": "Cursor Pro",
     "category": "AI Tools",
+    "offer_type": "free",
     "description": "Free year of Cursor Pro for verified university students. AI code editor with 500 fast requests/month.",
     "link": "https://cursor.com/students",
     "tags": [
@@ -43,6 +46,7 @@
     "id": "google-antigravity",
     "name": "Google Antigravity",
     "category": "AI Tools",
+    "offer_type": "free",
     "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
     "link": "https://antigravity.google",
     "tags": [
@@ -57,6 +61,7 @@
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
     "category": "Dev Tools",
+    "offer_type": "free",
     "description": "Free access to all JetBrains professional IDEs (IntelliJ, PyCharm, WebStorm, etc.). Renewable annually.",
     "link": "https://www.jetbrains.com/community/education/#students",
     "tags": [
@@ -72,6 +77,7 @@
     "id": "perplexity",
     "name": "Perplexity Pro",
     "category": "AI Tools",
+    "offer_type": "discount",
     "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
     "link": "https://www.perplexity.ai/students",
     "tags": [
@@ -85,6 +91,7 @@
     "id": "1password",
     "name": "1Password",
     "category": "Domains & Security",
+    "offer_type": "free",
     "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent and CLI integration.",
     "link": "https://1password.com/developers/students",
     "tags": [
@@ -98,6 +105,7 @@
     "id": "azure-credits",
     "name": "Microsoft Azure",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$100 free credits yearly (renewable while enrolled), no credit card required. 55+ Azure services.",
     "link": "https://azure.microsoft.com/en-us/free/students",
     "tags": [
@@ -111,6 +119,7 @@
     "id": "digitalocean",
     "name": "DigitalOcean",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$200 in credits valid for 1 year via GitHub Student Pack. Deploy droplets, databases, and Kubernetes clusters.",
     "link": "https://www.digitalocean.com/github-students",
     "tags": [
@@ -124,6 +133,7 @@
     "id": "aws-educate",
     "name": "AWS Educate",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$100 in AWS credits for students, no credit card required. Access to hands-on labs, learning paths, and job board.",
     "link": "https://aws.amazon.com/education/awseducate/",
     "tags": [
@@ -137,6 +147,7 @@
     "id": "mongodb-atlas",
     "name": "MongoDB Atlas",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$50 in credits plus free MongoDB University access via GitHub Student Pack. Cloud database with generous free tier.",
     "link": "https://www.mongodb.com/students",
     "tags": [
@@ -151,6 +162,7 @@
     "id": "heroku",
     "name": "Heroku",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
     "tags": [
@@ -164,6 +176,7 @@
     "id": "netlify",
     "name": "Netlify",
     "category": "Cloud & Hosting",
+    "offer_type": "free",
     "description": "Pro tier free via GitHub Student Developer Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
     "link": "https://education.github.com/pack",
     "tags": [
@@ -177,6 +190,7 @@
     "id": "namecheap",
     "name": "Namecheap Free Domain",
     "category": "Domains & Security",
+    "offer_type": "free",
     "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
     "link": "https://nc.me/",
     "tags": [
@@ -190,6 +204,7 @@
     "id": "figma",
     "name": "Figma Education",
     "category": "Design",
+    "offer_type": "free",
     "description": "Free Figma Professional for 2 years. Unlimited files, version history, and team libraries. Verify with school email.",
     "link": "https://www.figma.com/education/",
     "tags": [
@@ -203,6 +218,7 @@
     "id": "canva",
     "name": "Canva for Education",
     "category": "Design",
+    "offer_type": "free",
     "description": "Free premium features for K-12 via teacher invite. Higher ed students: check if your university has Canva Campus access.",
     "link": "https://www.canva.com/education/students/",
     "tags": [
@@ -216,6 +232,7 @@
     "id": "autodesk",
     "name": "Autodesk",
     "category": "Design",
+    "offer_type": "free",
     "description": "Free 1-year access to AutoCAD, Revit, Maya, 3ds Max, Fusion, and 100+ products. Renewable while enrolled.",
     "link": "https://www.autodesk.com/education/home",
     "tags": [
@@ -229,6 +246,7 @@
     "id": "notion",
     "name": "Notion Education",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
     "link": "https://www.notion.so/product/notion-for-education",
     "tags": [
@@ -242,6 +260,7 @@
     "id": "obsidian",
     "name": "Obsidian",
     "category": "Productivity",
+    "offer_type": "discount",
     "description": "App is free for everyone. Students get 40% off Sync ($29/year) and Publish for cloud backup and publishing.",
     "link": "https://obsidian.md/pricing",
     "tags": [
@@ -256,7 +275,8 @@
     "id": "grammarly",
     "name": "Grammarly",
     "category": "Productivity",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
+    "offer_type": "discount",
+    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access—check with your school.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
@@ -269,6 +289,7 @@
     "id": "microsoft-365",
     "name": "Microsoft 365 Education",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free Word, Excel, PowerPoint, OneNote, Teams, and 1TB OneDrive storage with valid school email address.",
     "link": "https://www.microsoft.com/en-us/education/products/office",
     "tags": [
@@ -282,6 +303,7 @@
     "id": "linear",
     "name": "Linear",
     "category": "Productivity",
+    "offer_type": "discount",
     "description": "Discounted paid plans for students. Free tier with 250 active issues. Email support@linear.app to apply.",
     "link": "https://linear.app/pricing",
     "tags": [
@@ -295,6 +317,7 @@
     "id": "spotify-student",
     "name": "Spotify Premium Student",
     "category": "Lifestyle",
+    "offer_type": "discount",
     "description": "$6.99/month (50% off) with Hulu included. Ad-free music, offline downloads, unlimited skips. Valid for up to 4 years.",
     "link": "https://www.spotify.com/us/student/",
     "tags": [
@@ -308,6 +331,7 @@
     "id": "amazon-prime-student",
     "name": "Amazon Prime Student",
     "category": "Lifestyle",
+    "offer_type": "trial",
     "description": "6-month free trial, then $7.49/month (50% off). Free shipping, Prime Video, Music, Grubhub+, and 5% cash back.",
     "link": "https://www.amazon.com/joinstudent",
     "tags": [
@@ -321,6 +345,7 @@
     "id": "apple-education",
     "name": "Apple Education Pricing",
     "category": "Lifestyle",
+    "offer_type": "discount",
     "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season.",
     "link": "https://www.apple.com/us-edu/store",
     "tags": [
@@ -334,6 +359,7 @@
     "id": "unidays",
     "name": "UNiDAYS",
     "category": "Lifestyle",
+    "offer_type": "free",
     "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
     "link": "https://www.myunidays.com/",
     "tags": [
@@ -346,6 +372,7 @@
     "id": "linkedin-learning",
     "name": "LinkedIn Learning",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free access through many universities. Check your school's library or career services for complimentary access.",
     "link": "https://learning.linkedin.com/for-higher-education",
     "tags": [
@@ -359,6 +386,7 @@
     "id": "coursera",
     "name": "Coursera for Campus",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Many universities provide free Coursera access. Financial aid available for individual learners.",
     "link": "https://www.coursera.org/campus",
     "tags": [
@@ -371,6 +399,7 @@
     "id": "google-gemini-pro",
     "name": "Google Gemini Pro",
     "category": "AI Tools",
+    "offer_type": "free",
     "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
     "link": "https://gemini.google/students/",
     "tags": [
@@ -384,6 +413,7 @@
     "id": "google-cloud",
     "name": "Google Cloud Credits",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$300 free credits for students plus always-free tier. Access through Google for Education or the standard free trial.",
     "link": "https://cloud.google.com/edu/students",
     "tags": [
@@ -397,6 +427,7 @@
     "id": "apple-music-student",
     "name": "Apple Music Student",
     "category": "Lifestyle",
+    "offer_type": "discount",
     "description": "$5.99/month (45% off) with free Apple TV+ included. Verify via UNiDAYS, valid up to 4 years.",
     "link": "https://music.apple.com/us/student",
     "tags": [
@@ -410,6 +441,7 @@
     "id": "youtube-premium-student",
     "name": "YouTube Premium Student",
     "category": "Lifestyle",
+    "offer_type": "discount",
     "description": "$7.99/month (50% off). Ad-free videos, offline downloads, YouTube Music included. Valid up to 4 years.",
     "link": "https://www.youtube.com/premium/student",
     "tags": [
@@ -423,6 +455,7 @@
     "id": "cloudflare-workers",
     "name": "Cloudflare Workers (Student)",
     "category": "Cloud & Hosting",
+    "offer_type": "free",
     "description": "Free Workers Paid Plan for 1 year. Includes Workers, Pages Functions, KV, and Durable Objects.",
     "link": "https://www.cloudflare.com/students/",
     "tags": [
@@ -436,6 +469,7 @@
     "id": "unity-student",
     "name": "Unity Student",
     "category": "Design",
+    "offer_type": "free",
     "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Renewable.",
     "link": "https://unity.com/products/unity-student",
     "tags": [
@@ -449,6 +483,7 @@
     "id": "miro-education",
     "name": "Miro Education",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free for 2 years. Unlimited boards, high-res exports, and custom templates. Apply with student documentation.",
     "link": "https://miro.com/education-whiteboard/",
     "tags": [
@@ -462,6 +497,7 @@
     "id": "sketch-education",
     "name": "Sketch",
     "category": "Design",
+    "offer_type": "free",
     "description": "Free for students and educators for 1 year. Professional UI/UX design tool for Mac with prototyping and collaboration.",
     "link": "https://www.sketch.com/education/",
     "tags": [
@@ -475,6 +511,7 @@
     "id": "loom-education",
     "name": "Loom Education",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free Loom Pro for verified students via Atlassian. Unlimited recordings with premium features for video messaging.",
     "link": "https://support.atlassian.com/loom/docs/education-plan-faq/",
     "tags": [
@@ -488,6 +525,7 @@
     "id": "postman-student",
     "name": "Postman Student Expert",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free API training and certification. Learn API fundamentals, earn a digital badge, and join the community.",
     "link": "https://www.postman.com/student-program/student-expert/",
     "tags": [
@@ -501,6 +539,7 @@
     "id": "ibm-skillsbuild",
     "name": "IBM SkillsBuild",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
     "link": "https://skillsbuild.org/",
     "tags": [
@@ -514,6 +553,7 @@
     "id": "gitkraken",
     "name": "GitKraken",
     "category": "Dev Tools",
+    "offer_type": "trial",
     "description": "6 months free via GitHub Student Pack, then 80% off while a student. Git GUI client with GitLens VS Code extension.",
     "link": "https://www.gitkraken.com/github-student-developer-pack-bundle",
     "tags": [
@@ -527,6 +567,7 @@
     "id": "educative",
     "name": "Educative.io",
     "category": "Learning",
+    "offer_type": "trial",
     "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
     "tags": [
@@ -540,6 +581,7 @@
     "id": "student-beans",
     "name": "Student Beans",
     "category": "Lifestyle",
+    "offer_type": "free",
     "description": "Free platform with 10,000+ student discounts on fashion, tech, food, and travel. Digital student ID included.",
     "link": "https://www.studentbeans.com/us",
     "tags": [
@@ -552,6 +594,7 @@
     "id": "airtable-student",
     "name": "Airtable Student",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free Team plan for 6-24 months. Instant 120-day trial with .edu email, then apply for extended access.",
     "link": "https://support.airtable.com/docs/nonprofit-and-educational-plans-faqs",
     "tags": [
@@ -565,6 +608,7 @@
     "id": "hack-the-box",
     "name": "Hack The Box Student",
     "category": "Learning",
+    "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
     "link": "https://www.hackthebox.com/higher-education",
     "tags": [
@@ -578,6 +622,7 @@
     "id": "tryhackme",
     "name": "TryHackMe Student",
     "category": "Learning",
+    "offer_type": "discount",
     "description": "20-30% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
     "link": "https://tryhackme.com/pricing",
     "tags": [
@@ -591,6 +636,7 @@
     "id": "samsung-education",
     "name": "Samsung Education",
     "category": "Lifestyle",
+    "offer_type": "discount",
     "description": "Up to 30% off Galaxy phones, tablets, laptops, and accessories. Verify with .edu email or ID.me.",
     "link": "https://www.samsung.com/us/shop/offer-program/education/",
     "tags": [
@@ -604,6 +650,7 @@
     "id": "evernote-student",
     "name": "Evernote Student",
     "category": "Productivity",
+    "offer_type": "discount",
     "description": "40% off Evernote Professional via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
     "link": "https://evernote.com/unidays",
     "tags": [
@@ -617,6 +664,7 @@
     "id": "raycast-pro",
     "name": "Raycast Pro",
     "category": "Productivity",
+    "offer_type": "discount",
     "description": "50% student discount ($5/month). Mac productivity launcher with AI, cloud sync, and custom themes.",
     "link": "https://www.raycast.com/pricing",
     "tags": [
@@ -630,6 +678,7 @@
     "id": "asana-student",
     "name": "Asana Student",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free Starter plan for students via Goodstack verification. Project management with timelines, boards, and collaboration.",
     "link": "https://asana.com/industry/students",
     "tags": [
@@ -643,6 +692,7 @@
     "id": "oracle-cloud",
     "name": "Oracle Cloud",
     "category": "Cloud & Hosting",
+    "offer_type": "credits",
     "description": "$300 free credits plus always-free tier via Oracle Academy. Includes Autonomous Database, VMs, and storage.",
     "link": "https://academy.oracle.com/en/solutions-cloud-program.html",
     "tags": [
@@ -656,6 +706,7 @@
     "id": "hackerrank",
     "name": "HackerRank Certifications",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free skill certifications in Python, JavaScript, SQL, and more. Recognized by 2000+ employers for job applications.",
     "link": "https://www.hackerrank.com/skills-verification",
     "tags": [
@@ -669,6 +720,7 @@
     "id": "interviewbit",
     "name": "InterviewBit",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free coding practice and mock interviews. Peer-matched practice sessions with structured learning paths.",
     "link": "https://www.interviewbit.com/",
     "tags": [
@@ -682,6 +734,7 @@
     "id": "kaggle",
     "name": "Kaggle",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free GPU compute (30hr/week), 50,000+ datasets, and ML competitions. Jupyter notebooks with P100/T4 GPUs.",
     "link": "https://www.kaggle.com/",
     "tags": [
@@ -695,6 +748,7 @@
     "id": "nvidia-education",
     "name": "NVIDIA Education",
     "category": "Learning",
+    "offer_type": "discount",
     "description": "Academic discounts on GPUs, free DLI courses, and research grants. Jetson developer kits at reduced prices for students.",
     "link": "https://developer.nvidia.com/higher-education-and-research",
     "tags": [
@@ -708,6 +762,7 @@
     "id": "red-hat-developer",
     "name": "Red Hat Developer",
     "category": "Cloud & Hosting",
+    "offer_type": "free",
     "description": "Free RHEL subscription for up to 16 systems. Full access to updates and self-service support. Renewable annually.",
     "link": "https://developers.redhat.com/",
     "tags": [
@@ -721,6 +776,7 @@
     "id": "edx",
     "name": "edX",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Free course audits from Harvard, MIT, and top universities. 200+ free courses, certificates for purchase.",
     "link": "https://www.edx.org/",
     "tags": [
@@ -734,6 +790,7 @@
     "id": "udemy-free",
     "name": "Udemy Free Courses",
     "category": "Learning",
+    "offer_type": "free",
     "description": "50,000+ free courses on programming, design, business, and more. Lifetime access once enrolled.",
     "link": "https://www.udemy.com/courses/free/",
     "tags": [
@@ -747,6 +804,7 @@
     "id": "gdsc",
     "name": "Google Developer Student Clubs",
     "category": "Learning",
+    "offer_type": "free",
     "description": "Join 2,100+ campus clubs for workshops, networking, and Google Solution Challenge. Free resources and community.",
     "link": "https://developers.google.com/community/gdsc",
     "tags": [
@@ -760,7 +818,8 @@
     "id": "google-colab",
     "name": "Google Colab",
     "category": "AI Tools",
-    "description": "Free Jupyter notebook environment in the cloud. Includes free GPU/TPU access for machine learning and AI research.",
+    "offer_type": "free",
+    "description": "Free 1-year Colab Pro for U.S. students and faculty (limited). Includes GPU/TPU access, Slideshow Mode, and AI toggle.",
     "link": "https://colab.research.google.com/",
     "tags": [
       "AI",
@@ -768,12 +827,13 @@
       "Python",
       "GPU"
     ],
-    "popularity": 5
+    "popularity": 8
   },
   {
     "id": "overleaf",
     "name": "Overleaf",
     "category": "Productivity",
+    "offer_type": "free",
     "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features.",
     "link": "https://www.overleaf.com/",
     "tags": [

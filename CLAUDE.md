@@ -29,6 +29,7 @@ benefits — all data must go through this file.
   "id": "url-safe-id",
   "name": "Official Product Name",
   "category": "one of the valid categories below",
+  "offer_type": "free | discount | credits | trial",
   "description": "What students get — be specific, max 120 chars",
   "link": "Direct URL to student signup or discount page",
   "tags": ["Tag1", "Tag2"],
@@ -41,6 +42,7 @@ benefits — all data must go through this file.
 - `category`: must exactly match one of the values in `categories.json` (the authoritative list)
 - `description`: specific about what students actually get (e.g. "Free Pro plan
   for 1 year", not "Student discount available"); max 120 chars
+- `offer_type`: required; one of `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period then paid/discounted)
 - `popularity`: integer 1–10; use 5 as default for new entries
 - `repo`: optional; only for open-source projects
 
@@ -72,6 +74,7 @@ When reviewing PRs (especially those created by the add-benefit workflow):
 
 - [ ] `id` is unique, URL-safe, matches the name
 - [ ] `category` exactly matches a value in `categories.json`
+- [ ] `offer_type` is set and accurate (`free`, `discount`, `credits`, or `trial`)
 - [ ] `description` is ≤ 120 chars and specific about what students get
 - [ ] `link` goes to the actual student signup page, not a marketing page
 - [ ] No duplicate: same name or same hostname doesn't already exist
