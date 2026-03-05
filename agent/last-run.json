@@ -1,0 +1,20 @@
+{
+  "issue": 31,
+  "title": "overleaf has a free plan for students",
+  "timestamp": "2026-03-04T21:06:30.000Z",
+  "outcome": "accepted",
+  "tools": [
+    { "name": "github-issue_read", "summary": "Read issue #31 to extract benefit submission details" },
+    { "name": "view", "summary": "Read benefits.json to check for duplicates" },
+    { "name": "view", "summary": "Read categories.json to validate category options" },
+    { "name": "grep", "summary": "Search for existing Overleaf entries in benefits.json" },
+    { "name": "web_fetch", "summary": "Validated Overleaf's educational offerings and pricing structure" },
+    { "name": "edit", "summary": "Added Overleaf benefit to benefits.json" }
+  ],
+  "benefit": {
+    "name": "Overleaf",
+    "category": "Productivity",
+    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features through institutional access."
+  },
+  "run_url": ""
+}
