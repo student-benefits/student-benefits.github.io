@@ -65,16 +65,25 @@ Build two lookup sets:
 
 ## Step 2: Search for new benefits
 
-Run these Tavily searches:
+### Primary source: GitHub Education Pack
 
-1. `"student discount" OR "free for students" developer tools software`
-2. `"edu email" OR "higher education" free plan productivity design`
-3. `"student program" cloud hosting OR security tools free`
+Fetch `https://education.github.com/pack/offers` and extract every listed tool. For each one not in your known or rejected sets, note its name and homepage.
+
+### Tavily searches
+
+Run these searches to find benefits not covered by the GitHub pack:
+
+1. `site:studentbeans.com OR site:myunidays.com software developer tools`
+2. `"student plan" OR "education plan" site announced 2024 OR 2025 developer tools`
+3. Look at the category distribution in `benefits.json` and pick the **most underrepresented category**, then search: `"<category name>" "student" OR "education" free OR discount`
+
+### Verify each candidate
 
 For each promising result, use `web-fetch` to confirm:
 - The student program is real and currently active
 - It offers a genuine discount or free tier (not just a marketing page)
 - The name and hostname are not in your known or rejected sets
+- The signup page loads and is self-serve (no "contact us" gate)
 
 Keep a shortlist of the best candidates. Apply this quality bar:
 
