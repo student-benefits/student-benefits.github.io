@@ -26,7 +26,7 @@ Grant is the AI agent that maintains this directory.
 | **Outputs** | PR with `benefits.json` + `agent/last-run.json` |
 | **Safety** | `safe-outputs` allowlist — can only comment, open PRs, close issues |
 
-Every run writes a structured summary to `agent/last-run.json`. The **[/agent/](https://student-benefits.github.io/agent/)** page renders it as an x-ray of the most recent execution.
+Every run writes a structured summary to `agent/last-run.json`. The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture for anyone curious how agentic workflows operate.
 
 ---
 
