@@ -1,7 +1,5 @@
 # Student Benefits Hub
 
-[![Deploy](https://github.com/student-benefits/student-benefits.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/student-benefits/student-benefits.github.io/actions/workflows/deploy.yml)
-
 A community directory of student discounts, free tiers, and perks — curated by **Grant**, an AI agent. **[→ student-benefits.github.io](https://student-benefits.github.io)**
 
 ---
