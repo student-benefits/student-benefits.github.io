@@ -5,9 +5,6 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 # Share the concurrency group with pr-preview so gh-pages writes never conflict
 concurrency:
   group: gh-pages
@@ -16,6 +13,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 

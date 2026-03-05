@@ -21,7 +21,7 @@ jobs:
 
       - name: Push preview to gh-pages/pr-${{ github.event.pull_request.number }}
         run: |
-          PR=${{ github.event.pull_request.number }}
+          pr_number=${{ github.event.pull_request.number }}
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -35,15 +35,15 @@ jobs:
           git fetch origin gh-pages:gh-pages
           git worktree add /tmp/gh-pages gh-pages
 
-          rm -rf /tmp/gh-pages/pr-${PR}
-          mkdir -p /tmp/gh-pages/pr-${PR}
-          cp index.html benefits.json categories.json /tmp/gh-pages/pr-${PR}/
-          cp -r public /tmp/gh-pages/pr-${PR}/
+          rm -rf /tmp/gh-pages/pr-${pr_number}
+          mkdir -p /tmp/gh-pages/pr-${pr_number}
+          cp index.html benefits.json categories.json /tmp/gh-pages/pr-${pr_number}/
+          cp -r public /tmp/gh-pages/pr-${pr_number}/
 
           cd /tmp/gh-pages
-          git add pr-${PR}
-          git diff --cached --quiet && exit 0
-          git commit -m "Preview PR #${PR} @ ${{ github.event.pull_request.head.sha }}"
+          git add pr-${pr_number}
+          git diff --cached --quiet && { echo "No changes to preview, skipping"; exit 0; }
+          git commit -m "Preview PR #${pr_number} @ ${{ github.event.pull_request.head.sha }}"
           git push origin gh-pages
 
       - name: Comment preview URL
@@ -54,7 +54,7 @@ jobs:
             const sha = context.payload.pull_request.head.sha.slice(0, 7);
             const url = `https://student-benefits.github.io/pr-${pr}/`;
             const marker = `<!-- pr-preview-${pr} -->`;
-            const body = `${marker}\n🔍 **Preview:** ${url}\n\n_Updated: \`${sha}\`_`;
+            const body = `${marker}\n**Preview:** ${url}\n\n_Updated: \`${sha}\`_`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -90,21 +90,22 @@ jobs:
 
       - name: Remove preview from gh-pages
         run: |
-          PR=${{ github.event.pull_request.number }}
+          pr_number=${{ github.event.pull_request.number }}
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git ls-remote --exit-code origin gh-pages > /dev/null 2>&1 || exit 0
+          # Nothing to clean up if gh-pages branch never existed
+          git ls-remote --exit-code origin gh-pages > /dev/null 2>&1 || { echo "No gh-pages branch, nothing to clean up"; exit 0; }
 
           git fetch origin gh-pages:gh-pages
           git worktree add /tmp/gh-pages gh-pages
 
           cd /tmp/gh-pages
-          [ -d "pr-${PR}" ] || exit 0
+          [ -d "pr-${pr_number}" ] || { echo "No preview directory for PR #${pr_number}, nothing to clean up"; exit 0; }
 
-          git rm -rf pr-${PR}
-          git commit -m "Remove preview for PR #${PR}"
+          git rm -rf pr-${pr_number}
+          git commit -m "Remove preview for PR #${pr_number}"
           git push origin gh-pages
 
       - name: Delete preview comment
