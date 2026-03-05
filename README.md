@@ -16,17 +16,7 @@ The full workflow lives in [`.github/workflows/add-benefit.md`](.github/workflow
 
 ## Grant
 
-Grant is the AI agent that maintains this directory.
-
-| | |
-|---|---|
-| **Model** | Claude Sonnet 4 (via GitHub Copilot) |
-| **Trigger** | GitHub Issue labeled `new-benefit` |
-| **Tools** | GitHub API · Tavily web search · web-fetch · file edit |
-| **Outputs** | PR with `benefits.json` + `agent/last-run.json` |
-| **Safety** | `safe-outputs` allowlist — can only comment, open PRs, close issues |
-
-Every run writes a structured summary to `agent/last-run.json`. The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture for anyone curious how agentic workflows operate.
+Grant is the AI agent that maintains this directory. The **[/agent/](https://student-benefits.github.io/agent/)** page exposes its run log, tool trace, and architecture.
 
 ---
 
