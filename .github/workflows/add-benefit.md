@@ -169,7 +169,7 @@ Before creating the PR, replace the entire content of `agent/last-run.json` with
 ```
 
 Rules:
-- `tools`: include every tool called during this run, in order. For `tavily_search`, include `"query": "<search query used>"` instead of `"summary"`. For `web_fetch`, include `"url": "<url fetched>"` instead of `"summary"`.
+- `tools`: include every tool called during this run, in order. Use `"summary"` for most tools; replace it with `"query"` for `tavily_search` and `"url"` for `web_fetch`.
 - `run_url`: always set to empty string `""` (the URL is not available at runtime).
 - Write the complete file — do not append; replace the entire content.
 
@@ -177,7 +177,7 @@ Rules:
 
 Create a PR with the changes. Use this format:
 
-- **Title**: `Add benefit: {name}` (the safe-output title-prefix handles the prefix, so just use the benefit name)
+- **Title**: `{name}`
 - **Branch**: `add-benefit-{id}`
 - **Body**: the body must contain these lines in order, as plain prose (no wrapping code fences around the body):
   - A heading: `## {name}`

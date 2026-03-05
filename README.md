@@ -16,7 +16,7 @@ The full workflow lives in [`.github/workflows/add-benefit.md`](.github/workflow
 
 ## Grant
 
-Grant is the AI agent that maintains this directory. The name is intentional — a grant is literally a student benefit.
+Grant is the AI agent that maintains this directory.
 
 | | |
 |---|---|
@@ -26,7 +26,7 @@ Grant is the AI agent that maintains this directory. The name is intentional —
 | **Outputs** | PR with `benefits.json` + `agent/last-run.json` |
 | **Safety** | `safe-outputs` allowlist — can only comment, open PRs, close issues |
 
-Every run writes a structured summary to `agent/last-run.json`. The **[/agent/](https://student-benefits.github.io/agent/)** page renders it as an x-ray of the most recent execution — educational if you're curious how AI agents work.
+Every run writes a structured summary to `agent/last-run.json`. The **[/agent/](https://student-benefits.github.io/agent/)** page renders it as an x-ray of the most recent execution.
 
 ---
 
@@ -52,7 +52,8 @@ All data lives in `benefits.json`. Each entry:
 {
   "id": "url-safe-id",
   "name": "Official Product Name",
-  "category": "one of the valid categories",
+  "category": "must exactly match a value in categories.json",
+  "offer_type": "free | discount | credits | trial",
   "description": "What students get — specific, max 120 chars",
   "link": "https://direct-url-to-student-signup-page",
   "tags": ["Tag1", "Tag2"],
@@ -64,9 +65,10 @@ All data lives in `benefits.json`. Each entry:
 | Field | Rules |
 |---|---|
 | `id` | Lowercase, hyphens only, unique |
-| `category` | Must be exactly: `AI Tools` · `Dev Tools` · `Cloud & Hosting` · `Learning` · `Design` · `Productivity` · `Lifestyle` · `Domains & Security` |
-| `description` | Specific about what students get (e.g. "Free Pro plan for 1 year"); max 120 chars |
-| `popularity` | Integer 1–10; default 5 for new entries |
+| `category` | Exact string from `categories.json` |
+| `offer_type` | `free`, `discount`, `credits`, or `trial` |
+| `description` | Specific (e.g. "Free Pro plan for 1 year"); max 120 chars |
+| `popularity` | Integer 1–10; default 5 |
 | `repo` | Optional; only for open-source projects |
 
 ---

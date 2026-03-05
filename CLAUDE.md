@@ -59,12 +59,6 @@ Two AI-driven workflows live in `.github/workflows/`:
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
 To change a workflow, edit the `.md` source and run `gh aw compile`.
 
-### Known failure: secret not configured
-
-Issues #4 and #5 are workflow failures caused by a missing secret. The
-gh-aw runtime requires a token to be set in repo Settings → Secrets → Actions.
-Check the run URL in issue #5 for the exact secret name needed.
-
 ---
 
 ## PR review checklist
@@ -93,14 +87,6 @@ When a link health report issue appears (labeled `link-health`):
    (use WebFetch to verify it resolves to a real page)
 3. Update `benefits.json` with the corrected links
 4. Open a PR that closes the link health issue
-
-### Stale Copilot PR #3
-
-PR #3 (draft, from Jan 2026) attempts to fix the 6 broken links from
-issue #2, but Copilot couldn't verify URLs due to firewall restrictions
-and the PR has been stale for weeks. The changes it proposed are guesses.
-Do not merge it as-is. Either verify each URL and update the PR, or
-close it and create a fresh one with verified links.
 
 ---
 

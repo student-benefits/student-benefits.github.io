@@ -67,9 +67,9 @@ Build two lookup sets:
 
 Run these Tavily searches:
 
-1. `"student discount" OR "free for students" developer tools software 2026`
-2. `"edu email" OR "higher education" free plan productivity design 2026`
-3. `"student program" cloud hosting OR security tools free 2026`
+1. `"student discount" OR "free for students" developer tools software`
+2. `"edu email" OR "higher education" free plan productivity design`
+3. `"student program" cloud hosting OR security tools free`
 
 For each promising result, use `web-fetch` to confirm:
 - The student program is real and currently active
