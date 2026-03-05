@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f0">
   <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub. See how it works and what it did last.">
+  <link rel="icon" type="image/svg+xml" href="../public/favicon.svg">
   <title>Grant · AI Agent · Student Benefits Hub</title>
   <style>
     :root {
@@ -987,7 +988,7 @@
           <div class="trace-card">
             <div class="trace-head">
               <span class="actor-badge ${escapeHtml(info.badge)}">${escapeHtml(info.label)}</span>
-              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b') // allow line-break after underscores in long tool names)}</span>
+              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b'))}</span><!-- allow line-break after underscores in long tool names -->
               ${detail ? `<span class="trace-head-detail">${escapeHtml(detail)}</span>` : ''}
             </div>
             <div class="trace-body">
