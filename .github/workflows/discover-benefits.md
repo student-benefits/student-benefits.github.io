@@ -58,7 +58,7 @@ You proactively search for student benefits not yet in the directory and create 
 
 Read `benefits.json` and `agent/rejected.json` from the repository.
 
-Build two lookup sets:
+Build three lookup sets:
 - **Known names**: all existing benefit names (lowercase)
 - **Known domains**: all hostnames from existing benefit links (strip `www.`)
 - **Rejected names and domains**: from `agent/rejected.json`

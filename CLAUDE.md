@@ -49,7 +49,7 @@ benefits — all data must go through this file.
 
 ## Automated workflows (gh-aw)
 
-Three AI-driven workflows live in `.github/workflows/`:
+AI-driven workflows live in `.github/workflows/`:
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
@@ -95,8 +95,7 @@ When a link health report issue appears (labeled `link-health`):
 
 - All changes go through PRs — never push directly to `main`
 - PRs must have a written Summary (not just a template placeholder)
-- The `deploy.yml` workflow fires on every push to `main` and deploys to
-  GitHub Pages automatically
+- GitHub Pages serves the site directly from the `main` branch root
 
 ---
 

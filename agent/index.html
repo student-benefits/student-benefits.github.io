@@ -667,7 +667,7 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that curates this directory by verifying submissions, checking for duplicates, and opening pull requests. A human reviews and merges every PR — Grant handles correctness, the reviewer exercises judgment. This page explains how it works, walks through a simulated run, and shows the latest real one.
+      Grant is an AI agent that curates this directory by verifying submissions, checking for duplicates, and opening pull requests. A human reviews and merges every PR — Grant handles correctness, the reviewer exercises judgment.
     </p>
   </section>
 
@@ -759,7 +759,7 @@
         </div>
         <div id="panel-human" class="node-panel" hidden>
           <p class="node-panel-title">Human Reviewer</p>
-          <p>Grant cannot merge its own pull requests. Its <code>safe-outputs</code> configuration restricts it to commenting, opening PRs, and closing issues — no write access to <code>main</code>. A human decides whether each benefit belongs in the directory. Grant handles correctness (format, links, duplicates); the reviewer exercises judgment (editorial fit, quality). The run log on this page exists so that review is informed, not a rubber stamp.</p>
+          <p>Grant cannot merge its own pull requests. Its <code>safe-outputs</code> configuration restricts it to commenting, opening PRs, and closing issues — no write access to <code>main</code>. Grant handles correctness (format, links, duplicates); the reviewer exercises judgment (editorial fit, quality).</p>
         </div>
       </div>
     </div>
@@ -833,7 +833,7 @@
       </div>
       <div id="ppanel-oversight" class="node-panel" hidden>
         <p class="node-panel-title">Human oversight</p>
-        <p>Grant is architecturally prevented from publishing. Its <code>safe-outputs</code> config restricts it to commenting, opening PRs, and closing issues — it cannot merge or push to <code>main</code>. Every benefit that goes live required a human to decide it belongs. Grant handles correctness; the reviewer exercises judgment. This run log exists so that review is informed, not a rubber stamp: a reviewer can see exactly what the agent searched, fetched, and reasoned before approving.</p>
+        <p>Grant cannot merge or push to <code>main</code> — every benefit that goes live required a human to approve it. The run log on this page exists so review is informed, not a rubber stamp: a reviewer can see exactly what Grant searched, fetched, and reasoned before deciding.</p>
       </div>
     </div>
 
@@ -890,13 +890,13 @@
     edit:                   { actor: 'grant',  label: 'Grant',         badge: 'badge-grant',  stepClass: 'actor-grant',  explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
   };
 
-  function toggleDisclosure(panelId, triggerId, panelSelector, triggerSelector) {
+  function toggleDisclosure(panelId, triggerId, allPanelsSelector, allTriggersSelector) {
     const panel   = document.getElementById(panelId);
     const trigger = document.getElementById(triggerId);
     const isOpen  = !panel.hidden;
 
-    document.querySelectorAll(panelSelector).forEach(function (p) { p.hidden = true; });
-    document.querySelectorAll(triggerSelector).forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
+    document.querySelectorAll(allPanelsSelector).forEach(function (p) { p.hidden = true; });
+    document.querySelectorAll(allTriggersSelector).forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
 
     if (!isOpen) {
       panel.hidden = false;

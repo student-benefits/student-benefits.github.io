@@ -297,14 +297,7 @@
       color: var(--indigo-300);
     }
 
-    .badge[data-cat="AI Tools"]           { color: #a78bfa; }
-    .badge[data-cat="Dev Tools"]          { color: #60a5fa; }
-    .badge[data-cat="Cloud & Hosting"]    { color: #38bdf8; }
-    .badge[data-cat="Learning"]           { color: #fbbf24; }
-    .badge[data-cat="Design"]             { color: #f472b6; }
-    .badge[data-cat="Productivity"]       { color: #4ade80; }
-    .badge[data-cat="Lifestyle"]          { color: #fb923c; }
-    .badge[data-cat="Domains & Security"] { color: #f87171; }
+    /* Category badge colors injected dynamically from categories.json at load time */
 
     .offer-pill {
       display: inline-flex;
@@ -374,6 +367,7 @@
 
     .tag {
       font-size: 0.75rem;
+      font-family: inherit;
       color: var(--slate-500);
       background: rgba(30, 41, 59, 0.8);
       padding: 0.125rem 0.375rem;
@@ -599,12 +593,12 @@
 
     function renderCard(b) {
       const tags = b.tags.slice(0, 3).map(function (t) {
-        return `<span class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`;
+        return `<button class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</button>`;
       }).join('');
       const pill = b.offer_type
         ? `<span class="offer-pill offer-${b.offer_type}">${OFFER_LABELS[b.offer_type]}</span>`
         : '';
-      return `<article class="card" data-href="${escapeHtml(b.link)}">
+      return `<article class="card" data-href="${escapeHtml(b.link)}" tabindex="0" role="link">
         <div class="card-body">
           <div class="card-top">
             <span class="badge" data-cat="${escapeHtml(b.category)}">${escapeHtml(b.category)}</span>
@@ -617,8 +611,7 @@
       </article>`;
     }
 
-    function render() {
-      const filtered = getFilteredAndSorted();
+    function renderResultsBar(filtered) {
       const count = filtered.length;
       const label = count === 1 ? 'resource' : 'resources';
       let bar = `<span class="results-count">Found <strong>${count}</strong> ${label}</span>`;
@@ -635,7 +628,9 @@
       }
       bar += `</div>`;
       resultsBar.innerHTML = bar;
+    }
 
+    function renderGrid(filtered) {
       if (filtered.length > 0) {
         content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
       } else {
@@ -644,6 +639,12 @@
           <p>Try a different search or category.</p>
         </div>`;
       }
+    }
+
+    function render() {
+      const filtered = getFilteredAndSorted();
+      renderResultsBar(filtered);
+      renderGrid(filtered);
     }
 
     resultsBar.addEventListener('change', function (e) {
@@ -680,7 +681,6 @@
       render();
     });
 
-    // Focus search when typing alphanumeric keys outside inputs
     document.addEventListener('keydown', function (e) {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -702,12 +702,32 @@
       window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
     });
 
+    content.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const card = e.target.closest('.card');
+      if (!card) return;
+      e.preventDefault();
+      window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
+    });
+
+    const CAT_PALETTE = ['#a78bfa','#60a5fa','#38bdf8','#fbbf24','#f472b6','#4ade80','#fb923c','#f87171','#34d399','#e879f9'];
+    function catColor(name) {
+      let h = 0;
+      for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;
+      return CAT_PALETTE[h % CAT_PALETTE.length];
+    }
+
     Promise.all([
       fetch('benefits.json').then(function (r) { return r.json(); }),
       fetch('categories.json').then(function (r) { return r.json(); })
     ]).then(function (results) {
       benefits = results[0];
       categories = ['All'].concat(results[1]);
+      const sheet = document.createElement('style');
+      sheet.textContent = results[1].map(function (cat) {
+        return `.badge[data-cat="${cat.replace(/"/g, '\\"')}"] { color: ${catColor(cat)}; }`;
+      }).join('\n');
+      document.head.appendChild(sheet);
       renderFilters();
       render();
     });

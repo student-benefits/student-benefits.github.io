@@ -117,7 +117,7 @@ Then close the issue and stop — do not create a PR.
 
 ## Step 4: Generate the benefit entry
 
-Create a JSON object matching this exact schema:
+Create a JSON object matching this exact schema (mirrors `CLAUDE.md` — keep in sync):
 
 ```json
 {
@@ -125,7 +125,7 @@ Create a JSON object matching this exact schema:
   "name": "Official Product/Service Name",
   "category": "one of the categories below",
   "offer_type": "free | discount | credits | trial",
-  "description": "What students get — be specific about discounts, free tiers, duration (max 120 chars)",
+  "description": "What students get - be specific about discounts, free tiers, duration (max 120 chars)",
   "link": "Direct URL to the student signup/discount page",
   "tags": ["Tag1", "Tag2", "Tag3"],
   "popularity": 5
@@ -157,20 +157,21 @@ Before creating the PR, replace the entire content of `agent/last-run.json` with
   "timestamp": "<current UTC time as ISO 8601>",
   "outcome": "accepted",
   "tools": [
-    { "name": "<tool_name>", "summary": "<one-line description of what it did>" }
+    { "name": "github-issue_read", "summary": "Read issue #42" },
+    { "name": "tavily_search", "query": "Notion student discount" },
+    { "name": "web_fetch", "url": "notion.so/students" },
+    { "name": "edit", "summary": "Added entry to benefits.json" }
   ],
   "benefit": {
     "name": "<name>",
     "category": "<category>",
     "description": "<description>"
-  },
-  "run_url": ""
+  }
 }
 ```
 
 Rules:
 - `tools`: include every tool called during this run, in order. Use `"summary"` for most tools; replace it with `"query"` for `tavily_search` and `"url"` for `web_fetch`.
-- `run_url`: always set to empty string `""` (the URL is not available at runtime).
 - Write the complete file — do not append; replace the entire content.
 
 ## Step 7: Create a pull request

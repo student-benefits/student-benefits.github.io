@@ -14,6 +14,5 @@
     "name": "Termius Pro",
     "category": "Dev Tools",
     "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing."
-  },
-  "run_url": ""
+  }
 }
