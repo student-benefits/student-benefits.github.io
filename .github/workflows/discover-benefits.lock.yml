@@ -26,12 +26,12 @@
 # entries and previously-rejected programs, and creates issues for the best
 # new discoveries (max 5 per run).
 #
-# frontmatter-hash: 969905fc51b51186a84c04acef9c804f337d0cb0cc841c1a1bb371459653ff88
+# frontmatter-hash: 8a8cfa15e137b50df748bfd51d221d0133e20a8af4a65459f52daf95021bab91
 
 name: "Discover New Student Benefits"
 "on":
   schedule:
-  - cron: "0 9 1 * *"
+  - cron: "0 9 * * 1"
   workflow_dispatch:
 
 permissions: {}

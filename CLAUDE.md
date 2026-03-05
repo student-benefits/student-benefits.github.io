@@ -49,11 +49,12 @@ benefits — all data must go through this file.
 
 ## Automated workflows (gh-aw)
 
-Two AI-driven workflows live in `.github/workflows/`:
+Three AI-driven workflows live in `.github/workflows/`:
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
+| `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
 | `check-links.yml` | Weekly (Sunday) or manual | Checks all benefit links, opens issue if broken/redirected |
 
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.

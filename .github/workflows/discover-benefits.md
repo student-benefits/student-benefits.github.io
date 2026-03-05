@@ -13,7 +13,7 @@ engine:
 
 on:
   schedule:
-    - cron: '0 9 1 * *'  # Monthly on the 1st at 9am UTC
+    - cron: '0 9 * * 1'  # Weekly on Monday at 9am UTC
   workflow_dispatch:
 
 permissions: read-all
