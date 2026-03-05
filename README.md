@@ -8,7 +8,7 @@ A community directory of student discounts, free tiers, and perks — curated by
 
 ## How it works
 
-Submissions come in as GitHub Issues. Grant — an AI agent running on Claude Sonnet 4 — picks them up, validates them against live web data, and opens a pull request if the benefit checks out. A human reviews and merges. The site deploys automatically.
+Submissions come in as GitHub Issues. Grant — an AI agent running on Claude Sonnet 4 — validates them against live web data and opens a pull request. A human reviews and merges; Grant cannot publish directly — the merge is the trust boundary. The site deploys automatically.
 
 The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture.
 
