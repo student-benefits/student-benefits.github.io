@@ -6,33 +6,45 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
+  group: gh-pages
   cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-24.04-arm
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Assemble site
+      - name: Push site to gh-pages
         run: |
-          mkdir /tmp/site
-          cp index.html benefits.json categories.json /tmp/site/
-          cp -r public agent /tmp/site/
-          touch /tmp/site/.nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: /tmp/site
+          if git ls-remote --exit-code origin gh-pages > /dev/null 2>&1; then
+            git fetch origin gh-pages:gh-pages
+            git worktree add /tmp/gh-pages gh-pages
+          else
+            git worktree add /tmp/gh-pages HEAD
+            cd /tmp/gh-pages
+            git switch --orphan gh-pages
+            git rm -rf . 2>/dev/null || true
+            cd -
+          fi
 
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          cd /tmp/gh-pages
+          find . -maxdepth 1 ! -name '.' ! -name '.git' -exec rm -rf {} +
+
+          cp "$GITHUB_WORKSPACE/index.html" .
+          cp "$GITHUB_WORKSPACE/benefits.json" .
+          cp "$GITHUB_WORKSPACE/categories.json" .
+          cp -r "$GITHUB_WORKSPACE/public" .
+          cp -r "$GITHUB_WORKSPACE/agent" .
+          touch .nojekyll
+
+          git add -A
+          git diff --cached --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy ${GITHUB_SHA::7} from main"
+          git push origin gh-pages
