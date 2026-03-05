@@ -65,21 +65,23 @@ Build two lookup sets:
 
 ## Step 2: Search for new benefits
 
-### Primary source: GitHub Education Pack
+**IMPORTANT**: Do not use `web-fetch` for discovery searches. Web-fetch on search engines returns nothing useful. Use only the `tavily` MCP tool for all searches in this step.
 
-Fetch `https://education.github.com/pack/offers` and extract every listed tool. For each one not in your known or rejected sets, note its name and homepage.
+### Step 2a: Tavily searches
 
-### Tavily searches
+Call the tavily `search` tool with each of these queries. Do not skip any.
 
-Run these searches to find benefits not covered by the GitHub pack:
+1. `site:studentbeans.com OR site:myunidays.com developer tools software free`
+2. `"student plan" OR "education plan" developer tools announced 2024 OR 2025`
+3. Look at the category distribution in `benefits.json` and pick the **most underrepresented category** (fewest entries). Then call tavily search with: `"<that category>" "student" OR "education" free OR discount`
 
-1. `site:studentbeans.com OR site:myunidays.com software developer tools`
-2. `"student plan" OR "education plan" site announced 2024 OR 2025 developer tools`
-3. Look at the category distribution in `benefits.json` and pick the **most underrepresented category**, then search: `"<category name>" "student" OR "education" free OR discount`
+### Step 2b: Fetch the GitHub Education Pack
 
-### Verify each candidate
+After the Tavily searches, use `web-fetch` on `https://education.github.com/pack/offers` to extract all listed tools. This is a curated list of verified student benefits.
 
-For each promising result, use `web-fetch` to confirm:
+### Step 2c: Verify each candidate
+
+For each promising result from either source, use `web-fetch` to confirm:
 - The student program is real and currently active
 - It offers a genuine discount or free tier (not just a marketing page)
 - The name and hostname are not in your known or rejected sets
