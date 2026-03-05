@@ -76,10 +76,19 @@ For each promising result, use `web-fetch` to confirm:
 - It offers a genuine discount or free tier (not just a marketing page)
 - The name and hostname are not in your known or rejected sets
 
-Keep a shortlist of the best candidates — programs that are:
-- Clearly useful to students
-- Not already in the directory
-- Verifiably active with a direct signup URL
+Keep a shortlist of the best candidates. Apply this quality bar:
+
+**Include** if all of the following are true:
+- The benefit is substantial: free tier, 50%+ discount, or meaningful platform credits. A 10–20% discount is not enough.
+- The tool is recognizable: a CS student, designer, or developer in the target domain would know it without explanation.
+- There is a dedicated student program page — not "contact us for education pricing" or an informal policy.
+- It fills a gap: prefer discoveries in categories underrepresented in the directory over a 4th tool in an already-populated category.
+
+**Skip** if any of the following are true:
+- The benefit is a token discount (under 30% off, no free tier, no credits).
+- The product is niche, one-person, or has no meaningful community of student users.
+- The student program requires institutional purchase or IT approval — it must be self-serve.
+- The signup page is broken, gated, or clearly outdated.
 
 ## Step 3: Create issues for new discoveries
 
