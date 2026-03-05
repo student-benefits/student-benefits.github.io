@@ -10,21 +10,6 @@ A community directory of student discounts, free tiers, and perks — curated by
 
 Submissions come in as GitHub Issues. Grant — an AI agent running on Claude Sonnet 4 — picks them up, validates them against live web data, and opens a pull request if the benefit checks out. A human reviews and merges. The site deploys automatically.
 
-```mermaid
-flowchart LR
-    A([Issue]) --> B{Grant}
-    B -->|duplicate\nor invalid| C[Comment\n+ close]
-    B -->|new| D[Tavily\nsearch]
-    D -->|not found| C
-    D -->|verified| E[Edit\nbenefits.json]
-    E --> F[Open PR]
-    F --> G([Human\nmerges])
-    G --> H[Site\ndeploys]
-
-    style C fill:#fdf3ef,stroke:#e8c4b8
-    style H fill:#f0faf4,stroke:#b8e0c8
-```
-
 The full workflow lives in [`.github/workflows/add-benefit.md`](.github/workflows/add-benefit.md) — a Markdown file with a YAML frontmatter block that configures the agent (model, tools, network access, safe outputs) and a plain-English prompt that tells it what to do.
 
 ---
