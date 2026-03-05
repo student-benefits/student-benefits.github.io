@@ -6,28 +6,48 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
+# Share the concurrency group with pr-preview so gh-pages writes never conflict
 concurrency:
-  group: pages
-  cancel-in-progress: true
+  group: gh-pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-24.04-arm
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/configure-pages@v4
+      - name: Push site to gh-pages root
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
+          if git ls-remote --exit-code origin gh-pages > /dev/null 2>&1; then
+            git fetch origin gh-pages:gh-pages
+            git worktree add /tmp/gh-pages gh-pages
+          else
+            # First deploy — create an orphan gh-pages branch
+            git worktree add /tmp/gh-pages HEAD
+            cd /tmp/gh-pages
+            git switch --orphan gh-pages
+            git rm -rf . 2>/dev/null || true
+            cd -
+          fi
 
-      - uses: actions/deploy-pages@v4
-        id: deployment
+          cd /tmp/gh-pages
+
+          # Remove root-level files but preserve pr-* preview directories
+          find . -maxdepth 1 ! -name '.' ! -name '.git' ! -name 'pr-*' -exec rm -rf {} +
+
+          cp "$GITHUB_WORKSPACE/index.html" .
+          cp "$GITHUB_WORKSPACE/benefits.json" .
+          cp "$GITHUB_WORKSPACE/categories.json" .
+          cp -r "$GITHUB_WORKSPACE/public" .
+          touch .nojekyll
+
+          git add -A
+          git diff --cached --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy ${GITHUB_SHA::7} from main"
+          git push origin gh-pages
