@@ -52,8 +52,7 @@
     "tags": [
       "AI",
       "IDE",
-      "Google",
-      "Agents"
+      "Google"
     ],
     "popularity": 9
   },
@@ -67,8 +66,7 @@
     "tags": [
       "IDE",
       "Programming",
-      "Java",
-      "Python"
+      "Java"
     ],
     "popularity": 9,
     "repo": "JetBrains/intellij-community"
@@ -824,8 +822,7 @@
     "tags": [
       "AI",
       "Jupyter",
-      "Python",
-      "GPU"
+      "Python"
     ],
     "popularity": 8
   },
@@ -839,8 +836,7 @@
     "tags": [
       "LaTeX",
       "Writing",
-      "Academic",
-      "Collaboration"
+      "Academic"
     ],
     "popularity": 5
   }
