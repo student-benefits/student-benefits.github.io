@@ -42,6 +42,7 @@
 
       --outcome-accepted-color: #1a7a4a;
       --outcome-accepted-bg:    #f0faf4;
+      --outcome-accepted-border: #b8e0c8;
       --outcome-rejected-color: #b5451b;
       --outcome-rejected-bg:    #fdf3ef;
       --outcome-duplicate-color: #c87a1a;
@@ -219,7 +220,7 @@
       padding: 3px 8px;
       border-radius: 3px;
     }
-    .run-outcome.accepted { background: var(--outcome-accepted-bg); color: var(--outcome-accepted-color); border: 1px solid var(--tavily-border); }
+    .run-outcome.accepted { background: var(--outcome-accepted-bg); color: var(--outcome-accepted-color); border: 1px solid var(--outcome-accepted-border); }
     .run-outcome.rejected { background: var(--outcome-rejected-bg); color: var(--outcome-rejected-color); border: 1px solid var(--grant-border); }
     .run-outcome.duplicate { background: var(--outcome-duplicate-bg); color: var(--outcome-duplicate-color); border: 1px solid #e8d8b8; }
     .benefit-pill {
@@ -416,6 +417,11 @@
     }
     .sim-btn:hover { opacity: 0.88; }
     .sim-btn:focus-visible { outline: 2px solid var(--grant-color); outline-offset: 2px; }
+    .prop-chip:focus-visible,
+    .arch-node:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
     .sim-btn:disabled { opacity: 0.5; cursor: default; }
     .sim-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
     .sim-hint { font-size: 0.8rem; color: var(--text-muted); }
@@ -465,7 +471,7 @@
       border: 1px solid;
       padding: 0.875rem 1rem;
     }
-    .outcome-card.accepted  { background: var(--outcome-accepted-bg);  border-color: var(--tavily-border); }
+    .outcome-card.accepted  { background: var(--outcome-accepted-bg);  border-color: var(--outcome-accepted-border); }
     .outcome-card.rejected  { background: var(--outcome-rejected-bg);  border-color: var(--grant-border); }
     .outcome-card.duplicate { background: var(--outcome-duplicate-bg); border-color: #e8d8b8; }
     .outcome-label {
@@ -606,8 +612,8 @@
     .added-banner {
       margin-top: 1.25rem;
       padding: 0.875rem 1rem;
-      background: var(--tavily-bg);
-      border: 1px solid var(--tavily-border);
+      background: var(--outcome-accepted-bg);
+      border: 1px solid var(--outcome-accepted-border);
       border-radius: var(--radius-lg);
     }
     .added-banner-label {
@@ -615,7 +621,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.07em;
-      color: var(--tavily-color);
+      color: var(--outcome-accepted-color);
       margin-bottom: 0.375rem;
     }
     .added-banner-name {
@@ -844,26 +850,17 @@
 </footer>
 
 <script>
-  const ACTOR_MAP = {
-    get_issue:           { actor: 'github', label: 'GitHub',         badge: 'badge-github', stepClass: 'actor-github' },
-    get_file_contents:   { actor: 'github', label: 'GitHub',         badge: 'badge-github', stepClass: 'actor-github' },
-    create_pull_request: { actor: 'github', label: 'GitHub',         badge: 'badge-github', stepClass: 'actor-github' },
-    add_comment:         { actor: 'github', label: 'GitHub',         badge: 'badge-github', stepClass: 'actor-github' },
-    tavily_search:       { actor: 'tavily', label: 'Tavily Search',  badge: 'badge-tavily', stepClass: 'actor-tavily' },
-    search:              { actor: 'tavily', label: 'Tavily Search',  badge: 'badge-tavily', stepClass: 'actor-tavily' },
-    web_fetch:           { actor: 'web',    label: 'Web',            badge: 'badge-web',    stepClass: 'actor-web'    },
-    edit:                { actor: 'grant',  label: 'Grant',          badge: 'badge-grant',  stepClass: 'actor-grant'  },
-  };
-
-  const TOOL_EXPLAIN = {
-    get_issue:           'Reads the GitHub issue to extract the submitted benefit name and any optional details.',
-    get_file_contents:   'Downloads <code>benefits.json</code> from the repo to check whether this benefit is already listed.',
-    tavily_search:       'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.',
-    search:              'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.',
-    web_fetch:           'Opens the most relevant search result to confirm the student program details and extract the correct URL.',
-    edit:                'Appends the new benefit entry to <code>benefits.json</code> in the repository.',
-    create_pull_request: 'Creates a GitHub pull request with the change for human review before it goes live.',
-    add_comment:         'Posts a status comment on the original issue to close the loop with the submitter.',
+  const TOOLS = {
+    get_issue:              { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
+    get_file_contents:      { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Downloads <code>benefits.json</code> from the repo to check whether this benefit is already listed.' },
+    create_or_update_file:  { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Writes or updates a file in the repository via the GitHub API.' },
+    create_pull_request:    { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
+    add_comment:            { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
+    close_issue:            { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: null },
+    tavily_search:          { actor: 'tavily', label: 'Tavily Search', badge: 'badge-tavily', stepClass: 'actor-tavily', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
+    search:                 { actor: 'tavily', label: 'Tavily Search', badge: 'badge-tavily', stepClass: 'actor-tavily', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
+    web_fetch:              { actor: 'web',    label: 'Web',           badge: 'badge-web',    stepClass: 'actor-web',    explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
+    edit:                   { actor: 'grant',  label: 'Grant',         badge: 'badge-grant',  stepClass: 'actor-grant',  explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
   };
 
   function toggleDisclosure(panelId, triggerId, panelSelector, triggerSelector) {
@@ -877,7 +874,7 @@
     if (!isOpen) {
       panel.hidden = false;
       panel.style.animation = 'none';
-      panel.offsetHeight; // force reflow to restart animation
+      panel.offsetHeight; // force reflow to restart CSS animation
       panel.style.animation = '';
       trigger.setAttribute('aria-expanded', 'true');
     }
@@ -918,10 +915,6 @@
     duplicate: '⚠ Duplicate'
   };
 
-  function outcomeClass(outcome) {
-    return outcome;
-  }
-
   function outcomeLabel(outcome) {
     return OUTCOME_LABELS[outcome] || outcome;
   }
@@ -939,7 +932,7 @@
           <span class="run-meta-time">${escapeHtml(fmtTime(data.timestamp))}</span>
         </div>
         <div class="run-meta-body">
-          <span class="run-outcome ${escapeHtml(outcomeClass(data.outcome))}">${outcomeLabel(data.outcome)}</span>`;
+          <span class="run-outcome ${escapeHtml(data.outcome)}">${outcomeLabel(data.outcome)}</span>`;
 
     if (data.benefit) {
       html += `<span class="benefit-pill"><strong>${escapeHtml(data.benefit.name)}</strong> · ${escapeHtml(data.benefit.category)}</span>`;
@@ -955,8 +948,8 @@
     html += `<div class="trace">`;
 
     for (const tool of (data.tools || [])) {
-      const info = ACTOR_MAP[tool.name] || { actor: 'grant', label: tool.name, badge: 'badge-grant', stepClass: 'actor-grant' };
-      const explain = TOOL_EXPLAIN[tool.name] || '';
+      const info = TOOLS[tool.name] || { actor: 'grant', label: tool.name, badge: 'badge-grant', stepClass: 'actor-grant', explain: null };
+      const explain = info.explain || '';
       const detail = fmtDetail(tool);
 
       html += `
@@ -968,7 +961,7 @@
           <div class="trace-card">
             <div class="trace-head">
               <span class="actor-badge ${escapeHtml(info.badge)}">${escapeHtml(info.label)}</span>
-              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b'))}</span>
+              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b') // allow line-break after underscores in long tool names)}</span>
               ${detail ? `<span class="trace-head-detail">${escapeHtml(detail)}</span>` : ''}
             </div>
             <div class="trace-body">
@@ -993,7 +986,7 @@
     document.getElementById('run-output').innerHTML = html;
   }
 
-  // ── Simulation ────────────────────────────────────────────────
+  // Simulation
   const SIM_STEPS = [
     {
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
