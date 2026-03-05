@@ -304,6 +304,15 @@
       border: 1px solid rgba(71, 85, 105, 0.5);
     }
 
+    .badge[data-cat="AI Tools"]           { color: #a78bfa; }
+    .badge[data-cat="Dev Tools"]          { color: #60a5fa; }
+    .badge[data-cat="Cloud & Hosting"]    { color: #38bdf8; }
+    .badge[data-cat="Learning"]           { color: #fbbf24; }
+    .badge[data-cat="Design"]             { color: #f472b6; }
+    .badge[data-cat="Productivity"]       { color: #4ade80; }
+    .badge[data-cat="Lifestyle"]          { color: #fb923c; }
+    .badge[data-cat="Domains & Security"] { color: #f87171; }
+
     .offer-pill {
       display: inline-flex;
       align-items: center;
@@ -570,13 +579,13 @@
     const resultsBar = document.getElementById('results-bar');
     const content = document.getElementById('content');
 
-    function esc(str) {
+    function escapeHtml(str) {
       return String(str)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;');
     }
 
-    function getFiltered() {
+    function getFilteredAndSorted() {
       const q = searchQuery.toLowerCase();
       return benefits
         .filter(function (b) {
@@ -598,33 +607,33 @@
       const toggle = `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
       const tabs = categories.map(function (cat) {
         const count = cat === 'All' ? benefits.length : (counts[cat] || 0);
-        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${esc(cat)}">${esc(cat)} <span class="filter-count">${count}</span></button>`;
+        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span class="filter-count">${count}</span></button>`;
       }).join('');
       filterBar.innerHTML = toggle + tabs;
     }
 
     function renderCard(b) {
       const tags = b.tags.slice(0, 3).map(function (t) {
-        return `<span class="tag" data-tag="${esc(t)}">#${esc(t)}</span>`;
+        return `<span class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`;
       }).join('');
       const pill = b.offer_type
         ? `<span class="offer-pill offer-${b.offer_type}">${OFFER_LABELS[b.offer_type]}</span>`
         : '';
-      return `<article class="card" data-href="${esc(b.link)}">
+      return `<article class="card" data-href="${escapeHtml(b.link)}">
         <div class="card-body">
           <div class="card-top">
-            <span class="badge">${esc(b.category)}</span>
+            <span class="badge" data-cat="${escapeHtml(b.category)}">${escapeHtml(b.category)}</span>
             ${pill}
           </div>
-          <h3 class="card-name">${esc(b.name)}</h3>
-          <p class="card-desc">${esc(b.description)}</p>
+          <h3 class="card-name">${escapeHtml(b.name)}</h3>
+          <p class="card-desc">${escapeHtml(b.description)}</p>
           <div class="tags">${tags}</div>
         </div>
       </article>`;
     }
 
     function render() {
-      const filtered = getFiltered();
+      const filtered = getFilteredAndSorted();
       const n = filtered.length;
       const label = n === 1 ? 'resource' : 'resources';
       let bar = `<span class="results-count">Found <strong>${n}</strong> ${label}</span>`;
@@ -652,7 +661,6 @@
       }
     }
 
-    // Event delegation on resultsBar avoids re-attaching listeners on every render
     resultsBar.addEventListener('change', function (e) {
       if (e.target.id === 'sort-select') {
         sortOrder = e.target.value;

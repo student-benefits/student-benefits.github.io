@@ -72,7 +72,6 @@
       font-size: 15px;
     }
 
-    /* ── Header ─────────────────────────────────────────────── */
     .site-header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
@@ -100,14 +99,12 @@
     .header-sep { color: var(--border); font-size: 0.8rem; }
     .header-title { font-size: 0.8rem; font-weight: 600; color: var(--text); }
 
-    /* ── Main ───────────────────────────────────────────────── */
     .main {
       max-width: 760px;
       margin: 0 auto;
       padding: 3rem 2rem 6rem;
     }
 
-    /* ── Identity block ─────────────────────────────────────── */
     .identity {
       margin-bottom: 3rem;
     }
@@ -135,7 +132,6 @@
       line-height: 1.65;
     }
 
-    /* ── How it works ───────────────────────────────────────── */
     .section { margin-bottom: 3rem; }
     .section-label {
       font-size: 0.7rem;
@@ -177,7 +173,6 @@
       line-height: 1.5;
     }
 
-    /* ── Last run card ──────────────────────────────────────── */
     .run-meta {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -240,7 +235,6 @@
       text-underline-offset: 2px;
     }
 
-    /* ── Trace ──────────────────────────────────────────────── */
     .trace { display: flex; flex-direction: column; }
 
     .trace-step {
@@ -345,7 +339,6 @@
     }
     .trace-annotation strong { color: var(--text); font-style: normal; }
 
-    /* ── Loading / error ────────────────────────────────────── */
     .state-loading, .state-error {
       text-align: center;
       padding: 3rem 1rem;
@@ -353,7 +346,6 @@
       font-size: 0.9rem;
     }
 
-    /* ── Footer ─────────────────────────────────────────────── */
     .site-footer {
       margin-top: 6rem;
       border-top: 1px solid var(--border);
@@ -364,7 +356,6 @@
     }
     .site-footer a { color: var(--grant-color); text-underline-offset: 2px; }
 
-    /* ── Simulation section ──────────────────────────────────────── */
     .sim-task {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -432,7 +423,6 @@
     .sim-hidden { display: none !important; }
     .sim-visible { animation: step-in 0.3s var(--ease) forwards; }
 
-    /* ── Agent property chips ───────────────────────────────────── */
     .prop-chips {
       display: flex;
       flex-wrap: wrap;
@@ -464,7 +454,6 @@
     .prop-chip-icon { width: 13px; height: 13px; stroke-width: 2; flex-shrink: 0; }
     .prop-detail-slot { min-height: 80px; margin-bottom: 1.25rem; }
 
-    /* ── Outcomes ────────────────────────────────────────────────── */
     .outcomes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -495,7 +484,6 @@
       .outcomes-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── Code block (sim) ───────────────────────────────────────── */
     .sim-code {
       background: var(--code-bg);
       border-radius: var(--radius);
@@ -510,8 +498,11 @@
       white-space: pre;
       line-height: 1.6;
     }
+    .sim-code .c-dim  { color: var(--code-dim); }
+    .sim-code .c-hl   { color: var(--code-hl); }
+    .sim-code .c-grn  { color: var(--code-grn); }
+    .sim-code .c-blue { color: var(--code-blue); }
 
-    /* ── Architecture diagram ───────────────────────────────────── */
     .arch-diagram {
       margin-top: 0.75rem;
       overflow-x: auto;
@@ -612,7 +603,6 @@
       margin-bottom: 0.375rem;
     }
 
-    /* ── Added-to-directory banner ──────────────────────────── */
     .added-banner {
       margin-top: 1.25rem;
       padding: 0.875rem 1rem;
@@ -901,7 +891,7 @@
     toggleDisclosure('panel-' + id, 'node-' + id, '.node-panel', '.arch-node');
   }
 
-  function esc(s) {
+  function escapeHtml(s) {
     return String(s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
@@ -929,7 +919,7 @@
   };
 
   function outcomeClass(outcome) {
-    return OUTCOME_LABELS[outcome] ? outcome : 'duplicate';
+    return outcome;
   }
 
   function outcomeLabel(outcome) {
@@ -943,20 +933,20 @@
       <div class="run-meta">
         <div class="run-meta-head">
           <span class="run-meta-issue">
-            <a href="${esc(issueUrl)}" target="_blank" rel="noopener noreferrer">Issue #${esc(String(data.issue))}</a>
-            — ${esc(data.title)}
+            <a href="${escapeHtml(issueUrl)}" target="_blank" rel="noopener noreferrer">Issue #${escapeHtml(String(data.issue))}</a>
+            — ${escapeHtml(data.title)}
           </span>
-          <span class="run-meta-time">${esc(fmtTime(data.timestamp))}</span>
+          <span class="run-meta-time">${escapeHtml(fmtTime(data.timestamp))}</span>
         </div>
         <div class="run-meta-body">
-          <span class="run-outcome ${esc(outcomeClass(data.outcome))}">${outcomeLabel(data.outcome)}</span>`;
+          <span class="run-outcome ${escapeHtml(outcomeClass(data.outcome))}">${outcomeLabel(data.outcome)}</span>`;
 
     if (data.benefit) {
-      html += `<span class="benefit-pill"><strong>${esc(data.benefit.name)}</strong> · ${esc(data.benefit.category)}</span>`;
+      html += `<span class="benefit-pill"><strong>${escapeHtml(data.benefit.name)}</strong> · ${escapeHtml(data.benefit.category)}</span>`;
     }
 
     if (data.run_url) {
-      html += `<a class="run-link" href="${esc(data.run_url)}" target="_blank" rel="noopener noreferrer">View run →</a>`;
+      html += `<a class="run-link" href="${escapeHtml(data.run_url)}" target="_blank" rel="noopener noreferrer">View run →</a>`;
     }
 
     html += `</div></div>`;
@@ -970,19 +960,19 @@
       const detail = fmtDetail(tool);
 
       html += `
-        <div class="trace-step ${esc(info.stepClass)}">
+        <div class="trace-step ${escapeHtml(info.stepClass)}">
           <div class="trace-gutter">
             <div class="trace-dot"></div>
             <div class="trace-line"></div>
           </div>
           <div class="trace-card">
             <div class="trace-head">
-              <span class="actor-badge ${esc(info.badge)}">${esc(info.label)}</span>
-              <span class="trace-head-label">${esc(tool.name.replace(/_/g, '_\u200b'))}</span>
-              ${detail ? `<span class="trace-head-detail">${esc(detail)}</span>` : ''}
+              <span class="actor-badge ${escapeHtml(info.badge)}">${escapeHtml(info.label)}</span>
+              <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b'))}</span>
+              ${detail ? `<span class="trace-head-detail">${escapeHtml(detail)}</span>` : ''}
             </div>
             <div class="trace-body">
-              ${tool.summary ? `<p class="trace-primary">${esc(tool.summary)}</p>` : ''}
+              ${tool.summary ? `<p class="trace-primary">${escapeHtml(tool.summary)}</p>` : ''}
               ${explain ? `<p class="trace-annotation">${explain}</p>` : ''}
             </div>
           </div>
@@ -995,8 +985,8 @@
       html += `
         <div class="added-banner">
           <p class="added-banner-label">Added to directory</p>
-          <p class="added-banner-name">${esc(data.benefit.name)} <span>· ${esc(data.benefit.category)}</span></p>
-          <p class="added-banner-desc">${esc(data.benefit.description)}</p>
+          <p class="added-banner-name">${escapeHtml(data.benefit.name)} <span>· ${escapeHtml(data.benefit.category)}</span></p>
+          <p class="added-banner-desc">${escapeHtml(data.benefit.description)}</p>
         </div>`;
     }
 
@@ -1039,13 +1029,13 @@
       stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
       headLabel: 'edit', detail: 'benefits.json',
       primary: 'Added <strong>Notion Education</strong> · Productivity',
-      code: `<span style="color:#5a5a4e">{</span>
-  <span style="color:#e0b060">"id"</span>: <span style="color:#7ec890">"notion"</span>,
-  <span style="color:#e0b060">"name"</span>: <span style="color:#7ec890">"Notion Education"</span>,
-  <span style="color:#e0b060">"category"</span>: <span style="color:#7ec890">"Productivity"</span>,
-  <span style="color:#e0b060">"description"</span>: <span style="color:#7ec890">"Free Plus plan with unlimited blocks..."</span>,
-  <span style="color:#e0b060">"popularity"</span>: <span style="color:#7eb8e0">5</span>
-<span style="color:#5a5a4e">}</span>`,
+      code: `<span class="c-dim">{</span>
+  <span class="c-hl">"id"</span>: <span class="c-grn">"notion"</span>,
+  <span class="c-hl">"name"</span>: <span class="c-grn">"Notion Education"</span>,
+  <span class="c-hl">"category"</span>: <span class="c-grn">"Productivity"</span>,
+  <span class="c-hl">"description"</span>: <span class="c-grn">"Free Plus plan with unlimited blocks..."</span>,
+  <span class="c-hl">"popularity"</span>: <span class="c-blue">5</span>
+<span class="c-dim">}</span>`,
       annotation: 'Appends the validated benefit with all required fields to benefits.json.'
     },
     {
@@ -1109,9 +1099,9 @@
       </div>
       <div class="trace-card">
         <div class="trace-head">
-          <span class="actor-badge ${esc(step.badge)}">${esc(step.badgeLabel)}</span>
-          <span class="trace-head-label">${esc(step.headLabel)}</span>
-          ${step.detail ? `<span class="trace-head-detail">${esc(step.detail)}</span>` : ''}
+          <span class="actor-badge ${escapeHtml(step.badge)}">${escapeHtml(step.badgeLabel)}</span>
+          <span class="trace-head-label">${escapeHtml(step.headLabel)}</span>
+          ${step.detail ? `<span class="trace-head-detail">${escapeHtml(step.detail)}</span>` : ''}
         </div>
         <div class="trace-body">
           <p class="trace-primary">${step.primary}</p>

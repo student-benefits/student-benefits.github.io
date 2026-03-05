@@ -124,6 +124,7 @@ Create a JSON object matching this exact schema:
   "id": "url-safe-id",
   "name": "Official Product/Service Name",
   "category": "one of the categories below",
+  "offer_type": "free | discount | credits | trial",
   "description": "What students get — be specific about discounts, free tiers, duration (max 120 chars)",
   "link": "Direct URL to the student signup/discount page",
   "tags": ["Tag1", "Tag2", "Tag3"],
@@ -145,7 +146,7 @@ If the user provided a link, prefer it. Otherwise, use your knowledge to find th
 
 Use the edit tool to append the new benefit object to the array in `benefits.json`. Maintain the existing JSON formatting (2-space indent, trailing newline).
 
-## Step 5b: Update the agent run log
+## Step 6: Update the agent run log
 
 Before creating the PR, replace the entire content of `agent/last-run.json` with a structured summary of this run. Use valid JSON with 2-space indentation:
 
@@ -172,7 +173,7 @@ Rules:
 - `run_url`: always set to empty string `""` (the URL is not available at runtime).
 - Write the complete file — do not append; replace the entire content.
 
-## Step 6: Create a pull request
+## Step 7: Create a pull request
 
 Create a PR with the changes. Use this format:
 
@@ -186,7 +187,7 @@ Create a PR with the changes. Use this format:
   - A horizontal rule `---`
   - The literal text `Closes #{issue_number}` — this must appear as plain text (not inside backticks, not inside a code block) so GitHub automatically closes the issue when the PR merges
 
-## Step 7: Comment on the issue
+## Step 8: Comment on the issue
 
 After creating the PR, add a comment on issue #${{ github.event.issue.number }}:
 
