@@ -10,13 +10,7 @@ A community directory of student discounts, free tiers, and perks — curated by
 
 Submissions come in as GitHub Issues. Grant — an AI agent running on Claude Sonnet 4 — picks them up, validates them against live web data, and opens a pull request if the benefit checks out. A human reviews and merges. The site deploys automatically.
 
-The full workflow lives in [`.github/workflows/add-benefit.md`](.github/workflows/add-benefit.md) — a Markdown file with a YAML frontmatter block that configures the agent (model, tools, network access, safe outputs) and a plain-English prompt that tells it what to do.
-
----
-
-## Grant
-
-Grant is the AI agent that maintains this directory. The **[/agent/](https://student-benefits.github.io/agent/)** page exposes its run log, tool trace, and architecture.
+The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture.
 
 ---
 
@@ -28,38 +22,9 @@ Grant is the AI agent that maintains this directory. The **[/agent/](https://stu
 2. Grant validates and opens a PR within minutes
 3. A maintainer reviews and merges
 
-**Add benefits directly** — edit `benefits.json` following the schema below and open a PR.
+**Add benefits directly** — edit `benefits.json` following the schema in `CLAUDE.md` and open a PR.
 
 **Improve Grant** — edit `.github/workflows/add-benefit.md` and run `gh aw compile` to regenerate the lock file.
-
----
-
-## Schema
-
-All data lives in `benefits.json`. Each entry:
-
-```json
-{
-  "id": "url-safe-id",
-  "name": "Official Product Name",
-  "category": "must exactly match a value in categories.json",
-  "offer_type": "free | discount | credits | trial",
-  "description": "What students get — specific, max 120 chars",
-  "link": "https://direct-url-to-student-signup-page",
-  "tags": ["Tag1", "Tag2"],
-  "popularity": 5,
-  "repo": "owner/repo"
-}
-```
-
-| Field | Rules |
-|---|---|
-| `id` | Lowercase, hyphens only, unique |
-| `category` | Exact string from `categories.json` |
-| `offer_type` | `free`, `discount`, `credits`, or `trial` |
-| `description` | Specific (e.g. "Free Pro plan for 1 year"); max 120 chars |
-| `popularity` | Integer 1–10; default 5 |
-| `repo` | Optional; only for open-source projects |
 
 ---
 
