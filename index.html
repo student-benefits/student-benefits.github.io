@@ -16,7 +16,6 @@
       --slate-500: #64748b;
       --slate-400: #94a3b8;
       --indigo-400: #818cf8;
-      --indigo-200: #c7d2fe;
       --indigo-300: #a5b4fc;
       --amber-300: #fcd34d;
       --font: system-ui, -apple-system, sans-serif;
@@ -173,11 +172,6 @@
       }
     }
 
-    .filter-count {
-      font-size: 0.75rem;
-      opacity: 0.6;
-    }
-
     .filter-tab {
       padding: 0.625rem 1rem;
       min-height: 44px;
@@ -198,7 +192,7 @@
       border-color: var(--slate-600);
     }
 
-    .filter-tab[aria-selected="true"] {
+    .filter-tab[aria-pressed="true"] {
       background: #fff;
       color: var(--slate-900);
       border-color: #fff;
@@ -301,7 +295,6 @@
       font-weight: 500;
       background: rgba(51, 65, 85, 0.5);
       color: var(--indigo-300);
-      border: 1px solid rgba(71, 85, 105, 0.5);
     }
 
     .badge[data-cat="AI Tools"]           { color: #a78bfa; }
@@ -324,10 +317,10 @@
       text-transform: uppercase;
     }
 
-    .offer-free { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.25); }
-    .offer-discount { background: rgba(251, 191, 36, 0.1); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.25); }
-    .offer-credits { background: rgba(96, 165, 250, 0.1); color: #60a5fa; border: 1px solid rgba(96, 165, 250, 0.25); }
-    .offer-trial { background: rgba(167, 139, 250, 0.1); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.25); }
+    .offer-free { background: rgba(74, 222, 128, 0.1); color: #4ade80; }
+    .offer-discount { background: rgba(251, 191, 36, 0.1); color: #fbbf24; }
+    .offer-credits { background: rgba(96, 165, 250, 0.1); color: #60a5fa; }
+    .offer-trial { background: rgba(167, 139, 250, 0.1); color: #a78bfa; }
 
     .free-toggle {
       display: inline-flex;
@@ -364,7 +357,7 @@
       transition: color 0.15s;
     }
 
-    .card:hover .card-name { color: var(--indigo-200); }
+    .card:hover .card-name { color: #c7d2fe; }
 
     .card-desc {
       color: var(--slate-400);
@@ -400,7 +393,7 @@
       padding: 6rem 1rem;
       background: rgba(30, 41, 59, 0.3);
       border-radius: var(--radius-lg);
-      border: 1px dashed var(--slate-700);
+      border: 1px solid var(--slate-700);
     }
 
     .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -425,7 +418,6 @@
       border-radius: 50%;
       background: #4ade80;
       flex-shrink: 0;
-      box-shadow: 0 0 6px #4ade80;
     }
 
     .contribute-banner {
@@ -537,7 +529,7 @@
         </div>
 
         <div class="filter-wrap">
-          <div id="filter-bar" role="tablist" aria-label="Filter by category" class="filter-bar"></div>
+          <div id="filter-bar" role="group" aria-label="Filter by category" class="filter-bar"></div>
         </div>
       </header>
 
@@ -545,10 +537,6 @@
 
       <div id="content">
         <div class="skeleton">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
           <div class="skeleton-card"></div>
@@ -595,21 +583,18 @@
             b.tags.some(function (t) { return t.toLowerCase().includes(q); });
           return catMatch && searchMatch && (!freeOnly || b.offer_type === 'free');
         })
-        .sort(function (a, b) {
-          if (sortOrder === 'alpha') return a.name.localeCompare(b.name);
-          return b.popularity - a.popularity;
+        .sort(function (x, y) {
+          if (sortOrder === 'alpha') return x.name.localeCompare(y.name);
+          return y.popularity - x.popularity;
         });
     }
 
     function renderFilters() {
-      const counts = {};
-      benefits.forEach(function (b) { counts[b.category] = (counts[b.category] || 0) + 1; });
-      const toggle = `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
+      const freeOnlyToggle = `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
       const tabs = categories.map(function (cat) {
-        const count = cat === 'All' ? benefits.length : (counts[cat] || 0);
-        return `<button role="tab" aria-selected="${cat === activeCategory}" class="filter-tab" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)} <span class="filter-count">${count}</span></button>`;
+        return `<button aria-pressed="${cat === activeCategory}" class="filter-tab" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`;
       }).join('');
-      filterBar.innerHTML = toggle + tabs;
+      filterBar.innerHTML = freeOnlyToggle + tabs;
     }
 
     function renderCard(b) {
@@ -634,9 +619,9 @@
 
     function render() {
       const filtered = getFilteredAndSorted();
-      const n = filtered.length;
-      const label = n === 1 ? 'resource' : 'resources';
-      let bar = `<span class="results-count">Found <strong>${n}</strong> ${label}</span>`;
+      const count = filtered.length;
+      const label = count === 1 ? 'resource' : 'resources';
+      let bar = `<span class="results-count">Found <strong>${count}</strong> ${label}</span>`;
       bar += `<div class="bar-right">`;
       bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
         <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Popular</option>
@@ -679,7 +664,7 @@
     filterBar.addEventListener('click', function (e) {
       if (e.target.closest('#free-toggle')) {
         freeOnly = !freeOnly;
-        document.getElementById('free-toggle').setAttribute('aria-pressed', freeOnly);
+        renderFilters();
         render();
         return;
       }
