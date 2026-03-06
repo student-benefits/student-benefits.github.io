@@ -423,7 +423,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--slate-500);
+      background: var(--indigo-400);
       flex-shrink: 0;
     }
 
@@ -673,6 +673,11 @@
     });
 
     resultsBar.addEventListener('click', function (e) {
+      if (e.target.closest('#free-toggle')) {
+        freeOnly = !freeOnly;
+        render();
+        return;
+      }
       if (e.target.closest('#clear-btn')) {
         searchQuery = '';
         searchInput.value = '';
@@ -681,12 +686,6 @@
     });
 
     filterBar.addEventListener('click', function (e) {
-      if (e.target.closest('#free-toggle')) {
-        freeOnly = !freeOnly;
-        renderFilters();
-        render();
-        return;
-      }
       const btn = e.target.closest('.filter-tab');
       if (!btn) return;
       activeCategory = btn.dataset.cat;
