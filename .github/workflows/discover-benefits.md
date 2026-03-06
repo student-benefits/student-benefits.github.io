@@ -14,7 +14,7 @@ engine:
 
 on:
   schedule:
-    - cron: '0 9 * * 1'  # Weekly on Monday at 9am UTC
+    - cron: 'weekly on monday'
   workflow_dispatch:
 
 permissions: read-all
@@ -58,12 +58,19 @@ You proactively search for student benefits not yet in the directory and create 
 
 ## Step 1: Read existing data
 
-Read `benefits.json` and `agent/rejected.json` from the repository.
+Read `benefits.json`, `categories.json`, and `agent/rejected.json` from the repository. If `agent/rejected.json` does not exist, treat the rejected set as empty.
+
+`agent/rejected.json` has this shape:
+```json
+[{ "name": "<product name lowercase>", "domain": "<hostname>" }]
+```
 
 Build three lookup sets:
 - **Known names**: all existing benefit names (lowercase)
 - **Known domains**: all hostnames from existing benefit links (strip `www.`)
 - **Rejected names and domains**: from `agent/rejected.json`
+
+Also read open GitHub issues labeled `new-benefit`. Extract the product name from each issue title and add it (lowercase) to **Known names**. This prevents creating duplicate issues for benefits already in the pipeline.
 
 ## Step 2: Check known aggregator sources (web-fetch)
 
@@ -81,20 +88,18 @@ Fetch each URL below directly with `web-fetch`. These pages reliably list studen
 | Canva for Education | `https://www.canva.com/education/` |
 | Autodesk Education | `https://www.autodesk.com/education/edu-software/overview` |
 
-For each page, extract any tools, products, or programs that look relevant. Note the name and URL — you will verify them in Step 4.
+For each page, extract any tools, products, or programs that look relevant.
 
 ## Step 3: Keyword-discovery pass (Tavily)
 
-**IMPORTANT**: Do not use `web-fetch` for these searches. Web-fetch on search engines returns nothing useful. Use only the `tavily` MCP tool for all searches in this step.
+**IMPORTANT**: Do not use `web-fetch` for these searches. Use only the `tavily` MCP tool.
 
 Call the tavily `search` tool with each of these queries. Do not skip any.
 
 1. `"student plan" OR "education plan" developer tools software 2025 OR 2026 free`
 2. `"free for students" OR "academic license" AI tools cloud 2025 OR 2026`
-3. Look at the category distribution in `benefits.json` and pick the **most underrepresented category** (fewest entries). Then call tavily search with: `"<that category>" student OR education free OR discount 2025 OR 2026`
+3. `"lifestyle" OR "productivity" OR "domains" student discount OR "free for students" 2025 OR 2026`
 4. `student grant OR credits developer tools 2026 apply individual`
-
-These queries target unknown vendors not covered by the aggregator pages in Step 2.
 
 ## Step 4: Verify each candidate
 
@@ -125,7 +130,12 @@ Keep a shortlist of the best candidates. Apply this quality bar:
 For each confirmed new benefit, up to **5 per run**, create a GitHub issue:
 
 - **Title**: The product name only (e.g. `Figma` not `Figma has a student discount`)
-- **Body**: One or two sentences describing what students get and the direct signup URL. Include which pass discovered it (known-source or keyword).
+- **Body**:
+  ```
+  **What students get**: <one sentence — be specific about plan, amount, or duration>
+  **Signup**: <direct URL to the student program page>
+  **Discovered via**: <known-source | keyword>
+  ```
 
 The `create-issue` safe-output will automatically add the `new-benefit` label, which triggers the add-benefit workflow to process and validate each one.
 
@@ -133,7 +143,7 @@ Create issues one at a time.
 
 ## Step 6: Update the discovery log
 
-Replace the entire content of `agent/last-discovery.json` with:
+Replace the entire content of `agent/last-benefits-discovery.json` with:
 
 ```json
 {

@@ -47,7 +47,7 @@
     "date": "2026-05-19",
     "date_end": "2026-05-20",
     "location": "Mountain View, CA",
-    "remote": true,
+    "remote": false,
     "eligibility": "Open to all; online attendance is free",
     "why": "Google's flagship developer conference — free online stream. New APIs and SDKs are announced here first, before documentation catches up.",
     "link": "https://io.google/2026/",
@@ -63,7 +63,7 @@
     "location": "San Francisco, CA",
     "remote": false,
     "eligibility": "Undergraduate CS or engineering students worldwide; no company required",
-    "why": "$20k cash + $90k in compute credits to build a self-directed AI project in SF. YC picks 20–50 students. Application closes end of March.",
+    "why": "$20k cash + $90k in compute credits to build a self-directed AI project in SF. YC picks 20–50 students; no company or team required.",
     "link": "https://events.ycombinator.com/summer-grants-26",
     "expires": "2026-08-22"
   },
@@ -88,11 +88,10 @@
     "category": "fellowship",
     "date": "2026-07-01",
     "date_end": "2026-10-31",
-    "location": "San Francisco, CA",
     "remote": true,
     "eligibility": "Engineers and researchers with strong Python background; must have right to work in US, UK, or Canada",
     "why": "$3,850/week stipend and $15k/month in compute for full-time AI safety research. 80%+ of past fellows published a paper; 40%+ received a full-time Anthropic offer.",
-    "link": "https://bit.ly/afpsafety",
+    "link": "https://airtable.com/appiuxxfhf5moRwTx/pagULi7KjbpUaOdIg/form",
     "expires": "2026-10-31"
   },
   {
@@ -102,7 +101,6 @@
     "category": "fellowship",
     "date": "2026-09-01",
     "date_end": "2026-11-30",
-    "location": "Washington, DC",
     "remote": true,
     "eligibility": "Undergrads through professionals worldwide; DC track requires US work authorization",
     "why": "$15–22k stipend, two-week DC residency, direct mentorship from leading AI governance experts. Past fellows joined CSET, GovAI, and major tech policy shops.",

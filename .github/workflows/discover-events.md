@@ -84,13 +84,13 @@ Fetch each URL below directly with `web-fetch`. These are high-signal sources th
 | YC Events | `https://events.ycombinator.com` |
 | MLH Season schedule | `https://mlh.io/seasons/2026/events` |
 | a16z Programs | `https://a16z.com/programs` |
-| Anthropic student programs | `https://www.anthropic.com/careers` |
-| OpenAI student programs | `https://openai.com/careers` |
+| Anthropic programs | `https://www.anthropic.com/news` |
+| OpenAI programs | `https://openai.com/news` |
 | Google student programs | `https://buildyourfuture.withgoogle.com/programs` |
 | GitHub Education events | `https://education.github.com/events` |
 | HackMIT / MIT events | `https://hack.mit.edu` |
 
-For each page, extract any programs or events that look relevant. Note the name and URL — you will verify them in Step 3c.
+For each page, extract any programs or events that look relevant.
 
 ### Step 3b: Keyword-discovery pass (Tavily)
 
@@ -102,8 +102,6 @@ Call the tavily `search` tool with each of these queries. Do not skip any.
 2. `"open to students" conference 2026 free OR fellowship application`
 3. `student grant OR "build grant" 2026 apply individual cash stipend`
 4. `student residency OR cohort OR program 2026 free technical AI`
-
-These queries target unknown organizers and vocabulary not covered by the known-sources pass.
 
 ### Step 3c: Verify each candidate
 
@@ -134,9 +132,7 @@ Keep a shortlist of the best candidates across both passes, up to **3 new events
 
 ## Step 4: Draft each new event entry
 
-For each candidate on your shortlist, note which pass discovered it (known-source or keyword) — include this in the PR body.
-
-For each candidate on your shortlist, produce a JSON object matching this schema exactly:
+For each candidate on your shortlist, produce a JSON object matching this schema exactly. Note which pass discovered it (known-source or keyword) — include this in the PR body.
 
 ```json
 {
