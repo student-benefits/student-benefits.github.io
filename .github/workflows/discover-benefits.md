@@ -40,6 +40,7 @@ tools:
 network:
   allowed:
     - defaults
+    # Broad by design — the agent fetches arbitrary student benefit pages
     - "*.com"
     - "*.org"
     - "*.edu"

@@ -41,9 +41,9 @@
       --web-bg:         #faf4ff;
       --web-border:     #d8b8e8;
 
-      --outcome-accepted-color: #1a7a4a;
-      --outcome-accepted-bg:    #f0faf4;
-      --outcome-accepted-border: #b8e0c8;
+      --outcome-accepted-color: var(--tavily-color);
+      --outcome-accepted-bg:    var(--tavily-bg);
+      --outcome-accepted-border: var(--tavily-border);
       --outcome-rejected-color: #b5451b;
       --outcome-rejected-bg:    #fdf3ef;
       --outcome-duplicate-color: #c87a1a;
@@ -464,18 +464,6 @@
       margin: 0 auto 0.75rem;
       aspect-ratio: 500 / 320;
     }
-    .prop-radial-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    .spoke {
-      stroke: var(--border);
-      stroke-width: 1;
-    }
-    .spoke--oversight { stroke-dasharray: 4 3; }
     .prop-radial-center {
       position: absolute;
       left: 50%;
@@ -484,22 +472,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0.625rem 1.25rem;
-      background: var(--grant-bg);
-      border: 1.5px solid var(--grant-border);
-      border-radius: var(--radius-lg);
       pointer-events: none;
       z-index: 1;
     }
     .prop-radial-center-name {
-      font-size: 0.875rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--grant-color);
     }
     .prop-radial-center-sub {
       font-size: 0.65rem;
       color: var(--grant-color);
-      opacity: 0.7;
+      opacity: 0.6;
       margin-top: 0.1rem;
     }
     .prop-radial-node {
@@ -517,7 +501,6 @@
         flex-wrap: wrap;
         gap: 0.5rem;
       }
-      .prop-radial-svg,
       .prop-radial-center { display: none; }
       .prop-radial-node {
         position: static;
@@ -631,30 +614,6 @@
       align-self: center;
       overflow: visible;
     }
-    .packet {
-      position: absolute;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-    .packet-req    { background: var(--grant-color);  animation: pkt-fwd 2.4s ease-in-out infinite; }
-    .packet-res    { background: var(--github-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.2s; }
-    .packet-query  { background: var(--tavily-color); animation: pkt-fwd 2.4s ease-in-out infinite; animation-delay: 0.4s; }
-    .packet-result { background: var(--tavily-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.6s; }
-    @keyframes pkt-fwd {
-      0%   { left: 0%;   opacity: 0; }
-      6%   { opacity: 1; }
-      94%  { opacity: 1; }
-      100% { left: 100%; opacity: 0; }
-    }
-    @keyframes pkt-rev {
-      0%   { left: 100%; opacity: 0; }
-      6%   { opacity: 1; }
-      94%  { opacity: 1; }
-      100% { left: 0%;   opacity: 0; }
-    }
 
     .node-panels-slot {
       min-height: 88px;
@@ -748,9 +707,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
-          <span class="packet packet-req"></span>
-        </div>
+        <div class="arch-connector" aria-hidden="true"></div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--grant" id="node-grant" aria-expanded="false" aria-controls="panel-grant" onclick="togglePanel('grant')">
@@ -759,10 +716,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
-          <span class="packet packet-query"></span>
-          <span class="packet packet-result"></span>
-        </div>
+        <div class="arch-connector" aria-hidden="true"></div>
 
         <div class="arch-node-wrap arch-node-wrap--stacked">
           <button class="arch-node arch-node--tavily" id="node-tavily" aria-expanded="false" aria-controls="panel-tavily" onclick="togglePanel('tavily')">
@@ -775,10 +729,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
-          <span class="packet packet-req"></span>
-          <span class="packet packet-res"></span>
-        </div>
+        <div class="arch-connector" aria-hidden="true"></div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output" onclick="togglePanel('output')">
@@ -787,9 +738,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
-          <span class="packet packet-req"></span>
-        </div>
+        <div class="arch-connector" aria-hidden="true"></div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--human" id="node-human" aria-expanded="false" aria-controls="panel-human" onclick="togglePanel('human')">
@@ -834,22 +783,13 @@
     <p class="section-label">What makes this an agent?</p>
 
     <div class="prop-radial" role="region" aria-label="Agent properties. Click any dimension to learn more.">
-      <svg class="prop-radial-svg" viewBox="0 0 500 320" aria-hidden="true">
-        <line class="spoke" x1="250" y1="160" x2="250" y2="45" />
-        <line class="spoke" x1="250" y1="160" x2="350" y2="102" />
-        <line class="spoke" x1="250" y1="160" x2="350" y2="218" />
-        <line class="spoke" x1="250" y1="160" x2="250" y2="275" />
-        <line class="spoke" x1="250" y1="160" x2="150" y2="218" />
-        <line class="spoke spoke--oversight" x1="250" y1="160" x2="150" y2="102" />
-      </svg>
-
       <div class="prop-radial-center" aria-hidden="true">
         <span class="prop-radial-center-name">Grant</span>
         <span class="prop-radial-center-sub">AI agent</span>
       </div>
 
       <button class="prop-chip prop-radial-node" id="pchip-tool" style="left:50%;top:14%" aria-expanded="false" onclick="toggleProp('tool')">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" d="M12 8v8M8 12h8"/></svg>
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
         Tool use
       </button>
       <button class="prop-chip prop-radial-node" id="pchip-decision" style="left:70%;top:32%" aria-expanded="false" onclick="toggleProp('decision')">
@@ -861,7 +801,7 @@
         Autonomy
       </button>
       <button class="prop-chip prop-radial-node" id="pchip-memory" style="left:50%;top:86%" aria-expanded="false" onclick="toggleProp('memory')">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><ellipse cx="12" cy="7" rx="8" ry="2.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5V7"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5v-5"/></svg>
         Memory
       </button>
       <button class="prop-chip prop-radial-node" id="pchip-self" style="left:30%;top:68%" aria-expanded="false" onclick="toggleProp('self')">
@@ -956,16 +896,16 @@
 
 <script>
   const TOOLS = {
-    get_issue:              { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
-    get_file_contents:      { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Downloads <code>benefits.json</code> from the repo to check whether this benefit is already listed.' },
-    create_or_update_file:  { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Writes or updates a file in the repository via the GitHub API.' },
-    create_pull_request:    { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
-    add_comment:            { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
-    close_issue:            { actor: 'github', label: 'GitHub',        badge: 'badge-github', stepClass: 'actor-github', explain: null },
-    tavily_search:          { actor: 'tavily', label: 'Tavily Search', badge: 'badge-tavily', stepClass: 'actor-tavily', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
-    search:                 { actor: 'tavily', label: 'Tavily Search', badge: 'badge-tavily', stepClass: 'actor-tavily', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
-    web_fetch:              { actor: 'web',    label: 'Web',           badge: 'badge-web',    stepClass: 'actor-web',    explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
-    edit:                   { actor: 'grant',  label: 'Grant',         badge: 'badge-grant',  stepClass: 'actor-grant',  explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
+    get_issue:             { actor: 'github', label: 'GitHub',        explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
+    get_file_contents:     { actor: 'github', label: 'GitHub',        explain: 'Downloads <code>benefits.json</code> from the repo to check whether this benefit is already listed.' },
+    create_or_update_file: { actor: 'github', label: 'GitHub',        explain: 'Writes or updates a file in the repository via the GitHub API.' },
+    create_pull_request:   { actor: 'github', label: 'GitHub',        explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
+    add_comment:           { actor: 'github', label: 'GitHub',        explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
+    close_issue:           { actor: 'github', label: 'GitHub',        explain: null },
+    tavily_search:         { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
+    search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
+    web_fetch:             { actor: 'web',    label: 'Web',           explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
+    edit:                  { actor: 'grant',  label: 'Grant',         explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
   };
 
   function toggleDisclosure(panelId, triggerId, allPanelsSelector, allTriggersSelector) {
@@ -1053,19 +993,21 @@
     html += `<div class="trace">`;
 
     for (const tool of (data.tools || [])) {
-      const info = TOOLS[tool.name] || { actor: 'grant', label: tool.name, badge: 'badge-grant', stepClass: 'actor-grant', explain: null };
+      const info = TOOLS[tool.name] || { actor: 'grant', label: tool.name, explain: null };
+      const badge = 'badge-' + info.actor;
+      const stepClass = 'actor-' + info.actor;
       const explain = info.explain || '';
       const detail = fmtDetail(tool);
 
       html += `
-        <div class="trace-step ${escapeHtml(info.stepClass)}">
+        <div class="trace-step ${escapeHtml(stepClass)}">
           <div class="trace-gutter">
             <div class="trace-dot"></div>
             <div class="trace-line"></div>
           </div>
           <div class="trace-card">
             <div class="trace-head">
-              <span class="actor-badge ${escapeHtml(info.badge)}">${escapeHtml(info.label)}</span>
+              <span class="actor-badge ${escapeHtml(badge)}">${escapeHtml(info.label)}</span>
               <span class="trace-head-label">${escapeHtml(tool.name.replace(/_/g, '_\u200b'))}</span><!-- allow line-break after underscores in long tool names -->
               ${detail ? `<span class="trace-head-detail">${escapeHtml(detail)}</span>` : ''}
             </div>

@@ -26,7 +26,7 @@
 # entries and previously-rejected programs, and creates issues for the best
 # new discoveries (max 5 per run).
 #
-# frontmatter-hash: 8a8cfa15e137b50df748bfd51d221d0133e20a8af4a65459f52daf95021bab91
+# frontmatter-hash: 25c955fdba3cb8cd950413a50a5534fe5f471d222ce3d678736c22551f37d42e
 
 name: "Discover New Student Benefits"
 "on":

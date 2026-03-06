@@ -711,6 +711,7 @@
     });
 
     const CAT_PALETTE = ['#a78bfa','#60a5fa','#38bdf8','#fbbf24','#f472b6','#4ade80','#fb923c','#f87171','#34d399','#e879f9'];
+    // djb2-variant hash: maps any category name to a stable palette index
     function catColor(name) {
       let h = 0;
       for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;

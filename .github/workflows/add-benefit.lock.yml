@@ -25,7 +25,7 @@
 # validates the benefit, checks for duplicates against benefits.json,
 # and creates a PR with the new entry if valid.
 #
-# frontmatter-hash: 0c08915de2a4e1de449503707f3588ee1cd8e252063f8a756e7636416eeb81fe
+# frontmatter-hash: e76b2732d31f70168df6e7bb1b4063b33d96614e6043a7495a9b28b409a04cd5
 
 name: "Add Benefit from Issue"
 "on":
