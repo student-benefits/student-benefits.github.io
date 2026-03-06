@@ -53,7 +53,7 @@ timeout-minutes: 20
 
 # Discover New Student Events
 
-You proactively search for upcoming student events and hackathons worth featuring in the feed, then open a PR with additions and expired-entry removals. A human reviews and merges every PR — you never modify `main` directly.
+You proactively search for upcoming student events and hackathons worth featuring in the feed, then open a PR with additions and expired-entry removals.
 
 ## Step 1: Read existing data
 
@@ -69,15 +69,11 @@ Also note today's UTC date (ISO 8601).
 
 An entry is expired if its `expires` field is a date that has already passed (strictly before today).
 
-If any expired entries exist, collect their IDs. You will remove them in Step 5.
+If any expired entries exist, collect their IDs. You will remove them in Step 7.
 
-## Step 3: Search for new events
+## Step 3: Check known sources
 
-Discovery runs in two passes. Run both before building your shortlist.
-
-### Step 3a: Known-sources pass (web-fetch)
-
-Fetch each URL below directly with `web-fetch`. These are high-signal sources that reliably publish student programs regardless of what vocabulary they use. Do not skip any.
+Fetch each URL below directly with `web-fetch`. Do not skip any.
 
 | Source | URL |
 |--------|-----|
@@ -92,7 +88,7 @@ Fetch each URL below directly with `web-fetch`. These are high-signal sources th
 
 For each page, extract any programs or events that look relevant.
 
-### Step 3b: Keyword-discovery pass (Tavily)
+## Step 4: Keyword-discovery pass
 
 **IMPORTANT**: Do NOT use `web-fetch` for these searches. Use only the `tavily` MCP tool.
 
@@ -103,34 +99,19 @@ Call the tavily `search` tool with each of these queries. Do not skip any.
 3. `student grant OR "build grant" 2026 apply individual cash stipend`
 4. `student residency OR cohort OR program 2026 free technical AI`
 
-### Step 3c: Verify each candidate
+## Step 5: Verify each candidate
 
-For each result from Steps 3a and 3b, use `web-fetch` to confirm:
-- The event page is real and the event has not already passed
-- Applications are open to students without a company (individual applicants)
-- It is free or very low cost (travel stipend and grant events count; $50+ registration fees do not)
-- The event name is not already in your known names set
+For each result from Steps 3 and 4, use `web-fetch` to confirm the event page is real, not already passed, and not already in your known names set. Then apply this quality bar:
 
-Apply this quality bar:
-
-**Include** if all of the following are true:
-- Free or heavily subsidized (travel grants, stipends, or zero cost)
-- Open to individual students — no company affiliation or team requirement to apply
-- Run by a credible organizer: well-known company, university, VC firm, or established non-profit
-- Genuinely career-altering: the kind of event a student would name as a turning point
-- Has a concrete date and a working application or registration page
-
-**Skip** if any of the following are true:
-- Requires a team, startup, or company affiliation to apply
-- Registration fee above $50 with no scholarship pathway
-- Organizer is obscure or unverifiable
-- Date has passed or is more than 12 months away
-- Application page is broken or "coming soon"
-- Already in the known names set
+1. Free or heavily subsidized (travel grants, stipends, or zero cost) — skip if fee >$50 with no scholarship pathway
+2. Open to individual students — skip if requires team, startup, or company affiliation
+3. Credible organizer (well-known company, university, VC firm, or non-profit) — skip if obscure or unverifiable
+4. Genuinely career-altering — skip if not the kind of event a student would name as a turning point
+5. Concrete date within 12 months and a working application page — skip if date has passed, is >12 months away, or page is broken/"coming soon"
 
 Keep a shortlist of the best candidates across both passes, up to **3 new events**.
 
-## Step 4: Draft each new event entry
+## Step 6: Draft each new event entry
 
 For each candidate on your shortlist, produce a JSON object matching this schema exactly. Note which pass discovered it (known-source or keyword) — include this in the PR body.
 
@@ -145,9 +126,9 @@ For each candidate on your shortlist, produce a JSON object matching this schema
   "location": "<City, State/Country or omit if fully remote>",
   "remote": <true | false>,
   "eligibility": "<Who can apply, concisely>",
-  "why": "<One or two sentences. Why is this event worth a student's time? Be specific — name speakers, outcomes, or what makes the room special. Max 200 chars.>",
+  "why": "<One or two sentences on why this event is worth a student's time — name speakers, outcomes, or what makes the room special. Max 200 chars.>",
   "link": "<Direct URL to the application or registration page>",
-  "expires": "<YYYY-MM-DD — same as date_end, or date if single-day>"
+  "expires": "<YYYY-MM-DD>"
 }
 ```
 
@@ -156,14 +137,15 @@ Rules:
 - `category`: must be one of `hackathon`, `conference`, `fellowship`, `summit`, `workshop`
 - `why`: write this yourself based on what you learned from the event page — do not copy marketing text verbatim; max 200 chars
 - `remote`: set to `true` only if the event is fully virtual; set to `false` for in-person or hybrid
+- `expires`: same as `date_end`, or `date` if the event is a single day
 - Omit `date_end` if the event is a single day
 - Omit `location` only if the event is fully remote
 
-## Step 5: Open a PR
+## Step 7: Open a PR
 
 Construct the updated `events.json`:
 - Remove any expired entries identified in Step 2
-- Append new entries from Step 4 (in date order, earliest first)
+- Append new entries from Step 6 (in date order, earliest first)
 - Preserve 2-space indent and a trailing newline
 
 Write the updated file, then open a single pull request with:
@@ -188,7 +170,7 @@ Write the updated file, then open a single pull request with:
 
 Open one PR total — do not open separate PRs per event.
 
-## Step 6: Update the discovery log
+## Step 8: Update the discovery log
 
 Write `agent/last-events-discovery.json` with the complete file content:
 
