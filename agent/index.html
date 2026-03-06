@@ -98,8 +98,7 @@
     }
     .back-link:hover { color: var(--text); }
     .back-link svg { width: 14px; height: 14px; }
-    .header-sep { color: var(--border); font-size: 0.8rem; }
-    .header-title { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+.header-title { font-size: 0.8rem; font-weight: 600; color: var(--text); }
 
     .main {
       max-width: 760px;
@@ -437,7 +436,7 @@
       padding: 0.45rem 0.875rem;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 100px;
+      border-radius: var(--radius-lg);
       font-family: var(--font);
       font-size: 0.8rem;
       font-weight: 600;
@@ -586,7 +585,7 @@
       transition: box-shadow 120ms, transform 120ms;
       min-width: 96px;
     }
-    .arch-node:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .arch-node:hover { box-shadow: var(--shadow-sm); }
     .arch-node-label { font-size: 0.8rem; font-weight: 700; }
     .arch-node-sublabel { font-size: 0.68rem; margin-top: 0.125rem; opacity: 0.75; }
 
@@ -602,7 +601,7 @@
     .arch-node--web    { border-color: var(--web-border);    color: var(--web-color); }
     .arch-node--web[aria-expanded="true"]    { box-shadow: 0 0 0 2px var(--web-color); }
 
-    .arch-node--human  { border-color: var(--border); color: var(--text-muted); border-style: dashed; }
+    .arch-node--human  { border-color: var(--border); color: var(--text-muted); }
     .arch-node--human[aria-expanded="true"]  { box-shadow: 0 0 0 2px var(--text); color: var(--text); }
 
     .arch-connector {
@@ -613,6 +612,7 @@
       background: var(--border-subtle);
       align-self: center;
       overflow: visible;
+      cursor: help;
     }
     .arch-connector-label {
       position: absolute;
@@ -627,7 +627,7 @@
       padding: 0.2rem 0.5rem;
       white-space: nowrap;
       box-shadow: var(--shadow-sm);
-      opacity: 0;
+      opacity: 0.3;
       pointer-events: none;
       transition: opacity 120ms;
     }
@@ -738,14 +738,12 @@
       <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       Student Benefits Hub
     </a>
-    <span class="header-sep">·</span>
     <span class="header-title">Grant</span>
   </div>
 </header>
 
 <main class="main">
 
-  <!-- Identity -->
   <section class="identity">
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
@@ -754,7 +752,6 @@
     </p>
   </section>
 
-  <!-- Architecture -->
   <section class="section">
     <p class="section-label">Architecture</p>
     <div class="arch-diagram" role="region" aria-label="Interactive architecture diagram. Click any node to learn what it does.">
@@ -852,7 +849,6 @@
     </div>
   </section>
 
-  <!-- What makes this an agent -->
   <section class="section">
     <p class="section-label">What makes this an agent?</p>
 
@@ -931,7 +927,6 @@
 
   </section>
 
-  <!-- Simulation -->
   <section class="section">
     <p class="section-label">See it in action</p>
 
@@ -954,7 +949,6 @@
     </div>
   </section>
 
-  <!-- Last run -->
   <section class="section" id="run-section">
     <p class="section-label">Last run</p>
     <div id="run-output">
@@ -977,7 +971,7 @@
     add_comment:           { actor: 'github', label: 'GitHub',        explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
     close_issue:           { actor: 'github', label: 'GitHub',        explain: null },
     tavily_search:         { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
-    search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
+    search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' }, // alias — MCP tool name varies by server version
     web_fetch:             { actor: 'web',    label: 'Web',           explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
     edit:                  { actor: 'grant',  label: 'Grant',         explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
   };
@@ -1009,7 +1003,8 @@
 
   function escapeHtml(s) {
     return String(s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   function fmtDetail(tool) {
@@ -1257,6 +1252,8 @@
     }
   }
 
+  // SIM_STEPS fields: badge, badgeLabel, headLabel, detail are plain text — escaped below.
+  // primary, code, annotation are authored HTML in the SIM_STEPS constant — injected raw intentionally.
   function addSimStep(step, trace, btn) {
     const codeHtml = step.code
       ? `<div class="sim-code"><pre>${step.code}</pre></div>`
