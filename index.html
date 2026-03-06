@@ -74,7 +74,7 @@
       justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
     }
     .header-actions {
       display: flex;
@@ -95,13 +95,6 @@
       font-weight: 700;
       letter-spacing: -0.015em;
       line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 0.9375rem;
-      color: var(--slate-400);
-      margin: 0 auto 1.5rem;
-      line-height: 1.5;
     }
 
     .search-wrap {
@@ -514,7 +507,13 @@
     <div class="container">
       <header>
         <div class="header-row">
-          <h1>Student Benefits Hub</h1>
+          <div>
+            <h1>Student Benefits Hub</h1>
+            <a href="/agent/" class="grant-badge">
+              <span class="grant-dot"></span>
+              Curated by Grant
+            </a>
+          </div>
           <div class="header-actions">
             <a href="/events/" class="nav-link">Events</a>
             <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner">
@@ -523,13 +522,6 @@
             </a>
           </div>
         </div>
-        <p class="subtitle">
-          Student discounts, free tiers, and perks.<br>
-          <a href="/agent/" class="grant-badge">
-            <span class="grant-dot"></span>
-            Curated by Grant
-          </a>
-        </p>
 
         <div role="search" class="search-wrap">
           <svg class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
