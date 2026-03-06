@@ -614,6 +614,61 @@
       align-self: center;
       overflow: visible;
     }
+    .arch-connector-label {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+    .packet {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .packet-req    { background: var(--grant-color);  animation: pkt-fwd 2.4s ease-in-out infinite; }
+    .packet-res    { background: var(--github-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.2s; }
+    .packet-query  { background: var(--tavily-color); animation: pkt-fwd 2.4s ease-in-out infinite; animation-delay: 0.4s; }
+    .packet-result { background: var(--tavily-color); animation: pkt-rev 2.4s ease-in-out infinite; animation-delay: 1.6s; }
+    @keyframes pkt-fwd {
+      0%   { left: 0%;    opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: 100%;  opacity: 0; }
+    }
+    @keyframes pkt-rev {
+      0%   { left: 100%;  opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: 0%;    opacity: 0; }
+    }
+
+    /* Orbiting dots around Grant center in the radial diagram */
+    .orbit-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 5px;
+      height: 5px;
+      margin: -2.5px;
+      border-radius: 50%;
+      background: var(--grant-color);
+      opacity: 0.25;
+      animation: orbit 10s linear infinite;
+    }
+    .orbit-dot:nth-child(2) { animation-delay: -3.33s; }
+    .orbit-dot:nth-child(3) { animation-delay: -6.67s; }
+    @keyframes orbit {
+      from { transform: rotate(0deg)    translateX(52px) rotate(0deg); }
+      to   { transform: rotate(360deg)  translateX(52px) rotate(-360deg); }
+    }
 
     .node-panels-slot {
       min-height: 88px;
@@ -707,7 +762,10 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true"></div>
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+          <span class="arch-connector-label">issue event</span>
+        </div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--grant" id="node-grant" aria-expanded="false" aria-controls="panel-grant" onclick="togglePanel('grant')">
@@ -716,7 +774,11 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true"></div>
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-query"></span>
+          <span class="packet packet-result"></span>
+          <span class="arch-connector-label">queries &amp; results</span>
+        </div>
 
         <div class="arch-node-wrap arch-node-wrap--stacked">
           <button class="arch-node arch-node--tavily" id="node-tavily" aria-expanded="false" aria-controls="panel-tavily" onclick="togglePanel('tavily')">
@@ -729,7 +791,11 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true"></div>
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+          <span class="packet packet-res"></span>
+          <span class="arch-connector-label">validated entry</span>
+        </div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output" onclick="togglePanel('output')">
@@ -738,7 +804,10 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true"></div>
+        <div class="arch-connector" aria-hidden="true">
+          <span class="packet packet-req"></span>
+          <span class="arch-connector-label">PR for review</span>
+        </div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--human" id="node-human" aria-expanded="false" aria-controls="panel-human" onclick="togglePanel('human')">
@@ -784,6 +853,9 @@
 
     <div class="prop-radial" role="region" aria-label="Agent properties. Click any dimension to learn more.">
       <div class="prop-radial-center" aria-hidden="true">
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot"></span>
+        <span class="orbit-dot"></span>
         <span class="prop-radial-center-name">Grant</span>
         <span class="prop-radial-center-sub">AI agent</span>
       </div>
