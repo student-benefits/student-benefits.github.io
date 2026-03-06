@@ -71,11 +71,24 @@
     .header-row {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
       margin-bottom: 0.5rem;
     }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .nav-link {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s;
+    }
+    .nav-link:hover { color: var(--text); }
 
     h1 {
       font-size: 1.75rem;
@@ -406,12 +419,6 @@
 
     .grant-badge:hover { color: var(--slate-400); }
 
-    .subtitle-sep {
-      color: var(--slate-600);
-      font-size: 0.875rem;
-      margin: 0 0.25rem;
-    }
-
     .grant-dot {
       width: 6px;
       height: 6px;
@@ -508,10 +515,13 @@
       <header>
         <div class="header-row">
           <h1>Student Benefits Hub</h1>
-          <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-            Submit a benefit
-          </a>
+          <div class="header-actions">
+            <a href="/events/" class="nav-link">Events</a>
+            <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-benefit.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              Submit a benefit
+            </a>
+          </div>
         </div>
         <p class="subtitle">
           Student discounts, free tiers, and perks.<br>
@@ -519,8 +529,6 @@
             <span class="grant-dot"></span>
             Curated by Grant
           </a>
-          <span class="subtitle-sep" aria-hidden="true">·</span>
-          <a href="/events/" class="grant-badge">Events</a>
         </p>
 
         <div role="search" class="search-wrap">
