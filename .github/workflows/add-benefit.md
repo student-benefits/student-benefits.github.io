@@ -180,13 +180,22 @@ Create a PR with the changes. Use this format:
 
 - **Title**: `{name}`
 - **Branch**: `add-benefit-{id}`
-- **Body**: the body must contain these lines in order, as plain prose (no wrapping code fences around the body):
-  - A heading: `## {name}`
-  - `**Category:** {category}`
-  - `**Link:** {link}`
-  - A blank line, then the description
-  - A horizontal rule `---`
-  - The literal text `Closes #{issue_number}` — this must appear as plain text (not inside backticks, not inside a code block) so GitHub automatically closes the issue when the PR merges
+- **Body**: use exactly this format (replace placeholders; do not wrap in a code fence):
+
+```
+## {name}
+
+**Category:** {category}
+**Link:** {link}
+
+{description}
+
+---
+
+Closes #{issue_number}
+```
+
+The last line must be plain text — not inside backticks or a code block. GitHub uses it to auto-close the issue on merge.
 
 ## Step 8: Comment on the issue
 
