@@ -1105,40 +1105,34 @@
     }
 
     document.getElementById('run-output').innerHTML = html;
-    applyPacketRates(data.tools || []);
+    applyPacketRates(data.tools || [], data.outcome);
     renderOrbitDots(data.tools || []);
   }
 
-  // Maps connector IDs to the actor types that flow on them.
-  // Speed (animation-duration) encodes call frequency: more calls → faster packets.
-  const CONN_ACTORS = {
-    'conn-search':   ['tavily', 'web'],
-    'conn-validate': ['github-file'],
-    'conn-pr':       ['github-pr'],
-  };
-
-  function applyPacketRates(tools) {
-    const counts = { tavily: 0, web: 0, 'github-file': 0, 'github-pr': 0 };
+  function applyPacketRates(tools, outcome) {
+    // conn-search and conn-validate: speed encodes call frequency
+    const counts = { tavily: 0, web: 0, github: 0 };
     for (const t of tools) {
       const actor = (TOOLS[t.name] || {}).actor || 'grant';
       if (actor === 'tavily') counts.tavily++;
       else if (actor === 'web') counts.web++;
-      else if (actor === 'github') {
-        if (t.name === 'create_pull_request' || t.name === 'create_issue') counts['github-pr']++;
-        else counts['github-file']++;
-      }
+      else if (actor === 'github') counts.github++;
     }
-    for (const [id, actors] of Object.entries(CONN_ACTORS)) {
-      const count = actors.reduce((n, a) => n + (counts[a] || 0), 0);
-      const conn = document.getElementById(id);
-      if (!conn) continue;
-      const packets = conn.querySelectorAll('.packet');
-      if (count === 0) {
-        packets.forEach(p => { p.style.animation = 'none'; });
-      } else {
-        const dur = Math.max(0.8, 2.4 / count).toFixed(2) + 's';
-        packets.forEach(p => { p.style.animationDuration = dur; });
-      }
+    setPacketRate('conn-search',   counts.tavily + counts.web);
+    setPacketRate('conn-validate', counts.github);
+    // conn-pr: binary — PR either went to reviewer or it didn't
+    setPacketRate('conn-pr', outcome === 'accepted' ? 1 : 0);
+  }
+
+  function setPacketRate(id, count) {
+    const conn = document.getElementById(id);
+    if (!conn) return;
+    const packets = conn.querySelectorAll('.packet');
+    if (count === 0) {
+      packets.forEach(p => { p.style.animation = 'none'; });
+    } else {
+      const dur = Math.max(0.8, 2.4 / count).toFixed(2) + 's';
+      packets.forEach(p => { p.style.animationDuration = dur; });
     }
   }
 
