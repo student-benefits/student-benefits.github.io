@@ -88,17 +88,16 @@
     }
     .site-sep {
       font-size: 1rem;
-      color: var(--text-muted);
-      opacity: 0.4;
+      color: var(--slate-600);
     }
     .site-alt {
       font-size: 1rem;
       font-weight: 500;
-      color: var(--text-muted);
+      color: var(--slate-500);
       text-decoration: none;
       transition: color 0.15s;
     }
-    .site-alt:hover { color: var(--text); }
+    .site-alt:hover { color: #fff; }
 
     h1 {
       font-size: 1.75rem;
@@ -212,10 +211,10 @@
     }
 
     .results-bar {
-      margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: center;
+      margin-bottom: 1.5rem;
       border-bottom: 1px solid var(--slate-800);
       padding-bottom: 1rem;
     }
@@ -393,6 +392,8 @@
     .tag:hover {
       color: var(--indigo-300);
       border-color: var(--slate-500);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .empty {
@@ -423,7 +424,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--indigo-400);
+      background: var(--slate-600);
       flex-shrink: 0;
     }
 
@@ -517,7 +518,7 @@
           <div>
             <div class="site-id">
               <h1>Student Benefits Hub</h1>
-              <span class="site-sep" aria-hidden="true">·</span>
+              <span class="site-sep" aria-hidden="true">|</span>
               <a href="/events/" class="site-alt">Events</a>
             </div>
             <a href="/agent/" class="grant-badge">

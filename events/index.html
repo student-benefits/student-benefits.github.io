@@ -84,37 +84,29 @@
       flex-wrap: wrap;
       gap: 0.375rem;
     }
-    .filter-tab {
-      padding: 0.375rem 0.875rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(51, 65, 85, 0.7);
-      background: transparent;
+    .filter-tab, .remote-toggle {
+      padding: 0.625rem 1rem;
+      min-height: 44px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      background: rgba(30, 41, 59, 0.4);
       color: var(--slate-400);
       font-family: var(--font);
-      font-size: 0.8125rem;
+      font-size: 0.875rem;
       font-weight: 500;
       cursor: pointer;
       transition: border-color 0.15s, color 0.15s, background 0.15s;
     }
-    .filter-tab:hover { border-color: var(--slate-500); color: #fff; }
+    .filter-tab:hover, .remote-toggle:hover {
+      background: rgba(51, 65, 85, 0.5);
+      color: #fff;
+      border-color: var(--slate-600);
+    }
     .filter-tab[aria-pressed="true"] {
-      border-color: var(--indigo-400);
+      background: rgba(99, 102, 241, 0.1);
       color: var(--indigo-300);
-      background: rgba(129, 140, 248, 0.08);
+      border-color: var(--indigo-400);
     }
-    .remote-toggle {
-      padding: 0.375rem 0.875rem;
-      border-radius: 9999px;
-      border: 1px solid rgba(51, 65, 85, 0.7);
-      background: transparent;
-      color: var(--slate-400);
-      font-family: var(--font);
-      font-size: 0.8125rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: border-color 0.15s, color 0.15s, background 0.15s;
-    }
-    .remote-toggle:hover { border-color: var(--slate-500); color: #fff; }
     .remote-toggle[aria-pressed="true"] {
       border-color: #34d399;
       color: #34d399;
@@ -150,9 +142,9 @@
       border: 1px solid rgba(51, 65, 85, 0.5);
       border-radius: var(--radius-lg);
       padding: 1.125rem;
+      cursor: pointer;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .event-card { cursor: pointer; }
     .event-card:hover {
       border-color: rgba(129, 140, 248, 0.4);
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
@@ -268,7 +260,12 @@
     .empty h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--slate-400); }
 
     /* Footer */
-    footer { margin-top: 3rem; }
+    footer {
+      margin-top: 6rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--slate-800);
+      text-align: center;
+    }
     footer p { color: var(--slate-500); font-size: 0.875rem; }
     footer a { color: var(--indigo-400); text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
     footer a:hover { color: var(--indigo-300); }
@@ -281,7 +278,7 @@
       <header>
         <div class="site-id">
           <a href="/" class="site-alt">Student Benefits Hub</a>
-          <span class="site-sep" aria-hidden="true">·</span>
+          <span class="site-sep" aria-hidden="true">|</span>
           <h1>Events</h1>
         </div>
         <p class="subtitle">Hackathons, conferences, and fellowships — curated, not aggregated.</p>
