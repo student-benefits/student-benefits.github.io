@@ -670,8 +670,6 @@
       opacity: 0.25;
       animation: orbit 10s linear infinite;
     }
-    .orbit-dot:nth-child(2) { animation-delay: -3.33s; }
-    .orbit-dot:nth-child(3) { animation-delay: -6.67s; }
     @keyframes orbit {
       from { transform: rotate(0deg)    translateX(52px) rotate(0deg); }
       to   { transform: rotate(360deg)  translateX(52px) rotate(-360deg); }
@@ -781,7 +779,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
+        <div class="arch-connector" id="conn-search" aria-hidden="true">
           <span class="packet packet-query"></span>
           <span class="packet packet-result"></span>
           <span class="arch-connector-label">queries &amp; results</span>
@@ -798,7 +796,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
+        <div class="arch-connector" id="conn-validate" aria-hidden="true">
           <span class="packet packet-req"></span>
           <span class="packet packet-res"></span>
           <span class="arch-connector-label">validated entry</span>
@@ -811,7 +809,7 @@
           </button>
         </div>
 
-        <div class="arch-connector" aria-hidden="true">
+        <div class="arch-connector" id="conn-pr" aria-hidden="true">
           <span class="packet packet-req"></span>
           <span class="arch-connector-label">PR for review</span>
         </div>
@@ -860,9 +858,6 @@
 
     <div class="prop-radial" role="region" aria-label="Agent properties. Click any dimension to learn more.">
       <div class="prop-radial-center" aria-hidden="true">
-        <span class="orbit-dot"></span>
-        <span class="orbit-dot"></span>
-        <span class="orbit-dot"></span>
         <span class="prop-radial-center-name">Grant</span>
         <span class="prop-radial-center-sub">AI agent</span>
       </div>
@@ -1110,6 +1105,69 @@
     }
 
     document.getElementById('run-output').innerHTML = html;
+    applyPacketRates(data.tools || []);
+    renderOrbitDots(data.tools || []);
+  }
+
+  // Maps connector IDs to the actor types that flow on them.
+  // Speed (animation-duration) encodes call frequency: more calls → faster packets.
+  const CONN_ACTORS = {
+    'conn-search':   ['tavily', 'web'],
+    'conn-validate': ['github-file'],
+    'conn-pr':       ['github-pr'],
+  };
+
+  function applyPacketRates(tools) {
+    const counts = { tavily: 0, web: 0, 'github-file': 0, 'github-pr': 0 };
+    for (const t of tools) {
+      const actor = (TOOLS[t.name] || {}).actor || 'grant';
+      if (actor === 'tavily') counts.tavily++;
+      else if (actor === 'web') counts.web++;
+      else if (actor === 'github') {
+        if (t.name === 'create_pull_request' || t.name === 'create_issue') counts['github-pr']++;
+        else counts['github-file']++;
+      }
+    }
+    for (const [id, actors] of Object.entries(CONN_ACTORS)) {
+      const count = actors.reduce((n, a) => n + (counts[a] || 0), 0);
+      const conn = document.getElementById(id);
+      if (!conn) continue;
+      const packets = conn.querySelectorAll('.packet');
+      if (count === 0) {
+        packets.forEach(p => { p.style.animation = 'none'; });
+      } else {
+        const dur = Math.max(0.8, 2.4 / count).toFixed(2) + 's';
+        packets.forEach(p => { p.style.animationDuration = dur; });
+      }
+    }
+  }
+
+  const ACTOR_COLOR = {
+    grant:  'var(--grant-color)',
+    github: 'var(--github-color)',
+    tavily: 'var(--tavily-color)',
+    web:    'var(--web-color)',
+  };
+
+  // Replaces static orbit dots with one dot per tool step (capped at 8).
+  // Dot color = actor type; distribution encodes the composition of the last run.
+  function renderOrbitDots(tools) {
+    const center = document.querySelector('.prop-radial-center');
+    if (!center) return;
+    center.querySelectorAll('.orbit-dot').forEach(d => d.remove());
+    const steps = tools.slice(0, 8);
+    if (!steps.length) return;
+    const period = 10; // seconds per orbit
+    const nameEl = center.querySelector('.prop-radial-center-name');
+    steps.forEach((tool, i) => {
+      const actor = (TOOLS[tool.name] || {}).actor || 'grant';
+      const dot = document.createElement('span');
+      dot.className = 'orbit-dot';
+      dot.style.background = ACTOR_COLOR[actor] || ACTOR_COLOR.grant;
+      dot.style.animationDelay = (-period * i / steps.length).toFixed(2) + 's';
+      dot.title = actor + ': ' + tool.name;
+      center.insertBefore(dot, nameEl);
+    });
   }
 
   // Simulation
