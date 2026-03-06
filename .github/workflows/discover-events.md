@@ -1,9 +1,10 @@
 ---
 description: |
   Proactively discovers notable student events and hackathons not yet in the
-  feed. Searches the web for upcoming events, filters against existing entries,
-  removes expired entries, and opens PRs for the best new discoveries
-  (max 3 per run). Human approves all changes — nothing merges automatically.
+  feed. First checks a curated list of known high-value sources directly, then
+  runs keyword searches for unknown organizers. Removes expired entries and
+  opens PRs for the best new discoveries (max 3 per run). Human approves all
+  changes — nothing merges automatically.
 
 strict: false
 
@@ -72,23 +73,44 @@ If any expired entries exist, collect their IDs. You will remove them in Step 5.
 
 ## Step 3: Search for new events
 
-**IMPORTANT**: Do NOT use `web-fetch` for discovery searches. Web-fetch on search engines returns nothing useful. Use only the `tavily` MCP tool for all searches in this step.
+Discovery runs in two passes. Run both before building your shortlist.
 
-### Step 3a: Tavily searches
+### Step 3a: Known-sources pass (web-fetch)
+
+Fetch each URL below directly with `web-fetch`. These are high-signal sources that reliably publish student programs regardless of what vocabulary they use. Do not skip any.
+
+| Source | URL |
+|--------|-----|
+| YC Events | `https://events.ycombinator.com` |
+| MLH Season schedule | `https://mlh.io/seasons/2026/events` |
+| a16z Programs | `https://a16z.com/programs` |
+| Anthropic student programs | `https://www.anthropic.com/careers` |
+| OpenAI student programs | `https://openai.com/careers` |
+| Google student programs | `https://buildyourfuture.withgoogle.com/programs` |
+| GitHub Education events | `https://education.github.com/events` |
+| HackMIT / MIT events | `https://hack.mit.edu` |
+
+For each page, extract any programs or events that look relevant. Note the name and URL — you will verify them in Step 3c.
+
+### Step 3b: Keyword-discovery pass (Tavily)
+
+**IMPORTANT**: Do NOT use `web-fetch` for these searches. Use only the `tavily` MCP tool.
 
 Call the tavily `search` tool with each of these queries. Do not skip any.
 
 1. `student hackathon 2026 free apply open`
 2. `"open to students" conference 2026 free OR fellowship application`
-3. `MLH hackathon 2026 upcoming schedule`
-4. `YC OR a16z OR Google OR OpenAI student event summit 2026`
+3. `student grant OR "build grant" 2026 apply individual cash stipend`
+4. `student residency OR cohort OR program 2026 free technical AI`
 
-### Step 3b: Verify each candidate
+These queries target unknown organizers and vocabulary not covered by the known-sources pass.
 
-For each promising result, use `web-fetch` to confirm:
+### Step 3c: Verify each candidate
+
+For each result from Steps 3a and 3b, use `web-fetch` to confirm:
 - The event page is real and the event has not already passed
 - Applications are open to students without a company (individual applicants)
-- It is free or very low cost (travel stipend events count; $50+ registration fees do not)
+- It is free or very low cost (travel stipend and grant events count; $50+ registration fees do not)
 - The event name is not already in your known names set
 
 Apply this quality bar:
@@ -108,9 +130,11 @@ Apply this quality bar:
 - Application page is broken or "coming soon"
 - Already in the known names set
 
-Keep a shortlist of the best candidates, up to **3 new events**.
+Keep a shortlist of the best candidates across both passes, up to **3 new events**.
 
 ## Step 4: Draft each new event entry
+
+For each candidate on your shortlist, note which pass discovered it (known-source or keyword) — include this in the PR body.
 
 For each candidate on your shortlist, produce a JSON object matching this schema exactly:
 
@@ -175,10 +199,11 @@ Write `agent/last-events-discovery.json` with the complete file content:
 ```json
 {
   "timestamp": "<current UTC time as ISO 8601>",
-  "queries": ["<query 1>", "<query 2>", "<query 3>", "<query 4>"],
+  "known_sources_checked": ["<url>", "..."],
+  "keyword_queries": ["<query 1>", "<query 2>", "<query 3>", "<query 4>"],
   "expired_removed": ["<id>", "..."],
   "discovered": [
-    { "name": "<name>", "date": "<YYYY-MM-DD>", "link": "<link>" }
+    { "name": "<name>", "date": "<YYYY-MM-DD>", "link": "<link>", "source": "known-source | keyword" }
   ],
   "pr_opened": <true | false>
 }

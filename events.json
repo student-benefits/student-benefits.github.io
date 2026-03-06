@@ -54,6 +54,20 @@
     "expires": "2026-05-20"
   },
   {
+    "id": "yc-summer-fellows-2026",
+    "name": "YC Summer Fellows Grants",
+    "organizer": "Y Combinator",
+    "category": "fellowship",
+    "date": "2026-06-15",
+    "date_end": "2026-08-22",
+    "location": "San Francisco, CA",
+    "remote": false,
+    "eligibility": "Undergraduate CS or engineering students worldwide; no company required",
+    "why": "$20k cash + $90k in compute credits to build a self-directed AI project in SF. YC picks 20–50 students. Application closes end of March.",
+    "link": "https://events.ycombinator.com/summer-grants-26",
+    "expires": "2026-08-22"
+  },
+  {
     "id": "yc-ai-startup-school-2026",
     "name": "YC AI Startup School",
     "organizer": "Y Combinator",
