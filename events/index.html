@@ -127,7 +127,8 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1.25rem;
-      min-height: 24px;
+      border-bottom: 1px solid var(--slate-800);
+      padding-bottom: 1rem;
     }
     .results-count { font-size: 0.8125rem; color: var(--slate-500); }
     .results-count strong { color: var(--slate-300); }
@@ -151,10 +152,12 @@
       padding: 1.125rem;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
+    .event-card { cursor: pointer; }
     .event-card:hover {
       border-color: rgba(129, 140, 248, 0.4);
       box-shadow: 0 8px 24px rgba(0,0,0,0.25);
     }
+    .event-card:hover .event-name { text-decoration: underline; text-underline-offset: 3px; }
     .event-card-top {
       display: flex;
       flex-wrap: wrap;
@@ -300,7 +303,9 @@
 
   <script>
     const CATEGORIES = ['All', 'conference', 'hackathon', 'fellowship', 'competition', 'summit'];
-    const ORG_PALETTE = ['#818cf8','#60a5fa','#34d399','#fbbf24','#f472b6','#fb923c','#a78bfa','#38bdf8'];
+    // Excludes #34d399 (remote pill green) and #fbbf24 (countdown amber)
+    // so organizer color never collides with semantic UI colors in the same card.
+    const ORG_PALETTE = ['#818cf8','#60a5fa','#c084fc','#e879f9','#f472b6','#fb923c','#a78bfa','#38bdf8'];
 
     let events = [];
     let activeCategory = 'All';
@@ -365,7 +370,7 @@
         ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
         : `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`;
 
-      return `<article class="event-card">
+      return `<article class="event-card" data-href="${escapeHtml(e.link)}" tabindex="0" role="link">
         <div class="event-card-top">
           <span class="event-organizer" style="color:${color}">${escapeHtml(e.organizer)}</span>
           <span class="event-cat">${escapeHtml(e.category)}</span>
@@ -401,8 +406,7 @@
         .map(function(c) {
           return `<button class="filter-tab" aria-pressed="${c === activeCategory}" data-cat="${escapeHtml(c)}">${c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}</button>`;
         }).join('');
-      const remoteBtn = `<button class="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
-      filterBar.innerHTML = tabs + remoteBtn;
+      filterBar.innerHTML = tabs;
     }
 
     function render() {
@@ -410,7 +414,8 @@
       const resultsBar = document.getElementById('results-bar');
       const content = document.getElementById('content');
       const label = filtered.length === 1 ? 'event' : 'events';
-      resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>`;
+      resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>` +
+        `<button class="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
 
       if (filtered.length > 0) {
         content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
@@ -421,8 +426,25 @@
 
     document.getElementById('filter-bar').addEventListener('click', function(e) {
       const tab = e.target.closest('.filter-tab');
-      if (tab) { activeCategory = tab.dataset.cat; renderFilters(); render(); return; }
-      if (e.target.closest('.remote-toggle')) { remoteOnly = !remoteOnly; renderFilters(); render(); }
+      if (tab) { activeCategory = tab.dataset.cat; renderFilters(); render(); }
+    });
+
+    document.getElementById('results-bar').addEventListener('click', function(e) {
+      if (e.target.closest('.remote-toggle')) { remoteOnly = !remoteOnly; render(); }
+    });
+
+    document.getElementById('content').addEventListener('click', function(e) {
+      const card = e.target.closest('.event-card');
+      if (!card || e.target.closest('a')) return;
+      window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
+    });
+
+    document.getElementById('content').addEventListener('keydown', function(e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const card = e.target.closest('.event-card');
+      if (!card) return;
+      e.preventDefault();
+      window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
     });
 
     fetch('../events.json')

@@ -206,10 +206,9 @@
     }
 
     .filter-tab[aria-pressed="true"] {
-      background: #fff;
-      color: var(--slate-900);
-      border-color: #fff;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      background: rgba(99, 102, 241, 0.1);
+      color: var(--indigo-300);
+      border-color: var(--indigo-400);
     }
 
     .results-bar {
@@ -289,6 +288,7 @@
       border-color: rgba(99, 102, 241, 0.5);
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
+    .card:hover .card-name { text-decoration: underline; text-underline-offset: 3px; }
 
     .card-body { padding: 1rem; flex-grow: 1; }
 
@@ -423,7 +423,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #4ade80;
+      background: var(--slate-500);
       flex-shrink: 0;
     }
 
@@ -602,11 +602,10 @@
     }
 
     function renderFilters() {
-      const freeOnlyToggle = `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
       const tabs = categories.map(function (cat) {
         return `<button aria-pressed="${cat === activeCategory}" class="filter-tab" data-cat="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`;
       }).join('');
-      filterBar.innerHTML = freeOnlyToggle + tabs;
+      filterBar.innerHTML = tabs;
     }
 
     function renderCard(b) {
@@ -634,6 +633,7 @@
       const label = count === 1 ? 'resource' : 'resources';
       let bar = `<span class="results-count">Found <strong>${count}</strong> ${label}</span>`;
       bar += `<div class="bar-right">`;
+      bar += `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
       bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
         <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Popular</option>
         <option value="alpha"${sortOrder === 'alpha' ? ' selected' : ''}>A-Z</option>
@@ -728,7 +728,9 @@
       window.open(card.dataset.href, '_blank', 'noopener,noreferrer');
     });
 
-    const CAT_PALETTE = ['#a78bfa','#60a5fa','#38bdf8','#fbbf24','#f472b6','#4ade80','#fb923c','#f87171','#34d399','#e879f9'];
+    // Excludes offer-type colors (#a78bfa trial, #60a5fa credits, #fbbf24 discount, #4ade80 free)
+    // so category badges never share a hue with an offer pill on the same card.
+    const CAT_PALETTE = ['#c084fc','#22d3ee','#38bdf8','#14b8a6','#f472b6','#e879f9','#fb923c','#f87171','#34d399','#818cf8'];
     // djb2-variant hash: maps any category name to a stable palette index
     function catColor(name) {
       let h = 0;
