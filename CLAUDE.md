@@ -55,6 +55,7 @@ AI-driven workflows live in `.github/workflows/`:
 |----------|---------|--------------|
 | `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
 | `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
+| `discover-events.md` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens PRs |
 | `check-links.yml` | Weekly (Sunday) or manual | Checks all benefit links, opens issue if broken/redirected |
 
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.

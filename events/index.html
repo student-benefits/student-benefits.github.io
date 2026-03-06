@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <link rel="icon" type="image/svg+xml" href="../public/favicon.svg">
+  <title>Events · Student Benefits Hub</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --indigo-400: #818cf8;
+      --indigo-300: #a5b4fc;
+      --amber-300: #fcd34d;
+      --amber-400: #fbbf24;
+      --font: system-ui, -apple-system, sans-serif;
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--slate-900);
+      color: #fff;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100dvh;
+    }
+
+    :focus-visible { outline: 2px solid var(--indigo-400); outline-offset: 2px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    .page { padding: 3rem 1rem; }
+    .container { max-width: 80rem; margin: 0 auto; }
+
+    /* Nav */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.875rem;
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-back:hover { color: #fff; }
+    .nav-back svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .nav-sep { color: var(--slate-700); }
+    .nav-current { font-size: 0.875rem; color: #fff; font-weight: 600; }
+
+    /* Header */
+    header { margin-bottom: 2rem; }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle { font-size: 0.9375rem; color: var(--slate-400); line-height: 1.5; }
+
+    /* Filters */
+    .filter-wrap { margin: 1.5rem 0; }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.375rem;
+    }
+    .filter-tab {
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      background: transparent;
+      color: var(--slate-400);
+      font-family: var(--font);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .filter-tab:hover { border-color: var(--slate-500); color: #fff; }
+    .filter-tab[aria-pressed="true"] {
+      border-color: var(--indigo-400);
+      color: var(--indigo-300);
+      background: rgba(129, 140, 248, 0.08);
+    }
+    .remote-toggle {
+      padding: 0.375rem 0.875rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(51, 65, 85, 0.7);
+      background: transparent;
+      color: var(--slate-400);
+      font-family: var(--font);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .remote-toggle:hover { border-color: var(--slate-500); color: #fff; }
+    .remote-toggle[aria-pressed="true"] {
+      border-color: #34d399;
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.08);
+    }
+
+    /* Results bar */
+    .results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      min-height: 24px;
+    }
+    .results-count { font-size: 0.8125rem; color: var(--slate-500); }
+    .results-count strong { color: var(--slate-300); }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 640px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+
+    /* Event card */
+    .event-card {
+      display: flex;
+      flex-direction: column;
+      background: rgba(30, 41, 59, 0.4);
+      border: 1px solid rgba(51, 65, 85, 0.5);
+      border-radius: var(--radius-lg);
+      padding: 1.125rem;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .event-card:hover {
+      border-color: rgba(129, 140, 248, 0.4);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .event-card-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.375rem;
+      margin-bottom: 0.75rem;
+    }
+    .event-organizer {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      background: rgba(51, 65, 85, 0.5);
+    }
+    .event-cat {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--slate-400);
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+      background: rgba(51, 65, 85, 0.3);
+      text-transform: capitalize;
+    }
+    .event-location-pill {
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 0.125rem 0.5rem;
+      border-radius: var(--radius-sm);
+    }
+    .event-location-pill--remote {
+      color: #34d399;
+      background: rgba(52, 211, 153, 0.1);
+    }
+    .event-location-pill--in-person {
+      color: var(--slate-400);
+      background: rgba(51, 65, 85, 0.3);
+    }
+    .event-name {
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.875rem;
+    }
+    .event-meta-line {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.8rem;
+      color: var(--slate-400);
+    }
+    .event-meta-line svg { width: 13px; height: 13px; flex-shrink: 0; opacity: 0.7; }
+    .event-why {
+      font-size: 0.8125rem;
+      color: var(--slate-300);
+      line-height: 1.55;
+      font-style: italic;
+      flex-grow: 1;
+      margin-bottom: 1rem;
+      padding-left: 0.625rem;
+      border-left: 2px solid rgba(129, 140, 248, 0.4);
+    }
+    .event-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .event-countdown {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .event-countdown--soon { color: var(--amber-400); }
+    .event-countdown--upcoming { color: var(--slate-500); }
+    .event-apply {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.375rem 0.875rem;
+      background: rgba(129, 140, 248, 0.1);
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      border-radius: var(--radius-sm);
+      color: var(--indigo-300);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .event-apply:hover {
+      background: rgba(129, 140, 248, 0.18);
+      border-color: rgba(129, 140, 248, 0.5);
+    }
+
+    /* Empty state */
+    .empty {
+      text-align: center;
+      padding: 5rem 1rem;
+      color: var(--slate-500);
+    }
+    .empty h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--slate-400); }
+
+    /* Footer */
+    footer { margin-top: 3rem; }
+    footer p { color: var(--slate-500); font-size: 0.875rem; }
+    footer a { color: var(--indigo-400); text-decoration: underline; text-underline-offset: 2px; transition: color 0.15s; }
+    footer a:hover { color: var(--indigo-300); }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="container">
+
+      <nav class="site-nav" aria-label="Breadcrumb">
+        <a href="/" class="nav-back">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          Student Benefits Hub
+        </a>
+        <span class="nav-sep" aria-hidden="true">·</span>
+        <span class="nav-current">Events</span>
+      </nav>
+
+      <header>
+        <h1>Events worth your time</h1>
+        <p class="subtitle">Hackathons, conferences, and fellowships — curated, not aggregated.<br>If it's here, it cleared the bar.</p>
+      </header>
+
+      <div class="filter-wrap">
+        <div id="filter-bar" class="filter-bar" role="group" aria-label="Filter events"></div>
+      </div>
+
+      <div id="results-bar" class="results-bar"></div>
+
+      <div id="content"></div>
+
+      <footer>
+        <p>Built by <a href="https://github.com/jonasneves" target="_blank" rel="noopener noreferrer">jonasneves</a></p>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const CATEGORIES = ['All', 'conference', 'hackathon', 'fellowship', 'competition', 'summit'];
+    const ORG_PALETTE = ['#818cf8','#60a5fa','#34d399','#fbbf24','#f472b6','#fb923c','#a78bfa','#38bdf8'];
+
+    let events = [];
+    let activeCategory = 'All';
+    let remoteOnly = false;
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // djb2-variant: maps organizer name to stable palette index
+    function orgColor(name) {
+      let h = 0;
+      for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;
+      return ORG_PALETTE[h % ORG_PALETTE.length];
+    }
+
+    function fmtDate(date, dateEnd) {
+      const opts = { month: 'short', day: 'numeric', year: 'numeric' };
+      const start = new Date(date + 'T12:00:00');
+      if (!dateEnd || dateEnd === date) {
+        return start.toLocaleDateString('en-US', opts);
+      }
+      const end = new Date(dateEnd + 'T12:00:00');
+      if (start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth()) {
+        return start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
+          '–' + end.getDate() + ', ' + end.getFullYear();
+      }
+      return start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
+        ' – ' + end.toLocaleDateString('en-US', opts);
+    }
+
+    function countdown(date) {
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      const target = new Date(date + 'T00:00:00');
+      const days = Math.round((target - now) / 86400000);
+      if (days === 0) return { text: 'Today', cls: 'event-countdown--soon' };
+      if (days === 1) return { text: 'Tomorrow', cls: 'event-countdown--soon' };
+      if (days <= 14) return { text: days + ' days away', cls: 'event-countdown--soon' };
+      return { text: days + ' days away', cls: 'event-countdown--upcoming' };
+    }
+
+    function isExpired(e) {
+      const expires = new Date((e.expires || e.date_end || e.date) + 'T23:59:59');
+      return expires < new Date();
+    }
+
+    function getFiltered() {
+      return events
+        .filter(function (e) { return !isExpired(e); })
+        .filter(function (e) { return activeCategory === 'All' || e.category === activeCategory; })
+        .filter(function (e) { return !remoteOnly || e.remote; })
+        .sort(function (a, b) { return a.date.localeCompare(b.date); });
+    }
+
+    function renderCard(e) {
+      const color = orgColor(e.organizer);
+      const cd = countdown(e.date);
+      const locationPill = e.remote
+        ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
+        : `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`;
+
+      return `<article class="event-card">
+        <div class="event-card-top">
+          <span class="event-organizer" style="color:${color}">${escapeHtml(e.organizer)}</span>
+          <span class="event-cat">${escapeHtml(e.category)}</span>
+          ${locationPill}
+        </div>
+        <h3 class="event-name">${escapeHtml(e.name)}</h3>
+        <div class="event-meta">
+          <span class="event-meta-line">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            ${escapeHtml(fmtDate(e.date, e.date_end))}
+          </span>
+          <span class="event-meta-line">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            ${escapeHtml(e.eligibility)}
+          </span>
+        </div>
+        <p class="event-why">${escapeHtml(e.why)}</p>
+        <div class="event-footer">
+          <span class="event-countdown ${escapeHtml(cd.cls)}">${escapeHtml(cd.text)}</span>
+          <a class="event-apply" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
+            Apply
+            <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </article>`;
+    }
+
+    function renderFilters() {
+      const filterBar = document.getElementById('filter-bar');
+      const usedCats = new Set(events.filter(function(e) { return !isExpired(e); }).map(function(e) { return e.category; }));
+      const tabs = CATEGORIES
+        .filter(function(c) { return c === 'All' || usedCats.has(c); })
+        .map(function(c) {
+          return `<button class="filter-tab" aria-pressed="${c === activeCategory}" data-cat="${escapeHtml(c)}">${c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1)}</button>`;
+        }).join('');
+      const remoteBtn = `<button class="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
+      filterBar.innerHTML = tabs + remoteBtn;
+    }
+
+    function render() {
+      const filtered = getFiltered();
+      const resultsBar = document.getElementById('results-bar');
+      const content = document.getElementById('content');
+      const label = filtered.length === 1 ? 'event' : 'events';
+      resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>`;
+
+      if (filtered.length > 0) {
+        content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
+      } else {
+        content.innerHTML = `<div class="empty"><h2>Nothing upcoming</h2><p>Check back soon — new events get added when they clear the bar.</p></div>`;
+      }
+    }
+
+    document.getElementById('filter-bar').addEventListener('click', function(e) {
+      const tab = e.target.closest('.filter-tab');
+      if (tab) { activeCategory = tab.dataset.cat; renderFilters(); render(); return; }
+      if (e.target.closest('.remote-toggle')) { remoteOnly = !remoteOnly; renderFilters(); render(); }
+    });
+
+    fetch('../events.json')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        events = data;
+        renderFilters();
+        render();
+      });
+  </script>
+</body>
+</html>
