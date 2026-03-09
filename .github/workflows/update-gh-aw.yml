@@ -49,7 +49,7 @@ jobs:
           LATEST: ${{ steps.versions.outputs.latest }}
         run: |
           if [ -z "$(git diff --name-only)" ]; then
-            echo "No file changes after recompile — skipping PR."
+            echo "No file changes after recompile -- skipping PR."
             exit 0
           fi
 
@@ -57,7 +57,7 @@ jobs:
 
           # Don't open a duplicate PR if one already exists
           if gh pr view "$BRANCH" --json state -q '.state' 2>/dev/null | grep -q OPEN; then
-            echo "PR for $BRANCH already open — skipping."
+            echo "PR for $BRANCH already open -- skipping."
             exit 0
           fi
 
@@ -69,15 +69,18 @@ jobs:
           git push origin "$BRANCH"
 
           gh pr create \
-            --title "Upgrade gh-aw $CURRENT → $LATEST" \
+            --title "Upgrade gh-aw $CURRENT to $LATEST" \
             --base main \
             --head "$BRANCH" \
-            --body "Automated recompile of all workflow lock files with gh-aw $LATEST.
+            --body "$(cat <<EOF
+          Automated recompile of all workflow lock files with gh-aw $LATEST.
 
-## Changes
-- Recompiled \`add-benefit.lock.yml\`
-- Recompiled \`discover-benefits.lock.yml\`
-- Recompiled \`discover-events.lock.yml\`
-- Recompiled \`maintain-benefits.lock.yml\`
+          ## Changes
+          - Recompiled \`add-benefit.lock.yml\`
+          - Recompiled \`discover-benefits.lock.yml\`
+          - Recompiled \`discover-events.lock.yml\`
+          - Recompiled \`maintain-benefits.lock.yml\`
 
-Review the diff to confirm no unexpected behavioural changes before merging."
+          Review the diff to confirm no unexpected behavioural changes before merging.
+          EOF
+          )"
