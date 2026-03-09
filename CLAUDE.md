@@ -20,9 +20,11 @@ and renders a searchable, filterable card grid. Deployed via GitHub Pages.
 **Data integrity.** All benefit data lives in `benefits.json` — one source of
 truth, never hardcoded in HTML.
 
-**Active discovery, not passive curation.** Benefits enter through two paths:
-humans submit issues (pull), and the `discover-benefits` workflow searches the
-web weekly (push). The system surfaces programs people haven't thought to add.
+**Active discovery, not passive curation.** Content enters through multiple
+paths: humans submit issues (pull); `discover-benefits` searches the web weekly
+for new student programs (push); `discover-events` finds upcoming student events
+and removes expired ones automatically (push + self-maintenance). The system
+surfaces what people haven't thought to add and keeps itself current.
 
 **Automation with human oversight.** Workflows handle validation and PR
 creation. Humans (or Claude) own the merge decision. Grant cannot publish
