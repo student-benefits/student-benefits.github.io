@@ -11,9 +11,27 @@ A community-curated directory of student discounts, free tiers, and perks. The
 site is a single static HTML/JS page (`index.html`) that reads from `benefits.json`
 and renders a searchable, filterable card grid. Deployed via GitHub Pages.
 
-The primary contribution flow is fully automated via GitHub Agentic Workflows
-(gh-aw): users open an issue, a workflow validates and creates a PR, and a
-human (or Claude) reviews it.
+### Core values
+
+**Specificity.** Descriptions must say exactly what students get. Vague copy
+("Student discount available") is rejected in favor of concrete offers
+("Free Pro plan for 1 year").
+
+**Data integrity.** All benefit data lives in `benefits.json` — one source of
+truth, never hardcoded in HTML.
+
+**Active discovery, not passive curation.** Benefits enter through two paths:
+humans submit issues (pull), and the `discover-benefits` workflow searches the
+web weekly (push). The system surfaces programs people haven't thought to add.
+
+**Automation with human oversight.** Workflows handle validation and PR
+creation. Humans (or Claude) own the merge decision. Grant cannot publish
+directly — the merge is the trust boundary.
+
+**Educational transparency.** The `/agent/` page exposes run logs, tool traces,
+and architecture. The seams are visible by design so the system can be
+understood and replicated. When working on this project, preserve that
+transparency: keep workflows documented, keep the agent page accurate.
 
 ---
 
