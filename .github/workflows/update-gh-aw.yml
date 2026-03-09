@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  issues: write
 
 jobs:
   update:
@@ -26,42 +25,58 @@ jobs:
           echo "latest=$LATEST" >> $GITHUB_OUTPUT
           echo "Current: $CURRENT, Latest: $LATEST"
 
-      - name: Open issue if behind
+      - name: Install gh-aw ${{ steps.versions.outputs.latest }}
         if: steps.versions.outputs.current != steps.versions.outputs.latest
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: gh extension install github/gh-aw
+
+      - name: Recompile all workflows
+        if: steps.versions.outputs.current != steps.versions.outputs.latest
+        run: |
+          gh aw compile \
+            .github/workflows/add-benefit.md \
+            .github/workflows/discover-benefits.md \
+            .github/workflows/discover-events.md \
+            .github/workflows/maintain-benefits.md
+
+      - name: Open PR
+        if: steps.versions.outputs.current != steps.versions.outputs.latest
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           CURRENT: ${{ steps.versions.outputs.current }}
           LATEST: ${{ steps.versions.outputs.latest }}
         run: |
-          # Don't open a duplicate issue if one already exists for this version
-          EXISTING=$(gh issue list \
-            --repo "$GITHUB_REPOSITORY" \
-            --label "agentic-workflows" \
-            --search "gh-aw $LATEST in:title" \
-            --json number \
-            --jq 'length')
-
-          if [ "$EXISTING" -gt 0 ]; then
-            echo "Issue for $LATEST already exists -- skipping."
+          if [ -z "$(git diff --name-only)" ]; then
+            echo "No file changes after recompile -- skipping PR."
             exit 0
           fi
 
-          gh issue create \
+          BRANCH="update-gh-aw-${LATEST}"
+
+          if gh pr list --repo "$GITHUB_REPOSITORY" --head "$BRANCH" --json number --jq 'length' | grep -q '^[1-9]'; then
+            echo "PR for $BRANCH already open -- skipping."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}"
+          git checkout -b "$BRANCH"
+          git add .github/workflows/*.lock.yml .github/aw/
+          git commit -m "Upgrade gh-aw from $CURRENT to $LATEST"
+          git push origin "$BRANCH"
+
+          gh pr create \
             --title "Upgrade gh-aw $CURRENT to $LATEST" \
-            --label "agentic-workflows" \
-            --body "gh-aw $LATEST is available (currently on $CURRENT).
+            --base main \
+            --head "$BRANCH" \
+            --body "Automated recompile of all workflow lock files with gh-aw $LATEST.
 
-          To upgrade, run locally:
+          ## Changes
+          - Recompiled \`add-benefit.lock.yml\`
+          - Recompiled \`discover-benefits.lock.yml\`
+          - Recompiled \`discover-events.lock.yml\`
+          - Recompiled \`maintain-benefits.lock.yml\`
 
-          \`\`\`sh
-          gh extension upgrade aw
-          gh aw compile \\
-            .github/workflows/add-benefit.md \\
-            .github/workflows/discover-benefits.md \\
-            .github/workflows/discover-events.md \\
-            .github/workflows/maintain-benefits.md
-          \`\`\`
-
-          Then commit and push the updated lock files.
-
-          See the [gh-aw release notes](https://github.com/github/gh-aw/releases/tag/$LATEST) for what changed."
+          Review the diff to confirm no unexpected behavioural changes before merging."

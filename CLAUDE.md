@@ -85,7 +85,7 @@ AI-driven workflows live in `.github/workflows/`:
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
 To change a workflow, edit the `.md` source and run `gh aw compile`.
 
-`update-gh-aw.yml` runs every Tuesday, checks for a newer gh-aw release, and opens an issue with upgrade instructions if behind. It is a plain `.yml` — do not compile it with `gh aw`.
+`update-gh-aw.yml` runs every Tuesday, checks for a newer gh-aw release, recompiles all lock files, and opens a PR. It is a plain `.yml` — do not compile it with `gh aw`. Requires a `GH_PAT` repository secret (PAT with `workflow` scope).
 
 ---
 
