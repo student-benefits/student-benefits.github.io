@@ -1,4 +1,5 @@
 ---
+name: Discover Student Events
 description: |
   Proactively discovers notable student events and hackathons not yet in the
   feed. First checks a curated list of known high-value sources directly, then

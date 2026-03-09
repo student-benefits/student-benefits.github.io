@@ -1,7 +1,7 @@
 name: Report Broken or Changed Benefit
 description: Report a benefit that has a broken link, changed terms, or no longer exists
 title: "[Report]: "
-labels: ["report", "needs-review"]
+labels: ["link-health", "needs-review"]
 body:
   - type: input
     id: benefit

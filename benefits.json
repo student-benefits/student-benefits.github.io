@@ -72,7 +72,7 @@
     "repo": "JetBrains/intellij-community"
   },
   {
-    "id": "perplexity",
+    "id": "perplexity-pro",
     "name": "Perplexity Pro",
     "category": "AI Tools",
     "offer_type": "discount",
@@ -88,7 +88,7 @@
   {
     "id": "1password",
     "name": "1Password",
-    "category": "Domains & Security",
+    "category": "Security",
     "offer_type": "free",
     "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent and CLI integration.",
     "link": "https://1password.com/developers/students",
@@ -100,7 +100,7 @@
     "popularity": 8
   },
   {
-    "id": "azure-credits",
+    "id": "microsoft-azure",
     "name": "Microsoft Azure",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
@@ -186,8 +186,8 @@
   },
   {
     "id": "namecheap",
-    "name": "Namecheap Free Domain",
-    "category": "Domains & Security",
+    "name": "Namecheap",
+    "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
     "link": "https://nc.me/",
@@ -450,7 +450,7 @@
   },
   {
     "id": "cloudflare-workers",
-    "name": "Cloudflare Workers (Student)",
+    "name": "Cloudflare Workers",
     "category": "Cloud & Hosting",
     "offer_type": "free",
     "description": "Free Workers Paid Plan for 1 year. Includes Workers, Pages Functions, KV, and Durable Objects.",
@@ -491,7 +491,7 @@
     "popularity": 8
   },
   {
-    "id": "sketch-education",
+    "id": "sketch",
     "name": "Sketch",
     "category": "Design",
     "offer_type": "free",
@@ -728,7 +728,7 @@
     "popularity": 6
   },
   {
-    "id": "gdsc",
+    "id": "google-student-clubs",
     "name": "Google Developer Student Clubs",
     "category": "Learning",
     "offer_type": "free",

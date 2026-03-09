@@ -25,9 +25,9 @@
 # validates the benefit, checks for duplicates against benefits.json,
 # and creates a PR with the new entry if valid.
 #
-# frontmatter-hash: e76b2732d31f70168df6e7bb1b4063b33d96614e6043a7495a9b28b409a04cd5
+# frontmatter-hash: 4b62fa4605cb0cf048de6c9338f3300f10997004bbc61c55eaa869670c3a12c8
 
-name: "Add Benefit from Issue"
+name: "Add Benefit"
 "on":
   issues:
     # lock-for-agent: true # Lock-for-agent processed as issue locking in activation job
@@ -40,7 +40,7 @@ permissions: {}
 concurrency:
   group: "gh-aw-${{ github.workflow }}-${{ github.event.issue.number }}"
 
-run-name: "Add Benefit from Issue"
+run-name: "Add Benefit"
 
 jobs:
   activation:
@@ -158,7 +158,7 @@ jobs:
               version: "",
               agent_version: "0.0.410",
               cli_version: "v0.45.0",
-              workflow_name: "Add Benefit from Issue",
+              workflow_name: "Add Benefit",
               experimental: false,
               supports_tools_allowlist: true,
               supports_http_transport: true,
@@ -266,7 +266,7 @@ jobs:
               "name": "add_comment"
             },
             {
-              "description": "Create a new GitHub pull request to propose code changes. Use this after making file edits to submit them for review and merging. The PR will be created from the current branch with your committed changes. For code review comments on an existing PR, use create_pull_request_review_comment instead. CONSTRAINTS: Maximum 1 pull request(s) can be created. Title will be prefixed with \"Add benefit: \". Labels [new-benefit] will be automatically added.",
+              "description": "Create a new GitHub pull request to propose code changes. Use this after making file edits to submit them for review and merging. The PR will be created from the current branch with your committed changes. For code review comments on an existing PR, use create_pull_request_review_comment instead. CONSTRAINTS: Maximum 1 pull request(s) can be created. Title will be prefixed with \"Add Benefit: \". Labels [new-benefit] will be automatically added.",
               "inputSchema": {
                 "additionalProperties": false,
                 "properties": {
@@ -914,7 +914,7 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
           GH_AW_NOOP_MAX: 1
-          GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+          GH_AW_WORKFLOW_NAME: "Add Benefit"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -927,7 +927,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+          GH_AW_WORKFLOW_NAME: "Add Benefit"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -940,7 +940,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+          GH_AW_WORKFLOW_NAME: "Add Benefit"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_WORKFLOW_ID: "add-benefit"
@@ -958,7 +958,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+          GH_AW_WORKFLOW_NAME: "Add Benefit"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
@@ -975,7 +975,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+          GH_AW_WORKFLOW_NAME: "Add Benefit"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -1018,7 +1018,7 @@ jobs:
       - name: Setup threat detection
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          WORKFLOW_NAME: "Add Benefit from Issue"
+          WORKFLOW_NAME: "Add Benefit"
           WORKFLOW_DESCRIPTION: "Processes new student benefit submissions from issues. Reads the issue,\nvalidates the benefit, checks for duplicates against benefits.json,\nand creates a PR with the new entry if valid."
           HAS_PATCH: ${{ needs.agent.outputs.has_patch }}
         with:
@@ -1124,7 +1124,7 @@ jobs:
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_ENGINE_MODEL: "claude-sonnet-4"
       GH_AW_WORKFLOW_ID: "add-benefit"
-      GH_AW_WORKFLOW_NAME: "Add Benefit from Issue"
+      GH_AW_WORKFLOW_NAME: "Add Benefit"
     outputs:
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}
@@ -1177,7 +1177,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"add_comment\":{\"max\":1},\"close_issue\":{\"max\":1},\"create_pull_request\":{\"base_branch\":\"${{ github.ref_name }}\",\"labels\":[\"new-benefit\"],\"max\":1,\"max_patch_size\":1024,\"title_prefix\":\"Add benefit: \"},\"missing_data\":{},\"missing_tool\":{}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"add_comment\":{\"max\":1},\"close_issue\":{\"max\":1},\"create_pull_request\":{\"base_branch\":\"${{ github.ref_name }}\",\"labels\":[\"new-benefit\"],\"max\":1,\"max_patch_size\":1024,\"title_prefix\":\"Add Benefit: \"},\"missing_data\":{},\"missing_tool\":{}}"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |

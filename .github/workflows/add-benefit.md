@@ -1,4 +1,5 @@
 ---
+name: Add Benefit
 description: |
   Processes new student benefit submissions from issues. Reads the issue,
   validates the benefit, checks for duplicates against benefits.json,
@@ -20,7 +21,7 @@ permissions: read-all
 
 safe-outputs:
   create-pull-request:
-    title-prefix: "Add benefit: "
+    title-prefix: "Add Benefit: "
     labels: [new-benefit]
   add-comment:
   close-issue:

@@ -1,4 +1,5 @@
 ---
+name: Discover Student Benefits
 description: |
   Proactively discovers new student benefits not yet in the directory. First
   checks curated aggregator and program pages directly, then runs keyword
