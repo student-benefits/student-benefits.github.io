@@ -21,17 +21,19 @@
 #
 # For more information: https://github.github.com/gh-aw/introduction/overview/
 #
-# Proactively discovers new student benefits not yet in the directory.
-# Searches the web for popular student discounts, filters against existing
-# entries and previously-rejected programs, and creates issues for the best
-# new discoveries (max 5 per run).
+# Proactively discovers new student benefits not yet in the directory. First
+# checks curated aggregator and program pages directly, then runs keyword
+# searches for unknown vendors. Filters against existing entries and
+# previously-rejected programs, and creates issues for the best new
+# discoveries (max 5 per run).
 #
-# frontmatter-hash: 25c955fdba3cb8cd950413a50a5534fe5f471d222ce3d678736c22551f37d42e
+# frontmatter-hash: 6cbefe60f3cbd36bcf278041c0fa46f9a3306f7f46834e1b8d639aac8aa1c0a3
 
-name: "Discover New Student Benefits"
+name: "Discover Student Benefits"
 "on":
   schedule:
-  - cron: "0 9 * * 1"
+  - cron: "32 22 * * 1"
+    # Friendly format: weekly on monday (scattered)
   workflow_dispatch:
 
 permissions: {}
@@ -39,7 +41,7 @@ permissions: {}
 concurrency:
   group: "gh-aw-${{ github.workflow }}"
 
-run-name: "Discover New Student Benefits"
+run-name: "Discover Student Benefits"
 
 jobs:
   activation:
@@ -143,7 +145,7 @@ jobs:
               version: "",
               agent_version: "0.0.410",
               cli_version: "v0.45.0",
-              workflow_name: "Discover New Student Benefits",
+              workflow_name: "Discover Student Benefits",
               experimental: false,
               supports_tools_allowlist: true,
               supports_http_transport: true,
@@ -833,7 +835,7 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
           GH_AW_NOOP_MAX: 1
-          GH_AW_WORKFLOW_NAME: "Discover New Student Benefits"
+          GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -846,7 +848,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Benefits"
+          GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -859,7 +861,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Benefits"
+          GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_WORKFLOW_ID: "discover-benefits"
@@ -877,7 +879,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Benefits"
+          GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
@@ -925,8 +927,8 @@ jobs:
       - name: Setup threat detection
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          WORKFLOW_NAME: "Discover New Student Benefits"
-          WORKFLOW_DESCRIPTION: "Proactively discovers new student benefits not yet in the directory.\nSearches the web for popular student discounts, filters against existing\nentries and previously-rejected programs, and creates issues for the best\nnew discoveries (max 5 per run)."
+          WORKFLOW_NAME: "Discover Student Benefits"
+          WORKFLOW_DESCRIPTION: "Proactively discovers new student benefits not yet in the directory. First\nchecks curated aggregator and program pages directly, then runs keyword\nsearches for unknown vendors. Filters against existing entries and\npreviously-rejected programs, and creates issues for the best new\ndiscoveries (max 5 per run)."
           HAS_PATCH: ${{ needs.agent.outputs.has_patch }}
         with:
           script: |
@@ -1004,7 +1006,7 @@ jobs:
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_ENGINE_MODEL: "claude-sonnet-4"
       GH_AW_WORKFLOW_ID: "discover-benefits"
-      GH_AW_WORKFLOW_NAME: "Discover New Student Benefits"
+      GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
     outputs:
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}

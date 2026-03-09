@@ -22,13 +22,14 @@
 # For more information: https://github.github.com/gh-aw/introduction/overview/
 #
 # Proactively discovers notable student events and hackathons not yet in the
-# feed. Searches the web for upcoming events, filters against existing entries,
-# removes expired entries, and opens PRs for the best new discoveries
-# (max 3 per run). Human approves all changes — nothing merges automatically.
+# feed. First checks a curated list of known high-value sources directly, then
+# runs keyword searches for unknown organizers. Removes expired entries and
+# opens PRs for the best new discoveries (max 3 per run). Human approves all
+# changes — nothing merges automatically.
 #
-# frontmatter-hash: 31b1fb303e28fe85ba115a47658a3ec3a6f3c8a6537df322069f62843039af33
+# frontmatter-hash: 91a1ae75c52d9e65a199a72344d23277998600e869fe7ea24f2cf762ae4882ba
 
-name: "Discover New Student Events"
+name: "Discover Student Events"
 "on":
   schedule:
   - cron: "7 6 * * 3"
@@ -40,7 +41,7 @@ permissions: {}
 concurrency:
   group: "gh-aw-${{ github.workflow }}"
 
-run-name: "Discover New Student Events"
+run-name: "Discover Student Events"
 
 jobs:
   activation:
@@ -144,7 +145,7 @@ jobs:
               version: "",
               agent_version: "0.0.410",
               cli_version: "v0.45.0",
-              workflow_name: "Discover New Student Events",
+              workflow_name: "Discover Student Events",
               experimental: false,
               supports_tools_allowlist: true,
               supports_http_transport: true,
@@ -824,7 +825,7 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
           GH_AW_NOOP_MAX: 1
-          GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+          GH_AW_WORKFLOW_NAME: "Discover Student Events"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -837,7 +838,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+          GH_AW_WORKFLOW_NAME: "Discover Student Events"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -850,7 +851,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+          GH_AW_WORKFLOW_NAME: "Discover Student Events"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_WORKFLOW_ID: "discover-events"
@@ -868,7 +869,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+          GH_AW_WORKFLOW_NAME: "Discover Student Events"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_MESSAGE: ${{ steps.noop.outputs.noop_message }}
@@ -885,7 +886,7 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
           GH_AW_AGENT_OUTPUT: ${{ env.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+          GH_AW_WORKFLOW_NAME: "Discover Student Events"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -930,8 +931,8 @@ jobs:
       - name: Setup threat detection
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
         env:
-          WORKFLOW_NAME: "Discover New Student Events"
-          WORKFLOW_DESCRIPTION: "Proactively discovers notable student events and hackathons not yet in the\nfeed. Searches the web for upcoming events, filters against existing entries,\nremoves expired entries, and opens PRs for the best new discoveries\n(max 3 per run). Human approves all changes — nothing merges automatically."
+          WORKFLOW_NAME: "Discover Student Events"
+          WORKFLOW_DESCRIPTION: "Proactively discovers notable student events and hackathons not yet in the\nfeed. First checks a curated list of known high-value sources directly, then\nruns keyword searches for unknown organizers. Removes expired entries and\nopens PRs for the best new discoveries (max 3 per run). Human approves all\nchanges — nothing merges automatically."
           HAS_PATCH: ${{ needs.agent.outputs.has_patch }}
         with:
           script: |
@@ -1011,7 +1012,7 @@ jobs:
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_ENGINE_MODEL: "claude-sonnet-4"
       GH_AW_WORKFLOW_ID: "discover-events"
-      GH_AW_WORKFLOW_NAME: "Discover New Student Events"
+      GH_AW_WORKFLOW_NAME: "Discover Student Events"
     outputs:
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}

@@ -1,10 +1,11 @@
 ---
+name: Maintain Benefits
 description: |
   Weekly maintenance pass over existing benefits.json entries. Checks link
-  health for every benefit, then applies the quality bar (specificity, self-serve,
-  direct student signup link, offer type accuracy) to flag entries that would
-  not pass today's review checklist. Opens or updates a single consolidated
-  issue with both categories of findings. Replaces check-links.yml.
+  health and quality bar for every benefit, then fixes each finding directly:
+  updates broken or redirected links, corrects offer_type mismatches, and
+  removes entries for programs that no longer exist. Opens a PR with all
+  changes. Human approves the merge — nothing lands automatically.
 
 strict: false
 
@@ -20,13 +21,23 @@ on:
 permissions: read-all
 
 safe-outputs:
-  create-issue:
-    labels: [link-health, needs-review]
+  create-pull-request:
+    base-branch: main
+  close-issue:
+
+mcp-servers:
+  tavily:
+    command: npx
+    args: ["-y", "@tavily/mcp-server"]
+    env:
+      TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
+    allowed: ["search"]
 
 tools:
   github:
-    toolsets: [issues, repos]
+    toolsets: [issues, pull_requests, repos]
   web-fetch:
+  edit:
 
 network:
   allowed:
@@ -39,16 +50,16 @@ network:
     - "*.dev"
     - "*.net"
 
-timeout-minutes: 30
+timeout-minutes: 45
 ---
 
 # Maintain Benefits
 
-You audit all existing `benefits.json` entries for link health and quality, then open or update a single consolidated GitHub issue with the findings.
+You audit all existing `benefits.json` entries for link health and quality, fix every finding you can, and open a PR with the changes. You do not open issues — findings go directly to a PR.
 
 ## Step 1: Read existing data
 
-Read `benefits.json` and `categories.json` from the repository.
+Read `benefits.json` from the repository.
 
 Note today's UTC date (ISO 8601).
 
@@ -57,59 +68,80 @@ Note today's UTC date (ISO 8601).
 For each benefit in `benefits.json`, fetch its `link` with `web-fetch`. Classify each result:
 
 - **Broken**: fetch fails (network error, DNS failure, or the returned page clearly indicates a 404 / "not found"). Skip 403 responses — that is commonly bot-blocking, not a broken page.
-- **Redirected**: the final URL's hostname differs from the original URL's hostname (cross-domain redirect, likely a moved or acquired product). Same-domain path changes are not redirects.
+- **Redirected**: the final URL's hostname differs from the original URL's hostname (cross-domain redirect). Same-domain path changes are not redirects.
 - **Healthy**: anything else.
 
-Collect broken and redirected benefits. Rate-limit to one request per second to avoid triggering bot-blocking.
+Collect broken and redirected benefits. Rate-limit to one request per second.
 
 ## Step 3: Quality review
 
-For each benefit in `benefits.json`, apply the quality bar. Treat link health from Step 2 as one input — a broken link is automatic failure regardless of other criteria.
+For each benefit in `benefits.json`, apply the quality bar. Only flag when the violation is unambiguous. If you are uncertain, skip it.
 
-Only flag a benefit when the violation is unambiguous. If you are uncertain, skip it.
+1. **Specific offer**: description must contain at least one concrete signal — a percentage, a dollar or credit amount, a plan name, or a duration. Flag if none are present and the description reads as a generic statement.
+2. **Direct signup link**: flag only if the URL path is exactly `/` or `/home`, or the subdomain is clearly non-enrollment (`support.`, `docs.`, `help.`, `blog.`) AND the path does not contain an enrollment keyword (`/edu`, `/education`, `/student`, `/students`, `/enrollment`). URL structure only — do not flag based on page content.
+3. **Self-serve**: flag only if the `description` itself contains language like "through your university", "ask your institution", or "contact IT".
+4. **Offer type accuracy**: flag only clear mismatches — description says "% off" or "discount" but `offer_type` is `free`; or description says "free" but `offer_type` is `discount`.
+5. **Description length**: flag if `description` exceeds 120 characters (mechanical count).
 
-1. **Specific offer**: description must contain at least one concrete signal — a percentage, a dollar or credit amount, a plan name, or a duration. Flag if the description contains none of these and reads as a generic statement (e.g. "Student discount available", "Free access through your university"). Do not flag if the description is short but still names a concrete plan.
-2. **Direct signup link**: flag only if the URL path is exactly `/` or `/home` (root homepage), or the subdomain is clearly non-enrollment (e.g. `support.`, `docs.`, `help.`, `blog.`). Do not flag based on page content — URL structure only.
-3. **Self-serve**: flag only if the `description` itself contains language like "through your university", "ask your institution", or "contact IT". Do not fetch the page to make this determination.
-4. **Offer type accuracy**: `offer_type` must match what the description says. Flag only clear mismatches: description says "% off" or "discount" but `offer_type` is `free`; description says "free" but `offer_type` is `discount`.
-5. **Description length**: `description` is ≤ 120 characters. Flag if over — this is mechanical, count the characters.
+## Step 4: Fix each finding
 
-For each flagged benefit, record which criterion failed and a brief reason.
+Work through every finding from Steps 2 and 3. For each one, attempt a fix.
 
-## Step 4: Open or update the maintenance issue
+### Broken or redirected links
 
-Check for an existing open GitHub issue labeled `link-health`.
+Use the Tavily `search` tool with a query like `"{benefit name}" student discount signup`. Then use `web-fetch` to verify the top result.
 
-Build the issue body using this format:
+- If a valid student signup page is found: update `link` to the correct URL.
+- If the program no longer exists (no student page found after search): remove the entire entry from `benefits.json`.
 
+For redirected links: if the redirect destination is a valid student signup page, update `link` to the destination URL. If not, treat as broken.
+
+### Quality flags
+
+- **Direct signup link** (root URL): use Tavily to find the direct student signup page. Update `link` if found; otherwise leave unchanged.
+- **Offer type mismatch**: update `offer_type` to match what the description says.
+- **Description length**: trim the `description` to ≤ 120 characters without losing the essential offer details. If trimming would lose meaning, leave unchanged.
+- **Specific offer** or **Self-serve**: only fix if the correct information is clearly findable via web-fetch. If uncertain, leave unchanged.
+
+## Step 5: Apply changes to benefits.json
+
+If any fixes were made (updates or removals), edit `benefits.json`:
+- Preserve 2-space indent and trailing newline
+- Maintain the existing entry order; do not reorder
+
+## Step 6: Open a PR (only if fixes were made)
+
+If no fixes were made, skip to Step 7.
+
+Open a single pull request with all changes.
+
+**Branch**: `maintain-benefits-{today's date as YYYY-MM-DD}`
+
+**Title**: `[Maintenance]: Fix {N} benefit(s)` where N is the number of entries changed or removed.
+
+**Body**:
 ```
-## Weekly Benefit Maintenance Report
+## Summary
 
-_Last checked: <today's date>_
+<one sentence describing what changed overall>
 
-### Link Health
+### Fixed
+| Benefit | Issue | Change |
+|---------|-------|--------|
+| {name} | {broken link / redirected / offer_type mismatch / ...} | {what was changed} |
 
-<If no findings: "All links healthy.">
-
-**Broken**
-| Benefit | Link | Reason |
-|---------|------|--------|
-
-**Redirected (cross-domain)**
-| Benefit | Original | Now Points To |
-|---------|----------|--------------|
-
-### Quality Flags
-
-<If no findings: "All entries pass the quality bar.">
-
-| Benefit | Criterion | Reason |
-|---------|-----------|--------|
+### Removed
+| Benefit | Reason |
+|---------|--------|
+| {name} | Program no longer offers a student benefit |
 ```
 
-If an open `link-health` issue exists, update its body with the new report. Otherwise, create a new issue:
+Omit the Removed section if no entries were removed. Omit the Fixed section if no entries were updated.
 
-- **Title**: `Benefit Maintenance: <N> issue(s) found` (N = total broken + redirected + quality flags)
-- **Labels**: `link-health`, `needs-review`
+## Step 7: Close any open link-health issues
 
-If there are no findings at all, do not open or update any issue — stop here.
+Check for any open GitHub issues labeled `link-health`. Close each one with a comment that matches the outcome:
+
+- **No findings from Steps 2 or 3**: "All benefits are healthy."
+- **Findings existed but none were fixable** (every fix attempt was uncertain or unsuccessful): "Found {N} issue(s) that require manual review: {list benefit names}."
+- **PR was opened**: "Fixed in PR #{pr_number}."
