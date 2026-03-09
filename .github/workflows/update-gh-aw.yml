@@ -61,6 +61,8 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Remove the checkout-injected credential header so the PAT in the remote URL is used
+          git config --unset-all http.https://github.com/.extraheader || true
           git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}"
           git checkout -b "$BRANCH"
           git add .github/workflows/*.lock.yml .github/aw/
