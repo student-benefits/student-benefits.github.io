@@ -44,7 +44,10 @@ jobs:
       - name: Open PR
         if: steps.versions.outputs.current != steps.versions.outputs.latest
         env:
-          GH_TOKEN: ${{ github.token }}
+          # Pushing workflow files requires a PAT with the `workflow` scope.
+          # Create one at Settings > Developer settings > Personal access tokens
+          # and store it as the GH_PAT repository secret.
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           CURRENT: ${{ steps.versions.outputs.current }}
           LATEST: ${{ steps.versions.outputs.latest }}
         run: |
@@ -63,6 +66,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}"
           git checkout -b "$BRANCH"
           git add .github/workflows/*.lock.yml .github/aw/
           git commit -m "Upgrade gh-aw from $CURRENT to $LATEST"
