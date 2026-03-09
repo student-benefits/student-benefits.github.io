@@ -336,11 +336,22 @@
         ' – ' + end.toLocaleDateString('en-US', opts);
     }
 
-    function countdown(date) {
+    function countdown(date, expires) {
       const now = new Date();
       now.setHours(0, 0, 0, 0);
-      const target = new Date(date + 'T00:00:00');
-      const days = Math.round((target - now) / 86400000);
+      const start = new Date(date + 'T00:00:00');
+      const days = Math.round((start - now) / 86400000);
+      if (days < 0) {
+        // Started — show time remaining if available
+        if (expires) {
+          const end = new Date(expires + 'T00:00:00');
+          const left = Math.round((end - now) / 86400000);
+          if (left === 0) return { text: 'Ends today', cls: 'event-countdown--soon' };
+          if (left === 1) return { text: 'Ends tomorrow', cls: 'event-countdown--soon' };
+          if (left <= 14) return { text: 'Ends in ' + left + ' days', cls: 'event-countdown--soon' };
+        }
+        return { text: 'Ongoing', cls: 'event-countdown--upcoming' };
+      }
       if (days === 0) return { text: 'Today', cls: 'event-countdown--soon' };
       if (days === 1) return { text: 'Tomorrow', cls: 'event-countdown--soon' };
       if (days <= 14) return { text: days + ' days away', cls: 'event-countdown--soon' };
@@ -362,7 +373,7 @@
 
     function renderCard(e) {
       const color = orgColor(e.organizer);
-      const cd = countdown(e.date);
+      const cd = countdown(e.date, e.expires || e.date_end);
       const locationPill = e.remote
         ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
         : `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`;
