@@ -30,10 +30,16 @@ jobs:
 
               try {
                 // First try HEAD request
+                const headers = {
+                  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                  'Accept-Language': 'en-US,en;q=0.5'
+                };
+
                 let response = await fetch(benefit.link, {
                   method: 'HEAD',
                   redirect: 'manual',
-                  headers: { 'User-Agent': 'StudentBenefitsHub/1.0 (link checker)' }
+                  headers
                 });
 
                 // If HEAD fails with 405, try GET
@@ -41,7 +47,7 @@ jobs:
                   response = await fetch(benefit.link, {
                     method: 'GET',
                     redirect: 'manual',
-                    headers: { 'User-Agent': 'StudentBenefitsHub/1.0 (link checker)' }
+                    headers
                   });
                 }
 
