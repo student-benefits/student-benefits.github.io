@@ -33,6 +33,10 @@ and architecture. The seams are visible by design so the system can be
 understood and replicated. When working on this project, preserve that
 transparency: keep workflows documented, keep the agent page accurate.
 
+> Enforcement: if you change Grant's behavior (workflow logic, validation rules,
+> schema, trigger conditions), update `agent/index.html` to reflect it. A
+> mismatch between what Grant does and what the agent page says is a bug.
+
 ---
 
 ## Source of truth: `benefits.json`
