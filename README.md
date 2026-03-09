@@ -1,14 +1,14 @@
 # Student Benefits Hub
 
-A community directory of student discounts, free tiers, and perks — curated by **Grant**, an AI agent. **[→ student-benefits.github.io](https://student-benefits.github.io)**
+A student discounts directory where Grant, an AI agent, searches the web each week for new benefits. **[→ student-benefits.github.io](https://student-benefits.github.io)**
 
 ---
 
 ## How it works
 
-Content enters through multiple paths: humans submit issues, Grant searches the web weekly for new student programs, and a separate workflow finds upcoming student events and prunes expired ones automatically. Either way, Grant validates against live web data and opens a pull request. A human reviews and merges; Grant cannot publish directly — the merge is the trust boundary. The site deploys automatically.
+Content enters through multiple paths. Humans submit issues; Grant validates and opens a PR. A separate discover-benefits workflow searches the web weekly and opens issues for new programs. A discover-events workflow finds upcoming student events and creates PRs, removing expired entries automatically. A human reviews and merges. Grant cannot publish directly. The merge is the trust boundary.
 
-The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture — the seams are visible by design, so the system can be understood and replicated.
+The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture so the system can be understood and replicated.
 
 ---
 

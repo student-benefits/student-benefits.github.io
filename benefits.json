@@ -176,7 +176,7 @@
     "category": "Cloud & Hosting",
     "offer_type": "free",
     "description": "Pro tier free via GitHub Student Developer Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
-    "link": "https://education.github.com/pack",
+    "link": "https://www.netlify.com/github-students/",
     "tags": [
       "Hosting",
       "JAMstack"
@@ -303,7 +303,7 @@
     "category": "Productivity",
     "offer_type": "discount",
     "description": "Discounted paid plans for students. Free tier with 250 active issues. Email support@linear.app to apply.",
-    "link": "https://linear.app/pricing",
+    "link": "https://linear.app/education",
     "tags": [
       "Project Management",
       "Agile"
@@ -700,48 +700,6 @@
     "popularity": 6
   },
   {
-    "id": "hackerrank",
-    "name": "HackerRank Certifications",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free skill certifications in Python, JavaScript, SQL, and more. Recognized by 2000+ employers for job applications.",
-    "link": "https://www.hackerrank.com/skills-verification",
-    "tags": [
-      "Certifications",
-      "Coding",
-      "Interview Prep"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "interviewbit",
-    "name": "InterviewBit",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free coding practice and mock interviews. Peer-matched practice sessions with structured learning paths.",
-    "link": "https://www.interviewbit.com/",
-    "tags": [
-      "Interview Prep",
-      "Coding",
-      "Practice"
-    ],
-    "popularity": 7
-  },
-  {
-    "id": "kaggle",
-    "name": "Kaggle",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free GPU compute (30hr/week), 50,000+ datasets, and ML competitions. Jupyter notebooks with P100/T4 GPUs.",
-    "link": "https://www.kaggle.com/",
-    "tags": [
-      "Data Science",
-      "ML",
-      "GPU"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "nvidia-education",
     "name": "NVIDIA Education",
     "category": "Learning",
@@ -768,34 +726,6 @@
       "DevOps"
     ],
     "popularity": 6
-  },
-  {
-    "id": "edx",
-    "name": "edX",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free course audits from Harvard, MIT, and top universities. 200+ free courses, certificates for purchase.",
-    "link": "https://www.edx.org/",
-    "tags": [
-      "Courses",
-      "Universities",
-      "Certificates"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "udemy-free",
-    "name": "Udemy Free Courses",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "50,000+ free courses on programming, design, business, and more. Lifetime access once enrolled.",
-    "link": "https://www.udemy.com/courses/free/",
-    "tags": [
-      "Courses",
-      "Skills",
-      "Free"
-    ],
-    "popularity": 7
   },
   {
     "id": "gdsc",
@@ -831,7 +761,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features.",
-    "link": "https://www.overleaf.com/",
+    "link": "https://www.overleaf.com/edu",
     "tags": [
       "LaTeX",
       "Writing",

@@ -748,7 +748,7 @@
     <h1 class="identity-name">Grant</h1>
     <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that curates this directory by verifying submissions, checking for duplicates, and opening pull requests. A human reviews and merges every PR — Grant handles correctness, the reviewer exercises judgment.
+      Grant is an AI agent that curates this directory by verifying submissions, searching the web for new student programs, and opening pull requests. It runs on a schedule to discover and add benefits without waiting for a human to suggest them. A human reviews and merges every PR — Grant handles correctness, the reviewer exercises judgment.
     </p>
   </section>
 
@@ -757,16 +757,20 @@
     <div class="arch-diagram" role="region" aria-label="Interactive architecture diagram. Click any node to learn what it does.">
       <div class="arch-nodes">
 
-        <div class="arch-node-wrap">
+        <div class="arch-node-wrap arch-node-wrap--stacked">
           <button class="arch-node arch-node--github" id="node-issue" aria-expanded="false" aria-controls="panel-issue">
             <span class="arch-node-label">GitHub</span>
             <span class="arch-node-sublabel">issue trigger</span>
+          </button>
+          <button class="arch-node arch-node--github" id="node-schedule" aria-expanded="false" aria-controls="panel-schedule">
+            <span class="arch-node-label">Schedule</span>
+            <span class="arch-node-sublabel">Mon + Wed weekly</span>
           </button>
         </div>
 
         <div class="arch-connector" aria-hidden="true">
           <span class="packet packet-req"></span>
-          <span class="arch-connector-label">issue event</span>
+          <span class="arch-connector-label">trigger</span>
         </div>
 
         <div class="arch-node-wrap">
@@ -802,7 +806,7 @@
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output">
             <span class="arch-node-label">GitHub</span>
-            <span class="arch-node-sublabel">PR + comment</span>
+            <span class="arch-node-sublabel">PR · issue · comment</span>
           </button>
         </div>
 
@@ -825,6 +829,10 @@
           <p class="node-panel-title">GitHub Issue</p>
           <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs. Everything else Grant discovers on its own.</p>
         </div>
+        <div id="panel-schedule" class="node-panel" hidden>
+          <p class="node-panel-title">Weekly Schedule</p>
+          <p>Two scheduled workflows run without human prompting. On Mondays, <code>discover-benefits</code> searches the web for new student programs and opens GitHub issues for the best discoveries — feeding Grant's own queue. On Wednesdays, <code>discover-events</code> searches for notable student events, removes expired entries, and opens PRs directly.</p>
+        </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · Claude Sonnet 4</p>
           <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome without human approval of intermediate steps. Its final output is always a PR — nothing goes live without a human merge. Its instructions are a Markdown file checked into this repository.</p>
@@ -839,7 +847,7 @@
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Output</p>
-          <p>If valid and new: Grant opens a pull request adding the entry to <code>benefits.json</code> and comments on the issue with the PR link. If rejected or duplicate: it comments with the reason and closes the issue. All writes go through GitHub's API. The PR waits for a human reviewer to merge — Grant cannot publish directly.</p>
+          <p>Grant's outputs depend on the workflow. For submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
         </div>
         <div id="panel-human" class="node-panel" hidden>
           <p class="node-panel-title">Human Reviewer</p>
@@ -933,9 +941,9 @@
     <div class="sim-task">
       <div class="sim-task-head">
         <span class="sim-task-label">GitHub Issue</span>
-        <span class="sim-task-num">#42</span>
+        <span class="sim-task-num">#67</span>
       </div>
-      <div class="sim-task-body"><strong>"Notion is free for students"</strong></div>
+      <div class="sim-task-body"><strong>"Adobe Creative Cloud is discounted for students"</strong></div>
     </div>
 
     <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
@@ -962,6 +970,7 @@
   <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io/blob/main/.github/workflows/add-benefit.md" target="_blank" rel="noopener noreferrer">Read the workflow</a> to see exactly what it does, or open an issue to suggest a new benefit and watch it run for real.</p>
 </footer>
 
+<script src="/shared.js"></script>
 <script>
   const TOOLS = {
     get_issue:             { actor: 'github', label: 'GitHub',        explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
@@ -970,6 +979,7 @@
     create_pull_request:   { actor: 'github', label: 'GitHub',        explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
     add_comment:           { actor: 'github', label: 'GitHub',        explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
     close_issue:           { actor: 'github', label: 'GitHub',        explain: null },
+    create_issue:          { actor: 'github', label: 'GitHub',        explain: 'Opens a new GitHub issue for a discovered student program, queuing it for the add-benefit workflow to process.' },
     tavily_search:         { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
     search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' }, // alias — MCP tool name varies by server version
     web_fetch:             { actor: 'web',    label: 'Web',           explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
@@ -1001,11 +1011,6 @@
     toggleDisclosure('panel-' + id, 'node-' + id, '.node-panel', '.arch-node');
   }
 
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-  }
 
   function fmtDetail(tool) {
     if (tool.query) return 'query: ' + tool.query;
@@ -1163,57 +1168,57 @@
   const SIM_STEPS = [
     {
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
-      headLabel: 'get_issue', detail: 'issue #42',
-      primary: 'User submitted: <em>"Notion is free for students"</em>',
+      headLabel: 'get_issue', detail: 'issue #67',
+      primary: 'User submitted: <em>"Adobe Creative Cloud is discounted for students"</em>',
       annotation: 'Reads the issue body to extract the benefit name and any optional link provided by the submitter.'
     },
     {
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
       headLabel: 'get_file_contents', detail: 'benefits.json',
-      primary: '59 existing benefits loaded. Checking for name and hostname matches…',
+      primary: '61 existing benefits loaded. Checking for name and hostname matches…',
       annotation: 'Scans all existing entries before doing any web research to avoid duplicates.'
     },
     {
       stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
       headLabel: 'no duplicate found', detail: null,
-      primary: '<code>notion.so</code> not in existing entries. Proceeding to verify.',
+      primary: '<code>adobe.com</code> not in existing entries. Proceeding to verify.',
       annotation: null
     },
     {
       stepClass: 'actor-tavily', badge: 'badge-tavily', badgeLabel: 'Tavily',
-      headLabel: 'search', detail: 'Notion student free plan education',
-      primary: '5 results found. Top result: <code>notion.so/product/notion-for-education</code>',
+      headLabel: 'search', detail: 'Adobe Creative Cloud student discount education',
+      primary: '5 results found. Top result: <code>adobe.com/creativecloud/plans/student-and-teacher.html</code>',
       annotation: 'Searches the live web to confirm the program is real and currently active. Not just from training data.'
     },
     {
       stepClass: 'actor-web', badge: 'badge-web', badgeLabel: 'Web',
-      headLabel: 'web_fetch', detail: 'notion.so/product/notion-for-education',
-      primary: 'Confirmed: free Plus plan for verified students with .edu email.',
+      headLabel: 'web_fetch', detail: 'adobe.com/creativecloud/plans/student-and-teacher.html',
+      primary: 'Confirmed: ~65% discount on Creative Cloud All Apps for verified students.',
       annotation: 'Opens the actual signup page to extract exact terms and the correct URL.'
     },
     {
       stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
       headLabel: 'edit', detail: 'benefits.json',
-      primary: 'Added <strong>Notion Education</strong> · Productivity',
+      primary: 'Added <strong>Adobe Creative Cloud</strong> · Design',
       code: `<span class="c-dim">{</span>
-  <span class="c-hl">"id"</span>: <span class="c-grn">"notion"</span>,
-  <span class="c-hl">"name"</span>: <span class="c-grn">"Notion Education"</span>,
-  <span class="c-hl">"category"</span>: <span class="c-grn">"Productivity"</span>,
-  <span class="c-hl">"description"</span>: <span class="c-grn">"Free Plus plan with unlimited blocks..."</span>,
+  <span class="c-hl">"id"</span>: <span class="c-grn">"adobe-creative-cloud"</span>,
+  <span class="c-hl">"name"</span>: <span class="c-grn">"Adobe Creative Cloud"</span>,
+  <span class="c-hl">"category"</span>: <span class="c-grn">"Design"</span>,
+  <span class="c-hl">"description"</span>: <span class="c-grn">"~65% discount on All Apps plan for students..."</span>,
   <span class="c-hl">"popularity"</span>: <span class="c-blue">5</span>
 <span class="c-dim">}</span>`,
       annotation: 'Appends the validated benefit with all required fields to benefits.json.'
     },
     {
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
-      headLabel: 'create_pull_request', detail: 'PR #43',
-      primary: 'Opened PR #43: <em>"Add benefit: Notion Education"</em>',
+      headLabel: 'create_pull_request', detail: 'PR #68',
+      primary: 'Opened PR #68: <em>"Add benefit: Adobe Creative Cloud"</em>',
       annotation: 'Creates a pull request for human review. The benefit goes live only after it\'s merged.'
     },
     {
       stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
-      headLabel: 'add_comment', detail: 'issue #42',
-      primary: 'Commented on issue #42 with the PR link.',
+      headLabel: 'add_comment', detail: 'issue #67',
+      primary: 'Commented on issue #67 with the PR link.',
       annotation: 'Closes the loop. The submitter gets notified their suggestion was processed.'
     }
   ];

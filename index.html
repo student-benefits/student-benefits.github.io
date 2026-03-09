@@ -6,66 +6,12 @@
   <meta name="theme-color" content="#0f172a">
   <link rel="icon" type="image/svg+xml" href="public/favicon.svg">
   <title>Student Benefits Hub</title>
+  <link rel="stylesheet" href="/shared.css">
   <style>
-    :root {
-      color-scheme: dark;
-      --slate-900: #0f172a;
-      --slate-800: #1e293b;
-      --slate-700: #334155;
-      --slate-600: #475569;
-      --slate-500: #64748b;
-      --slate-400: #94a3b8;
-      --indigo-400: #818cf8;
-      --indigo-300: #a5b4fc;
-      --amber-300: #fcd34d;
-      --font: system-ui, -apple-system, sans-serif;
-      --radius-sm: 0.25rem;
-      --radius-md: 0.5rem;
-      --radius-lg: 0.75rem;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: var(--font);
-      background-color: var(--slate-900);
-      color: #fff;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100dvh;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--indigo-400);
-      outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: var(--slate-900); }
     ::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--slate-600); }
-
-    .page {
-      padding: 3rem 1rem;
-    }
-
-    .container {
-      max-width: 80rem;
-      margin: 0 auto;
-    }
-
-    header {
-      margin-bottom: 2rem;
-    }
 
     .header-row {
       display: flex;
@@ -79,31 +25,6 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-    }
-    .site-id {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .site-sep {
-      font-size: 1rem;
-      color: var(--slate-600);
-    }
-    .site-alt {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--slate-500);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .site-alt:hover { color: #fff; }
-
-    h1 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      letter-spacing: -0.015em;
-      line-height: 1.2;
     }
 
     .search-wrap {
@@ -182,32 +103,6 @@
         flex-wrap: wrap;
         overflow-x: visible;
       }
-    }
-
-    .filter-tab {
-      padding: 0.625rem 1rem;
-      min-height: 44px;
-      border-radius: var(--radius-md);
-      font-size: 0.875rem;
-      font-weight: 500;
-      font-family: var(--font);
-      border: 1px solid rgba(51, 65, 85, 0.5);
-      background: rgba(30, 41, 59, 0.4);
-      color: var(--slate-400);
-      cursor: pointer;
-      transition: background 0.15s, color 0.15s, border-color 0.15s;
-    }
-
-    .filter-tab:hover {
-      background: rgba(51, 65, 85, 0.5);
-      color: #fff;
-      border-color: var(--slate-600);
-    }
-
-    .filter-tab[aria-pressed="true"] {
-      background: rgba(99, 102, 241, 0.1);
-      color: var(--indigo-300);
-      border-color: var(--indigo-400);
     }
 
     .results-bar {
@@ -468,24 +363,6 @@
       flex-shrink: 0;
     }
 
-    footer {
-      margin-top: 6rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--slate-800);
-      text-align: center;
-    }
-
-    footer p { color: var(--slate-500); font-size: 0.875rem; }
-
-    footer a {
-      color: var(--indigo-400);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.15s;
-    }
-
-    footer a:hover { color: var(--indigo-300); }
-
     .skeleton {
       display: grid;
       grid-template-columns: 1fr;
@@ -500,21 +377,11 @@
       animation: pulse 1.5s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    @media (min-width: 640px) {
-      .page { padding: 3rem 1.5rem; }
-    }
-
     @media (min-width: 768px) {
       .grid, .skeleton { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (min-width: 1024px) {
-      .page { padding: 3rem 2rem; }
       .grid, .skeleton { grid-template-columns: repeat(3, 1fr); }
     }
 
@@ -578,6 +445,7 @@
     </div>
   </div>
 
+  <script src="/shared.js"></script>
   <script>
     let categories = ['All'];
     let benefits = [];
@@ -592,12 +460,6 @@
     const filterBar = document.getElementById('filter-bar');
     const resultsBar = document.getElementById('results-bar');
     const content = document.getElementById('content');
-
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    }
 
     function getFilteredAndSorted() {
       const q = searchQuery.toLowerCase();
@@ -734,12 +596,7 @@
     // Excludes offer-type colors (#a78bfa trial, #60a5fa credits, #fbbf24 discount, #4ade80 free)
     // so category badges never share a hue with an offer pill on the same card.
     const CAT_PALETTE = ['#c084fc','#22d3ee','#38bdf8','#14b8a6','#f472b6','#e879f9','#fb923c','#f87171','#34d399','#818cf8'];
-    // djb2-variant hash: maps any category name to a stable palette index
-    function catColor(name) {
-      let h = 0;
-      for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;
-      return CAT_PALETTE[h % CAT_PALETTE.length];
-    }
+    function catColor(name) { return hashColor(name, CAT_PALETTE); }
 
     Promise.all([
       fetch('benefits.json').then(function (r) { return r.json(); }),
