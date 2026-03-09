@@ -67,7 +67,7 @@ jobs:
           git checkout -b "$BRANCH"
           git add .github/workflows/*.lock.yml .github/aw/
           git commit -m "Upgrade gh-aw from $CURRENT to $LATEST"
-          git push origin "$BRANCH"
+          git push --force origin "$BRANCH"
 
           gh pr create \
             --title "Upgrade gh-aw $CURRENT to $LATEST" \
