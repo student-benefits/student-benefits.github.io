@@ -94,12 +94,12 @@ For each page, extract any tools, products, or programs that look relevant.
 
 **IMPORTANT**: Do not use `web-fetch` for these searches. Use only the `tavily` MCP tool.
 
-Call the tavily `search` tool with each of these queries. Do not skip any.
+Call the tavily `search` tool with each of these queries. Do not skip any. Use the current year (the year you are running this workflow) in place of `YEAR`.
 
-1. `"student plan" OR "education plan" developer tools software 2025 OR 2026 free`
-2. `"free for students" OR "academic license" AI tools cloud 2025 OR 2026`
-3. `"lifestyle" OR "productivity" OR "domains" student discount OR "free for students" 2025 OR 2026`
-4. `student grant OR credits developer tools 2026 apply individual`
+1. `"student plan" OR "education plan" developer tools software YEAR free`
+2. `"free for students" OR "academic license" AI tools cloud YEAR`
+3. `"lifestyle" OR "productivity" OR "domains" student discount OR "free for students" YEAR`
+4. `student grant OR credits developer tools YEAR apply individual`
 
 ## Step 4: Verify each candidate
 

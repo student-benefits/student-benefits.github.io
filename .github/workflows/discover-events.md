@@ -92,12 +92,12 @@ For each page, extract any programs or events that look relevant.
 
 **IMPORTANT**: Do NOT use `web-fetch` for these searches. Use only the `tavily` MCP tool.
 
-Call the tavily `search` tool with each of these queries. Do not skip any.
+Call the tavily `search` tool with each of these queries. Do not skip any. Use the current year (the year you are running this workflow) in place of `YEAR`.
 
-1. `student hackathon 2026 free apply open`
-2. `"open to students" conference 2026 free OR fellowship application`
-3. `student grant OR "build grant" 2026 apply individual cash stipend`
-4. `student residency OR cohort OR program 2026 free technical AI`
+1. `student hackathon YEAR free apply open`
+2. `"open to students" conference YEAR free OR fellowship application`
+3. `student grant OR "build grant" YEAR apply individual cash stipend`
+4. `student residency OR cohort OR program YEAR free technical AI`
 
 ## Step 5: Verify each candidate
 
