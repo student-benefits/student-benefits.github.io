@@ -13,3 +13,29 @@ function hashColor(name, palette) {
   for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;
   return palette[h % palette.length];
 }
+
+// Renders filter tab buttons into `container`.
+// `categories` is an array of category strings.
+// `activeCategory` is the currently selected value.
+// `labelFn` is an optional function(cat) => string for display text; defaults to identity.
+function renderFilterTabs(container, categories, activeCategory, labelFn) {
+  var label = labelFn || function (c) { return c; };
+  container.innerHTML = categories.map(function (cat) {
+    return '<button class="filter-tab" aria-pressed="' + (cat === activeCategory) + '" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(label(cat)) + '</button>';
+  }).join('');
+}
+
+// Renders an empty-state block into `container`.
+// `message` is the body text shown under the heading.
+function renderEmptyState(container, message) {
+  container.innerHTML = '<div class="empty"><h2>No results</h2><p>' + escapeHtml(message) + '</p></div>';
+}
+
+// Renders `count` skeleton cards into `container` (replaces existing content).
+function renderSkeletons(container, count) {
+  var cards = '';
+  for (var i = 0; i < count; i++) {
+    cards += '<div class="skeleton-card"></div>';
+  }
+  container.innerHTML = '<div class="skeleton">' + cards + '</div>';
+}
