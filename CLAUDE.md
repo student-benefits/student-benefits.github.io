@@ -121,6 +121,8 @@ When a link health report issue appears (labeled `link-health`):
 - All changes go through PRs — never push directly to `main`
 - PRs must have a written Summary (not just a template placeholder)
 - GitHub Pages serves the site directly from the `main` branch root
+- Every PR automatically requests review from @jonasneves (via CODEOWNERS)
+- Branch protection requires @jonasneves approval before any PR can merge
 
 ---
 
