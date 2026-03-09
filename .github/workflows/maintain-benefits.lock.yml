@@ -27,7 +27,7 @@
 # not pass today's review checklist. Opens or updates a single consolidated
 # issue with both categories of findings. Replaces check-links.yml.
 #
-# frontmatter-hash: da9f3f62e01874d6d7d5ac338a41562c12498ea3a20b9423e4fd5af89d389c1f
+# frontmatter-hash: 0298c72303d2310e8e832e5fdaf885c23cf5840c692335c0b806ec3dd767f29f
 
 name: "Maintain Benefits"
 "on":

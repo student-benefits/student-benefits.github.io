@@ -27,7 +27,6 @@ tools:
   github:
     toolsets: [issues, repos]
   web-fetch:
-  edit:
 
 network:
   allowed:
@@ -67,13 +66,13 @@ Collect broken and redirected benefits. Rate-limit to one request per second to 
 
 For each benefit in `benefits.json`, apply the quality bar. Treat link health from Step 2 as one input — a broken link is automatic failure regardless of other criteria.
 
-Flag the benefit if any criterion fails:
+Only flag a benefit when the violation is unambiguous. If you are uncertain, skip it.
 
-1. **Specific offer**: description names what students actually get — plan name, discount percentage, credit amount, or duration. Flag if vague ("Student discount available", "Free access through your university").
-2. **Direct signup link**: `link` goes to a student-specific enrollment or signup page. Flag if the URL is a product homepage (e.g. `github.com`, `canva.com`), a generic marketing page, or a support/FAQ page.
-3. **Self-serve**: a student can claim the benefit without institutional purchase, IT approval, or "contact sales". Flag if the page says "contact your institution" or requires an admin to unlock it.
-4. **Offer type accuracy**: `offer_type` matches what the description actually says. Flag if mismatched (e.g. description says "50% off" but `offer_type` is `free`).
-5. **Description length**: `description` is ≤ 120 characters. Flag if over.
+1. **Specific offer**: description must contain at least one concrete signal — a percentage, a dollar or credit amount, a plan name, or a duration. Flag if the description contains none of these and reads as a generic statement (e.g. "Student discount available", "Free access through your university"). Do not flag if the description is short but still names a concrete plan.
+2. **Direct signup link**: flag only if the URL path is exactly `/` or `/home` (root homepage), or the subdomain is clearly non-enrollment (e.g. `support.`, `docs.`, `help.`, `blog.`). Do not flag based on page content — URL structure only.
+3. **Self-serve**: flag only if the `description` itself contains language like "through your university", "ask your institution", or "contact IT". Do not fetch the page to make this determination.
+4. **Offer type accuracy**: `offer_type` must match what the description says. Flag only clear mismatches: description says "% off" or "discount" but `offer_type` is `free`; description says "free" but `offer_type` is `discount`.
+5. **Description length**: `description` is ≤ 120 characters. Flag if over — this is mechanical, count the characters.
 
 For each flagged benefit, record which criterion failed and a brief reason.
 
@@ -113,19 +112,4 @@ If an open `link-health` issue exists, update its body with the new report. Othe
 - **Title**: `Benefit Maintenance: <N> issue(s) found` (N = total broken + redirected + quality flags)
 - **Labels**: `link-health`, `needs-review`
 
-If there are no findings at all, do not open or update any issue. Log the clean run in Step 5 and stop.
-
-## Step 5: Write the maintenance log
-
-Write `agent/last-maintenance.json` with the complete file content. Do not append.
-
-```json
-{
-  "timestamp": "<current UTC time as ISO 8601>",
-  "total_checked": 0,
-  "broken": [{ "name": "<name>", "link": "<link>", "reason": "<reason>" }],
-  "redirected": [{ "name": "<name>", "link": "<link>", "redirects_to": "<url>" }],
-  "quality_flags": [{ "name": "<name>", "criterion": "<criterion>", "reason": "<reason>" }],
-  "issue_updated": false
-}
-```
+If there are no findings at all, do not open or update any issue — stop here.
