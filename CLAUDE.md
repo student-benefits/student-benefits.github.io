@@ -80,7 +80,7 @@ AI-driven workflows live in `.github/workflows/`:
 | `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
 | `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
 | `discover-events.md` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens PRs |
-| `check-links.yml` | Weekly (Sunday) or manual | Checks all benefit links, opens issue if broken/redirected |
+| `maintain-benefits.md` | Weekly (Sunday) or manual | Checks all benefit links and re-audits existing entries against the quality bar; opens or updates a consolidated issue |
 
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
 To change a workflow, edit the `.md` source and run `gh aw compile`.
@@ -104,15 +104,16 @@ Flag the issue and stop — do not approve PRs that fail any of these.
 
 ---
 
-## Broken link workflow
+## Maintenance issue workflow
 
-When a link health report issue appears (labeled `link-health`):
+When a maintenance issue appears (labeled `link-health`):
 
-1. Read the issue body for the list of broken URLs
-2. For each broken benefit, find the current correct student program URL
+1. Read the issue body — it contains both broken/redirected links and quality flags
+2. For each broken or redirected benefit, find the current correct student program URL
    (use WebFetch to verify it resolves to a real page)
-3. Update `benefits.json` with the corrected links
-4. Open a PR that closes the link health issue
+3. For each quality flag, fix the description, link, or offer_type as needed — or remove the entry if it no longer meets the quality bar
+4. Update `benefits.json` with all corrections
+5. Open a PR that closes the maintenance issue
 
 ---
 

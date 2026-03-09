@@ -110,7 +110,7 @@
         </div>
         <div id="panel-schedule" class="node-panel" hidden>
           <p class="node-panel-title">Weekly Schedule</p>
-          <p>Two scheduled workflows run without human prompting. On Mondays, <code>discover-benefits</code> searches the web for new student programs and opens GitHub issues for the best discoveries — feeding Grant's own queue. On Wednesdays, <code>discover-events</code> searches for notable student events, removes expired entries, and opens PRs directly.</p>
+          <p>Three scheduled workflows run without human prompting. On Mondays, <code>discover-benefits</code> searches the web for new student programs and opens GitHub issues for the best discoveries — feeding Grant's own queue. On Wednesdays, <code>discover-events</code> searches for notable student events, removes expired entries, and opens PRs directly. On Sundays, <code>maintain-benefits</code> checks every existing entry for broken links and quality issues, and opens a consolidated issue with any findings.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · Claude Sonnet 4</p>
@@ -126,7 +126,7 @@
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Output</p>
-          <p>Grant's outputs depend on the workflow. For submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
+          <p>Grant's outputs depend on the workflow. For submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. For <code>maintain-benefits</code>: it opens or updates a consolidated issue listing broken links and quality flags. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
         </div>
         <div id="panel-human" class="node-panel" hidden>
           <p class="node-panel-title">Human Reviewer</p>
