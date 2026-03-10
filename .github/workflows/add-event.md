@@ -23,6 +23,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "Add Event: "
     labels: [new-event]
+    draft: false
   add-comment:
   close-issue:
 
