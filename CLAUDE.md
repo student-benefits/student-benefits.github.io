@@ -86,6 +86,8 @@ AI-driven workflows live in `.github/workflows/`:
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
 To change a workflow, edit the `.md` source and run `gh aw compile`.
 
+When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
+
 `update-gh-aw.yml` runs every Tuesday, checks for a newer gh-aw release, recompiles all lock files, and opens a PR. It is a plain `.yml` — do not compile it with `gh aw`. Requires a `GH_PAT` repository secret (PAT with `workflow` scope).
 
 ---
