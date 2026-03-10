@@ -23,6 +23,7 @@ safe-outputs:
   create-pull-request:
     title-prefix: "Add Benefit: "
     labels: [new-benefit]
+    draft: false
   add-comment:
   close-issue:
 
