@@ -144,8 +144,8 @@ const CAT_PALETTE = ['#c084fc','#22d3ee','#38bdf8','#14b8a6','#f472b6','#e879f9'
 function catColor(name) { return hashColor(name, CAT_PALETTE); }
 
 Promise.all([
-  fetch('benefits.json').then(function (r) { return r.json(); }),
-  fetch('categories.json').then(function (r) { return r.json(); })
+  fetch('/benefits.json').then(function (r) { return r.json(); }),
+  fetch('/categories.json').then(function (r) { return r.json(); })
 ]).then(function (results) {
   benefits = results[0];
   categories = ['All'].concat(results[1]);
