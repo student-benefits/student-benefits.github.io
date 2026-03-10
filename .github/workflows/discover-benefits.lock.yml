@@ -27,7 +27,7 @@
 # previously-rejected programs, and creates issues for the best new
 # discoveries (max 5 per run).
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"58a2dac085a64dcda551a692dfc41d593bb1bbe1db255d1f156fe58d701da3a0","compiler_version":"v0.56.2"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"f4b3aad8263f578290db033c348760d33c3a2d53c5b879c025161b261272f148","compiler_version":"v0.56.2"}
 
 name: "Discover Student Benefits"
 "on":
@@ -656,8 +656,7 @@ jobs:
                   "tavily-mcp"
                 ],
                 "tools": [
-                  "search",
-                  "search_news"
+                  "tavily_search"
                 ],
                 "env": {
                   "TAVILY_API_KEY": "\${TAVILY_API_KEY}"

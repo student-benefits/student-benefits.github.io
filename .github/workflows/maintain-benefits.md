@@ -31,7 +31,7 @@ mcp-servers:
     args: ["-y", "tavily-mcp"]
     env:
       TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
-    allowed: ["search"]
+    allowed: ["tavily_search"]
 
 tools:
   github:
