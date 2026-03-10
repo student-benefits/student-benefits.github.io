@@ -25,7 +25,7 @@
 # validates the benefit, checks for duplicates against benefits.json,
 # and creates a PR with the new entry if valid.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"27b7cf588dc9c7c2dab0277c72aa69cb1b7853b21b52dfbaabf9d24b01125326","compiler_version":"v0.56.2"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"d5aebbba9c8a812586796e434774220310ce965e73ce4f219703889334228262","compiler_version":"v0.56.2"}
 
 name: "Add Benefit"
 "on":
@@ -795,8 +795,7 @@ jobs:
                   "tavily-mcp"
                 ],
                 "tools": [
-                  "search",
-                  "search_news"
+                  "tavily_search"
                 ],
                 "env": {
                   "TAVILY_API_KEY": "\${TAVILY_API_KEY}"
