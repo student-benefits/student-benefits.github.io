@@ -42,6 +42,7 @@ network:
     - "*.io"
     - "*.dev"
     - "*.net"
+    - "*.google"
 
 timeout-minutes: 10
 ---
@@ -84,6 +85,11 @@ Then close the issue and stop — do not create a PR.
 ## Step 3: Validate the event
 
 Use `web-fetch` to find and confirm the event. If the user provided a link, fetch it directly. Otherwise, derive the most likely URL from the event name and fetch it (e.g. `mlh.io`, `hackathon.mit.edu`). Do not use a search engine — use web-fetch only.
+
+**If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), do not conclude the event is invalid. Instead, comment on the issue:
+> **Need a link:** I couldn't reach the relevant page due to a network restriction. Please provide a direct URL to the event or application page so I can verify it.
+
+Then close the issue and stop — the submitter can reopen with a link.
 
 Then apply this quality bar. Reject if any criterion fails:
 
