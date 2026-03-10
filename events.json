@@ -13,6 +13,19 @@
     "expires": "2026-06-27"
   },
   {
+    "id": "gemini-live-agent-challenge-2026",
+    "name": "Gemini Live Agent Challenge",
+    "organizer": "Google",
+    "category": "hackathon",
+    "date": "2026-02-16",
+    "date_end": "2026-03-16",
+    "remote": true,
+    "eligibility": "Developers above legal age of majority (country restrictions apply)",
+    "why": "$80k+ in prizes for building multimodal AI agents that move beyond text. Grand prize includes $25k cash and Google Cloud Next 2026 tickets with travel stipend.",
+    "link": "https://geminiliveagentchallenge.devpost.com/",
+    "expires": "2026-03-16"
+  },
+  {
     "id": "mlh-ghw-cloud-2026",
     "name": "MLH Global Hack Week: Cloud",
     "organizer": "Major League Hacking",
