@@ -124,7 +124,9 @@ For each confirmed new benefit, up to **5 per run**, create a GitHub issue:
   **What students get**: <one sentence — be specific about plan, amount, or duration>
   **Signup**: <direct URL to the student program page>
   **Discovered via**: <known-source | keyword>
+  **Pack**: GitHub Student Pack
   ```
+  Omit the `**Pack**` line if the tool was not discovered from the GitHub Student Developer Pack source.
 
 Create issues one at a time.
 
