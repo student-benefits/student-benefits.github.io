@@ -294,27 +294,6 @@
 .empty h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
 .empty p { color: var(--slate-400); }
 
-.grant-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  color: var(--slate-500);
-  font-size: 0.875rem;
-  text-decoration: none;
-  margin-top: 0.4rem;
-  transition: color 0.15s;
-}
-
-.grant-badge:hover { color: var(--slate-400); }
-
-.grant-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--slate-600);
-  flex-shrink: 0;
-}
-
 
 .skeleton {
   display: grid;
