@@ -78,6 +78,7 @@ AI-driven workflows live in `.github/workflows/`:
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
+| `add-event.md` | Issue labeled `new-event` | Validates event submission against quality bar, deduplicates, creates PR |
 | `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
 | `discover-events.md` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens PRs |
 | `maintain-benefits.md` | Weekly (Sunday) or manual | Checks all benefit links and re-audits existing entries against the quality bar; fixes findings directly and opens a PR |
