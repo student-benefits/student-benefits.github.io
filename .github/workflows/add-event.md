@@ -90,18 +90,20 @@ If the submission is a duplicate, comment on the issue:
 
 Then close the issue and stop — do not create a PR.
 
-## Step 3: Validate the event
+## Step 3: Find the event page
 
-If the user provided a link, fetch it directly with `web-fetch` to confirm the event.
+**If the user provided a link**, fetch it directly with `web-fetch`.
 
-If no link was provided, **you must call the Tavily `search` tool** (not `web-fetch` on a search URL) with a query like `"{event name} student hackathon apply"` or `"{event name} challenge registration"`. Use the most relevant result URL, then fetch that page with `web-fetch` to confirm the details.
+**If no link was provided**, you must search for the event before fetching anything. Call the Tavily `search` tool with a query like `"{event name} registration apply"` or `"{event name} hackathon challenge"`. Do not use `web-fetch` on a search engine URL — that is not a substitute for Tavily. Pick the most relevant result URL from Tavily's response, then fetch that page with `web-fetch` to confirm the details.
 
 **If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), do not conclude the event is invalid. Instead, comment on the issue:
 > **Need a link:** I couldn't reach the relevant page due to a network restriction. Please provide a direct URL to the event or application page so I can verify it.
 
 Then close the issue and stop — the submitter can reopen with a link.
 
-Then apply this quality bar. Reject if any criterion fails:
+## Step 4: Validate the event
+
+Using what you learned from the event page, apply this quality bar. Reject if any criterion fails:
 
 1. **Free or heavily subsidized** — skip if fee >$50 with no scholarship or travel grant pathway
 2. **Open to individual students** — skip if requires a team, startup, or company affiliation
@@ -114,7 +116,7 @@ If invalid, comment on the issue:
 
 Then close the issue and stop — do not create a PR.
 
-## Step 4: Generate the event entry
+## Step 5: Generate the event entry
 
 Create a JSON object matching this exact schema:
 
@@ -146,11 +148,11 @@ Rules:
 
 If the user provided a link, prefer it for `link`. Otherwise use the URL you fetched.
 
-## Step 5: Update events.json
+## Step 6: Update events.json
 
 Use the edit tool to insert the new event object into `events.json`, in date order (earliest `date` first). Maintain the existing JSON formatting (2-space indent, trailing newline).
 
-## Step 6: Update the run log
+## Step 7: Update the run log
 
 Replace the entire content of `agent/last-events-submission.json` with:
 
@@ -179,7 +181,7 @@ Rules:
 - `tools`: include every tool called during this run, in order. Use `"summary"` for most tools; replace it with `"query"` for `tavily_search` and `"url"` for `web_fetch`.
 - Write the complete file — do not append; replace the entire content.
 
-## Step 7: Create a pull request
+## Step 8: Create a pull request
 
 Create a PR with the changes. Use this format:
 
@@ -206,7 +208,7 @@ Where `{date_end_formatted}` is ` – {date_end}` if the event spans multiple da
 
 The last line must be plain text — not inside backticks or a code block. GitHub uses it to auto-close the issue on merge.
 
-## Step 8: Comment on the issue
+## Step 9: Comment on the issue
 
 After creating the PR, add a comment on issue #${{ github.event.issue.number }}:
 
