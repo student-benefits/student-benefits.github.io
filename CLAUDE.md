@@ -78,12 +78,15 @@ AI-driven workflows live in `.github/workflows/`:
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
 | `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
+| `add-event.md` | Issue labeled `new-event` | Validates event submission against quality bar, deduplicates, creates PR |
 | `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
 | `discover-events.md` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens PRs |
 | `maintain-benefits.md` | Weekly (Sunday) or manual | Checks all benefit links and re-audits existing entries against the quality bar; fixes findings directly and opens a PR |
 
 The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
 To change a workflow, edit the `.md` source and run `gh aw compile`.
+
+When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
 
 `update-gh-aw.yml` runs every Tuesday, checks for a newer gh-aw release, recompiles all lock files, and opens a PR. It is a plain `.yml` — do not compile it with `gh aw`. Requires a `GH_PAT` repository secret (PAT with `workflow` scope).
 

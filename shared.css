@@ -73,6 +73,26 @@ header { margin-bottom: 2rem; }
 }
 .site-alt:hover { color: #fff; }
 
+.grant-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--slate-500);
+  font-size: 0.875rem;
+  text-decoration: none;
+  margin-top: 0.4rem;
+  transition: color 0.15s;
+}
+.grant-badge:hover { color: var(--slate-400); }
+
+.grant-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--slate-600);
+  flex-shrink: 0;
+}
+
 h1 {
   font-size: 1.75rem;
   font-weight: 700;
@@ -118,6 +138,45 @@ footer a {
   transition: color 0.15s;
 }
 footer a:hover { color: var(--indigo-300); }
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.contribute-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: var(--radius-sm);
+  color: var(--amber-300);
+  font-size: 0.8125rem;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.contribute-banner:hover {
+  background: rgba(245, 158, 11, 0.14);
+  border-color: rgba(245, 158, 11, 0.55);
+  color: var(--amber-300);
+}
+.contribute-banner svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
 
 @media (min-width: 640px) {
   .page { padding: 3rem 1.5rem; }

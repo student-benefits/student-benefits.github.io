@@ -23,16 +23,17 @@ safe-outputs:
   create-pull-request:
     title-prefix: "Add Benefit: "
     labels: [new-benefit]
+    draft: false
   add-comment:
   close-issue:
 
 mcp-servers:
   tavily:
     command: npx
-    args: ["-y", "@tavily/mcp-server"]
+    args: ["-y", "tavily-mcp"]
     env:
       TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
-    allowed: ["search", "search_news"]
+    allowed: ["tavily_search"]
 
 tools:
   github:
@@ -141,6 +142,8 @@ If the product is open source, also include `"repo": "owner/repo"`.
 **Valid categories**: read the authoritative list from `categories.json` in the repository root. Use exactly one value, matching the string exactly.
 
 If the user provided a link, prefer it. Otherwise, use your knowledge to find the correct student discount URL. Pick the best category from `categories.json`.
+
+**Tags**: generate 2–4 relevant tags based on the tool's type and audience. If the issue body contains `**Pack**: GitHub Student Pack`, include `"GitHub Student Pack"` as one of the tags.
 
 **Description rules**: Be specific (e.g. "Free Pro plan for 1 year" not "Student discount available"). Max 120 characters.
 

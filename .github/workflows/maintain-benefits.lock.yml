@@ -27,7 +27,7 @@
 # removes entries for programs that no longer exist. Opens a PR with all
 # changes. Human approves the merge — nothing lands automatically.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"a86152c9bdb3b1cc3f72d5e260b3c869ec47387dfd1c819f2ceb67ca15b72342","compiler_version":"v0.56.2"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"d265d190dec8689d3127d9de1c3b04842f5051b36e122f8f9475dda09f971e14","compiler_version":"v0.56.2"}
 
 name: "Maintain Benefits"
 "on":
@@ -709,10 +709,10 @@ jobs:
                 "entrypointArgs": [
                   "npx",
                   "-y",
-                  "@tavily/mcp-server"
+                  "tavily-mcp"
                 ],
                 "tools": [
-                  "search"
+                  "tavily_search"
                 ],
                 "env": {
                   "TAVILY_API_KEY": "\${TAVILY_API_KEY}"

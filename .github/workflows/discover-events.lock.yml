@@ -27,7 +27,7 @@
 # opens PRs for the best new discoveries (max 3 per run). Human approves all
 # changes — nothing merges automatically.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"91a1ae75c52d9e65a199a72344d23277998600e869fe7ea24f2cf762ae4882ba","compiler_version":"v0.56.2"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"6114ddbb9f3888b0593dc6a0395e9f207262a1d5a278f6632952fa0d195dfa71","compiler_version":"v0.56.2"}
 
 name: "Discover Student Events"
 "on":
@@ -659,11 +659,10 @@ jobs:
                 "entrypointArgs": [
                   "npx",
                   "-y",
-                  "@tavily/mcp-server"
+                  "tavily-mcp"
                 ],
                 "tools": [
-                  "search",
-                  "search_news"
+                  "tavily_search"
                 ],
                 "env": {
                   "TAVILY_API_KEY": "\${TAVILY_API_KEY}"

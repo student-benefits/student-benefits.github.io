@@ -1,0 +1,33 @@
+name: Submit New Event
+description: Suggest a student event, hackathon, fellowship, or program to add
+title: "[Event]: "
+labels: ["new-event"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Just tell us about the event — be as brief or detailed as you like.**
+
+        Our AI will find the event page, verify the details, and extract everything it needs. You don't need to fill in dates or categories — just point us to it.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's the event?
+      description: Describe it however you want — a name, a sentence, or a detailed explanation all work.
+      placeholder: |
+        Examples of valid submissions:
+
+        "MLH Global Hack Week"
+        "YC AI Startup School is free for CS students"
+        "There's a free fellowship by a16z for undergrads building AI"
+        "HackMIT 2026 applications are open — free travel grants for students outside Boston"
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      description: If you know the event or application URL, include it — otherwise we'll find it
+      placeholder: https://example.com/apply
