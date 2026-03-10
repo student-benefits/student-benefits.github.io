@@ -92,11 +92,20 @@ Then close the issue and stop — do not create a PR.
 
 ## Step 3: Find the event page
 
-**If the user provided a link**, fetch it directly with `web-fetch`.
+**If the user provided a link**, fetch it directly with `web-fetch` and skip to Step 4.
 
-**If no link was provided**, you must search for the event before fetching anything. Call the Tavily `search` tool with a query like `"{event name} registration apply"` or `"{event name} hackathon challenge"`. Do not use `web-fetch` on a search engine URL — that is not a substitute for Tavily. Pick the most relevant result URL from Tavily's response, then fetch that page with `web-fetch` to confirm the details.
+**If no link was provided**:
 
-**If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), do not conclude the event is invalid. Instead, comment on the issue:
+1. Call `tavily_search` with a query like `"{event name} registration apply"` or `"{event name} hackathon challenge"`. This is mandatory — do not skip it, do not substitute `web-fetch` on a search URL, do not use any other search tool.
+2. From the Tavily results, pick the most relevant URL (the event's official page or registration page).
+3. Fetch that URL with `web-fetch` to read the event details.
+
+If Tavily returns no useful results and you have no URL to fetch, comment on the issue:
+> **Need a link:** I couldn't find this event through search. Please provide a direct URL to the event or application page so I can verify it.
+
+Then close the issue and stop.
+
+**If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), comment on the issue:
 > **Need a link:** I couldn't reach the relevant page due to a network restriction. Please provide a direct URL to the event or application page so I can verify it.
 
 Then close the issue and stop — the submitter can reopen with a link.
