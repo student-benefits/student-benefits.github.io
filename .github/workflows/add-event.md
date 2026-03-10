@@ -90,25 +90,23 @@ If the submission is a duplicate, comment on the issue:
 
 Then close the issue and stop — do not create a PR.
 
-## Step 3: Find the event page
+## Step 3: Find and confirm the event
 
-**If the user provided a link**, fetch it directly with `web-fetch` and skip to Step 4.
+Verify this is a real, active event. Do not rely solely on your training data — events launch and change frequently.
 
-**If no link was provided**:
+**You must call the Tavily `search` tool** (not `web-fetch` on a search URL) with a query like `"{event name} registration apply"` or `"{event name} hackathon challenge"`. Then use `web-fetch` to open the most relevant result and confirm the event exists and get the correct application URL. Do not skip this step or substitute it with a search engine URL fetch. If the user provided a link, use it to inform your search query or fetch it directly after Tavily confirms the event is real.
 
-1. Call `tavily_search` with a query like `"{event name} registration apply"` or `"{event name} hackathon challenge"`. This is mandatory — do not skip it, do not substitute `web-fetch` on a search URL, do not use any other search tool.
-2. From the Tavily results, pick the most relevant URL (the event's official page or registration page).
-3. Fetch that URL with `web-fetch` to read the event details.
+Only proceed if after using Tavily search and fetching the result you are confident the event exists and is active.
 
-If Tavily returns no useful results and you have no URL to fetch, comment on the issue:
+If Tavily returns no useful results, comment on the issue:
 > **Need a link:** I couldn't find this event through search. Please provide a direct URL to the event or application page so I can verify it.
 
 Then close the issue and stop.
 
-**If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), comment on the issue:
+If `web-fetch` fails with a network or firewall error (not a 404), comment on the issue:
 > **Need a link:** I couldn't reach the relevant page due to a network restriction. Please provide a direct URL to the event or application page so I can verify it.
 
-Then close the issue and stop — the submitter can reopen with a link.
+Then close the issue and stop.
 
 ## Step 4: Validate the event
 
