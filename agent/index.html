@@ -216,7 +216,7 @@
   </section>
 
   <section class="section">
-    <p class="section-label">See it in action</p>
+    <p class="section-label">How it works <span class="section-label-tag">simulated</span></p>
 
     <div class="sim-task">
       <div class="sim-task-head">
@@ -238,10 +238,15 @@
   </section>
 
   <section class="section" id="run-section">
-    <p class="section-label">Last run</p>
-    <div id="run-output">
-      <div class="state-loading">Loading run data…</div>
-    </div>
+    <details class="run-details" id="run-details">
+      <summary class="run-summary">
+        <span class="section-label">Last run</span>
+        <span class="run-summary-meta" id="run-summary-meta"></span>
+      </summary>
+      <div id="run-output">
+        <div class="state-loading">Loading run data…</div>
+      </div>
+    </details>
   </section>
 
 </main>

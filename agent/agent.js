@@ -338,7 +338,15 @@ fetch('../benefits.json')
 
 fetch('last-run.json')
   .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-  .then(renderRun)
+  .then(function (data) {
+    renderRun(data);
+    const meta = document.getElementById('run-summary-meta');
+    if (meta) {
+      meta.innerHTML =
+        `<span class="run-outcome ${escapeHtml(data.outcome)}">${outcomeLabel(data.outcome)}</span>` +
+        `<span class="run-summary-issue">Issue #${escapeHtml(String(data.issue))} — ${escapeHtml(data.title)}</span>`;
+    }
+  })
   .catch(function () {
     document.getElementById('run-output').innerHTML =
       '<div class="state-error">No run data yet. Grant hasn\'t processed a submission yet.</div>';
