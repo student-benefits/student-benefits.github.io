@@ -26,6 +26,14 @@ safe-outputs:
   add-comment:
   close-issue:
 
+mcp-servers:
+  tavily:
+    command: npx
+    args: ["-y", "@tavily/mcp-server"]
+    env:
+      TAVILY_API_KEY: "${{ secrets.TAVILY_API_KEY }}"
+    allowed: ["search", "search_news"]
+
 tools:
   github:
     toolsets: [issues, repos]
@@ -84,7 +92,9 @@ Then close the issue and stop — do not create a PR.
 
 ## Step 3: Validate the event
 
-Use `web-fetch` to find and confirm the event. If the user provided a link, fetch it directly. Otherwise, derive the most likely URL from the event name and fetch it (e.g. `mlh.io`, `hackathon.mit.edu`). Do not use a search engine — use web-fetch only.
+If the user provided a link, fetch it directly with `web-fetch` to confirm the event.
+
+If no link was provided, **you must call the Tavily `search` tool** (not `web-fetch` on a search URL) with a query like `"{event name} student hackathon apply"` or `"{event name} challenge registration"`. Use the most relevant result URL, then fetch that page with `web-fetch` to confirm the details.
 
 **If `web-fetch` fails with a network or firewall error** (not a 404 or "page not found"), do not conclude the event is invalid. Instead, comment on the issue:
 > **Need a link:** I couldn't reach the relevant page due to a network restriction. Please provide a direct URL to the event or application page so I can verify it.
@@ -152,6 +162,7 @@ Replace the entire content of `agent/last-events-submission.json` with:
   "outcome": "accepted",
   "tools": [
     { "name": "github-issue_read", "summary": "Read issue #${{ github.event.issue.number }}" },
+    { "name": "tavily_search", "query": "<search query if used>" },
     { "name": "web_fetch", "url": "<url fetched>" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
@@ -165,7 +176,7 @@ Replace the entire content of `agent/last-events-submission.json` with:
 ```
 
 Rules:
-- `tools`: include every tool called during this run, in order. Use `"summary"` for most tools; replace it with `"url"` for `web_fetch`.
+- `tools`: include every tool called during this run, in order. Use `"summary"` for most tools; replace it with `"query"` for `tavily_search` and `"url"` for `web_fetch`.
 - Write the complete file — do not append; replace the entire content.
 
 ## Step 7: Create a pull request
