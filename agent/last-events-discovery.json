@@ -1,7 +1,35 @@
 {
-  "timestamp": null,
-  "queries": [],
+  "timestamp": "2026-03-11T07:09:13.151Z",
+  "known_sources_checked": [
+    "https://events.ycombinator.com",
+    "https://mlh.io/seasons/2026/events",
+    "https://a16z.com/programs",
+    "https://www.anthropic.com/news",
+    "https://openai.com/news",
+    "https://buildyourfuture.withgoogle.com/programs",
+    "https://education.github.com/events",
+    "https://hack.mit.edu"
+  ],
+  "keyword_queries": [
+    "student hackathon 2026 free apply open",
+    "\"open to students\" conference 2026 free OR fellowship application",
+    "student grant OR \"build grant\" 2026 apply individual cash stipend",
+    "student residency OR cohort OR program 2026 free technical AI"
+  ],
   "expired_removed": [],
-  "discovered": [],
-  "pr_opened": false
+  "discovered": [
+    {
+      "name": "USAII Global AI Hackathon 2026",
+      "date": "2026-06-14",
+      "link": "https://aihackathon.usaii.org/",
+      "source": "keyword"
+    },
+    {
+      "name": "MCW Global Young Leaders Fellowship 2026",
+      "date": "2026-06-01",
+      "link": "https://mcwglobal.org/young-leaders-fellowship-2026/",
+      "source": "keyword"
+    }
+  ],
+  "pr_opened": true
 }
