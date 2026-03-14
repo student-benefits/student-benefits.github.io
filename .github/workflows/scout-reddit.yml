@@ -1,0 +1,75 @@
+name: Scout Reddit
+
+on:
+  schedule:
+    # Friday 14:00 UTC — catches posts from the week, leaves weekend to act
+    - cron: '0 14 * * 5'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'discover, scout, or both'
+        required: false
+        default: 'both'
+      dry_run:
+        description: 'Dry run (no state changes or notifications)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Determine mode
+        id: mode
+        run: |
+          MODE="${{ github.event.inputs.mode || 'both' }}"
+          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          FLAGS=""
+          if [[ "$MODE" == "both" || "$MODE" == "discover" ]]; then
+            FLAGS="$FLAGS --discover"
+          fi
+          if [[ "$MODE" == "both" || "$MODE" == "scout" ]]; then
+            FLAGS="$FLAGS --scout"
+          fi
+          if [[ "$DRY_RUN" == "true" ]]; then
+            FLAGS="$FLAGS --dry-run"
+          fi
+          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
+
+      - name: Run Reddit scout
+        id: scout
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python .github/scripts/scout-reddit.py ${{ steps.mode.outputs.flags }}
+
+      - name: Commit state changes
+        if: github.event.inputs.dry_run != 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agent/reddit-state.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Update Reddit scout state"
+          git push
+
+      - name: Create issues for discoveries
+        if: github.event.inputs.dry_run != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The script outputs discoveries to stdout — in future iterations,
+          # it could write a JSON file that this step reads to create issues.
+          # For now, discoveries are logged and the discover-benefits workflow
+          # handles issue creation via its Tavily Reddit searches.
+          echo "Scout complete. Check logs for discoveries."
