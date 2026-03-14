@@ -101,6 +101,8 @@ Call the tavily `search` tool with each of these queries. Do not skip any. Use t
 2. `"free for students" OR "academic license" AI tools cloud YEAR`
 3. `"lifestyle" OR "productivity" OR "domains" student discount OR "free for students" YEAR`
 4. `student grant OR credits developer tools YEAR apply individual`
+5. `site:reddit.com "free for students" OR "student email" software tools list YEAR`
+6. `site:reddit.com "student discount" developer OR engineering OR design tools YEAR`
 
 ## Step 4: Verify each candidate
 
