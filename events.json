@@ -67,6 +67,32 @@
     "expires": "2026-05-20"
   },
   {
+    "id": "mcw-young-leaders-fellowship-2026",
+    "name": "MCW Global Young Leaders Fellowship 2026",
+    "organizer": "MCW Global (Miracle Corners of the World)",
+    "category": "fellowship",
+    "date": "2026-06-01",
+    "date_end": "2026-06-30",
+    "remote": true,
+    "eligibility": "Young people worldwide ages 18-26; fluent English required",
+    "why": "Fully funded year-long leadership program with 10-day in-person training, alumni mentorship, and $15k+ project funding. Past graduates lead major NGOs and social enterprises.",
+    "link": "https://mcwglobal.org/young-leaders-fellowship-2026/",
+    "expires": "2026-06-30"
+  },
+  {
+    "id": "usaii-global-ai-hackathon-2026", 
+    "name": "USAII Global AI Hackathon 2026",
+    "organizer": "United States Artificial Intelligence Institute",
+    "category": "hackathon",
+    "date": "2026-06-14",
+    "date_end": "2026-06-21",
+    "remote": true,
+    "eligibility": "High school (grades 9-12), undergraduate, graduate, and doctoral students worldwide",
+    "why": "Premier global AI competition with $15k+ prize pool. Students build real-world AI solutions with mentor support. Award winners receive AI certification scholarships.",
+    "link": "https://aihackathon.usaii.org/",
+    "expires": "2026-06-21"
+  },
+  {
     "id": "yc-summer-fellows-2026",
     "name": "YC Summer Fellows Grants",
     "organizer": "Y Combinator",
