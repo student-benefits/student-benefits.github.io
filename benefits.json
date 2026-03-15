@@ -190,7 +190,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
-    "link": "https://nc.me/",
+    "link": "https://nc.me/landing/github",
     "tags": [
       "Domain",
       "SSL",
@@ -524,7 +524,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free API training and certification. Learn API fundamentals, earn a digital badge, and join the community.",
-    "link": "https://www.postman.com/student-program/student-expert/",
+    "link": "https://academy.postman.com/page/students",
     "tags": [
       "API",
       "Certification",
