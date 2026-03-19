@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-03-11T07:09:13.151Z",
+  "timestamp": "2026-03-18T07:16:48.825Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -13,22 +13,28 @@
   "keyword_queries": [
     "student hackathon 2026 free apply open",
     "\"open to students\" conference 2026 free OR fellowship application",
-    "student grant OR \"build grant\" 2026 apply individual cash stipend",
+    "student grant OR \"build grant\" 2026 apply individual cash stipend", 
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [],
+  "expired_removed": ["gemini-live-agent-challenge-2026"],
   "discovered": [
     {
-      "name": "USAII Global AI Hackathon 2026",
-      "date": "2026-06-14",
-      "link": "https://aihackathon.usaii.org/",
+      "name": "Apple AIML Residency 2026",
+      "date": "2026-07-01",
+      "link": "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
       "source": "keyword"
     },
     {
-      "name": "MCW Global Young Leaders Fellowship 2026",
-      "date": "2026-06-01",
-      "link": "https://mcwglobal.org/young-leaders-fellowship-2026/",
+      "name": "Meta AI Residency Program 2026", 
+      "date": "2026-07-01",
+      "link": "https://ai.meta.com/join-us/residency-program/",
       "source": "keyword"
+    },
+    {
+      "name": "MakeMIT x Harvard 2026",
+      "date": "2026-02-21", 
+      "link": "https://makemit.net/",
+      "source": "known-source"
     }
   ],
   "pr_opened": true

@@ -13,17 +13,18 @@
     "expires": "2026-06-27"
   },
   {
-    "id": "gemini-live-agent-challenge-2026",
-    "name": "Gemini Live Agent Challenge",
-    "organizer": "Google",
+    "id": "makemit-x-harvard-2026",
+    "name": "MakeMIT x Harvard 2026", 
+    "organizer": "MIT",
     "category": "hackathon",
-    "date": "2026-02-16",
-    "date_end": "2026-03-16",
-    "remote": true,
-    "eligibility": "Individuals above age of majority; not residents of restricted countries",
-    "why": "$80k total prizes including $25k grand prize, Google Cloud Next tickets, and opportunity to demo at Google's flagship conference.",
-    "link": "https://geminiliveagentchallenge.devpost.com/",
-    "expires": "2026-03-16"
+    "date": "2026-02-21",
+    "date_end": "2026-02-22",
+    "location": "Cambridge, MA",
+    "remote": false,
+    "eligibility": "College students and recent graduates; beginner-friendly",
+    "why": "MIT's largest hardware hackathon with 400+ students. Free access to laser cutters, 3D printers, and materials. Focus on building physical products across Healthcare, Sustainability, and Communication tracks.",
+    "link": "https://makemit.net/",
+    "expires": "2026-02-22"
   },
   {
     "id": "mlh-ghw-cloud-2026",
@@ -37,6 +38,34 @@
     "why": "Free week-long online event with daily cloud infrastructure workshops. Low barrier, immediately upcoming, and a fast way to build a cloud portfolio before summer recruiting.",
     "link": "https://ghw.mlh.io/events/cloud",
     "expires": "2026-03-19"
+  },
+  {
+    "id": "apple-aiml-residency-2026",
+    "name": "Apple AIML Residency 2026",
+    "organizer": "Apple",
+    "category": "fellowship", 
+    "date": "2026-07-01",
+    "date_end": "2027-06-30",
+    "location": "Cupertino, CA",
+    "remote": false,
+    "eligibility": "Master's/PhD graduates, software engineers, academics seeking industry experience",
+    "why": "One-year paid residency at Apple working on ML products that impact millions. Residents publish at premier venues like NeurIPS while gaining direct Apple mentor access.",
+    "link": "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
+    "expires": "2027-06-30"
+  },
+  {
+    "id": "meta-ai-residency-2026", 
+    "name": "Meta AI Residency Program 2026",
+    "organizer": "Meta",
+    "category": "fellowship",
+    "date": "2026-07-01", 
+    "date_end": "2027-06-30",
+    "location": "Menlo Park, CA",
+    "remote": false,
+    "eligibility": "Technical backgrounds looking to apply to PhD programs; diverse STEM backgrounds welcome",
+    "why": "One-year research training at Meta AI, pairing residents with researchers. Focus on publishing at top conferences (NeurIPS, ICML, ICLR) and open-source impact.",
+    "link": "https://ai.meta.com/join-us/residency-program/",
+    "expires": "2027-06-30"
   },
   {
     "id": "bitcamp-2026",
