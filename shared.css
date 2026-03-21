@@ -17,6 +17,10 @@
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
+  --dur-fast: 80ms;
+  --dur-normal: 150ms;
+  --dur-slow: 300ms;
+  --ease: cubic-bezier(0.165, 0.85, 0.45, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -69,7 +73,7 @@ header { margin-bottom: 2rem; }
   font-weight: 500;
   color: var(--slate-500);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 .site-alt:hover { color: #fff; }
 
@@ -81,7 +85,7 @@ header { margin-bottom: 2rem; }
   font-size: 0.875rem;
   text-decoration: none;
   margin-top: 0.4rem;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 .grant-badge:hover { color: var(--slate-400); }
 
@@ -111,7 +115,7 @@ h1 {
   background: rgba(30, 41, 59, 0.4);
   color: var(--slate-400);
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background-color var(--dur-normal), color var(--dur-normal), border-color var(--dur-normal);
 }
 .filter-tab:hover {
   background: rgba(51, 65, 85, 0.5);
@@ -135,7 +139,7 @@ footer a {
   color: var(--indigo-400);
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 footer a:hover { color: var(--indigo-300); }
 
@@ -164,7 +168,7 @@ footer a:hover { color: var(--indigo-300); }
   color: var(--amber-300);
   font-size: 0.8125rem;
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background-color var(--dur-normal), border-color var(--dur-normal);
   white-space: nowrap;
 }
 .contribute-banner:hover {

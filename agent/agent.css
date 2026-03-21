@@ -44,6 +44,9 @@
   --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+  --dur-fast: 80ms;
+  --dur-normal: 150ms;
+  --dur-slow: 300ms;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -84,7 +87,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  transition: color 120ms;
+  transition: color var(--dur-fast);
 }
 .back-link:hover { color: var(--text); }
 .back-link svg { width: 14px; height: 14px; }
@@ -157,7 +160,7 @@ body {
   content: '▶';
   font-size: 0.5rem;
   color: var(--text-muted);
-  transition: transform 120ms;
+  transition: transform var(--dur-fast);
   flex-shrink: 0;
 }
 .run-details[open] > summary::before { transform: rotate(90deg); }
@@ -449,7 +452,7 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 120ms;
+  transition: opacity var(--dur-fast);
 }
 .sim-btn:hover { opacity: 0.88; }
 .sim-btn:focus-visible { outline: 2px solid var(--grant-color); outline-offset: 2px; }
@@ -458,6 +461,7 @@ body {
   outline: 2px solid var(--text);
   outline-offset: 2px;
 }
+.sim-btn:active { transform: scale(0.97); }
 .sim-btn:disabled { opacity: 0.5; cursor: default; }
 .sim-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
 .sim-hint { font-size: 0.8rem; color: var(--text-muted); }
@@ -479,7 +483,7 @@ body {
   color: var(--text);
   cursor: pointer;
   white-space: nowrap;
-  transition: border-color 120ms, color 120ms, background 120ms;
+  transition: border-color var(--dur-fast), color var(--dur-fast), background-color var(--dur-fast);
 }
 .prop-chip:hover { border-color: var(--grant-border); color: var(--grant-color); }
 .prop-chip[aria-expanded="true"] {
@@ -619,7 +623,7 @@ body {
   cursor: pointer;
   text-align: left;
   font-family: var(--font);
-  transition: box-shadow 120ms, transform 120ms;
+  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
   min-width: 96px;
 }
 .arch-node:hover { box-shadow: var(--shadow-sm); }
@@ -666,7 +670,7 @@ body {
   box-shadow: var(--shadow-sm);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 120ms;
+  transition: opacity var(--dur-fast);
 }
 .arch-connector:hover .arch-connector-label { opacity: 1; }
 .packet {

@@ -51,6 +51,7 @@ jobs:
         id: scout
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
         run: python .github/scripts/scout-reddit.py ${{ steps.mode.outputs.flags }}
 
       - name: Commit state changes

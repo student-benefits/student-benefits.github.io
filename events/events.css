@@ -17,7 +17,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  transition: border-color var(--dur-normal), color var(--dur-normal), background-color var(--dur-normal);
   border: 1px solid rgba(52, 211, 153, 0.3);
   background: rgba(52, 211, 153, 0.06);
   color: #34d399;
@@ -62,7 +62,7 @@
   border-radius: var(--radius-lg);
   padding: 1.125rem;
   cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--dur-normal), box-shadow var(--dur-normal);
 }
 .event-card:hover {
   border-color: rgba(129, 140, 248, 0.4);
@@ -162,7 +162,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background-color var(--dur-normal), border-color var(--dur-normal);
   white-space: nowrap;
 }
 .event-apply:hover {
