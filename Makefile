@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := deploy
 
 .PHONY: help deploy purge-runs purge-deployments review
 

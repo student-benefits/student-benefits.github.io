@@ -1,18 +1,5 @@
 [
   {
-    "id": "gdsc-solution-challenge-2026",
-    "name": "GDSC Solution Challenge 2026",
-    "organizer": "Google",
-    "category": "hackathon",
-    "date": "2026-01-15",
-    "date_end": "2026-06-27",
-    "remote": true,
-    "eligibility": "University students in a Google Developer Student Club chapter; teams of 1–4",
-    "why": "Build on Google tech for a UN Sustainable Development Goal. Top 3 teams win $3,000/member and a Google Developers Blog feature — direct path to recruiter visibility.",
-    "link": "https://developers.google.com/community/gdsc-solution-challenge",
-    "expires": "2026-06-27"
-  },
-  {
     "id": "makemit-x-harvard-2026",
     "name": "MakeMIT x Harvard 2026", 
     "organizer": "MIT",

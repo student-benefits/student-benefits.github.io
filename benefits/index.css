@@ -18,7 +18,7 @@
   height: 1.25rem;
   color: var(--slate-400);
   pointer-events: none;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 
 .search-wrap:focus-within .search-icon { color: var(--indigo-400); }
@@ -34,7 +34,7 @@
   font-size: 1rem;
   font-family: var(--font);
   line-height: 1.25;
-  transition: background 0.15s, border-color 0.15s;
+  transition: background-color var(--dur-normal), border-color var(--dur-normal);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
 }
 
@@ -132,7 +132,7 @@
   min-height: 44px;
   min-width: 44px;
   justify-content: center;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 
 .clear-btn:hover { color: var(--indigo-300); }
@@ -152,7 +152,7 @@
   border-radius: var(--radius-lg);
   border: 1px solid rgba(51, 65, 85, 0.5);
   position: relative;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color var(--dur-normal), box-shadow var(--dur-normal);
 }
 
 .card:hover {
@@ -214,7 +214,7 @@
   background: rgba(74, 222, 128, 0.06);
   color: #4ade80;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition: background-color var(--dur-normal), border-color var(--dur-normal), box-shadow var(--dur-normal);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -232,7 +232,7 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   line-height: 1.4;
-  transition: color 0.15s;
+  transition: color var(--dur-normal);
 }
 
 .card:hover .card-name { color: #c7d2fe; text-decoration: underline; text-underline-offset: 3px; }
@@ -273,7 +273,7 @@
   border-radius: var(--radius-sm);
   border: 1px solid rgba(51, 65, 85, 0.5);
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color var(--dur-normal), border-color var(--dur-normal);
 }
 
 .tag:hover {
