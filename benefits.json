@@ -43,20 +43,6 @@
     "repo": "getcursor/cursor"
   },
   {
-    "id": "google-antigravity",
-    "name": "Google Antigravity",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://antigravity.google",
-    "tags": [
-      "AI",
-      "IDE",
-      "Google"
-    ],
-    "popularity": 9
-  },
-  {
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
     "category": "Dev Tools",
@@ -70,20 +56,6 @@
     ],
     "popularity": 9,
     "repo": "JetBrains/intellij-community"
-  },
-  {
-    "id": "perplexity-pro",
-    "name": "Perplexity Pro",
-    "category": "AI Tools",
-    "offer_type": "discount",
-    "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
-    "link": "https://www.perplexity.ai/students",
-    "tags": [
-      "AI",
-      "Search",
-      "Research"
-    ],
-    "popularity": 8
   },
   {
     "id": "1password",
@@ -171,34 +143,6 @@
     "popularity": 6
   },
   {
-    "id": "netlify",
-    "name": "Netlify",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Pro tier free via GitHub Student Developer Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
-    "link": "https://www.netlify.com/github-students/",
-    "tags": [
-      "Hosting",
-      "JAMstack"
-    ],
-    "popularity": 7,
-    "repo": "netlify/cli"
-  },
-  {
-    "id": "namecheap",
-    "name": "Namecheap",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
-    "link": "https://nc.me/landing/github",
-    "tags": [
-      "Domain",
-      "SSL",
-      "Security"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "figma",
     "name": "Figma Education",
     "category": "Design",
@@ -246,7 +190,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
-    "link": "https://www.notion.so/product/notion-for-education",
+    "link": "https://www.notion.com/product/notion-for-education",
     "tags": [
       "Notes",
       "Planning",
@@ -296,19 +240,6 @@
       "Microsoft"
     ],
     "popularity": 9
-  },
-  {
-    "id": "linear",
-    "name": "Linear",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "Discounted paid plans for students. Free tier with 250 active issues. Email support@linear.app to apply.",
-    "link": "https://linear.app/education",
-    "tags": [
-      "Project Management",
-      "Agile"
-    ],
-    "popularity": 7
   },
   {
     "id": "spotify-student",
@@ -391,20 +322,6 @@
       "Certificates"
     ],
     "popularity": 9
-  },
-  {
-    "id": "google-gemini-pro",
-    "name": "Google Gemini Pro",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://gemini.google/students/",
-    "tags": [
-      "AI",
-      "Google",
-      "Research"
-    ],
-    "popularity": 10
   },
   {
     "id": "google-cloud",
