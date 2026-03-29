@@ -48,7 +48,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://antigravity.google",
+    "link": "https://one.google.com/ai-student",
     "tags": [
       "AI",
       "IDE",
@@ -171,34 +171,6 @@
     "popularity": 6
   },
   {
-    "id": "netlify",
-    "name": "Netlify",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Pro tier free via GitHub Student Developer Pack. Includes 1TB bandwidth, 300 build minutes, and serverless functions.",
-    "link": "https://www.netlify.com/github-students/",
-    "tags": [
-      "Hosting",
-      "JAMstack"
-    ],
-    "popularity": 7,
-    "repo": "netlify/cli"
-  },
-  {
-    "id": "namecheap",
-    "name": "Namecheap",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free .me domain for 1 year plus SSL certificate. Available to students with .edu email addresses worldwide.",
-    "link": "https://nc.me/landing/github",
-    "tags": [
-      "Domain",
-      "SSL",
-      "Security"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "figma",
     "name": "Figma Education",
     "category": "Design",
@@ -246,7 +218,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
-    "link": "https://www.notion.so/product/notion-for-education",
+    "link": "https://www.notion.com/product/notion-for-education",
     "tags": [
       "Notes",
       "Planning",
@@ -298,19 +270,6 @@
     "popularity": 9
   },
   {
-    "id": "linear",
-    "name": "Linear",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "Discounted paid plans for students. Free tier with 250 active issues. Email support@linear.app to apply.",
-    "link": "https://linear.app/education",
-    "tags": [
-      "Project Management",
-      "Agile"
-    ],
-    "popularity": 7
-  },
-  {
     "id": "spotify-student",
     "name": "Spotify Premium Student",
     "category": "Lifestyle",
@@ -356,7 +315,7 @@
     "id": "unidays",
     "name": "UNiDAYS",
     "category": "Lifestyle",
-    "offer_type": "free",
+    "offer_type": "discount",
     "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
     "link": "https://www.myunidays.com/",
     "tags": [
@@ -398,7 +357,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://gemini.google/students/",
+    "link": "https://one.google.com/ai-student",
     "tags": [
       "AI",
       "Google",
@@ -564,7 +523,7 @@
     "id": "educative",
     "name": "Educative.io",
     "category": "Learning",
-    "offer_type": "trial",
+    "offer_type": "discount",
     "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
     "tags": [
@@ -578,7 +537,7 @@
     "id": "student-beans",
     "name": "Student Beans",
     "category": "Lifestyle",
-    "offer_type": "free",
+    "offer_type": "discount",
     "description": "Free platform with 10,000+ student discounts on fashion, tech, food, and travel. Digital student ID included.",
     "link": "https://www.studentbeans.com/us",
     "tags": [
