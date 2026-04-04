@@ -1,5 +1,18 @@
 [
   {
+    "id": "paul-daisy-soros-fellowship-2027",
+    "name": "Paul & Daisy Soros Fellowships for New Americans",
+    "organizer": "Paul & Daisy Soros Fellowships",
+    "category": "fellowship",
+    "date": "2026-04-01",
+    "date_end": "2026-10-30",
+    "remote": true,
+    "eligibility": "New Americans (immigrants and children of immigrants) age 32 or younger pursuing graduate degrees",
+    "why": "$90,000 over two years for graduate school. Join a network of 835+ Fellows across 103 countries making significant contributions to US society, culture and academia.",
+    "link": "https://pdsoros.org/",
+    "expires": "2026-10-30"
+  },
+  {
     "id": "thiel-fellowship-2026",
     "name": "Thiel Fellowship",
     "organizer": "Thiel Foundation",
