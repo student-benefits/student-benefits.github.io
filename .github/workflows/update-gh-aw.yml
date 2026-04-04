@@ -28,7 +28,7 @@ jobs:
       - name: Install gh-aw ${{ steps.versions.outputs.latest }}
         if: steps.versions.outputs.current != steps.versions.outputs.latest
         env:
-          GH_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: gh extension install github/gh-aw
 
       - name: Recompile all workflows
@@ -43,7 +43,7 @@ jobs:
       - name: Open PR
         if: steps.versions.outputs.current != steps.versions.outputs.latest
         env:
-          GH_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
           CURRENT: ${{ steps.versions.outputs.current }}
           LATEST: ${{ steps.versions.outputs.latest }}
         run: |
