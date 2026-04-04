@@ -1,5 +1,18 @@
 [
   {
+    "id": "paul-daisy-soros-fellowships-2027",
+    "name": "Paul & Daisy Soros Fellowships for New Americans 2027",
+    "organizer": "Paul & Daisy Soros Foundation",
+    "category": "fellowship",
+    "date": "2026-04-01",
+    "date_end": "2026-10-30",
+    "remote": true,
+    "eligibility": "Immigrants and children of immigrants pursuing graduate/professional degrees in the US",
+    "why": "$90,000 over two years plus lifelong network of 800+ accomplished New American Fellows. Merit-based funding for any field of graduate study with no restrictions.",
+    "link": "https://pdsoros.org/",
+    "expires": "2026-10-30"
+  },
+  {
     "id": "apple-aiml-residency-2026",
     "name": "Apple AIML Residency 2026",
     "organizer": "Apple",

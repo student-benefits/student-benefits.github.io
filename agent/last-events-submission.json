@@ -1,18 +1,20 @@
 {
-  "issue": 89,
-  "title": "[event]: gemini live agent challenge",
-  "timestamp": "2026-03-10T16:52:15.043Z",
+  "issue": 112,
+  "title": "[event]: paul & daisy soros fellowships for new americans",
+  "timestamp": "2026-04-04T04:27:46.359Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #89" },
-    { "name": "tavily_search", "query": "Gemini Live Agent Challenge registration apply Google" },
-    { "name": "web_fetch", "url": "https://geminiliveagentchallenge.devpost.com/" },
+    { "name": "github-issue_read", "summary": "Read issue #112" },
+    { "name": "tavily_search", "query": "Paul Daisy Soros Fellowship New Americans graduate students application 2027" },
+    { "name": "web_fetch", "url": "https://pdsoros.org/" },
+    { "name": "web_fetch", "url": "https://pdsoros.org/application-process/" },
+    { "name": "web_fetch", "url": "https://pdsoros.org/eligibility/" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
   "event": {
-    "name": "Gemini Live Agent Challenge",
-    "category": "hackathon",
-    "date": "2026-02-16",
-    "organizer": "Google"
+    "name": "Paul & Daisy Soros Fellowships for New Americans 2027",
+    "category": "fellowship",
+    "date": "2026-04-01",
+    "organizer": "Paul & Daisy Soros Foundation"
   }
 }
