@@ -1,18 +1,19 @@
 {
-  "issue": 41,
-  "title": "[benefit]: termius pro",
-  "timestamp": "2026-03-05T18:25:42.670Z",
+  "issue": 105,
+  "title": "[benefit]: datacamp",
+  "timestamp": "2026-04-04T01:51:27.363Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #41 about Termius Pro student benefit" },
-    { "name": "get_file_contents", "summary": "Read benefits.json, rejected.json, and categories.json" },
-    { "name": "get_file_contents", "summary": "Checked benefits.json for existing Termius entries" },
-    { "name": "tavily_search", "query": "Termius student discount program" },
-    { "name": "edit", "summary": "Added Termius Pro benefit to benefits.json and updated agent log" }
+    { "name": "bash", "summary": "Read issue #105 via GitHub API" },
+    { "name": "view", "summary": "Read benefits.json and agent/rejected.json" },
+    { "name": "grep", "summary": "Checked for DataCamp duplicates" },
+    { "name": "tavily_search", "query": "DataCamp student discount higher education GitHub student" },
+    { "name": "web_fetch", "url": "https://www.datacamp.com/github-students" },
+    { "name": "edit", "summary": "Added DataCamp entry to benefits.json" }
   ],
   "benefit": {
-    "name": "Termius Pro",
-    "category": "Dev Tools",
-    "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing."
+    "name": "DataCamp",
+    "category": "Learning",
+    "description": "3 months free access to data science courses and interactive learning paths with GitHub Student Pack."
   }
 }
