@@ -1,32 +1,5 @@
 [
   {
-    "id": "makemit-x-harvard-2026",
-    "name": "MakeMIT x Harvard 2026", 
-    "organizer": "MIT",
-    "category": "hackathon",
-    "date": "2026-02-21",
-    "date_end": "2026-02-22",
-    "location": "Cambridge, MA",
-    "remote": false,
-    "eligibility": "College students and recent graduates; beginner-friendly",
-    "why": "MIT's largest hardware hackathon with 400+ students. Free access to laser cutters, 3D printers, and materials. Focus on building physical products across Healthcare, Sustainability, and Communication tracks.",
-    "link": "https://makemit.net/",
-    "expires": "2026-02-22"
-  },
-  {
-    "id": "mlh-ghw-cloud-2026",
-    "name": "MLH Global Hack Week: Cloud",
-    "organizer": "Major League Hacking",
-    "category": "hackathon",
-    "date": "2026-03-13",
-    "date_end": "2026-03-19",
-    "remote": true,
-    "eligibility": "Any student or developer worldwide",
-    "why": "Free week-long online event with daily cloud infrastructure workshops. Low barrier, immediately upcoming, and a fast way to build a cloud portfolio before summer recruiting.",
-    "link": "https://ghw.mlh.io/events/cloud",
-    "expires": "2026-03-19"
-  },
-  {
     "id": "apple-aiml-residency-2026",
     "name": "Apple AIML Residency 2026",
     "organizer": "Apple",
@@ -189,5 +162,19 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
+  },
+  {
+    "id": "immerse-gt-2026",
+    "name": "ImmerseGT 2026",
+    "organizer": "Georgia Tech XR",
+    "category": "hackathon",
+    "date": "2026-04-10",
+    "date_end": "2026-04-12",
+    "location": "Atlanta, GA",
+    "remote": false,
+    "eligibility": "University students interested in XR/AR/VR development",
+    "why": "36-hour XR hackathon at Georgia Tech with access to cutting-edge AR/VR makerspace. Focus on immersive technology with industry mentorship.",
+    "link": "https://www.immersegt.org/",
+    "expires": "2026-04-12"
   }
 ]
