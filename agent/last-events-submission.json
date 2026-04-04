@@ -1,18 +1,20 @@
 {
-  "issue": 89,
-  "title": "[event]: gemini live agent challenge",
-  "timestamp": "2026-03-10T16:52:15.043Z",
+  "issue": 111,
+  "title": "[event]: nsf graduate research fellowship program",
+  "timestamp": "2026-04-04T04:27:25.869Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #89" },
-    { "name": "tavily_search", "query": "Gemini Live Agent Challenge registration apply Google" },
-    { "name": "web_fetch", "url": "https://geminiliveagentchallenge.devpost.com/" },
+    { "name": "github-issue_read", "summary": "Read issue #111" },
+    { "name": "tavily_search", "query": "NSF GRFP Graduate Research Fellowship Program application 2026" },
+    { "name": "tavily_search", "query": "NSF GRFP 2026 application deadline October November stipend benefits" },
+    { "name": "tavily_search", "query": "\"NSF GRFP\" \"$37,000 stipend\" \"$16,000\" benefits 2026" },
+    { "name": "web_fetch", "url": "https://www.nsfgrfp.org" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
   "event": {
-    "name": "Gemini Live Agent Challenge",
-    "category": "hackathon",
-    "date": "2026-02-16",
-    "organizer": "Google"
+    "name": "NSF Graduate Research Fellowship Program",
+    "category": "fellowship",
+    "date": "2025-11-12",
+    "organizer": "National Science Foundation"
   }
 }
