@@ -162,19 +162,6 @@
     "expires": "2026-11-30"
   },
   {
-    "id": "nsf-grfp-2026",
-    "name": "NSF Graduate Research Fellowship Program 2026",
-    "organizer": "National Science Foundation",
-    "category": "fellowship",
-    "date": "2026-10-27",
-    "date_end": "2026-10-30",
-    "remote": true,
-    "eligibility": "US citizens/nationals/permanent residents pursuing STEM graduate degrees; undergrad seniors and first-year grad students eligible",
-    "why": "$37k annual stipend plus $16k education allowance for 3 years. America's most prestigious graduate fellowship in STEM — recognition alone opens research doors.",
-    "link": "https://www.nsfgrfp.org/",
-    "expires": "2026-10-30"
-  },
-  {
     "id": "richard-tapia-2026",
     "name": "Richard Tapia Celebration of Diversity in Computing",
     "organizer": "CMD-IT / ACM",

@@ -1,19 +1,19 @@
 {
-  "issue": 111,
-  "title": "[event]: nsf graduate research fellowship program",
-  "timestamp": "2026-04-04T13:53:55.841Z",
+  "issue": 112,
+  "title": "[event]: paul & daisy soros fellowships for new americans",
+  "timestamp": "2026-04-04T13:46:13.717Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #111" },
-    { "name": "tavily_search", "query": "NSF Graduate Research Fellowship Program GRFP 2026 application deadlines" },
-    { "name": "web_fetch", "url": "https://www.nsfgrfp.org/" },
-    { "name": "tavily_search", "query": "NSF GRFP 2026 deadline October November application dates" },
+    { "name": "github-issue_read", "summary": "Read issue #112" },
+    { "name": "tavily_search", "query": "Paul Daisy Soros Fellowship New Americans application 2026 2027" },
+    { "name": "web_fetch", "url": "https://pdsoros.org/" },
+    { "name": "web_fetch", "url": "https://pdsoros.org/application-process/" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
   "event": {
-    "name": "NSF Graduate Research Fellowship Program 2026",
+    "name": "Paul & Daisy Soros Fellowships for New Americans",
     "category": "fellowship",
-    "date": "2026-10-27",
-    "organizer": "National Science Foundation"
+    "date": "2026-04-01",
+    "organizer": "Paul & Daisy Soros Fellowships"
   }
 }
