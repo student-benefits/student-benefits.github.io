@@ -1,5 +1,17 @@
 [
   {
+    "id": "nsf-grfp-2025",
+    "name": "NSF Graduate Research Fellowship Program",
+    "organizer": "National Science Foundation",
+    "category": "fellowship",
+    "date": "2025-11-14",
+    "remote": true,
+    "eligibility": "US citizens/permanent residents; undergrad seniors or first-year grad students in STEM",
+    "why": "$37k annual stipend + $16k education allowance for 3 years. The gold standard federal STEM fellowship – past recipients became Nobel laureates and tech leaders.",
+    "link": "https://www.nsfgrfp.org/",
+    "expires": "2025-11-14"
+  },
+  {
     "id": "thiel-fellowship-2026",
     "name": "Thiel Fellowship",
     "organizer": "Thiel Foundation",

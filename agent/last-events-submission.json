@@ -1,18 +1,19 @@
 {
-  "issue": 110,
-  "title": "[event]: thiel fellowship",
-  "timestamp": "2026-04-04T04:27:24.937Z",
+  "issue": 111,
+  "title": "[event]: nsf graduate research fellowship program",
+  "timestamp": "2026-04-04T13:36:48.149Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #110" },
-    { "name": "tavily_search", "query": "Thiel Fellowship 2026 applications registration apply" },
-    { "name": "web_fetch", "url": "https://thielfellowship.org/" },
+    { "name": "github-issue_read", "summary": "Read issue #111" },
+    { "name": "tavily_search", "query": "NSF Graduate Research Fellowship Program GRFP registration apply 2026" },
+    { "name": "web_fetch", "url": "https://www.nsfgrfp.org/" },
+    { "name": "web_fetch", "url": "https://www.nsfgrfp.org/applicants/faqs.html" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
   "event": {
-    "name": "Thiel Fellowship",
+    "name": "NSF Graduate Research Fellowship Program",
     "category": "fellowship",
-    "date": "2026-04-04",
-    "organizer": "Thiel Foundation"
+    "date": "2025-11-14",
+    "organizer": "National Science Foundation"
   }
 }
