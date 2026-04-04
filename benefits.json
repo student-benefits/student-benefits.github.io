@@ -741,5 +741,19 @@
       "GitHub"
     ],
     "popularity": 5
+  },
+  {
+    "id": "datacamp",
+    "name": "DataCamp",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "3 months free access to data science courses and interactive learning paths with GitHub Student Pack.",
+    "link": "https://www.datacamp.com/github-students",
+    "tags": [
+      "Data Science",
+      "Courses",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
