@@ -7,6 +7,16 @@ let events = [];
 let activeCategory = 'All';
 let remoteOnly = false;
 
+const categoryTooltips = {
+  'All': 'Show all events',
+  'conference': 'Industry conferences, keynotes, and talks',
+  'fellowship': 'Structured cohort programs with mentors and curriculum',
+  'grant': 'Individual funding for self-directed projects',
+  'hackathon': 'Time-limited coding competitions and building sprints',
+  'summit': 'Multi-day gatherings focused on specific topics or communities',
+  'workshop': 'Hands-on training sessions and skill-building'
+};
+
 function orgColor(name) { return hashColor(name, ORG_PALETTE); }
 
 function fmtDate(date, dateEnd) {
@@ -104,6 +114,8 @@ function renderFilters() {
   const visibleCategories = categories.filter(function(c) { return c === 'All' || usedCats.has(c); });
   renderFilterTabs(filterBar, visibleCategories, activeCategory, function(c) {
     return c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
+  }, function(c) {
+    return categoryTooltips[c] || '';
   });
 }
 

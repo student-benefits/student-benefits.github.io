@@ -18,10 +18,12 @@ function hashColor(name, palette) {
 // `categories` is an array of category strings.
 // `activeCategory` is the currently selected value.
 // `labelFn` is an optional function(cat) => string for display text; defaults to identity.
-function renderFilterTabs(container, categories, activeCategory, labelFn) {
+// `tooltipFn` is an optional function(cat) => string for tooltip text.
+function renderFilterTabs(container, categories, activeCategory, labelFn, tooltipFn) {
   var label = labelFn || function (c) { return c; };
   container.innerHTML = categories.map(function (cat) {
-    return '<button class="filter-tab" aria-pressed="' + (cat === activeCategory) + '" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(label(cat)) + '</button>';
+    var tooltip = tooltipFn ? (' title="' + escapeHtml(tooltipFn(cat)) + '"') : '';
+    return '<button class="filter-tab" aria-pressed="' + (cat === activeCategory) + '" data-cat="' + escapeHtml(cat) + '"' + tooltip + '>' + escapeHtml(label(cat)) + '</button>';
   }).join('');
 }
 
