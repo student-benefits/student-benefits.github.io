@@ -116,7 +116,7 @@ Using what you learned from the event page, apply this quality bar. Reject if an
 1. **Free or heavily subsidized** — skip if fee >$50 with no scholarship or travel grant pathway
 2. **Open to individual students** — skip if requires a team, startup, or company affiliation
 3. **Credible organizer** — skip if the organizing entity is obscure or unverifiable (well-known company, university, VC firm, or non-profit clears this)
-4. **Genuinely career-altering** — skip if this is not the kind of event a student would name as a turning point (a hackathon with a cash prize, a fellowship with a cohort, a summit with top speakers clears this; a generic webinar does not)
+4. **Genuinely career-altering** — skip if this is not the kind of opportunity a student would name as a turning point (a hackathon with a cash prize, a fellowship with a cohort, a summit with top speakers, or a grant that funds independent work clears this; a generic webinar does not)
 5. **Active and upcoming** — skip if the date has passed, the application deadline has passed, the event is more than 12 months away, or the page is broken or "coming soon"
 
 If invalid, comment on the issue:
@@ -133,7 +133,7 @@ Create a JSON object matching this exact schema:
   "id": "<url-safe-id>",
   "name": "<Official Event Name>",
   "organizer": "<Organizing entity name>",
-  "category": "<one of: hackathon | conference | fellowship | summit | workshop>",
+  "category": "<one of: hackathon | conference | fellowship | summit | workshop | grant>",
   "date": "<YYYY-MM-DD>",
   "date_end": "<YYYY-MM-DD or omit if single-day>",
   "location": "<City, State/Country or omit if fully remote>",
@@ -147,7 +147,7 @@ Create a JSON object matching this exact schema:
 
 Rules:
 - `id`: lowercase, hyphens only, unique, no leading/trailing hyphens (e.g. `mlh-hackcon-2026`); verify the ID doesn't already exist in `events.json`
-- `category`: must be exactly one of `hackathon`, `conference`, `fellowship`, `summit`, `workshop`
+- `category`: must be exactly one of `hackathon`, `conference`, `fellowship`, `summit`, `workshop`, `grant`
 - `why`: write this yourself based on what you learned from the event page — do not copy marketing text verbatim; max 200 chars
 - `remote`: `true` only if the event is fully virtual; `false` for in-person or hybrid
 - `expires`: same as `date_end`, or `date` if the event is a single day

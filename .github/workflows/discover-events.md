@@ -107,7 +107,7 @@ For each result from Steps 3 and 4, use `web-fetch` to confirm the event page is
 1. Free or heavily subsidized (travel grants, stipends, or zero cost) — skip if fee >$50 with no scholarship pathway
 2. Open to individual students — skip if requires team, startup, or company affiliation
 3. Credible organizer (well-known company, university, VC firm, or non-profit) — skip if obscure or unverifiable
-4. Genuinely career-altering — skip if not the kind of event a student would name as a turning point
+4. Genuinely career-altering — skip if not the kind of opportunity a student would name as a turning point (a hackathon with a cash prize, a fellowship with a cohort, a summit with top speakers, or a grant that funds independent work clears this; a generic webinar does not)
 5. Concrete date within 12 months and a working application page — skip if date has passed, is >12 months away, or page is broken/"coming soon"
 
 Keep a shortlist of the best candidates across both passes, up to **3 new events**.
@@ -121,7 +121,7 @@ For each candidate on your shortlist, produce a JSON object matching this schema
   "id": "<url-safe-id>",
   "name": "<Official Event Name>",
   "organizer": "<Organizing entity name>",
-  "category": "<one of: hackathon | conference | fellowship | summit | workshop>",
+  "category": "<one of: hackathon | conference | fellowship | summit | workshop | grant>",
   "date": "<YYYY-MM-DD>",
   "date_end": "<YYYY-MM-DD or omit if single-day>",
   "location": "<City, State/Country or omit if fully remote>",
@@ -135,7 +135,7 @@ For each candidate on your shortlist, produce a JSON object matching this schema
 
 Rules:
 - `id`: lowercase, hyphens only, unique, no leading/trailing hyphens (e.g. `mlh-hackcon-2026`)
-- `category`: must be one of `hackathon`, `conference`, `fellowship`, `summit`, `workshop`
+- `category`: must be one of `hackathon`, `conference`, `fellowship`, `summit`, `workshop`, `grant`
 - `why`: write this yourself based on what you learned from the event page — do not copy marketing text verbatim; max 200 chars
 - `remote`: set to `true` only if the event is fully virtual; set to `false` for in-person or hybrid
 - `expires`: same as `date_end`, or `date` if the event is a single day
