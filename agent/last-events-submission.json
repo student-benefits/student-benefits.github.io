@@ -1,18 +1,18 @@
 {
-  "issue": 89,
-  "title": "[event]: gemini live agent challenge",
-  "timestamp": "2026-03-10T16:52:15.043Z",
+  "issue": 110,
+  "title": "[event]: thiel fellowship",
+  "timestamp": "2026-04-04T04:27:24.937Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "github-issue_read", "summary": "Read issue #89" },
-    { "name": "tavily_search", "query": "Gemini Live Agent Challenge registration apply Google" },
-    { "name": "web_fetch", "url": "https://geminiliveagentchallenge.devpost.com/" },
+    { "name": "github-issue_read", "summary": "Read issue #110" },
+    { "name": "tavily_search", "query": "Thiel Fellowship 2026 applications registration apply" },
+    { "name": "web_fetch", "url": "https://thielfellowship.org/" },
     { "name": "edit", "summary": "Added entry to events.json" }
   ],
   "event": {
-    "name": "Gemini Live Agent Challenge",
-    "category": "hackathon",
-    "date": "2026-02-16",
-    "organizer": "Google"
+    "name": "Thiel Fellowship",
+    "category": "fellowship",
+    "date": "2026-04-04",
+    "organizer": "Thiel Foundation"
   }
 }

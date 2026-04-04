@@ -1,5 +1,18 @@
 [
   {
+    "id": "thiel-fellowship-2026",
+    "name": "Thiel Fellowship",
+    "organizer": "Thiel Foundation",
+    "category": "fellowship",
+    "date": "2026-04-04",
+    "location": "San Francisco, CA",
+    "remote": false,
+    "eligibility": "Young people age 22 or younger building new ventures",
+    "why": "$200,000 over two years to skip college and build something new. Access to Peter Thiel's network of founders, investors, and scientists in Silicon Valley.",
+    "link": "https://thielfellowship.org/",
+    "expires": "2027-04-04"
+  },
+  {
     "id": "apple-aiml-residency-2026",
     "name": "Apple AIML Residency 2026",
     "organizer": "Apple",
