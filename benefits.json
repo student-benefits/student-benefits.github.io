@@ -44,11 +44,11 @@
   },
   {
     "id": "google-antigravity",
-    "name": "Google Antigravity",
+    "name": "Google AI Pro Student",
     "category": "AI Tools",
     "offer_type": "free",
-    "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://one.google.com/ai-student",
+    "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
+    "link": "https://support.google.com/googleone/answer/16417758",
     "tags": [
       "AI",
       "IDE",
@@ -62,7 +62,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free access to all JetBrains professional IDEs (IntelliJ, PyCharm, WebStorm, etc.). Renewable annually.",
-    "link": "https://www.jetbrains.com/community/education/#students",
+    "link": "https://www.jetbrains.com/academy/student-pack/",
     "tags": [
       "IDE",
       "Programming",
@@ -70,20 +70,6 @@
     ],
     "popularity": 9,
     "repo": "JetBrains/intellij-community"
-  },
-  {
-    "id": "perplexity-pro",
-    "name": "Perplexity Pro",
-    "category": "AI Tools",
-    "offer_type": "discount",
-    "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
-    "link": "https://www.perplexity.ai/students",
-    "tags": [
-      "AI",
-      "Search",
-      "Research"
-    ],
-    "popularity": 8
   },
   {
     "id": "1password",
@@ -315,7 +301,7 @@
     "id": "unidays",
     "name": "UNiDAYS",
     "category": "Lifestyle",
-    "offer_type": "discount",
+    "offer_type": "free",
     "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
     "link": "https://www.myunidays.com/",
     "tags": [
@@ -357,7 +343,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://one.google.com/ai-student",
+    "link": "https://support.google.com/googleone/answer/16417758",
     "tags": [
       "AI",
       "Google",
@@ -426,7 +412,7 @@
     "name": "Unity Student",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Renewable.",
+    "description": "Free Unity Pro features for students. Includes Unity Pro editor, Odin Inspector license, and premium Synty asset bundle.",
     "link": "https://unity.com/products/unity-student",
     "tags": [
       "Game Dev",
@@ -537,7 +523,7 @@
     "id": "student-beans",
     "name": "Student Beans",
     "category": "Lifestyle",
-    "offer_type": "discount",
+    "offer_type": "free",
     "description": "Free platform with 10,000+ student discounts on fashion, tech, food, and travel. Digital student ID included.",
     "link": "https://www.studentbeans.com/us",
     "tags": [
