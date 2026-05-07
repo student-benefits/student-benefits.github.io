@@ -1,7 +1,6 @@
 # CLAUDE.md — student-benefits.github.io
 
 This file is loaded automatically by Claude Code in every session.
-All instructions here are mandatory and override default behavior.
 
 ---
 
@@ -27,17 +26,18 @@ and removes expired ones automatically (push + self-maintenance). The system
 surfaces what people haven't thought to add and keeps itself current.
 
 **Automation with human oversight.** Workflows handle validation and PR
-creation. Humans (or Claude) own the merge decision. Grant cannot publish
-directly — the merge is the trust boundary.
+creation. Humans own the merge decision. Grant cannot publish directly —
+the merge is the trust boundary.
+
+**Zero-cost.** Built on free-tier GitHub services — Actions, Copilot CLI, Pages.
 
 **Educational transparency.** The `/agent/` page exposes run logs, tool traces,
 and architecture. The seams are visible by design so the system can be
 understood and replicated. When working on this project, preserve that
 transparency: keep workflows documented, keep the agent page accurate.
 
-> Enforcement: if you change Grant's behavior (workflow logic, validation rules,
-> schema, trigger conditions), update `agent/index.html` to reflect it. A
-> mismatch between what Grant does and what the agent page says is a bug.
+Keep `agent/index.html` in sync with Grant's behavior — workflow logic,
+validation rules, schema, trigger conditions. Mismatch is a bug.
 
 ---
 
