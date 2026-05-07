@@ -1,0 +1,106 @@
+name: Discover Student Benefits
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'  # Monday 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5"
+          prompt: |
+            You proactively discover student benefits not yet in the directory and open GitHub issues for the best finds. The add-benefit workflow will pick them up.
+
+            ## Step 1: Build skip lists
+
+            Read `benefits.json`, `categories.json`, and `agent/rejected.json` (treat missing as empty `[]`).
+
+            Build:
+            - **Known names** (lowercase) from existing benefits
+            - **Known domains** from existing benefit links (strip `www.`)
+            - **Rejected names + domains** from `agent/rejected.json` — shape: `[{ "name": "...", "domain": "..." }]`
+
+            Also read open issues labeled `new-benefit` and add their product names (lowercase) to known names — avoids duplicate pipeline submissions.
+
+            ## Step 2: Known sources
+
+            WebFetch each of these (don't skip):
+
+            | Source | URL |
+            |---|---|
+            | GitHub Student Pack | `https://education.github.com/pack/offers` |
+            | JetBrains | `https://www.jetbrains.com/community/education/` |
+            | Google for Students | `https://buildyourfuture.withgoogle.com/programs` |
+            | Microsoft Education | `https://www.microsoft.com/en-us/education` |
+            | AWS Educate | `https://aws.amazon.com/education/awseducate/` |
+            | Figma Education | `https://www.figma.com/education/` |
+            | Notion for Education | `https://www.notion.so/product/notion-for-education` |
+            | Canva for Education | `https://www.canva.com/education/` |
+            | Autodesk Education | `https://www.autodesk.com/education/edu-software/overview` |
+
+            Extract relevant tools/programs from each.
+
+            ## Step 3: Keyword pass (WebSearch)
+
+            Use WebSearch (not WebFetch on a search URL) for each. Use the current year for `YEAR`:
+
+            1. `"student plan" OR "education plan" developer tools software YEAR free`
+            2. `"free for students" OR "academic license" AI tools cloud YEAR`
+            3. `productivity OR domains student discount OR "free for students" YEAR`
+            4. `student grant OR credits developer tools YEAR apply individual`
+            5. `site:reddit.com "free for students" software tools list YEAR`
+            6. `site:reddit.com "student discount" developer OR design tools YEAR`
+
+            ## Step 4: Verify each candidate
+
+            For each result from Steps 2 and 3: WebFetch the program page. Skip if name or hostname is in the known/rejected sets. Note source (`known-source` or `keyword`).
+
+            Quality bar — reject on any failure:
+            1. Substantial offer: free tier, 50%+ discount, or meaningful credits — reject token discounts <30% with no free tier
+            2. Recognizable product with real student community
+            3. Self-serve student program page (not "contact us" / institutional purchase)
+            4. Fills a gap (avoid 4th entry in saturated categories)
+            5. Active signup page
+
+            Shortlist up to **5 new benefits** across both passes.
+
+            ## Step 5: Open issues
+
+            For each, create one GitHub issue:
+            - **Title**: product name only (e.g. `Figma`)
+            - **Body**:
+              ```
+              **What students get**: <one specific sentence — plan, amount, or duration>
+              **Signup**: <direct URL>
+              **Discovered via**: <known-source | keyword>
+              **Pack**: GitHub Student Pack
+              ```
+              Omit `**Pack**` line unless discovered from the GitHub Student Pack source.
+
+            ## Step 6: Update log
+
+            Replace `agent/last-benefits-discovery.json` entirely:
+            ```json
+            {
+              "timestamp": "<UTC ISO 8601>",
+              "known_sources_checked": ["<url>", "..."],
+              "keyword_queries": ["<q1>", "..."],
+              "discovered": [{ "name": "...", "link": "...", "source": "known-source | keyword" }],
+              "issues_created": <number>
+            }
+            ```
