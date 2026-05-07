@@ -24,7 +24,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
-          claude_args: "--model claude-sonnet-4-5"
+          claude_args: "--model claude-sonnet-4-5 --dangerously-skip-permissions"
           prompt: |
             You process student event submissions from GitHub issues. Read issue #${{ github.event.issue.number }}, validate it against the quality bar, and either open a PR adding the event or comment explaining why it can't be added.
 
