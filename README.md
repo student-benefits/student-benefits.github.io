@@ -1,8 +1,8 @@
 # Student Benefits Hub
 
-**A community-curated directory of student discounts and free tiers, kept current by an AI agent.**
+**Grant — a production AI agent powered by Claude — curates a public directory of student discounts.**
 
-Grant searches the web every week for new programs, validates community submissions opened as issues, and audits link health. Humans approve every merge. **[→ student-benefits.github.io](https://student-benefits.github.io)**
+Grant discovers new programs each week, validates community submissions opened as issues, and audits link health. Humans approve every merge — the merge is the trust boundary. Run logs and tool traces are open. **[→ student-benefits.github.io](https://student-benefits.github.io)**
 
 [![Live](https://img.shields.io/badge/live-student--benefits.github.io-blue)](https://student-benefits.github.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
