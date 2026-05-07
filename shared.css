@@ -132,10 +132,15 @@ footer {
   margin-top: 6rem;
   padding: 2rem;
   text-align: center;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
-  color: rgba(148, 163, 184, 0.18);
 }
+footer a {
+  color: var(--slate-500);
+  text-decoration: none;
+  transition: color var(--dur-normal);
+}
+footer a:hover { color: var(--slate-300); }
 
 .header-row {
   display: flex;
