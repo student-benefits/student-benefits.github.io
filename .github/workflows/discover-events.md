@@ -12,6 +12,7 @@ strict: false
 engine:
   id: copilot
   model: gpt-5.4-mini
+  version: v1.0.39  # pinned: copilot-cli#3162 MCP fingerprint regression in 1.0.42+
 
 on:
   schedule:

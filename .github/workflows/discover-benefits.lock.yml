@@ -27,7 +27,7 @@
 # previously-rejected programs, and creates issues for the best new
 # discoveries (max 5 per run).
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"053710a3638da0ff391f7818772859a50e2a51c6343762293920e077912a749b","compiler_version":"v0.59.0"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"6865a3237fc2f4616759e85302861095d8a757b2d1c4d81bba6c9f4ad627bf28","compiler_version":"v0.59.0"}
 
 name: "Discover Student Benefits"
 "on":
@@ -64,8 +64,8 @@ jobs:
           GH_AW_INFO_ENGINE_ID: "copilot"
           GH_AW_INFO_ENGINE_NAME: "GitHub Copilot CLI"
           GH_AW_INFO_MODEL: "gpt-5.4-mini"
-          GH_AW_INFO_VERSION: ""
-          GH_AW_INFO_AGENT_VERSION: "latest"
+          GH_AW_INFO_VERSION: "v1.0.39"
+          GH_AW_INFO_AGENT_VERSION: "v1.0.39"
           GH_AW_INFO_CLI_VERSION: "v0.59.0"
           GH_AW_INFO_WORKFLOW_NAME: "Discover Student Benefits"
           GH_AW_INFO_EXPERIMENTAL: "false"
@@ -297,7 +297,7 @@ jobs:
             const { main } = require('/opt/gh-aw/actions/checkout_pr_branch.cjs');
             await main();
       - name: Install GitHub Copilot CLI
-        run: /opt/gh-aw/actions/install_copilot_cli.sh latest
+        run: /opt/gh-aw/actions/install_copilot_cli.sh v1.0.39
         env:
           GH_HOST: github.com
       - name: Install AWF binary
@@ -1088,6 +1088,7 @@ jobs:
       GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/discover-benefits"
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_ENGINE_MODEL: "gpt-5.4-mini"
+      GH_AW_ENGINE_VERSION: "v1.0.39"
       GH_AW_WORKFLOW_ID: "discover-benefits"
       GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
     outputs:

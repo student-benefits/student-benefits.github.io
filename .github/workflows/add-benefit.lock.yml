@@ -25,7 +25,7 @@
 # validates the benefit, checks for duplicates against benefits.json,
 # and creates a PR with the new entry if valid.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"9a60e598622101b895807780f800576bee38137f2ad370f3bb9ca9ab98969c24","compiler_version":"v0.59.0"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"e6cae9bb8ba378f5eb9fde5024ffc51deb872fcb818e765e9589f865a92abb1c","compiler_version":"v0.59.0"}
 
 name: "Add Benefit"
 "on":
@@ -70,8 +70,8 @@ jobs:
           GH_AW_INFO_ENGINE_ID: "copilot"
           GH_AW_INFO_ENGINE_NAME: "GitHub Copilot CLI"
           GH_AW_INFO_MODEL: "gpt-5.4-mini"
-          GH_AW_INFO_VERSION: ""
-          GH_AW_INFO_AGENT_VERSION: "latest"
+          GH_AW_INFO_VERSION: "v1.0.39"
+          GH_AW_INFO_AGENT_VERSION: "v1.0.39"
           GH_AW_INFO_CLI_VERSION: "v0.59.0"
           GH_AW_INFO_WORKFLOW_NAME: "Add Benefit"
           GH_AW_INFO_EXPERIMENTAL: "false"
@@ -324,7 +324,7 @@ jobs:
             const { main } = require('/opt/gh-aw/actions/checkout_pr_branch.cjs');
             await main();
       - name: Install GitHub Copilot CLI
-        run: /opt/gh-aw/actions/install_copilot_cli.sh latest
+        run: /opt/gh-aw/actions/install_copilot_cli.sh v1.0.39
         env:
           GH_HOST: github.com
       - name: Install AWF binary
@@ -1248,6 +1248,7 @@ jobs:
       GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/add-benefit"
       GH_AW_ENGINE_ID: "copilot"
       GH_AW_ENGINE_MODEL: "gpt-5.4-mini"
+      GH_AW_ENGINE_VERSION: "v1.0.39"
       GH_AW_WORKFLOW_ID: "add-benefit"
       GH_AW_WORKFLOW_NAME: "Add Benefit"
     outputs:
