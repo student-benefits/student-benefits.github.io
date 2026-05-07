@@ -9,7 +9,7 @@ strict: false
 
 engine:
   id: copilot
-  model: claude-sonnet-4
+  model: claude-sonnet-4.6
 
 on:
   issues:
