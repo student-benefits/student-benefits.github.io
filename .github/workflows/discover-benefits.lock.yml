@@ -27,7 +27,7 @@
 # previously-rejected programs, and creates issues for the best new
 # discoveries (max 5 per run).
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"8c914c6009c74339614e4b814e8a03b3f92c30bd28d8c749829123dc0bdcfb3e","compiler_version":"v0.59.0"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"60160db4224820016c53e754d9133fe235f9af978b8d424cefb5e520d1b12e90","compiler_version":"v0.59.0"}
 
 name: "Discover Student Benefits"
 "on":
@@ -63,7 +63,7 @@ jobs:
         env:
           GH_AW_INFO_ENGINE_ID: "copilot"
           GH_AW_INFO_ENGINE_NAME: "GitHub Copilot CLI"
-          GH_AW_INFO_MODEL: "claude-sonnet-4.6"
+          GH_AW_INFO_MODEL: "claude-sonnet-4.5"
           GH_AW_INFO_VERSION: ""
           GH_AW_INFO_AGENT_VERSION: "latest"
           GH_AW_INFO_CLI_VERSION: "v0.59.0"
@@ -696,7 +696,7 @@ jobs:
         env:
           COPILOT_AGENT_RUNNER_TYPE: STANDALONE
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_MODEL: claude-sonnet-4.6
+          COPILOT_MODEL: claude-sonnet-4.5
           GH_AW_MCP_CONFIG: /home/runner/.copilot/mcp-config.json
           GH_AW_PHASE: agent
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
@@ -920,7 +920,7 @@ jobs:
         env:
           COPILOT_AGENT_RUNNER_TYPE: STANDALONE
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_MODEL: claude-sonnet-4.6
+          COPILOT_MODEL: claude-sonnet-4.5
           GH_AW_PHASE: detection
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_VERSION: v0.59.0
@@ -1087,7 +1087,7 @@ jobs:
     env:
       GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/discover-benefits"
       GH_AW_ENGINE_ID: "copilot"
-      GH_AW_ENGINE_MODEL: "claude-sonnet-4.6"
+      GH_AW_ENGINE_MODEL: "claude-sonnet-4.5"
       GH_AW_WORKFLOW_ID: "discover-benefits"
       GH_AW_WORKFLOW_NAME: "Discover Student Benefits"
     outputs:
