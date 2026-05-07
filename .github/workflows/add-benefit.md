@@ -9,7 +9,7 @@ strict: false
 
 engine:
   id: copilot
-  model: claude-sonnet-4.6
+  model: gpt-5.4-mini
 
 on:
   issues:
