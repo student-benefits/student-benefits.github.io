@@ -25,7 +25,7 @@
 # validates the benefit, checks for duplicates against benefits.json,
 # and creates a PR with the new entry if valid.
 #
-# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"392394b657743abf30a6438b59a452a07231e20a4ad308fd79cf32e4be86b9bd","compiler_version":"v0.59.0"}
+# gh-aw-metadata: {"schema_version":"v2","frontmatter_hash":"5d02683cc97fe19b7fa69ae9a33d987ce5af4064d34b844dc968817bd5eef963","compiler_version":"v0.59.0"}
 
 name: "Add Benefit"
 "on":
@@ -69,7 +69,7 @@ jobs:
         env:
           GH_AW_INFO_ENGINE_ID: "copilot"
           GH_AW_INFO_ENGINE_NAME: "GitHub Copilot CLI"
-          GH_AW_INFO_MODEL: "claude-sonnet-4.5"
+          GH_AW_INFO_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT || '' }}
           GH_AW_INFO_VERSION: ""
           GH_AW_INFO_AGENT_VERSION: "latest"
           GH_AW_INFO_CLI_VERSION: "v0.59.0"
@@ -831,7 +831,7 @@ jobs:
         env:
           COPILOT_AGENT_RUNNER_TYPE: STANDALONE
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_MODEL: claude-sonnet-4.5
+          COPILOT_MODEL: ${{ vars.GH_AW_MODEL_AGENT_COPILOT || '' }}
           GH_AW_MCP_CONFIG: /home/runner/.copilot/mcp-config.json
           GH_AW_PHASE: agent
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
@@ -1056,7 +1056,7 @@ jobs:
         env:
           COPILOT_AGENT_RUNNER_TYPE: STANDALONE
           COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
-          COPILOT_MODEL: claude-sonnet-4.5
+          COPILOT_MODEL: ${{ vars.GH_AW_MODEL_DETECTION_COPILOT || '' }}
           GH_AW_PHASE: detection
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_VERSION: v0.59.0
@@ -1247,7 +1247,6 @@ jobs:
     env:
       GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/add-benefit"
       GH_AW_ENGINE_ID: "copilot"
-      GH_AW_ENGINE_MODEL: "claude-sonnet-4.5"
       GH_AW_WORKFLOW_ID: "add-benefit"
       GH_AW_WORKFLOW_NAME: "Add Benefit"
     outputs:
