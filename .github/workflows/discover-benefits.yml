@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
-      contents: read
-      issues: read
+      contents: write
+      issues: write
       id-token: write
 
     steps:
