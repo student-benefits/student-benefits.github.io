@@ -1,6 +1,6 @@
 # Student Benefits Hub
 
-**Grant — a production AI agent — curates a public directory of student discounts.**
+**Grant — a production AI agent powered by Claude — curates a public directory of student discounts.**
 
 Grant discovers new programs each week, validates community submissions opened as issues, and audits link health. Humans approve every merge — the merge is the trust boundary. Run logs and tool traces are open. **[→ student-benefits.github.io](https://student-benefits.github.io)**
 
@@ -28,7 +28,7 @@ The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant'
 
 **Add benefits directly** — edit `benefits.json` following the schema in `CLAUDE.md` and open a PR.
 
-**Improve Grant** — edit `.github/workflows/add-benefit.md` and run `gh aw compile` to regenerate the lock file.
+**Improve Grant** — edit a workflow's `prompt:` in `.github/workflows/*.yml` directly. No compile step.
 
 ---
 
