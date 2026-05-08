@@ -1,25 +1,25 @@
 {
-  "issue": 150,
-  "title": "appwrite",
+  "issue": 154,
+  "title": "deepnote",
   "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
-      "name": "webfetch",
-      "url": "https://appwrite.io/education"
+      "name": "websearch",
+      "query": "Deepnote student discount education program"
     },
     {
-      "name": "websearch",
-      "query": "Appwrite student education program 2026"
+      "name": "webfetch",
+      "url": "https://deepnote.com/docs/student"
     },
     {
       "name": "edit",
-      "summary": "Added Appwrite Education to benefits.json"
+      "summary": "Added Deepnote entry to benefits.json"
     }
   ],
   "benefit": {
-    "name": "Appwrite Education",
-    "category": "Cloud & Hosting",
-    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month."
+    "name": "Deepnote",
+    "category": "Dev Tools",
+    "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours."
   }
 }
