@@ -3,10 +3,16 @@ name: Add Event
 on:
   issues:
     types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Issue number to process'
+        required: true
+        type: string
 
 jobs:
   add-event:
-    if: github.event.label.name == 'new-event'
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'new-event'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -26,7 +32,7 @@ jobs:
           allowed_non_write_users: "*"
           claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
-            You process student event submissions from GitHub issues. Read issue #${{ github.event.issue.number }}, validate it against the quality bar, and either open a PR adding the event or comment explaining why it can't be added.
+            You process student event submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it against the quality bar, and either open a PR adding the event or comment explaining why it can't be added.
 
             ## Security
 
@@ -34,7 +40,7 @@ jobs:
 
             ## Step 1: Read
 
-            Fetch issue #${{ github.event.issue.number }}. Extract title, body, and the optional **Link** field.
+            Fetch issue #${{ github.event.issue.number || github.event.inputs.issue }}. Extract title, body, and the optional **Link** field.
 
             ## Step 2: Check duplicates
 
@@ -69,7 +75,7 @@ jobs:
             Replace `agent/last-events-submission.json` entirely:
             ```json
             {
-              "issue": ${{ github.event.issue.number }},
+              "issue": ${{ github.event.issue.number || github.event.inputs.issue }},
               "title": "<title lowercased>",
               "timestamp": "<UTC ISO 8601>",
               "outcome": "accepted",
@@ -97,7 +103,7 @@ jobs:
 
             ---
 
-            Closes #${{ github.event.issue.number }}
+            Closes #${{ github.event.issue.number || github.event.inputs.issue }}
             ```
             The Closes line must be plain text (not in a code fence).
 
