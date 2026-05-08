@@ -246,7 +246,7 @@
     "name": "Grammarly",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access—check with your school.",
+    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
@@ -767,6 +767,20 @@
       "Backend",
       "BaaS",
       "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "bootdev",
+    "name": "Boot.dev",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
+    "link": "https://education.github.com/pack",
+    "tags": [
+      "GitHub Student Pack",
+      "Backend",
+      "Courses"
     ],
     "popularity": 5
   }

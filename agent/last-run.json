@@ -1,25 +1,29 @@
 {
-  "issue": 150,
-  "title": "appwrite",
+  "issue": 153,
+  "title": "boot.dev",
   "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
-      "name": "webfetch",
-      "url": "https://appwrite.io/education"
+      "name": "websearch",
+      "query": "Boot.dev student discount GitHub Student Pack"
     },
     {
-      "name": "websearch",
-      "query": "Appwrite student education program 2026"
+      "name": "webfetch",
+      "url": "https://education.github.com/pack/"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://www.boot.dev/pricing"
     },
     {
       "name": "edit",
-      "summary": "Added Appwrite Education to benefits.json"
+      "summary": "Added Boot.dev entry to benefits.json"
     }
   ],
   "benefit": {
-    "name": "Appwrite Education",
-    "category": "Cloud & Hosting",
-    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month."
+    "name": "Boot.dev",
+    "category": "Learning",
+    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript)."
   }
 }
