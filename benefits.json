@@ -48,7 +48,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://one.google.com/ai-student",
+    "link": "https://gemini.google/students/",
     "tags": [
       "AI",
       "IDE",
@@ -357,7 +357,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://one.google.com/ai-student",
+    "link": "https://gemini.google/students/",
     "tags": [
       "AI",
       "Google",
@@ -385,7 +385,7 @@
     "category": "Lifestyle",
     "offer_type": "discount",
     "description": "$5.99/month (45% off) with free Apple TV+ included. Verify via UNiDAYS, valid up to 4 years.",
-    "link": "https://music.apple.com/us/student",
+    "link": "https://offers.applemusic.apple/student-offer",
     "tags": [
       "Music",
       "Streaming",
@@ -467,8 +467,8 @@
     "id": "loom-education",
     "name": "Loom Education",
     "category": "Productivity",
-    "offer_type": "free",
-    "description": "Free Loom Pro for verified students via Atlassian. Unlimited recordings with premium features for video messaging.",
+    "offer_type": "discount",
+    "description": "50-75% off Loom for verified students and educators. Unlimited recordings, HD quality, and full editing tools.",
     "link": "https://support.atlassian.com/loom/docs/education-plan-faq/",
     "tags": [
       "Video",
