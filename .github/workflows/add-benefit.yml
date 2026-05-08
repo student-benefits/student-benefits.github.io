@@ -3,10 +3,16 @@ name: Add Benefit
 on:
   issues:
     types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue:
+        description: 'Issue number to process'
+        required: true
+        type: string
 
 jobs:
   add-benefit:
-    if: github.event.label.name == 'new-benefit'
+    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'new-benefit'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -26,7 +32,7 @@ jobs:
           allowed_non_write_users: "*"
           claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
-            You process student benefit submissions from GitHub issues. Read issue #${{ github.event.issue.number }}, validate it, and either open a PR adding the benefit or comment explaining why it can't be added.
+            You process student benefit submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it, and either open a PR adding the benefit or comment explaining why it can't be added.
 
             ## Security
 
@@ -39,7 +45,7 @@ jobs:
 
             ## Step 1: Read the issue
 
-            Fetch issue #${{ github.event.issue.number }}. Extract title, body, and the optional **Link** field. Users submit casually ("Notion is free for students") — identify the product.
+            Fetch issue #${{ github.event.issue.number || github.event.inputs.issue }}. Extract title, body, and the optional **Link** field. Users submit casually ("Notion is free for students") — identify the product.
 
             ## Step 2: Check duplicates
 
@@ -89,7 +95,7 @@ jobs:
             Replace `agent/last-run.json` entirely with:
             ```json
             {
-              "issue": ${{ github.event.issue.number }},
+              "issue": ${{ github.event.issue.number || github.event.inputs.issue }},
               "title": "<issue title lowercased>",
               "timestamp": "<current UTC ISO 8601>",
               "outcome": "accepted",
@@ -115,7 +121,7 @@ jobs:
 
             ---
 
-            Closes #${{ github.event.issue.number }}
+            Closes #${{ github.event.issue.number || github.event.inputs.issue }}
             ```
             The Closes line must be plain text (not in a code fence) so GitHub auto-closes on merge.
 
