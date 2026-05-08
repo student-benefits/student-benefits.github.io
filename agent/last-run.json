@@ -1,25 +1,25 @@
 {
-  "issue": 150,
-  "title": "appwrite",
+  "issue": 151,
+  "title": "localstack",
   "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
       "name": "webfetch",
-      "url": "https://appwrite.io/education"
+      "url": "https://www.localstack.cloud/localstack-for-students"
     },
     {
       "name": "websearch",
-      "query": "Appwrite student education program 2026"
+      "query": "LocalStack student plan Ultimate GitHub Student Pack 2026"
     },
     {
       "name": "edit",
-      "summary": "Added Appwrite Education to benefits.json"
+      "summary": "Added LocalStack entry to benefits.json"
     }
   ],
   "benefit": {
-    "name": "Appwrite Education",
-    "category": "Cloud & Hosting",
-    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month."
+    "name": "LocalStack",
+    "category": "Dev Tools",
+    "description": "Free AWS emulator with all services, 1,000 monthly CI/CD credits via GitHub Student Pack."
   }
 }
