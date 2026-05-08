@@ -1,19 +1,25 @@
 {
-  "issue": 105,
-  "title": "[benefit]: datacamp",
-  "timestamp": "2026-04-04T01:51:27.363Z",
+  "issue": 154,
+  "title": "deepnote",
+  "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "bash", "summary": "Read issue #105 via GitHub API" },
-    { "name": "view", "summary": "Read benefits.json and agent/rejected.json" },
-    { "name": "grep", "summary": "Checked for DataCamp duplicates" },
-    { "name": "tavily_search", "query": "DataCamp student discount higher education GitHub student" },
-    { "name": "web_fetch", "url": "https://www.datacamp.com/github-students" },
-    { "name": "edit", "summary": "Added DataCamp entry to benefits.json" }
+    {
+      "name": "websearch",
+      "query": "Deepnote student discount education program"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://deepnote.com/docs/student"
+    },
+    {
+      "name": "edit",
+      "summary": "Added Deepnote entry to benefits.json"
+    }
   ],
   "benefit": {
-    "name": "DataCamp",
-    "category": "Learning",
-    "description": "3 months free access to data science courses and interactive learning paths with GitHub Student Pack."
+    "name": "Deepnote",
+    "category": "Dev Tools",
+    "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours."
   }
 }

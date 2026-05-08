@@ -48,7 +48,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://one.google.com/ai-student",
+    "link": "https://gemini.google/students/",
     "tags": [
       "AI",
       "IDE",
@@ -246,7 +246,7 @@
     "name": "Grammarly",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access—check with your school.",
+    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
@@ -357,7 +357,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://one.google.com/ai-student",
+    "link": "https://gemini.google/students/",
     "tags": [
       "AI",
       "Google",
@@ -385,7 +385,7 @@
     "category": "Lifestyle",
     "offer_type": "discount",
     "description": "$5.99/month (45% off) with free Apple TV+ included. Verify via UNiDAYS, valid up to 4 years.",
-    "link": "https://music.apple.com/us/student",
+    "link": "https://offers.applemusic.apple/student-offer",
     "tags": [
       "Music",
       "Streaming",
@@ -467,8 +467,8 @@
     "id": "loom-education",
     "name": "Loom Education",
     "category": "Productivity",
-    "offer_type": "free",
-    "description": "Free Loom Pro for verified students via Atlassian. Unlimited recordings with premium features for video messaging.",
+    "offer_type": "discount",
+    "description": "50-75% off Loom for verified students and educators. Unlimited recordings, HD quality, and full editing tools.",
     "link": "https://support.atlassian.com/loom/docs/education-plan-faq/",
     "tags": [
       "Video",
@@ -753,6 +753,78 @@
       "Data Science",
       "Courses",
       "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "appwrite",
+    "name": "Appwrite Education",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month.",
+    "link": "https://appwrite.io/education",
+    "tags": [
+      "Backend",
+      "BaaS",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "deepnote",
+    "name": "Deepnote",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours.",
+    "link": "https://deepnote.com/docs/student",
+    "tags": [
+      "Data Science",
+      "Jupyter",
+      "Collaboration",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "localstack",
+    "name": "LocalStack",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free AWS emulator with all services, 1,000 monthly CI/CD credits via GitHub Student Pack.",
+    "link": "https://www.localstack.cloud/localstack-for-students",
+    "tags": [
+      "AWS",
+      "Cloud",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "doppler",
+    "name": "Doppler",
+    "category": "Security",
+    "offer_type": "free",
+    "description": "Free Team subscription for secrets management while enrolled. Sync environment variables, prevent leaks.",
+    "link": "https://www.doppler.com/secretsops-for-students",
+    "tags": [
+      "Security",
+      "Secrets",
+      "GitHub Student Pack",
+      "DevOps"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "boot-dev",
+    "name": "Boot.dev",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
+    "link": "https://www.boot.dev/students",
+    "tags": [
+      "GitHub Student Pack",
+      "Backend",
+      "Courses"
     ],
     "popularity": 5
   }
