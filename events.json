@@ -25,46 +25,17 @@
     "expires": "2027-04-04"
   },
   {
-    "id": "apple-aiml-residency-2026",
-    "name": "Apple AIML Residency 2026",
-    "organizer": "Apple",
-    "category": "fellowship", 
-    "date": "2026-07-01",
-    "date_end": "2027-06-30",
-    "location": "Cupertino, CA",
-    "remote": false,
-    "eligibility": "Master's/PhD graduates, software engineers, academics seeking industry experience",
-    "why": "One-year paid residency at Apple working on ML products that impact millions. Residents publish at premier venues like NeurIPS while gaining direct Apple mentor access.",
-    "link": "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
-    "expires": "2027-06-30"
-  },
-  {
-    "id": "meta-ai-residency-2026", 
-    "name": "Meta AI Residency Program 2026",
-    "organizer": "Meta",
-    "category": "fellowship",
-    "date": "2026-07-01", 
-    "date_end": "2027-06-30",
-    "location": "Menlo Park, CA",
-    "remote": false,
-    "eligibility": "Technical backgrounds looking to apply to PhD programs; diverse STEM backgrounds welcome",
-    "why": "One-year research training at Meta AI, pairing residents with researchers. Focus on publishing at top conferences (NeurIPS, ICML, ICLR) and open-source impact.",
-    "link": "https://ai.meta.com/join-us/residency-program/",
-    "expires": "2027-06-30"
-  },
-  {
-    "id": "bitcamp-2026",
-    "name": "Bitcamp 2026",
-    "organizer": "University of Maryland",
+    "id": "midnight-hackathon-may-2026",
+    "name": "Midnight Hackathon May 2026",
+    "organizer": "Major League Hacking & Midnight Network",
     "category": "hackathon",
-    "date": "2026-04-10",
-    "date_end": "2026-04-12",
-    "location": "College Park, MD",
-    "remote": false,
-    "eligibility": "Currently enrolled university students; travel reimbursement available",
-    "why": "1,000+ student builders in one place with travel reimbursement. The density of strong hackers and direct sponsor access makes co-founder connections likely.",
-    "link": "https://www.register.bit.camp/",
-    "expires": "2026-04-12"
+    "date": "2026-05-15",
+    "date_end": "2026-05-17",
+    "remote": true,
+    "eligibility": "Students worldwide, teams up to 5 members",
+    "why": "Build privacy-focused dApps on Midnight's mainnet. Top 2 teams join Build Club accelerator with investor pitches; top 4 get MLH Fellowship and travel grants to London summit.",
+    "link": "https://events.mlh.io/events/14061-midnight-hackathon-may-2026",
+    "expires": "2026-05-17"
   },
   {
     "id": "google-io-2026",
@@ -94,7 +65,35 @@
     "expires": "2026-06-30"
   },
   {
-    "id": "usaii-global-ai-hackathon-2026", 
+    "id": "jamhacks-10-2026",
+    "name": "JAMHacks 10",
+    "organizer": "JAMHacks / University of Waterloo",
+    "category": "hackathon",
+    "date": "2026-06-12",
+    "date_end": "2026-06-14",
+    "location": "Waterloo, Ontario, Canada",
+    "remote": false,
+    "eligibility": "High school students, free attendance with accommodations",
+    "why": "Canada's largest high school hackathon celebrating 10 years. 36 hours of building with free meals, accommodations, mentorship, and prizes. Strong hacker density makes co-founder connections likely.",
+    "link": "https://jamhacks.ca/",
+    "expires": "2026-06-14"
+  },
+  {
+    "id": "hackprix-season-3-2026",
+    "name": "HackPrix Season 3",
+    "organizer": "HackPrix / Major League Hacking",
+    "category": "hackathon",
+    "date": "2026-06-13",
+    "date_end": "2026-06-14",
+    "location": "Hyderabad, India",
+    "remote": false,
+    "eligibility": "University students interested in technology and innovation",
+    "why": "36-hour MLH-backed hackathon with 700+ students and $3000+ prize pool. Build for social good with mentor support, workshops, and networking at one of India's premier student tech events.",
+    "link": "https://hackprix-2026.devfolio.co/",
+    "expires": "2026-06-14"
+  },
+  {
+    "id": "usaii-global-ai-hackathon-2026",
     "name": "USAII Global AI Hackathon 2026",
     "organizer": "United States Artificial Intelligence Institute",
     "category": "hackathon",
@@ -133,6 +132,34 @@
     "why": "Free, in-person, highly selective. Speakers include Sam Altman, Andrej Karpathy, and Andrew Ng — for CS students who want to build AI companies, this is the room.",
     "link": "https://www.ycombinator.com/blog/ai-startupschool",
     "expires": "2026-06-17"
+  },
+  {
+    "id": "apple-aiml-residency-2026",
+    "name": "Apple AIML Residency 2026",
+    "organizer": "Apple",
+    "category": "fellowship",
+    "date": "2026-07-01",
+    "date_end": "2027-06-30",
+    "location": "Cupertino, CA",
+    "remote": false,
+    "eligibility": "Master's/PhD graduates, software engineers, academics seeking industry experience",
+    "why": "One-year paid residency at Apple working on ML products that impact millions. Residents publish at premier venues like NeurIPS while gaining direct Apple mentor access.",
+    "link": "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
+    "expires": "2027-06-30"
+  },
+  {
+    "id": "meta-ai-residency-2026",
+    "name": "Meta AI Residency Program 2026",
+    "organizer": "Meta",
+    "category": "fellowship",
+    "date": "2026-07-01",
+    "date_end": "2027-06-30",
+    "location": "Menlo Park, CA",
+    "remote": false,
+    "eligibility": "Technical backgrounds looking to apply to PhD programs; diverse STEM backgrounds welcome",
+    "why": "One-year research training at Meta AI, pairing residents with researchers. Focus on publishing at top conferences (NeurIPS, ICML, ICLR) and open-source impact.",
+    "link": "https://ai.meta.com/join-us/residency-program/",
+    "expires": "2027-06-30"
   },
   {
     "id": "anthropic-ai-safety-fellows-2026",
@@ -187,19 +214,5 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
-  },
-  {
-    "id": "immerse-gt-2026",
-    "name": "ImmerseGT 2026",
-    "organizer": "Georgia Tech XR",
-    "category": "hackathon",
-    "date": "2026-04-10",
-    "date_end": "2026-04-12",
-    "location": "Atlanta, GA",
-    "remote": false,
-    "eligibility": "University students interested in XR/AR/VR development",
-    "why": "36-hour XR hackathon at Georgia Tech with access to cutting-edge AR/VR makerspace. Focus on immersive technology with industry mentorship.",
-    "link": "https://www.immersegt.org/",
-    "expires": "2026-04-12"
   }
 ]
