@@ -1,19 +1,25 @@
 {
-  "issue": 105,
-  "title": "[benefit]: datacamp",
-  "timestamp": "2026-04-04T01:51:27.363Z",
+  "issue": 150,
+  "title": "appwrite",
+  "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "bash", "summary": "Read issue #105 via GitHub API" },
-    { "name": "view", "summary": "Read benefits.json and agent/rejected.json" },
-    { "name": "grep", "summary": "Checked for DataCamp duplicates" },
-    { "name": "tavily_search", "query": "DataCamp student discount higher education GitHub student" },
-    { "name": "web_fetch", "url": "https://www.datacamp.com/github-students" },
-    { "name": "edit", "summary": "Added DataCamp entry to benefits.json" }
+    {
+      "name": "webfetch",
+      "url": "https://appwrite.io/education"
+    },
+    {
+      "name": "websearch",
+      "query": "Appwrite student education program 2026"
+    },
+    {
+      "name": "edit",
+      "summary": "Added Appwrite Education to benefits.json"
+    }
   ],
   "benefit": {
-    "name": "DataCamp",
-    "category": "Learning",
-    "description": "3 months free access to data science courses and interactive learning paths with GitHub Student Pack."
+    "name": "Appwrite Education",
+    "category": "Cloud & Hosting",
+    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month."
   }
 }

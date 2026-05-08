@@ -755,5 +755,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "appwrite",
+    "name": "Appwrite Education",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month.",
+    "link": "https://appwrite.io/education",
+    "tags": [
+      "Backend",
+      "BaaS",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
