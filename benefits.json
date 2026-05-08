@@ -246,7 +246,7 @@
     "name": "Grammarly",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access—check with your school.",
+    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
@@ -767,6 +767,21 @@
       "Backend",
       "BaaS",
       "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "doppler",
+    "name": "Doppler",
+    "category": "Security",
+    "offer_type": "free",
+    "description": "Free Team subscription for secrets management while enrolled. Sync environment variables, prevent leaks.",
+    "link": "https://www.doppler.com/secretsops-for-students",
+    "tags": [
+      "Security",
+      "Secrets",
+      "GitHub Student Pack",
+      "DevOps"
     ],
     "popularity": 5
   }

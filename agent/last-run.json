@@ -1,25 +1,25 @@
 {
-  "issue": 150,
-  "title": "appwrite",
+  "issue": 152,
+  "title": "doppler",
   "timestamp": "2026-05-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
-      "name": "webfetch",
-      "url": "https://appwrite.io/education"
+      "name": "websearch",
+      "query": "Doppler secretsops for students program"
     },
     {
-      "name": "websearch",
-      "query": "Appwrite student education program 2026"
+      "name": "webfetch",
+      "url": "https://www.doppler.com/secretsops-for-students"
     },
     {
       "name": "edit",
-      "summary": "Added Appwrite Education to benefits.json"
+      "summary": "Added Doppler entry to benefits.json"
     }
   ],
   "benefit": {
-    "name": "Appwrite Education",
-    "category": "Cloud & Hosting",
-    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month."
+    "name": "Doppler",
+    "category": "Security",
+    "description": "Free Team subscription for secrets management while enrolled. Sync environment variables, prevent leaks."
   }
 }
