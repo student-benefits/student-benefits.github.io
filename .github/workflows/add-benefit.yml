@@ -24,8 +24,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
-          claude_args: "--model claude-sonnet-4-5 --dangerously-skip-permissions"
-          show_full_output: "true"  # debug: revert once tool denials are diagnosed
+          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
             You process student benefit submissions from GitHub issues. Read issue #${{ github.event.issue.number }}, validate it, and either open a PR adding the benefit or comment explaining why it can't be added.
 
