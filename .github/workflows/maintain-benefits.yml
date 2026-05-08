@@ -23,7 +23,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5 --dangerously-skip-permissions"
+          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
             You audit every entry in `benefits.json` for link health and quality, fix every finding you can, and open a single PR. Findings go directly to a PR — you don't open issues.
 
