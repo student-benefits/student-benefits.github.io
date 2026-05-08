@@ -28,7 +28,7 @@ The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant'
 
 **Add benefits directly** — edit `benefits.json` following the schema in `CLAUDE.md` and open a PR.
 
-**Improve Grant** — edit `.github/workflows/add-benefit.md` and run `gh aw compile` to regenerate the lock file.
+**Improve Grant** — edit a workflow's `prompt:` in `.github/workflows/*.yml` directly. No compile step.
 
 ---
 

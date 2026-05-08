@@ -1,0 +1,115 @@
+name: Discover Student Events
+
+on:
+  schedule:
+    - cron: '0 14 * * 3'  # Wednesday 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          prompt: |
+            You discover student events worth a student's time, remove expired entries, and open one PR with both. Today's date is needed in UTC ISO 8601 — derive it.
+
+            ## Step 1: Read state
+
+            Read `events.json`. Build:
+            - **Known IDs** (all existing IDs)
+            - **Known names** (lowercase)
+
+            ## Step 2: Mark expired
+
+            Collect IDs of entries whose `expires` is strictly before today. You will remove them in Step 7.
+
+            ## Step 3: Known sources
+
+            WebFetch each (don't skip):
+
+            | Source | URL |
+            |---|---|
+            | YC Events | `https://events.ycombinator.com` |
+            | MLH Season schedule | `https://mlh.io/seasons/2026/events` |
+            | a16z Programs | `https://a16z.com/programs` |
+            | Anthropic | `https://www.anthropic.com/news` |
+            | OpenAI | `https://openai.com/news` |
+            | Google for Students | `https://buildyourfuture.withgoogle.com/programs` |
+            | GitHub Education events | `https://education.github.com/events` |
+            | HackMIT / MIT events | `https://hack.mit.edu` |
+
+            ## Step 4: Keyword pass (WebSearch)
+
+            Use WebSearch for each. Replace `YEAR` with the current year:
+
+            1. `student hackathon YEAR free apply open`
+            2. `"open to students" conference YEAR free OR fellowship application`
+            3. `student grant OR "build grant" YEAR apply individual cash stipend`
+            4. `student residency OR cohort OR program YEAR free technical AI`
+
+            ## Step 5: Verify each candidate
+
+            For each: WebFetch to confirm real, not passed, not in known names. Quality bar — reject on any failure:
+
+            1. Free or heavily subsidized — reject fee >$50 with no scholarship pathway
+            2. Open to individual students — reject if requires team/startup/affiliation
+            3. Credible organizer — well-known company, university, VC firm, non-profit
+            4. Career-altering — hackathon with cash, fellowship with cohort, summit with top speakers, grant for independent work; not a generic webinar
+            5. Concrete date within 12 months and a working application page
+
+            Shortlist up to **3 new events**. Note source (`known-source` | `keyword`).
+
+            ## Step 6: Draft entries
+
+            See the events.json schema in CLAUDE.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
+
+            ## Step 7: Open one PR
+
+            Updated `events.json`: remove expired IDs from Step 2, append new entries from Step 6 (in date order earliest first), preserve 2-space indent + trailing newline.
+
+            **Title**: `[Events]: <comma-separated new event names>` (or `Expire stale entries` if only removing)
+
+            **Body**:
+            ```
+            ## Summary
+
+            <one sentence>
+
+            ### Added
+            - <Event Name> — <date> — <organizer>
+
+            ### Removed (expired)
+            - <Event Name> (expired <date>)
+
+            ### Why these events
+            <For each added: one sentence on quality-bar pass>
+            ```
+            Omit empty sections. One PR total.
+
+            ## Step 8: Update log
+
+            Replace `agent/last-events-discovery.json` entirely:
+            ```json
+            {
+              "timestamp": "<UTC ISO 8601>",
+              "known_sources_checked": ["<url>", "..."],
+              "keyword_queries": ["<q1>", "..."],
+              "expired_removed": ["<id>", "..."],
+              "discovered": [{ "name": "...", "date": "...", "link": "...", "source": "known-source | keyword" }],
+              "pr_opened": <true | false>
+            }
+            ```

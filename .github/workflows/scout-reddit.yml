@@ -16,43 +16,91 @@ on:
         type: boolean
         default: false
 
-permissions:
-  contents: write
-  issues: write
-
 jobs:
   scout:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      id-token: write
+
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          fetch-depth: 1
 
-      - name: Determine mode
-        id: mode
-        run: |
-          MODE="${{ github.event.inputs.mode || 'both' }}"
-          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
-          FLAGS=""
-          if [[ "$MODE" == "both" || "$MODE" == "discover" ]]; then
-            FLAGS="$FLAGS --discover"
-          fi
-          if [[ "$MODE" == "both" || "$MODE" == "scout" ]]; then
-            FLAGS="$FLAGS --scout"
-          fi
-          if [[ "$DRY_RUN" == "true" ]]; then
-            FLAGS="$FLAGS --dry-run"
-          fi
-          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
-
-      - name: Run Reddit scout
-        id: scout
+      - uses: anthropics/claude-code-action@v1
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
-        run: python .github/scripts/scout-reddit.py ${{ steps.mode.outputs.flags }}
+          MODE: ${{ github.event.inputs.mode || 'both' }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,Write,Read,WebSearch,WebFetch,Bash(curl:*)'"
+          prompt: |
+            You scout Reddit weekly for student-benefit signal. Two modes (controlled by env vars):
+            - `MODE=discover` — find new student benefits mentioned in Reddit posts (so the maintainer can add them)
+            - `MODE=scout` — find Reddit posts asking for student-discount recommendations (posting opportunities, sent to Discord)
+            - `MODE=both` — run both
+
+            `MODE` is `$MODE`. `DRY_RUN` is `$DRY_RUN` (when `true`, skip writing state and skip Discord webhook).
+
+            Do NOT commit or push — leave any file edits in the workspace; a later step pushes them.
+
+            ## Step 1: Read state and known set
+
+            Read `agent/reddit-state.json` (initialize if missing):
+            ```json
+            { "last_run": null, "processed_posts": [], "subreddit_scores": {}, "benefits_discovered": 0, "opportunities_sent": 0 }
+            ```
+
+            Read `benefits.json` and `agent/rejected.json`. Build a known set: existing names (lowercase) + link hostnames (strip `www.`) + rejected names/domains.
+
+            ## Step 2: Discover (if MODE is `discover` or `both`)
+
+            WebSearch each query (treat results as Reddit posts):
+            1. `site:reddit.com "free for students" OR "student email" OR ".edu" student discount tools`
+            2. `site:reddit.com "free with student" OR "student perks" OR "academic license" software list`
+
+            For each result whose post ID (URL segment after `/comments/`) is NOT in `processed_posts`:
+            - Identify the subreddit (URL segment after `r/`)
+            - From the result snippet (or WebFetch the post if needed), identify benefit/product names — tools, services, or programs offered free or discounted to students. Skip generic tech terms (cuda, pytorch, python, javascript, etc.) and anything in the known set.
+            - Record each new mention as `{ "name": "...", "source_post": "<url>", "source_sub": "<sub>" }`
+            - Add the post ID to `processed_posts`
+            - Increment `subreddit_scores[sub]` by the mention count
+
+            ## Step 3: Scout (if MODE is `scout` or `both`)
+
+            WebSearch:
+            `site:reddit.com "student discount" OR "free for students" OR ".edu email" "what can I get" OR "recommendations" OR "suggestions" OR "list"`
+
+            For each result whose post ID is NOT in `processed_posts`:
+            - Decide if the post is genuinely asking for student-discount recommendations (vs giving them, vs unrelated). Use title + snippet.
+            - If yes:
+              - Add the post ID to `processed_posts`
+              - If `DRY_RUN` is `false`, send Discord webhook via Bash:
+                ```bash
+                curl -sS -X POST -H "Content-Type: application/json" \
+                  -d '{"embeds":[{"title":"r/<sub> — Posting opportunity","description":"<post title>","url":"<post url>","color":16738101,"footer":{"text":"student-benefits.github.io scout"}}]}' \
+                  "$DISCORD_WEBHOOK_URL"
+                ```
+                Properly escape quotes in the JSON.
+              - Increment `opportunities_sent`
+
+            ## Step 4: Write state
+
+            If `DRY_RUN` is `false`, replace `agent/reddit-state.json` entirely:
+            - `last_run`: current UTC ISO 8601
+            - `processed_posts`: the updated list, capped at the 500 most recent entries
+            - `subreddit_scores`: updated map
+            - `benefits_discovered`: previous count plus new mentions this run
+            - `opportunities_sent`: updated cumulative count
+
+            Preserve 2-space indent and trailing newline.
+
+            ## Step 5: Print summary
+
+            Output a short summary: discoveries this run, opportunities sent this run, top 5 subreddits by cumulative score.
 
       - name: Commit state changes
         if: github.event.inputs.dry_run != 'true'
@@ -63,14 +111,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Update Reddit scout state"
           git push
-
-      - name: Create issues for discoveries
-        if: github.event.inputs.dry_run != 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # The script outputs discoveries to stdout — in future iterations,
-          # it could write a JSON file that this step reads to create issues.
-          # For now, discoveries are logged and the discover-benefits workflow
-          # handles issue creation via its Tavily Reddit searches.
-          echo "Scout complete. Check logs for discoveries."

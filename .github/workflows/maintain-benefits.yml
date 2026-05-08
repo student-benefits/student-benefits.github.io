@@ -1,0 +1,94 @@
+name: Maintain Benefits
+
+on:
+  schedule:
+    - cron: '0 14 * * 0'  # Sunday 14:00 UTC
+  workflow_dispatch:
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          prompt: |
+            You audit every entry in `benefits.json` for link health and quality, fix every finding you can, and open a single PR. Findings go directly to a PR — you don't open issues.
+
+            ## Step 1: Read
+
+            Read `benefits.json`. Note today's UTC ISO 8601 date.
+
+            ## Step 2: Link health
+
+            For each benefit, WebFetch its `link`. Classify:
+            - **Broken**: fetch fails (network/DNS), or page is clearly 404. Skip 403s (often bot-blocking).
+            - **Redirected**: final URL's hostname differs from original (cross-domain). Same-domain path changes don't count.
+            - **Healthy**: anything else.
+
+            Rate-limit to 1 req/sec.
+
+            ## Step 3: Quality review
+
+            For each benefit, apply the bar. Only flag unambiguous violations; if uncertain, skip.
+
+            1. **Specific offer**: description must contain a percentage, dollar/credit amount, plan name, or duration. Flag generic descriptions.
+            2. **Direct signup link**: flag only if path is exactly `/` or `/home`, or subdomain is `support.`/`docs.`/`help.`/`blog.` AND path lacks `/edu`/`/education`/`/student`/`/students`/`/enrollment`. URL structure only — don't read page content.
+            3. **Self-serve**: flag if description contains "through your university", "ask your institution", or "contact IT".
+            4. **Offer type accuracy**: flag clear mismatches — description says "% off" / "discount" but `offer_type: free`; or description says "free" but `offer_type: discount`.
+            5. **Description length**: flag `description` exceeding 120 characters.
+
+            ## Step 4: Fix each finding
+
+            **Broken/redirected**: WebSearch `"{name}" student discount signup`, WebFetch top result. If valid student page found → update `link`. If program no longer offers a student program → remove the entry. Redirect destinations that are valid → update `link`; otherwise treat as broken.
+
+            **Quality flags**:
+            - **Direct signup link**: WebSearch for the direct student signup page; update `link` if found.
+            - **Offer type mismatch**: update `offer_type` to match the description.
+            - **Description length**: trim to ≤120 chars without losing the offer specifics. If trimming would lose meaning, leave unchanged.
+            - **Specific offer** / **Self-serve**: only fix if correct info is clearly findable via WebFetch. If uncertain, leave unchanged.
+
+            ## Step 5: Apply changes
+
+            If any fixes were made, edit `benefits.json` — preserve 2-space indent and trailing newline, maintain entry order.
+
+            ## Step 6: Open a PR (only if fixes made)
+
+            **Branch**: `maintain-benefits-{today YYYY-MM-DD}`
+            **Title**: `[Maintenance]: Fix {N} benefit(s)` where N = entries changed or removed.
+            **Body**:
+            ```
+            ## Summary
+
+            <one sentence>
+
+            ### Fixed
+            | Benefit | Issue | Change |
+            |---|---|---|
+            | {name} | {broken / redirected / type mismatch / ...} | {what changed} |
+
+            ### Removed
+            | Benefit | Reason |
+            |---|---|
+            | {name} | Program no longer offers a student benefit |
+            ```
+            Omit empty sections.
+
+            ## Step 7: Close link-health issues
+
+            Find open issues labeled `link-health`. Close each with a comment matching the outcome:
+            - **No findings from Steps 2 or 3**: "All benefits are healthy."
+            - **Findings existed but none fixable**: "Found {N} issue(s) that require manual review: {names}."
+            - **PR was opened**: "Fixed in PR #{pr_number}."

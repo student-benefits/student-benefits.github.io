@@ -1,7 +1,6 @@
 # CLAUDE.md — student-benefits.github.io
 
 This file is loaded automatically by Claude Code in every session.
-All instructions here are mandatory and override default behavior.
 
 ---
 
@@ -27,17 +26,18 @@ and removes expired ones automatically (push + self-maintenance). The system
 surfaces what people haven't thought to add and keeps itself current.
 
 **Automation with human oversight.** Workflows handle validation and PR
-creation. Humans (or Claude) own the merge decision. Grant cannot publish
-directly — the merge is the trust boundary.
+creation. Humans own the merge decision. Grant cannot publish directly —
+the merge is the trust boundary.
+
+**Zero-cost.** Built on free-tier GitHub services and Claude Code (subscription auth, no per-token billing).
 
 **Educational transparency.** The `/agent/` page exposes run logs, tool traces,
 and architecture. The seams are visible by design so the system can be
 understood and replicated. When working on this project, preserve that
 transparency: keep workflows documented, keep the agent page accurate.
 
-> Enforcement: if you change Grant's behavior (workflow logic, validation rules,
-> schema, trigger conditions), update `agent/index.html` to reflect it. A
-> mismatch between what Grant does and what the agent page says is a bug.
+Keep `agent/index.html` in sync with Grant's behavior — workflow logic,
+validation rules, schema, trigger conditions. Mismatch is a bug.
 
 ---
 
@@ -71,24 +71,54 @@ benefits — all data must go through this file.
 
 ---
 
-## Automated workflows (gh-aw)
+## Source of truth: `events.json`
 
-AI-driven workflows live in `.github/workflows/`:
+All event data lives in `events.json`. Schema:
+
+```json
+{
+  "id": "url-safe-id",
+  "name": "Official Event Name",
+  "organizer": "Organizing entity",
+  "category": "hackathon | conference | fellowship | summit | workshop | grant",
+  "date": "YYYY-MM-DD",
+  "date_end": "YYYY-MM-DD",
+  "location": "City, State/Country",
+  "remote": true,
+  "eligibility": "Who can apply, concisely",
+  "why": "Why this event is worth a student's time (max 200 chars)",
+  "link": "Direct URL to application or registration",
+  "expires": "YYYY-MM-DD"
+}
+```
+
+- `id`: lowercase, hyphens, unique
+- `category`: must be one of the six listed values
+- `why`: written from the event page, not marketing copy; max 200 chars
+- `remote`: `true` only if fully virtual; `false` for in-person or hybrid
+- `expires`: same as `date_end`, or `date` if single-day
+- `date_end`: omit if single-day
+- `location`: omit if fully remote
+
+Events are sorted by `date` (earliest first).
+
+---
+
+## Automated workflows
+
+Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent step is `anthropics/claude-code-action@v1`, authenticated via `CLAUDE_CODE_OAUTH_TOKEN`.
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `add-benefit.md` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
-| `add-event.md` | Issue labeled `new-event` | Validates event submission against quality bar, deduplicates, creates PR |
-| `discover-benefits.md` | Weekly (Monday) or manual | Searches the web for new benefits, opens issues for the best discoveries |
-| `discover-events.md` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens PRs |
-| `maintain-benefits.md` | Weekly (Sunday) or manual | Checks all benefit links and re-audits existing entries against the quality bar; fixes findings directly and opens a PR |
+| `add-benefit.yml` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
+| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar, deduplicates, creates PR |
+| `discover-benefits.yml` | Weekly (Monday) or manual | Searches for new student benefits, opens issues for the best finds |
+| `discover-events.yml` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens one PR |
+| `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
 
-The compiled `.lock.yml` files are auto-generated — **never edit them directly**.
-To change a workflow, edit the `.md` source and run `gh aw compile`.
+Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
 
 When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
-
-`update-gh-aw.yml` runs every Tuesday, checks for a newer gh-aw release, recompiles all lock files, and opens a PR. It is a plain `.yml` — do not compile it with `gh aw`. Requires a `GH_PAT` repository secret (PAT with `workflow` scope).
 
 ---
 
@@ -114,7 +144,7 @@ Flag the issue and stop — do not approve PRs that fail any of these.
 The `maintain-benefits` workflow runs every Sunday and closes open `link-health` issues automatically. If one appears mid-week (filed via the report-broken template or a prior run), either wait for Sunday or trigger the workflow manually:
 
 ```
-gh workflow run maintain-benefits.lock.yml --repo student-benefits/student-benefits.github.io
+gh workflow run maintain-benefits.yml --repo student-benefits/student-benefits.github.io
 ```
 
 ---
