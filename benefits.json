@@ -784,5 +784,48 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "localstack",
+    "name": "LocalStack",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free AWS emulator with all services, 1,000 monthly CI/CD credits via GitHub Student Pack.",
+    "link": "https://www.localstack.cloud/localstack-for-students",
+    "tags": [
+      "AWS",
+      "Cloud",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "doppler",
+    "name": "Doppler",
+    "category": "Security",
+    "offer_type": "free",
+    "description": "Free Team subscription for secrets management while enrolled. Sync environment variables, prevent leaks.",
+    "link": "https://www.doppler.com/secretsops-for-students",
+    "tags": [
+      "Security",
+      "Secrets",
+      "GitHub Student Pack",
+      "DevOps"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "bootdev",
+    "name": "Boot.dev",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
+    "link": "https://education.github.com/pack",
+    "tags": [
+      "GitHub Student Pack",
+      "Backend",
+      "Courses"
+    ],
+    "popularity": 5
   }
 ]
