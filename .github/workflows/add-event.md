@@ -16,6 +16,7 @@ on:
     types: [labeled]
     names: "new-event"
     lock-for-agent: true
+  roles: all
 
 permissions: read-all
 

@@ -130,18 +130,17 @@ h1 {
 
 footer {
   margin-top: 6rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid var(--slate-800);
+  padding: 2rem;
   text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
 }
-footer p { color: var(--slate-500); font-size: 0.875rem; }
 footer a {
-  color: var(--indigo-400);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  color: var(--slate-500);
+  text-decoration: none;
   transition: color var(--dur-normal);
 }
-footer a:hover { color: var(--indigo-300); }
+footer a:hover { color: var(--slate-300); }
 
 .header-row {
   display: flex;

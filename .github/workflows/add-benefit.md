@@ -16,6 +16,7 @@ on:
     types: [labeled]
     names: "new-benefit"
     lock-for-agent: true
+  roles: all
 
 permissions: read-all
 
