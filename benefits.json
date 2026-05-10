@@ -43,20 +43,6 @@
     "repo": "getcursor/cursor"
   },
   {
-    "id": "google-antigravity",
-    "name": "Google Antigravity",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free during preview. Agent-first IDE powered by Gemini 3. Google AI Pro students get higher limits.",
-    "link": "https://gemini.google/students/",
-    "tags": [
-      "AI",
-      "IDE",
-      "Google"
-    ],
-    "popularity": 9
-  },
-  {
     "id": "jetbrains-ides",
     "name": "JetBrains IDEs",
     "category": "Dev Tools",
@@ -246,7 +232,7 @@
     "name": "Grammarly",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "20-40% off Premium via SheerID/UNiDAYS verification. Some universities provide free Pro access\u2014check with your school.",
+    "description": "Student discounts available via SheerID/UNiDAYS verification. Free Premium tier plus AI features for students.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
@@ -323,33 +309,6 @@
       "Shopping"
     ],
     "popularity": 8
-  },
-  {
-    "id": "linkedin-learning",
-    "name": "LinkedIn Learning",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free access through many universities. Check your school's library or career services for complimentary access.",
-    "link": "https://learning.linkedin.com/for-higher-education",
-    "tags": [
-      "Courses",
-      "Professional",
-      "Skills"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "coursera",
-    "name": "Coursera for Campus",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Many universities provide free Coursera access. Financial aid available for individual learners.",
-    "link": "https://www.coursera.org/campus",
-    "tags": [
-      "Online Courses",
-      "Certificates"
-    ],
-    "popularity": 9
   },
   {
     "id": "google-gemini-pro",
@@ -566,7 +525,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://www.hackthebox.com/higher-education",
+    "link": "https://help.hackthebox.com/en/articles/13465244-getting-the-student-subscription",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -579,8 +538,8 @@
     "name": "TryHackMe Student",
     "category": "Learning",
     "offer_type": "discount",
-    "description": "20-30% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
-    "link": "https://tryhackme.com/pricing",
+    "description": "20% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
+    "link": "https://help.tryhackme.com/en/articles/6494960-student-discount",
     "tags": [
       "Cybersecurity",
       "Learning",
@@ -699,34 +658,6 @@
       "Events"
     ],
     "popularity": 7
-  },
-  {
-    "id": "google-colab",
-    "name": "Google Colab",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free 1-year Colab Pro for U.S. students and faculty (limited). Includes GPU/TPU access, Slideshow Mode, and AI toggle.",
-    "link": "https://colab.research.google.com/",
-    "tags": [
-      "AI",
-      "Jupyter",
-      "Python"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "overleaf",
-    "name": "Overleaf",
-    "category": "Productivity",
-    "offer_type": "free",
-    "description": "Free collaborative LaTeX editor for academic writing. Many universities provide premium features.",
-    "link": "https://www.overleaf.com/edu",
-    "tags": [
-      "LaTeX",
-      "Writing",
-      "Academic"
-    ],
-    "popularity": 5
   },
   {
     "id": "termius-pro",
