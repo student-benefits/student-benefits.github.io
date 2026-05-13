@@ -52,6 +52,20 @@
     "expires": "2026-05-20"
   },
   {
+    "id": "quackhacks-3-2026",
+    "name": "QuackHacks 3",
+    "organizer": "University of Oregon / Major League Hacking",
+    "category": "hackathon",
+    "date": "2026-05-30",
+    "date_end": "2026-05-31",
+    "location": "Eugene, Oregon",
+    "remote": false,
+    "eligibility": "Students worldwide, teams welcome",
+    "why": "Oregon's largest hackathon with $10K+ in prizes. 24-hour build with Google sponsorship, mentorship, and travel reimbursement. Strong track record for launching student projects.",
+    "link": "https://www.quackhacks.org/",
+    "expires": "2026-05-31"
+  },
+  {
     "id": "mcw-young-leaders-fellowship-2026",
     "name": "MCW Global Young Leaders Fellowship 2026",
     "organizer": "MCW Global (Miracle Corners of the World)",
