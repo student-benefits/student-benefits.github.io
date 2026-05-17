@@ -161,7 +161,7 @@
     "name": "Heroku",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
-    "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
+    "description": "$13/month platform credit for 24 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
     "tags": [
       "PaaS",
@@ -330,7 +330,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free access through many universities. Check your school's library or career services for complimentary access.",
-    "link": "https://learning.linkedin.com/for-higher-education",
+    "link": "https://business.linkedin.com/learn/for-higher-education",
     "tags": [
       "Courses",
       "Professional",
@@ -565,8 +565,8 @@
     "name": "Hack The Box Student",
     "category": "Learning",
     "offer_type": "discount",
-    "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://www.hackthebox.com/higher-education",
+    "description": "Discounted student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
+    "link": "https://help.hackthebox.com/en/articles/13465244-getting-the-student-subscription",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -692,7 +692,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Join 2,100+ campus clubs for workshops, networking, and Google Solution Challenge. Free resources and community.",
-    "link": "https://developers.google.com/community/gdsc",
+    "link": "https://cloud.google.com/blog/topics/training-certifications/join-a-google-developer-student-club",
     "tags": [
       "Google",
       "Community",
@@ -814,18 +814,4 @@
     ],
     "popularity": 5
   },
-  {
-    "id": "boot-dev",
-    "name": "Boot.dev",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
-    "link": "https://www.boot.dev/students",
-    "tags": [
-      "GitHub Student Pack",
-      "Backend",
-      "Courses"
-    ],
-    "popularity": 5
-  }
 ]
