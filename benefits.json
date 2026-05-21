@@ -787,5 +787,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "framer",
+    "name": "Framer",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Basic plan for 1 year (worth $120/year), renewable every 11 months while enrolled.",
+    "link": "https://www.framer.com/education/students/",
+    "tags": [
+      "Design",
+      "Web Design",
+      "No-Code"
+    ],
+    "popularity": 5
   }
 ]
