@@ -844,5 +844,19 @@
       "Graphics"
     ],
     "popularity": 5
+  },
+  {
+    "id": "codedex",
+    "name": "Codédex",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "Free 6-month Codédex Club premium with interactive Python, JavaScript, HTML/CSS, and Git courses.",
+    "link": "https://www.codedex.io/github-students",
+    "tags": [
+      "GitHub Student Pack",
+      "Coding",
+      "Courses"
+    ],
+    "popularity": 5
   }
 ]
