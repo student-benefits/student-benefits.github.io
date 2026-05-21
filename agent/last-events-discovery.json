@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-05-08T00:00:00Z",
+  "timestamp": "2026-05-20T17:01:19Z",
   "known_sources_checked": [
     "https://ycombinator.com/",
     "https://www.mlh.com/seasons/2026/events",
@@ -17,26 +17,25 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "bitcamp-2026",
-    "immerse-gt-2026"
+    "midnight-hackathon-may-2026"
   ],
   "discovered": [
     {
-      "name": "Midnight Hackathon May 2026",
-      "date": "2026-05-15",
-      "link": "https://events.mlh.io/events/14061-midnight-hackathon-may-2026",
+      "name": "START Hack 2026",
+      "date": "2026-03-18",
+      "link": "https://starthack.eu/#/register",
       "source": "keyword"
     },
     {
-      "name": "JAMHacks 10",
-      "date": "2026-06-12",
-      "link": "https://jamhacks.ca/",
-      "source": "known-source"
+      "name": "IIM Ahmedabad AI Summer Residency 2026",
+      "date": "2026-05-07",
+      "link": "https://gp12pzj7qtu.typeform.com/ai-residency",
+      "source": "keyword"
     },
     {
-      "name": "HackPrix Season 3",
-      "date": "2026-06-13",
-      "link": "https://hackprix-2026.devfolio.co/",
+      "name": "AI Hackathon 2026",
+      "date": "2026-06-20",
+      "link": "https://hive.hackberkeley.org",
       "source": "keyword"
     }
   ],
