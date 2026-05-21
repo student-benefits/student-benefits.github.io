@@ -873,5 +873,20 @@
       "Accessibility"
     ],
     "popularity": 5
+  },
+  {
+    "id": "gorails",
+    "name": "GoRails",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "12 months free via GitHub Student Pack. 300+ Ruby on Rails video tutorials covering full-stack development.",
+    "link": "https://gorails.com/github-students",
+    "tags": [
+      "GitHub Student Pack",
+      "Ruby on Rails",
+      "Web Development",
+      "Courses"
+    ],
+    "popularity": 5
   }
 ]
