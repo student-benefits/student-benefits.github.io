@@ -888,5 +888,19 @@
       "Courses"
     ],
     "popularity": 5
+  },
+  {
+    "id": "dashlane",
+    "name": "Dashlane",
+    "category": "Security",
+    "offer_type": "free",
+    "description": "Free Premium for 1 year with student email. Password manager with auto-login and dark web monitoring.",
+    "link": "https://www.dashlane.com/students",
+    "tags": [
+      "Passwords",
+      "Security",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
