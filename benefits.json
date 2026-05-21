@@ -827,5 +827,20 @@
       "Courses"
     ],
     "popularity": 5
+  },
+  {
+    "id": "frontend-masters",
+    "name": "Frontend Masters",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "6 months free access to all Frontend Masters courses and workshops (worth ~$234).",
+    "link": "https://frontendmasters.com/welcome/github-student-developers/",
+    "tags": [
+      "GitHub Student Pack",
+      "Frontend",
+      "Web Development",
+      "Courses"
+    ],
+    "popularity": 5
   }
 ]
