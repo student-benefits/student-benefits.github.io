@@ -815,5 +815,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Basic or Business plan for 1 year for full-time students. Apply via email with .edu address.",
+    "link": "https://linear.app/docs/billing-and-plans",
+    "tags": [
+      "Project Management",
+      "Issue Tracking",
+      "Team Collaboration"
+    ],
+    "popularity": 5
   }
 ]
