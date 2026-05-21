@@ -45,7 +45,7 @@ jobs:
             For each benefit, apply the bar. Only flag unambiguous violations; if uncertain, skip.
 
             1. **Specific offer**: description must contain a percentage, dollar/credit amount, plan name, or duration. Flag generic descriptions.
-            2. **Direct signup link**: flag only if path is exactly `/` or `/home`, or subdomain is `support.`/`docs.`/`help.`/`blog.` AND path lacks `/edu`/`/education`/`/student`/`/students`/`/enrollment`. URL structure only — don't read page content.
+            2. **Direct signup link**: flag if path is exactly `/` or `/home`, or if subdomain is `support.`/`docs.`/`help.`/`blog.`, or if path contains `/articles/`. Help/docs/support articles are documentation, not signup — even when the article title mentions students. URL structure only — don't read page content.
             3. **Self-serve**: flag if description contains "through your university", "ask your institution", or "contact IT".
             4. **Offer type accuracy**: flag clear mismatches — description says "% off" / "discount" but `offer_type: free`; or description says "free" but `offer_type: discount`.
             5. **Description length**: flag `description` exceeding 120 characters.
