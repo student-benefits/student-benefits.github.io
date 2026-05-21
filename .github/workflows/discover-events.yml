@@ -102,7 +102,7 @@ jobs:
 
             ## Step 8: Update log
 
-            Replace `agent/last-events-discovery.json` entirely:
+            Replace `agent/state/last-events-discovery.json` entirely:
             ```json
             {
               "timestamp": "<UTC ISO 8601>",

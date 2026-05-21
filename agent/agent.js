@@ -336,7 +336,7 @@ fetch('../data/benefits.json')
     SIM_STEPS[1].primary = data.length + ' existing benefits loaded. Checking for name and hostname matches\u2026';
   });
 
-fetch('last-run.json')
+fetch('state/last-run.json')
   .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then(function (data) {
     renderRun(data);
