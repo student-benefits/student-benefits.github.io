@@ -1,5 +1,4 @@
-.DS_Store
-.vscode
-.idea
-*.sw?
-.claude/
+# Hidden paths aren't tracked unless negated.
+**/.*
+!.gitignore
+!.gitattributes
