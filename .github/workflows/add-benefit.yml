@@ -89,6 +89,8 @@ jobs:
 
             Prefer the user-provided link; otherwise find the official student signup URL.
 
+            `link` MUST be the program's own signup, pricing, or program-overview page (e.g. `/students`, `/education`, `/edu`, `/pricing`). Never use a help/docs/support article URL — subdomains `help.`/`support.`/`docs.` or paths containing `/articles/`. Those are documentation, not signup destinations. If only a help-article URL is available, WebSearch the underlying program page and use that instead.
+
             ## Step 5: Write files
 
             Append the entry to `benefits.json` (preserve 2-space indent, trailing newline).
