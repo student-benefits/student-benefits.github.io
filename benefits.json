@@ -902,5 +902,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "lumix-edu",
+    "name": "LUMIX EDU",
+    "category": "Design",
+    "offer_type": "discount",
+    "description": "15% off cameras and lenses, plus free curriculum resources, equipment borrowing, and training workshops.",
+    "link": "https://shop.panasonic.com/pages/lumix-education-program",
+    "tags": [
+      "Photography",
+      "Cameras",
+      "Education"
+    ],
+    "popularity": 5
   }
 ]
