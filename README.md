@@ -6,7 +6,6 @@ Grant discovers new programs each week, validates community submissions opened a
 
 [![Live](https://img.shields.io/badge/live-student--benefits.github.io-blue)](https://student-benefits.github.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
-[![Add Benefit](https://github.com/student-benefits/student-benefits.github.io/actions/workflows/add-benefit.lock.yml/badge.svg)](https://github.com/student-benefits/student-benefits.github.io/actions/workflows/add-benefit.lock.yml)
 
 ---
 
