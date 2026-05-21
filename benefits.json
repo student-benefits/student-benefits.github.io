@@ -858,5 +858,20 @@
       "Courses"
     ],
     "popularity": 5
+  },
+  {
+    "id": "polypane",
+    "name": "Polypane",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free for 1 year for non-commercial work via GitHub Student Pack. Dev browser with responsive testing.",
+    "link": "https://polypane.app/github-students/",
+    "tags": [
+      "Browser",
+      "GitHub Student Pack",
+      "Web Development",
+      "Accessibility"
+    ],
+    "popularity": 5
   }
 ]
