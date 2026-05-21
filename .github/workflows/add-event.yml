@@ -30,6 +30,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
+          allowed_bots: "claude"
           claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
             You process student event submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it against the quality bar, and either open a PR adding the event or comment explaining why it can't be added.
