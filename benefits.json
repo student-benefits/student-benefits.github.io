@@ -916,5 +916,19 @@
       "Education"
     ],
     "popularity": 5
+  },
+  {
+    "id": "jitter",
+    "name": "Jitter for Education",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free advanced export features: GIF, Video, ProRes, WebM, Lottie, 4K/120fps quality, no watermark.",
+    "link": "https://jitter.video/students",
+    "tags": [
+      "Video",
+      "Animation",
+      "Motion Design"
+    ],
+    "popularity": 5
   }
 ]
