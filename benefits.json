@@ -801,5 +801,19 @@
       "No-Code"
     ],
     "popularity": 5
+  },
+  {
+    "id": "browserstack",
+    "name": "BrowserStack",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year Live and Automate Mobile plan (worth $2,388). Test on 3,000+ real browsers and devices.",
+    "link": "https://www.browserstack.com/github-students",
+    "tags": [
+      "Testing",
+      "Browsers",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
