@@ -829,5 +829,20 @@
       "Team Collaboration"
     ],
     "popularity": 5
+  },
+  {
+    "id": "icons8",
+    "name": "Icons8",
+    "category": "Design",
+    "offer_type": "trial",
+    "description": "Free 3-month subscription to icons, illustrations, music, and stock photos.",
+    "link": "https://icons8.com/github-students",
+    "tags": [
+      "GitHub Student Pack",
+      "Design Assets",
+      "Icons",
+      "Graphics"
+    ],
+    "popularity": 5
   }
 ]
