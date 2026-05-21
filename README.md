@@ -26,7 +26,7 @@ The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant'
 2. Grant validates and opens a PR within minutes
 3. A maintainer reviews and merges
 
-**Add benefits directly** — edit `benefits.json` following the schema in `CLAUDE.md` and open a PR.
+**Add benefits directly** — edit `data/benefits.json` following the schema in `CLAUDE.md` and open a PR.
 
 **Improve Grant** — edit a workflow's `prompt:` in `.github/workflows/*.yml` directly. No compile step.
 

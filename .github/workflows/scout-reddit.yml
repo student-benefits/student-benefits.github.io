@@ -54,7 +54,7 @@ jobs:
             { "last_run": null, "processed_posts": [], "subreddit_scores": {}, "benefits_discovered": 0, "opportunities_sent": 0 }
             ```
 
-            Read `benefits.json` and `agent/rejected.json`. Build a known set: existing names (lowercase) + link hostnames (strip `www.`) + rejected names/domains.
+            Read `data/benefits.json` and `agent/rejected.json`. Build a known set: existing names (lowercase) + link hostnames (strip `www.`) + rejected names/domains.
 
             ## Step 2: Discover (if MODE is `discover` or `both`)
 

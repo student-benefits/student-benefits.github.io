@@ -28,7 +28,7 @@ jobs:
 
             ## Step 1: Build skip lists
 
-            Read `benefits.json`, `categories.json`, and `agent/rejected.json` (treat missing as empty `[]`).
+            Read `data/benefits.json`, `data/categories.json`, and `agent/rejected.json` (treat missing as empty `[]`).
 
             Build:
             - **Known names** (lowercase) from existing benefits
