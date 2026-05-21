@@ -49,12 +49,12 @@ jobs:
 
             ## Step 1: Read state and known set
 
-            Read `agent/reddit-state.json` (initialize if missing):
+            Read `agent/state/reddit-state.json` (initialize if missing):
             ```json
             { "last_run": null, "processed_posts": [], "subreddit_scores": {}, "benefits_discovered": 0, "opportunities_sent": 0 }
             ```
 
-            Read `benefits.json` and `agent/rejected.json`. Build a known set: existing names (lowercase) + link hostnames (strip `www.`) + rejected names/domains.
+            Read `data/benefits.json` and `agent/state/rejected.json`. Build a known set: existing names (lowercase) + link hostnames (strip `www.`) + rejected names/domains.
 
             ## Step 2: Discover (if MODE is `discover` or `both`)
 
@@ -89,7 +89,7 @@ jobs:
 
             ## Step 4: Write state
 
-            If `DRY_RUN` is `false`, replace `agent/reddit-state.json` entirely:
+            If `DRY_RUN` is `false`, replace `agent/state/reddit-state.json` entirely:
             - `last_run`: current UTC ISO 8601
             - `processed_posts`: the updated list, capped at the 500 most recent entries
             - `subreddit_scores`: updated map
@@ -107,7 +107,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add agent/reddit-state.json
+          git add agent/state/reddit-state.json
           git diff --cached --quiet && exit 0
           git commit -m "Update Reddit scout state"
           git push

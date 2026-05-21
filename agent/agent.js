@@ -1,6 +1,6 @@
 const TOOLS = {
   get_issue:             { actor: 'github', label: 'GitHub',        explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
-  get_file_contents:     { actor: 'github', label: 'GitHub',        explain: 'Downloads <code>benefits.json</code> from the repo to check whether this benefit is already listed.' },
+  get_file_contents:     { actor: 'github', label: 'GitHub',        explain: 'Downloads <code>data/benefits.json</code> from the repo to check whether this benefit is already listed.' },
   create_or_update_file: { actor: 'github', label: 'GitHub',        explain: 'Writes or updates a file in the repository via the GitHub API.' },
   create_pull_request:   { actor: 'github', label: 'GitHub',        explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
   add_comment:           { actor: 'github', label: 'GitHub',        explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
@@ -9,7 +9,7 @@ const TOOLS = {
   tavily_search:         { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
   search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' }, // alias — MCP tool name varies by server version
   web_fetch:             { actor: 'web',    label: 'Web',           explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
-  edit:                  { actor: 'grant',  label: 'Grant',         explain: 'Appends the new benefit entry to <code>benefits.json</code> in the repository.' },
+  edit:                  { actor: 'grant',  label: 'Grant',         explain: 'Appends the new benefit entry to <code>data/benefits.json</code> in the repository.' },
 };
 
 function toggleDisclosure(panelId, triggerId, allPanelsSelector, allTriggersSelector) {
@@ -200,7 +200,7 @@ const SIM_STEPS = [
   },
   {
     stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
-    headLabel: 'get_file_contents', detail: 'benefits.json',
+    headLabel: 'get_file_contents', detail: 'data/benefits.json',
     primary: '… existing benefits loaded. Checking for name and hostname matches…',
     annotation: 'Scans all existing entries before doing any web research to avoid duplicates.'
   },
@@ -224,7 +224,7 @@ const SIM_STEPS = [
   },
   {
     stepClass: 'actor-grant', badge: 'badge-grant', badgeLabel: 'Grant',
-    headLabel: 'edit', detail: 'benefits.json',
+    headLabel: 'edit', detail: 'data/benefits.json',
     primary: 'Added <strong>Adobe Creative Cloud</strong> · Design',
     code: `<span class="c-dim">{</span>
   <span class="c-hl">"id"</span>: <span class="c-grn">"adobe-creative-cloud"</span>,
@@ -233,7 +233,7 @@ const SIM_STEPS = [
   <span class="c-hl">"description"</span>: <span class="c-grn">"~65% discount on All Apps plan for students..."</span>,
   <span class="c-hl">"popularity"</span>: <span class="c-blue">5</span>
 <span class="c-dim">}</span>`,
-    annotation: 'Appends the validated benefit with all required fields to benefits.json.'
+    annotation: 'Appends the validated benefit with all required fields to data/benefits.json.'
   },
   {
     stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub',
@@ -330,13 +330,13 @@ document.querySelector('.prop-radial').addEventListener('click', function (e) {
 
 document.getElementById('sim-btn').addEventListener('click', simNext);
 
-fetch('../benefits.json')
+fetch('../data/benefits.json')
   .then(function (r) { return r.ok ? r.json() : []; })
   .then(function (data) {
     SIM_STEPS[1].primary = data.length + ' existing benefits loaded. Checking for name and hostname matches\u2026';
   });
 
-fetch('last-run.json')
+fetch('state/last-run.json')
   .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
   .then(function (data) {
     renderRun(data);

@@ -28,12 +28,12 @@ jobs:
 
             ## Step 1: Build skip lists
 
-            Read `benefits.json`, `categories.json`, and `agent/rejected.json` (treat missing as empty `[]`).
+            Read `data/benefits.json`, `data/categories.json`, and `agent/state/rejected.json` (treat missing as empty `[]`).
 
             Build:
             - **Known names** (lowercase) from existing benefits
             - **Known domains** from existing benefit links (strip `www.`)
-            - **Rejected names + domains** from `agent/rejected.json` — shape: `[{ "name": "...", "domain": "..." }]`
+            - **Rejected names + domains** from `agent/state/rejected.json` — shape: `[{ "name": "...", "domain": "..." }]`
 
             Also read open issues labeled `new-benefit` and add their product names (lowercase) to known names — avoids duplicate pipeline submissions.
 
@@ -94,7 +94,7 @@ jobs:
 
             ## Step 6: Update log
 
-            Replace `agent/last-benefits-discovery.json` entirely:
+            Replace `agent/state/last-benefits-discovery.json` entirely:
             ```json
             {
               "timestamp": "<UTC ISO 8601>",

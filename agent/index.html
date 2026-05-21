@@ -127,7 +127,7 @@
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Output</p>
-          <p>Grant's outputs depend on the workflow. For benefit and event submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. For <code>maintain-benefits</code>: it fixes broken links and quality flags directly in <code>benefits.json</code> and opens a PR. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
+          <p>Grant's outputs depend on the workflow. For benefit and event submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. For <code>maintain-benefits</code>: it fixes broken links and quality flags directly in <code>data/benefits.json</code> and opens a PR. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
         </div>
         <div id="panel-human" class="node-panel" hidden>
           <p class="node-panel-title">Human Reviewer</p>
@@ -201,7 +201,7 @@
       </div>
       <div id="ppanel-memory" class="node-panel" hidden>
         <p class="node-panel-title">Memory</p>
-        <p>An agent persists state across runs. Grant saves rejected programs in <code>rejected.json</code>. Future submissions for the same product skip re-verification entirely.</p>
+        <p>An agent persists state across runs. Grant saves rejected programs in <code>state/rejected.json</code>. Future submissions for the same product skip re-verification entirely.</p>
       </div>
       <div id="ppanel-self" class="node-panel" hidden>
         <p class="node-panel-title">Self-direction</p>
@@ -255,7 +255,7 @@
   <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io/tree/main/.github/workflows" target="_blank" rel="noopener noreferrer">Read the workflows</a> to see exactly what it does, or open an issue to suggest a new benefit or event and watch it run for real.</p>
 </footer>
 
-<script src="/shared.js"></script>
+<script src="/assets/shared.js"></script>
 <script src="/agent/agent.js"></script>
 </body>
 </html>

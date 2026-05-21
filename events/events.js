@@ -144,8 +144,8 @@ document.getElementById('results-bar').addEventListener('click', function(e) {
 });
 
 Promise.all([
-  fetch('../events.json').then(function(r) { return r.json(); }),
-  fetch('../event-categories.json').then(function(r) { return r.json(); })
+  fetch('../data/events.json').then(function(r) { return r.json(); }),
+  fetch('../data/event-categories.json').then(function(r) { return r.json(); })
 ]).then(function(results) {
   events = results[0];
   categories = ['All'].concat(results[1]);

@@ -29,7 +29,7 @@ jobs:
 
             ## Step 1: Read state
 
-            Read `events.json`. Build:
+            Read `data/events.json`. Build:
             - **Known IDs** (all existing IDs)
             - **Known names** (lowercase)
 
@@ -75,11 +75,11 @@ jobs:
 
             ## Step 6: Draft entries
 
-            See the events.json schema in CLAUDE.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
+            See the data/events.json schema in CLAUDE.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
 
             ## Step 7: Open one PR
 
-            Updated `events.json`: remove expired IDs from Step 2, append new entries from Step 6 (in date order earliest first), preserve 2-space indent + trailing newline.
+            Updated `data/events.json`: remove expired IDs from Step 2, append new entries from Step 6 (in date order earliest first), preserve 2-space indent + trailing newline.
 
             **Title**: `[Events]: <comma-separated new event names>` (or `Expire stale entries` if only removing)
 
@@ -102,7 +102,7 @@ jobs:
 
             ## Step 8: Update log
 
-            Replace `agent/last-events-discovery.json` entirely:
+            Replace `agent/state/last-events-discovery.json` entirely:
             ```json
             {
               "timestamp": "<UTC ISO 8601>",

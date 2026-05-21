@@ -7,7 +7,7 @@ This file is loaded automatically by Claude Code in every session.
 ## Project Context
 
 A community-curated directory of student discounts, free tiers, and perks. The
-site is a single static HTML/JS page (`index.html`) that reads from `benefits.json`
+site is a single static HTML/JS page (`index.html`) that reads from `data/benefits.json`
 and renders a searchable, filterable card grid. Deployed via GitHub Pages.
 
 ### Core values
@@ -16,7 +16,7 @@ and renders a searchable, filterable card grid. Deployed via GitHub Pages.
 ("Student discount available") is rejected in favor of concrete offers
 ("Free Pro plan for 1 year").
 
-**Data integrity.** All benefit data lives in `benefits.json` — one source of
+**Data integrity.** All benefit data lives in `data/benefits.json` — one source of
 truth, never hardcoded in HTML.
 
 **Active discovery, not passive curation.** Content enters through multiple
@@ -41,9 +41,9 @@ validation rules, schema, trigger conditions. Mismatch is a bug.
 
 ---
 
-## Source of truth: `benefits.json`
+## Source of truth: `data/benefits.json`
 
-All benefit data lives in `benefits.json`. Never modify the HTML to hardcode
+All benefit data lives in `data/benefits.json`. Never modify the HTML to hardcode
 benefits — all data must go through this file.
 
 ### Schema
@@ -63,7 +63,7 @@ benefits — all data must go through this file.
 ```
 
 - `id`: lowercase, hyphens, no leading/trailing hyphens, unique
-- `category`: must exactly match one of the values in `categories.json` (the authoritative list)
+- `category`: must exactly match one of the values in `data/categories.json` (the authoritative list)
 - `description`: specific about what students actually get (e.g. "Free Pro plan for 1 year", not "Student discount available"); max 120 chars
 - `offer_type`: required; one of `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period then paid/discounted)
 - `popularity`: integer 1–10; use 5 as default for new entries
@@ -71,9 +71,9 @@ benefits — all data must go through this file.
 
 ---
 
-## Source of truth: `events.json`
+## Source of truth: `data/events.json`
 
-All event data lives in `events.json`. Schema:
+All event data lives in `data/events.json`. Schema:
 
 ```json
 {
@@ -127,7 +127,7 @@ When adding a new issue template that introduces a new label, create the GitHub 
 When reviewing PRs (especially those created by the add-benefit workflow):
 
 - [ ] `id` is unique, URL-safe, matches the name
-- [ ] `category` exactly matches a value in `categories.json`
+- [ ] `category` exactly matches a value in `data/categories.json`
 - [ ] `offer_type` is set and accurate (`free`, `discount`, `credits`, or `trial`)
 - [ ] `description` is ≤ 120 chars and specific about what students get
 - [ ] `link` goes to the actual student signup page, not a marketing page
