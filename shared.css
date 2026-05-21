@@ -77,6 +77,8 @@ header { margin-bottom: 2rem; }
 }
 .site-alt:hover { color: #fff; }
 
+.subtitle { font-size: 0.9375rem; color: var(--slate-400); line-height: 1.5; margin-top: 0.375rem; }
+
 .grant-badge {
   display: inline-flex;
   align-items: center;
