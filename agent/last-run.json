@@ -1,25 +1,25 @@
 {
-  "issue": 169,
-  "title": "frontend masters",
+  "issue": 170,
+  "title": "new relic",
   "timestamp": "2026-05-21T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
       "name": "websearch",
-      "query": "Frontend Masters GitHub Student Pack student discount"
+      "query": "New Relic student program education"
     },
     {
       "name": "webfetch",
-      "url": "https://frontendmasters.com/welcome/github-student-developers/"
+      "url": "https://newrelic.com/students"
     },
     {
       "name": "edit",
-      "summary": "Added Frontend Masters entry to benefits.json"
+      "summary": "Added entry to benefits.json"
     }
   ],
   "benefit": {
-    "name": "Frontend Masters",
-    "category": "Learning",
-    "description": "6 months free access to all Frontend Masters courses and workshops (worth ~$234)."
+    "name": "New Relic",
+    "category": "Dev Tools",
+    "description": "Free observability platform while enrolled (500 GB/month, 3 users, worth $300/month)."
   }
 }

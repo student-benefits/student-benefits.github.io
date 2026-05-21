@@ -773,5 +773,19 @@
       "Courses"
     ],
     "popularity": 5
+  },
+  {
+    "id": "new-relic",
+    "name": "New Relic",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free observability platform while enrolled (500 GB/month, 3 users, worth $300/month).",
+    "link": "https://newrelic.com/students",
+    "tags": [
+      "Monitoring",
+      "Observability",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
