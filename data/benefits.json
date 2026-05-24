@@ -100,20 +100,6 @@
     "popularity": 9
   },
   {
-    "id": "digitalocean",
-    "name": "DigitalOcean",
-    "category": "Cloud & Hosting",
-    "offer_type": "credits",
-    "description": "$200 in credits valid for 1 year via GitHub Student Pack. Deploy droplets, databases, and Kubernetes clusters.",
-    "link": "https://www.digitalocean.com/github-students",
-    "tags": [
-      "Cloud",
-      "VPS",
-      "Hosting"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "aws-educate",
     "name": "AWS Educate",
     "category": "Cloud & Hosting",
@@ -175,7 +161,7 @@
     "name": "Canva for Education",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free premium features for K-12 via teacher invite. Higher ed students: check if your university has Canva Campus access.",
+    "description": "Free Pro with .edu email. Premium templates, stock content, brand kit, and collaboration tools for students.",
     "link": "https://www.canva.com/education/students/",
     "tags": [
       "Design",
@@ -413,7 +399,7 @@
     "name": "Sketch",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free for students and educators for 1 year. Professional UI/UX design tool for Mac with prototyping and collaboration.",
+    "description": "Free for 1 year. Professional UI/UX design tool for Mac with prototyping, collaboration, and plugins.",
     "link": "https://www.sketch.com/education/",
     "tags": [
       "Design",
@@ -482,7 +468,7 @@
     "id": "educative",
     "name": "Educative.io",
     "category": "Learning",
-    "offer_type": "discount",
+    "offer_type": "free",
     "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
     "tags": [
@@ -539,7 +525,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "20% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
-    "link": "https://tryhackme.com/discounts",
+    "link": "https://help.tryhackme.com/en/articles/6494960-student-discount",
     "tags": [
       "Cybersecurity",
       "Learning",
@@ -594,7 +580,7 @@
     "name": "Asana Student",
     "category": "Productivity",
     "offer_type": "free",
-    "description": "Free Starter plan for students via Goodstack verification. Project management with timelines, boards, and collaboration.",
+    "description": "Free Starter plan via Goodstack verification. Project management with timelines, boards, and team collaboration.",
     "link": "https://asana.com/industry/students",
     "tags": [
       "Project Management",
@@ -622,7 +608,7 @@
     "name": "NVIDIA Education",
     "category": "Learning",
     "offer_type": "discount",
-    "description": "Academic discounts on GPUs, free DLI courses, and research grants. Jetson developer kits at reduced prices for students.",
+    "description": "Academic GPU discounts, free DLI courses, and research grants. Reduced prices on Jetson developer kits.",
     "link": "https://developer.nvidia.com/higher-education-and-research",
     "tags": [
       "GPU",
@@ -665,7 +651,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing.",
-    "link": "https://account.termius.com/student",
+    "link": "https://termius.com/education",
     "tags": [
       "SSH",
       "Terminal",
@@ -742,20 +728,6 @@
       "Secrets",
       "GitHub Student Pack",
       "DevOps"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "boot-dev",
-    "name": "Boot.dev",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
-    "link": "https://www.boot.dev/students",
-    "tags": [
-      "GitHub Student Pack",
-      "Backend",
-      "Courses"
     ],
     "popularity": 5
   },
@@ -923,7 +895,7 @@
     "category": "Design",
     "offer_type": "free",
     "description": "Free advanced export features: GIF, Video, ProRes, WebM, Lottie, 4K/120fps quality, no watermark.",
-    "link": "https://jitter.video/students",
+    "link": "https://help.jitter.video/en/articles/6545337-jitter-for-education",
     "tags": [
       "Video",
       "Animation",
