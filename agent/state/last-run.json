@@ -1,25 +1,21 @@
 {
-  "issue": 125,
-  "title": "[benefit]: lumix education",
-  "timestamp": "2026-05-21T00:00:00Z",
+  "issue": 202,
+  "title": "sentry",
+  "timestamp": "2026-05-25T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
-      "name": "websearch",
-      "query": "Lumix education program student discount"
-    },
-    {
       "name": "webfetch",
-      "url": "https://shop.panasonic.com/pages/lumix-education-program"
+      "url": "https://sentry.io/for/education"
     },
     {
       "name": "edit",
-      "summary": "Added LUMIX EDU entry to benefits.json"
+      "summary": "Added entry to data/benefits.json"
     }
   ],
   "benefit": {
-    "name": "LUMIX EDU",
-    "category": "Design",
-    "description": "15% off cameras and lenses, plus free curriculum resources, equipment borrowing, and training workshops."
+    "name": "Sentry",
+    "category": "Dev Tools",
+    "description": "Free 1-year education plan with 50K errors/month, unlimited team members, and AI debugging."
   }
 }

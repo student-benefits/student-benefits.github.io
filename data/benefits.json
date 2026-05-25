@@ -930,5 +930,19 @@
       "Motion Design"
     ],
     "popularity": 5
+  },
+  {
+    "id": "sentry",
+    "name": "Sentry",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year education plan with 50K errors/month, unlimited team members, and AI debugging.",
+    "link": "https://sentry.io/for/education",
+    "tags": [
+      "Error Tracking",
+      "Monitoring",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
