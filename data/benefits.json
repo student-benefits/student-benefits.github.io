@@ -930,5 +930,20 @@
       "Motion Design"
     ],
     "popularity": 5
+  },
+  {
+    "id": "codecov",
+    "name": "Codecov",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free code coverage forever on public and private repositories. Included in GitHub Student Pack.",
+    "link": "https://about.codecov.io/solution/students",
+    "tags": [
+      "Code Coverage",
+      "Testing",
+      "CI/CD",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]

@@ -1,25 +1,29 @@
 {
-  "issue": 125,
-  "title": "[benefit]: lumix education",
-  "timestamp": "2026-05-21T00:00:00Z",
+  "issue": 203,
+  "title": "codecov",
+  "timestamp": "2026-05-25T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
       "name": "websearch",
-      "query": "Lumix education program student discount"
+      "query": "Codecov student program education discount"
     },
     {
       "name": "webfetch",
-      "url": "https://shop.panasonic.com/pages/lumix-education-program"
+      "url": "https://about.codecov.io/for/education/"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://about.codecov.io/solution/students"
     },
     {
       "name": "edit",
-      "summary": "Added LUMIX EDU entry to benefits.json"
+      "summary": "Added entry to data/benefits.json"
     }
   ],
   "benefit": {
-    "name": "LUMIX EDU",
-    "category": "Design",
-    "description": "15% off cameras and lenses, plus free curriculum resources, equipment borrowing, and training workshops."
+    "name": "Codecov",
+    "category": "Dev Tools",
+    "description": "Free code coverage forever on public and private repositories. Included in GitHub Student Pack."
   }
 }
