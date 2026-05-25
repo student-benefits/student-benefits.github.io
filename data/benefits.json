@@ -930,5 +930,19 @@
       "Motion Design"
     ],
     "popularity": 5
+  },
+  {
+    "id": "bootstrap-studio",
+    "name": "Bootstrap Studio",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free desktop app license for building responsive Bootstrap websites while enrolled.",
+    "link": "https://bootstrapstudio.io/contact-us",
+    "tags": [
+      "Web Design",
+      "Bootstrap",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]

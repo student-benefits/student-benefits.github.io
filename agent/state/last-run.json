@@ -1,25 +1,25 @@
 {
-  "issue": 125,
-  "title": "[benefit]: lumix education",
-  "timestamp": "2026-05-21T00:00:00Z",
+  "issue": 206,
+  "title": "bootstrap studio",
+  "timestamp": "2026-05-25T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
       "name": "websearch",
-      "query": "Lumix education program student discount"
+      "query": "Bootstrap Studio student discount GitHub Student Pack"
     },
     {
       "name": "webfetch",
-      "url": "https://shop.panasonic.com/pages/lumix-education-program"
+      "url": "https://education.github.com/pack"
     },
     {
       "name": "edit",
-      "summary": "Added LUMIX EDU entry to benefits.json"
+      "summary": "Added entry to data/benefits.json"
     }
   ],
   "benefit": {
-    "name": "LUMIX EDU",
+    "name": "Bootstrap Studio",
     "category": "Design",
-    "description": "15% off cameras and lenses, plus free curriculum resources, equipment borrowing, and training workshops."
+    "description": "Free desktop app license for building responsive Bootstrap websites while enrolled."
   }
 }
