@@ -1,19 +1,5 @@
 [
   {
-    "id": "start-hack-2026",
-    "name": "START Hack 2026",
-    "organizer": "START Global",
-    "category": "hackathon",
-    "date": "2026-03-18",
-    "date_end": "2026-03-20",
-    "location": "St. Gallen, Switzerland",
-    "remote": false,
-    "eligibility": "Tech, design, and business students from around the world",
-    "why": "Europe's premier student hackathon. 36 hours to solve real industry cases with 600+ students from 30 countries. Free accommodation, food, and access to START Summit. 10,000 CHF prize pool.",
-    "link": "https://starthack.eu/#/register",
-    "expires": "2026-03-20"
-  },
-  {
     "id": "paul-daisy-soros-fellowship-2027",
     "name": "Paul & Daisy Soros Fellowships for New Americans",
     "organizer": "Paul & Daisy Soros Fellowships",
@@ -37,20 +23,6 @@
     "why": "$200,000 over two years to skip college and build something new. Access to Peter Thiel's network of founders, investors, and scientists.",
     "link": "https://thielfellowship.org/",
     "expires": "2027-04-04"
-  },
-  {
-    "id": "google-io-2026",
-    "name": "Google I/O 2026",
-    "organizer": "Google",
-    "category": "conference",
-    "date": "2026-05-19",
-    "date_end": "2026-05-20",
-    "location": "Mountain View, CA",
-    "remote": false,
-    "eligibility": "Open to all; online attendance is free",
-    "why": "Google's flagship developer conference \u2014 free online stream. New APIs and SDKs are announced here first, before documentation catches up.",
-    "link": "https://io.google/2026/",
-    "expires": "2026-05-20"
   },
   {
     "id": "iim-ahmedabad-ai-residency-2026",
@@ -105,6 +77,20 @@
     "eligibility": "High school students, free attendance with accommodations",
     "why": "Canada's largest high school hackathon celebrating 10 years. 36 hours of building with free meals, accommodations, mentorship, and prizes. Strong hacker density makes co-founder connections likely.",
     "link": "https://jamhacks.ca/",
+    "expires": "2026-06-14"
+  },
+  {
+    "id": "ethglobal-newyork-2026",
+    "name": "ETHGlobal New York 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-06-12",
+    "date_end": "2026-06-14",
+    "location": "New York City, NY",
+    "remote": false,
+    "eligibility": "Open to all builders; 800+ attendees expected",
+    "why": "Premier Web3 hackathon with $150k+ prize pool. 3 days of building with free food, technical mentorship, and exclusive workshops. Refundable ETH stake required to ensure commitment.",
+    "link": "https://ethglobal.com/events/newyork2026/apply",
     "expires": "2026-06-14"
   },
   {
@@ -204,6 +190,20 @@
     "expires": "2026-10-31"
   },
   {
+    "id": "ethglobal-lisbon-2026",
+    "name": "ETHGlobal Lisbon 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-07-24",
+    "date_end": "2026-07-26",
+    "location": "Lisbon, Portugal",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide",
+    "why": "Major Ethereum hackathon with substantial prize pool, free meals, and mentorship from top blockchain protocols. Small refundable ETH stake required; alternatives available for financial constraints.",
+    "link": "https://ethglobal.com/events/lisbon2026",
+    "expires": "2026-07-26"
+  },
+  {
     "id": "iaps-ai-policy-fellowship-2026",
     "name": "IAPS AI Policy Fellowship",
     "organizer": "Institute for AI Policy and Strategy",
@@ -229,6 +229,20 @@
     "why": "Full scholarships covering travel, hotel, and registration. Career fair access to Google, Microsoft, and Meta engineers that is difficult to replicate any other way.",
     "link": "https://tapiaconference.cmd-it.org/registration/",
     "expires": "2026-09-18"
+  },
+  {
+    "id": "ethglobal-tokyo-2026",
+    "name": "ETHGlobal Tokyo 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-09-25",
+    "date_end": "2026-09-27",
+    "location": "Tokyo, Japan",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide",
+    "why": "Elite Web3 hackathon in Asia's tech capital. Large prize pool, beginner-friendly mentorship, and access to leading blockchain innovators. Refundable ETH stake ensures participant commitment.",
+    "link": "https://ethglobal.com/events/tokyo2026",
+    "expires": "2026-09-27"
   },
   {
     "id": "grace-hopper-celebration-2026",
