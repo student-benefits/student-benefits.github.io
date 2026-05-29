@@ -175,7 +175,7 @@
     "name": "Canva for Education",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free premium features for K-12 via teacher invite. Higher ed students: check if your university has Canva Campus access.",
+    "description": "Free Pro with .edu email. Premium templates, stock content, brand kit, and collaboration tools for students.",
     "link": "https://www.canva.com/education/students/",
     "tags": [
       "Design",
@@ -413,7 +413,7 @@
     "name": "Sketch",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free for students and educators for 1 year. Professional UI/UX design tool for Mac with prototyping and collaboration.",
+    "description": "Free for 1 year. Professional UI/UX design tool for Mac with prototyping, collaboration, and plugins.",
     "link": "https://www.sketch.com/education/",
     "tags": [
       "Design",
@@ -482,7 +482,7 @@
     "id": "educative",
     "name": "Educative.io",
     "category": "Learning",
-    "offer_type": "discount",
+    "offer_type": "free",
     "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
     "link": "https://www.educative.io/github-students",
     "tags": [
@@ -594,7 +594,7 @@
     "name": "Asana Student",
     "category": "Productivity",
     "offer_type": "free",
-    "description": "Free Starter plan for students via Goodstack verification. Project management with timelines, boards, and collaboration.",
+    "description": "Free Starter plan via Goodstack verification. Project management with timelines, boards, and team collaboration.",
     "link": "https://asana.com/industry/students",
     "tags": [
       "Project Management",
@@ -622,7 +622,7 @@
     "name": "NVIDIA Education",
     "category": "Learning",
     "offer_type": "discount",
-    "description": "Academic discounts on GPUs, free DLI courses, and research grants. Jetson developer kits at reduced prices for students.",
+    "description": "Academic GPU discounts, free DLI courses, and research grants. Reduced prices on Jetson developer kits.",
     "link": "https://developer.nvidia.com/higher-education-and-research",
     "tags": [
       "GPU",
@@ -665,7 +665,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing.",
-    "link": "https://account.termius.com/student",
+    "link": "https://termius.com/education",
     "tags": [
       "SSH",
       "Terminal",
@@ -751,7 +751,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
-    "link": "https://www.boot.dev/students",
+    "link": "https://www.boot.dev/pricing",
     "tags": [
       "GitHub Student Pack",
       "Backend",
@@ -923,7 +923,7 @@
     "category": "Design",
     "offer_type": "free",
     "description": "Free advanced export features: GIF, Video, ProRes, WebM, Lottie, 4K/120fps quality, no watermark.",
-    "link": "https://jitter.video/students",
+    "link": "https://jitter.video/pricing",
     "tags": [
       "Video",
       "Animation",
