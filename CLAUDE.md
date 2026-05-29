@@ -115,10 +115,24 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 | `discover-benefits.yml` | Weekly (Monday) or manual | Searches for new student benefits, opens issues for the best finds |
 | `discover-events.yml` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens one PR |
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
+| `scout-reddit.yml` | Weekly (Friday) or manual | Scouts Reddit (`site:reddit.com` searches) for benefit mentions (`MODE=discover`) and posting opportunities (`MODE=scout`, → Discord via the `DISCORD_WEBHOOK_URL` secret). State in `agent/state/reddit-state.json`; `DRY_RUN=true` skips writes and the webhook. |
+| `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
 
 Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
 
 When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
+
+No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-event) both fire on any label event and the non-matching one skips correctly. Revisit a dispatcher at 3+ label-triggered workflows.
+
+### Agent state files
+
+Workflows write these; `agent/index.html` reads them to render run history. Never hand-edit — they're regenerated each run.
+
+- `agent/state/last-run.json` — last add-benefit run
+- `agent/state/last-events-submission.json` — last add-event run
+- `agent/state/last-events-discovery.json` — last discover-events run
+- `agent/state/reddit-state.json` — reddit scout state (processed post IDs, subreddit scores, counters)
+- `agent/state/rejected.json` — rejected programs, used for deduplication by add-benefit and scout-reddit
 
 ---
 
