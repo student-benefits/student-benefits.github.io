@@ -124,6 +124,14 @@ When adding a new issue template that introduces a new label, create the GitHub 
 
 ## PR review checklist
 
+`scripts/validate_data.py` (run in CI by `validate-data.yml` on any PR touching
+the data files) enforces the structural rules below automatically: schema,
+`id`/`category`/`offer_type` validity, ≤120-char descriptions, canonical
+formatting, and the forbidden-link rule (no `help.`/`support.`/`docs.`/`blog.`
+subdomains, `/articles/` paths, or bare homepages). A red check means the data
+is invalid — don't merge. The remaining items below still need a human eye
+(liveness, duplicates, whether the link is genuinely the signup page).
+
 When reviewing PRs (especially those created by the add-benefit workflow):
 
 - [ ] `id` is unique, URL-safe, matches the name

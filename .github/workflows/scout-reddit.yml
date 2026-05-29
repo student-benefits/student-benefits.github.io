@@ -36,7 +36,7 @@ jobs:
           DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,Write,Read,WebSearch,WebFetch,Bash(curl:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,Write,Read,WebSearch,WebFetch,Bash(curl:*)'"
           prompt: |
             You scout Reddit weekly for student-benefit signal. Two modes (controlled by env vars):
             - `MODE=discover` — find new student benefits mentioned in Reddit posts (so the maintainer can add them)

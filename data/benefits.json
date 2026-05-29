@@ -303,7 +303,7 @@
     "category": "Lifestyle",
     "offer_type": "discount",
     "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
-    "link": "https://www.myunidays.com/",
+    "link": "https://www.myunidays.com/US/en-US/account/register",
     "tags": [
       "Discounts",
       "Shopping"
@@ -428,7 +428,7 @@
     "category": "Productivity",
     "offer_type": "discount",
     "description": "50-75% off Loom for verified students and educators. Unlimited recordings, HD quality, and full editing tools.",
-    "link": "https://support.atlassian.com/loom/docs/education-plan-faq/",
+    "link": "https://www.loom.com/use-case/education",
     "tags": [
       "Video",
       "Recording",
@@ -456,7 +456,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
-    "link": "https://skillsbuild.org/",
+    "link": "https://skillsbuild.org/students",
     "tags": [
       "Courses",
       "Certifications",
@@ -511,7 +511,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Team plan for 6-24 months. Instant 120-day trial with .edu email, then apply for extended access.",
-    "link": "https://support.airtable.com/docs/nonprofit-and-educational-plans-faqs",
+    "link": "https://www.airtable.com/solutions/education",
     "tags": [
       "Database",
       "No-Code",
@@ -525,7 +525,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://help.hackthebox.com/en/articles/13465244-getting-the-student-subscription",
+    "link": "https://academy.hackthebox.com/login",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -637,7 +637,7 @@
     "category": "Cloud & Hosting",
     "offer_type": "free",
     "description": "Free RHEL subscription for up to 16 systems. Full access to updates and self-service support. Renewable annually.",
-    "link": "https://developers.redhat.com/",
+    "link": "https://developers.redhat.com/register",
     "tags": [
       "Linux",
       "Enterprise",
