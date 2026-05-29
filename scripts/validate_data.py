@@ -22,7 +22,6 @@ DATA = ROOT / "data"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 OFFER_TYPES = {"free", "discount", "credits", "trial"}
-EVENT_CATEGORIES = {"hackathon", "conference", "fellowship", "summit", "workshop", "grant"}
 # subdomains/paths that are documentation, not signup destinations (see PR #197)
 FORBIDDEN_SUBDOMAINS = ("help.", "support.", "docs.", "blog.")
 FORBIDDEN_PATH = "/articles/"
@@ -102,6 +101,7 @@ def validate_events() -> None:
     if not isinstance(data, list):
         err("events.json: top-level must be a list")
         return
+    categories = set(json.loads((DATA / "event-categories.json").read_text(encoding="utf-8")))
     seen_ids: set[str] = set()
     dates: list[str] = []
     for i, e in enumerate(data):
@@ -116,8 +116,8 @@ def validate_events() -> None:
             if eid in seen_ids:
                 err(f"{name}: duplicate id '{eid}'")
             seen_ids.add(eid)
-        if e.get("category") not in EVENT_CATEGORIES:
-            err(f"{name}: category '{e.get('category')}' not one of {sorted(EVENT_CATEGORIES)}")
+        if e.get("category") not in categories:
+            err(f"{name}: category '{e.get('category')}' not in event-categories.json")
         if len(e.get("why", "")) > 200:
             err(f"{name}: why is {len(e.get('why',''))} chars (max 200)")
         for dk in ("date", "date_end", "expires"):
