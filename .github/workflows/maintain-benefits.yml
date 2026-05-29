@@ -23,7 +23,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
           prompt: |
             You audit every entry in `data/benefits.json` for link health and quality, fix every finding you can, and open a single PR. Findings go directly to a PR — you don't open issues.
 
@@ -53,6 +53,8 @@ jobs:
             ## Step 4: Fix each finding
 
             **Broken/redirected**: WebSearch `"{name}" student discount signup`, WebFetch top result. If valid student page found → update `link`. If program no longer offers a student program → remove the entry. Redirect destinations that are valid → update `link`; otherwise treat as broken.
+
+            Any replacement `link` you choose MUST also pass the Step 3 rule #2 structure check — never a `help.`/`support.`/`docs.`/`blog.` subdomain, a `/articles/` path, or a bare homepage (`/` or `/home`), even if it's the top search result. If the only result is a help/docs article, keep searching for the program's own signup/pricing/overview page. A broken link is no excuse to introduce a forbidden one.
 
             **Quality flags**:
             - **Direct signup link**: WebSearch for the direct student signup page; update `link` if found.

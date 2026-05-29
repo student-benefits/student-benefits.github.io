@@ -1,0 +1,26 @@
+name: Validate Data
+
+on:
+  pull_request:
+    paths:
+      - 'data/benefits.json'
+      - 'data/events.json'
+      - 'data/categories.json'
+      - 'scripts/validate_data.py'
+  push:
+    branches: [main]
+    paths:
+      - 'data/benefits.json'
+      - 'data/events.json'
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate benefits.json and events.json
+        run: python3 scripts/validate_data.py
