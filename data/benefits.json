@@ -930,5 +930,62 @@
       "Motion Design"
     ],
     "popularity": 5
+  },
+  {
+    "id": "datadog",
+    "name": "Datadog",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro for 2 years. Monitor 10 hosts, 500 GB logs, 1,000 browser tests, 15-month data retention.",
+    "link": "https://studentpack.datadoghq.com/signup",
+    "tags": [
+      "Monitoring",
+      "Observability",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "codecov",
+    "name": "Codecov",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free code coverage forever on public and private repositories. Included in GitHub Student Pack.",
+    "link": "https://about.codecov.io/solution/students",
+    "tags": [
+      "Code Coverage",
+      "Testing",
+      "CI/CD",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "sentry",
+    "name": "Sentry",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year education plan with 50K errors/month, unlimited team members, and AI debugging.",
+    "link": "https://sentry.io/for/education",
+    "tags": [
+      "Error Tracking",
+      "Monitoring",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "bootstrap-studio",
+    "name": "Bootstrap Studio",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free desktop app license for building responsive Bootstrap websites while enrolled.",
+    "link": "https://bootstrapstudio.io/students",
+    "tags": [
+      "Web Design",
+      "Bootstrap",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
