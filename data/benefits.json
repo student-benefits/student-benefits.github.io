@@ -105,7 +105,7 @@
     "category": "Cloud & Hosting",
     "offer_type": "credits",
     "description": "$200 in credits valid for 1 year via GitHub Student Pack. Deploy droplets, databases, and Kubernetes clusters.",
-    "link": "https://www.digitalocean.com/github-students",
+    "link": "https://education.github.com/pack",
     "tags": [
       "Cloud",
       "VPS",
@@ -147,7 +147,7 @@
     "name": "Heroku",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
-    "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
+    "description": "$13/month platform credit for 24 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
     "tags": [
       "PaaS",
@@ -651,7 +651,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Join 2,100+ campus clubs for workshops, networking, and Google Solution Challenge. Free resources and community.",
-    "link": "https://developers.google.com/community/gdsc",
+    "link": "https://gdg.community.dev/",
     "tags": [
       "Google",
       "Community",
