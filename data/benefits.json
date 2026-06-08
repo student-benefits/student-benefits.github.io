@@ -987,5 +987,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "stripe",
+    "name": "Stripe",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Waived transaction fees on first $1,000 in revenue processed.",
+    "link": "https://education.github.com/pack/redeem/stripe-student",
+    "tags": [
+      "Payments",
+      "Dev Tools",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
