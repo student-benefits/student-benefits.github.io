@@ -987,5 +987,20 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "popsql",
+    "name": "PopSQL",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Business plan — SQL editor with dashboards, scheduled queries, and connections to BigQuery, Snowflake, and more.",
+    "link": "https://popsql.com/github-students",
+    "tags": [
+      "SQL",
+      "Database",
+      "GitHub Student Pack",
+      "Collaboration"
+    ],
+    "popularity": 5
   }
 ]

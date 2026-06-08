@@ -1,25 +1,12 @@
 {
-  "issue": 205,
-  "title": "datadog",
-  "timestamp": "2026-05-25T00:00:00Z",
+  "issue": 227,
+  "title": "popsql",
+  "timestamp": "2026-06-08T17:32:02Z",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Datadog student program GitHub Student Developer Pack"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://www.datadoghq.com/blog/datadog-github-student-developer-pack/"
-    },
-    {
-      "name": "edit",
-      "summary": "Added Datadog entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "PopSQL student discount GitHub Student Pack" },
+    { "name": "webfetch", "url": "https://popsql.com/github-students" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "Datadog",
-    "category": "Dev Tools",
-    "description": "Free Pro for 2 years. Monitor 10 hosts, 500 GB logs, 1,000 browser tests, 15-month data retention."
-  }
+  "benefit": { "name": "PopSQL", "category": "Dev Tools", "description": "Free Business plan — SQL editor with dashboards, scheduled queries, and connections to BigQuery, Snowflake, and more." }
 }
