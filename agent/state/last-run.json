@@ -1,25 +1,12 @@
 {
-  "issue": 205,
-  "title": "datadog",
-  "timestamp": "2026-05-25T00:00:00Z",
+  "issue": 228,
+  "title": "travis ci",
+  "timestamp": "2026-06-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Datadog student program GitHub Student Developer Pack"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://www.datadoghq.com/blog/datadog-github-student-developer-pack/"
-    },
-    {
-      "name": "edit",
-      "summary": "Added Datadog entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "Travis CI student discount GitHub Student Developer Pack education program 2026" },
+    { "name": "webfetch", "url": "https://www.travis-ci.com/education/" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "Datadog",
-    "category": "Dev Tools",
-    "description": "Free Pro for 2 years. Monitor 10 hosts, 500 GB logs, 1,000 browser tests, 15-month data retention."
-  }
+  "benefit": { "name": "Travis CI", "category": "Dev Tools", "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack." }
 }
