@@ -987,5 +987,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "adafruit",
+    "name": "Adafruit",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year Adafruit IO+ membership and 30% off select Circuit Playground hardware.",
+    "link": "https://www.adafruit.com/github-students",
+    "tags": [
+      "Hardware",
+      "IoT",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]

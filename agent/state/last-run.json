@@ -1,25 +1,25 @@
 {
-  "issue": 205,
-  "title": "datadog",
-  "timestamp": "2026-05-25T00:00:00Z",
+  "issue": 225,
+  "title": "adafruit",
+  "timestamp": "2026-06-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
     {
       "name": "websearch",
-      "query": "Datadog student program GitHub Student Developer Pack"
+      "query": "Adafruit GitHub Student Pack education discount 2026"
     },
     {
       "name": "webfetch",
-      "url": "https://www.datadoghq.com/blog/datadog-github-student-developer-pack/"
+      "url": "https://www.adafruit.com/github-students"
     },
     {
       "name": "edit",
-      "summary": "Added Datadog entry to data/benefits.json"
+      "summary": "Added entry to data/benefits.json"
     }
   ],
   "benefit": {
-    "name": "Datadog",
+    "name": "Adafruit",
     "category": "Dev Tools",
-    "description": "Free Pro for 2 years. Monitor 10 hosts, 500 GB logs, 1,000 browser tests, 15-month data retention."
+    "description": "Free 1-year Adafruit IO+ membership and 30% off select Circuit Playground hardware."
   }
 }
