@@ -66,9 +66,9 @@
         </div>
 
         <div class="arch-node-wrap arch-node-wrap--stacked">
-          <button class="arch-node arch-node--tavily" id="node-tavily" aria-expanded="false" aria-controls="panel-tavily">
-            <span class="arch-node-label">Tavily</span>
-            <span class="arch-node-sublabel">web search</span>
+          <button class="arch-node arch-node--web" id="node-search" aria-expanded="false" aria-controls="panel-search">
+            <span class="arch-node-label">Web Search</span>
+            <span class="arch-node-sublabel">live results</span>
           </button>
           <button class="arch-node arch-node--web" id="node-web" aria-expanded="false" aria-controls="panel-web">
             <span class="arch-node-label">Web Fetch</span>
@@ -117,13 +117,13 @@
           <p class="node-panel-title">Grant · Claude Sonnet 4.6</p>
           <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome without human approval of intermediate steps. Its output depends on the workflow and the outcome — a PR, a comment, a closed issue, or a combination. Its instructions are a Markdown file checked into this repository.</p>
         </div>
-        <div id="panel-tavily" class="node-panel" hidden>
-          <p class="node-panel-title">Tavily Search</p>
-          <p>A search API built for AI agents. Grant calls it to verify whether a student program exists by searching the live web beyond its training data. Tavily returns structured results Grant can reason over directly.</p>
+        <div id="panel-search" class="node-panel" hidden>
+          <p class="node-panel-title">Web Search</p>
+          <p>Claude Code’s built-in <code>WebSearch</code> tool. Grant calls it to verify whether a student program exists by searching the live web beyond its training data, returning candidate results Grant can reason over directly.</p>
         </div>
         <div id="panel-web" class="node-panel" hidden>
           <p class="node-panel-title">Web Fetch</p>
-          <p>After Tavily returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only. No forms submitted, no side effects.</p>
+          <p>Claude Code’s built-in <code>WebFetch</code> tool. After Web Search returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. Read-only. No forms submitted, no side effects.</p>
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Output</p>
@@ -131,7 +131,7 @@
         </div>
         <div id="panel-human" class="node-panel" hidden>
           <p class="node-panel-title">Human Reviewer</p>
-          <p>Grant cannot merge its own pull requests. Its <code>safe-outputs</code> configuration restricts it to commenting, opening PRs, and closing issues — no write access to <code>main</code>. Grant handles correctness (format, links, duplicates); the reviewer exercises judgment (editorial fit, quality).</p>
+          <p>Grant cannot merge its own pull requests. Each workflow runs with a scoped GitHub Actions <code>permissions:</code> block (<code>contents</code>, <code>issues</code>, <code>pull-requests</code>) — enough to commit to a branch, open a PR, and comment, but not to merge. The merge itself is gated by <code>CODEOWNERS</code> and branch protection, so it stays a human decision. Grant handles correctness (format, links, duplicates); the reviewer exercises judgment (editorial fit, quality).</p>
         </div>
       </div>
     </div>
@@ -175,7 +175,7 @@
     <div class="prop-detail-slot">
       <div id="ppanel-tool" class="node-panel" hidden>
         <p class="node-panel-title">Tool use</p>
-        <p>An agent selects tools based on what it finds, not a fixed sequence. Grant calls GitHub, Tavily, and web fetch in an order that varies with every submission.</p>
+        <p>An agent selects tools based on what it finds, not a fixed sequence. Grant calls GitHub, web search, and web fetch in an order that varies with every submission.</p>
       </div>
       <div id="ppanel-decision" class="node-panel" hidden>
         <p class="node-panel-title">Decision-making</p>

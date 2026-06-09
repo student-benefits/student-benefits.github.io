@@ -6,15 +6,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Just tell us about the event — be as brief or detailed as you like.**
-
-        Our AI will find the event page, verify the details, and extract everything it needs. You don't need to fill in dates or categories — just point us to it.
+        **Name the event — a few words is enough.** Grant finds the page and verifies dates, category, and details.
 
   - type: textarea
     id: description
     attributes:
       label: What's the event?
-      description: Describe it however you want — a name, a sentence, or a detailed explanation all work.
+      description: A name or a full description — both work.
       placeholder: |
         Examples of valid submissions:
 
