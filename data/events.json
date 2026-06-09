@@ -39,34 +39,6 @@
     "expires": "2026-06-30"
   },
   {
-    "id": "google-io-2026",
-    "name": "Google I/O 2026",
-    "organizer": "Google",
-    "category": "conference",
-    "date": "2026-05-19",
-    "date_end": "2026-05-20",
-    "location": "Mountain View, CA",
-    "remote": false,
-    "eligibility": "Open to all; online attendance is free",
-    "why": "Google's flagship developer conference — free online stream. New APIs and SDKs are announced here first, before documentation catches up.",
-    "link": "https://io.google/2026/",
-    "expires": "2026-05-20"
-  },
-  {
-    "id": "quackhacks-3-2026",
-    "name": "QuackHacks 3",
-    "organizer": "University of Oregon / Major League Hacking",
-    "category": "hackathon",
-    "date": "2026-05-30",
-    "date_end": "2026-05-31",
-    "location": "Eugene, Oregon",
-    "remote": false,
-    "eligibility": "Students worldwide, teams welcome",
-    "why": "Oregon's largest hackathon with $10K+ in prizes. 24-hour build with Google sponsorship, mentorship, and travel reimbursement. Strong track record for launching student projects.",
-    "link": "https://www.quackhacks.org/",
-    "expires": "2026-05-31"
-  },
-  {
     "id": "mcw-young-leaders-fellowship-2026",
     "name": "MCW Global Young Leaders Fellowship 2026",
     "organizer": "MCW Global (Miracle Corners of the World)",

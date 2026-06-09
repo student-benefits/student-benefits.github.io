@@ -1,5 +1,14 @@
 name: Scout Reddit
 
+# Falsifiability (per the "running systems" convention — criterion is contract, cycle history is the Actions run log).
+#   Working-when: each scheduled (non-dry-run) run rewrites `agent/state/reddit-state.json` with a fresh `last_run`
+#     timestamp and pushes it (the "Commit state changes" step) — the always-present dated heartbeat. NOT a
+#     discoveries/opportunities count: a quiet week (no new posts, nothing sent to Discord) is healthy iff `last_run`
+#     still advances. A `last_run` that doesn't move week-over-week = the cron silently isn't firing/committing → broken,
+#     not empty. (As of this writing `last_run` is months stale — exactly the silent-cron failure to verify.)
+#   Teardown after N: 8 weekly cycles (~2 months). If `last_run` never advances across 8 consecutive Fridays, the
+#     Reddit-signal thesis is wrong → remove this workflow. (N is Jonas's to tune.)
+
 on:
   schedule:
     # Friday 14:00 UTC — catches posts from the week, leaves weekend to act
