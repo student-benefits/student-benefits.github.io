@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-05-20T17:01:19Z",
+  "timestamp": "2026-06-03T00:00:00Z",
   "known_sources_checked": [
-    "https://ycombinator.com/",
-    "https://www.mlh.com/seasons/2026/events",
+    "https://events.ycombinator.com",
+    "https://mlh.io/seasons/2026/events",
     "https://a16z.com/programs",
     "https://www.anthropic.com/news",
     "https://openai.com/news",
@@ -17,25 +17,26 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "midnight-hackathon-may-2026"
+    "google-io-2026",
+    "quackhacks-3-2026"
   ],
   "discovered": [
     {
-      "name": "START Hack 2026",
-      "date": "2026-03-18",
-      "link": "https://starthack.eu/#/register",
+      "name": "Breakthrough Junior Challenge 2026",
+      "date": "2026-05-11",
+      "link": "https://breakthroughjuniorchallenge.org/enter",
       "source": "keyword"
     },
     {
-      "name": "IIM Ahmedabad AI Summer Residency 2026",
-      "date": "2026-05-07",
-      "link": "https://gp12pzj7qtu.typeform.com/ai-residency",
-      "source": "keyword"
+      "name": "HackMIT 2026",
+      "date": "2026-09-16",
+      "link": "https://hackmit.org/",
+      "source": "known-source"
     },
     {
-      "name": "AI Hackathon 2026",
-      "date": "2026-06-20",
-      "link": "https://hive.hackberkeley.org",
+      "name": "MHacks 2026",
+      "date": "2026-09-20",
+      "link": "https://www.mhacks.org/",
       "source": "keyword"
     }
   ],
