@@ -990,6 +990,63 @@
     "popularity": 5
   },
   {
+    "id": "tower",
+    "name": "Tower",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Tower Pro Git client for 12 months, renewable annually while enrolled. No credit card required.",
+    "link": "https://www.git-tower.com/students",
+    "tags": [
+      "Git",
+      "GitHub Student Pack",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "arduino-cloud",
+    "name": "Arduino Cloud",
+    "category": "Dev Tools",
+    "offer_type": "trial",
+    "description": "Free 6-month Arduino Cloud Maker Plan plus hardware discounts (25–50% off select boards) via GitHub Student Pack.",
+    "link": "https://www.arduino.cc/github/students",
+    "tags": [
+      "IoT",
+      "Hardware",
+      "Cloud",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "clerk",
+    "name": "Clerk",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro plan until graduation ($240/yr value) — 50K MAUs, MFA, SSO, and Organizations.",
+    "link": "https://clerk.com/github-student-developer-pack",
+    "tags": [
+      "Authentication",
+      "Identity",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "adafruit",
+    "name": "Adafruit",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year Adafruit IO+ membership and 30% off select Circuit Playground hardware.",
+    "link": "https://www.adafruit.com/github-students",
+    "tags": [
+      "Hardware",
+      "IoT",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "popsql",
     "name": "PopSQL",
     "category": "Dev Tools",
