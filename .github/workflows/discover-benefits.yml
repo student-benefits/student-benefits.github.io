@@ -1,5 +1,13 @@
 name: Discover Student Benefits
 
+# Falsifiability (per the "running systems" convention — criterion is contract, cycle history is the Actions run log).
+#   Working-when: each scheduled run COMPLETES and leaves a positive trace of having looked — either ≥1 `new-benefit`
+#     issue opened, OR `agent/state/last-benefits-discovery.json` rewritten with a fresh `timestamp` (the dated "searched,
+#     nothing met the bar" heartbeat). NOT a found-count: silence-by-design (a dry week) is healthy iff the heartbeat moves.
+#     A run that opens nothing AND doesn't bump the timestamp = the cron silently isn't firing/committing → broken, not empty.
+#   Teardown after N: 8 weekly cycles (~2 months). If working-when is unmet for 8 consecutive Mondays (timestamp never
+#     advances / Actions shows no scheduled runs), the discovery thesis is wrong → remove this workflow. (N is Jonas's to tune.)
+
 on:
   schedule:
     - cron: '0 14 * * 1'  # Monday 14:00 UTC

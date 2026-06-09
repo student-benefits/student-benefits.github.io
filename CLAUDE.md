@@ -125,6 +125,19 @@ When adding a new issue template that introduces a new label, create the GitHub 
 
 No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-event) both fire on any label event and the non-matching one skips correctly. Revisit a dispatcher at 3+ label-triggered workflows.
 
+### Falsifiability (scheduled workflows)
+
+Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some weeks, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 weekly cycles (~2 months)** for each; Jonas's to tune.
+
+| Workflow | Working-when (positive trace) | N |
+|---|---|---|
+| `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 8 wk |
+| `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 8 wk |
+| `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
+| `scout-reddit` | `reddit-state.json` `last_run` advances (committed by the push step) | 8 wk |
+
+**The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. This is live: `agent/state/last-benefits-discovery.json` is **absent** (discover-benefits appears to have never committed) and `reddit-state.json` `last_run` is **months stale** (~2026-03) — the exact silent-cron failure. So **verify each working-when against the live Actions run history before trusting any "stays current automatically" claim** (the Core-values "keeps itself current" line is unverified until the run log confirms scheduled runs are firing). A missing/stale state file is the alarm, not noise.
+
 ### Agent state files
 
 Workflows write these; `agent/index.html` reads them to render run history. Never hand-edit — they're regenerated each run.
