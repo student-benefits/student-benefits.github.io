@@ -36,6 +36,12 @@ and architecture. The seams are visible by design so the system can be
 understood and replicated. When working on this project, preserve that
 transparency: keep workflows documented, keep the agent page accurate.
 
+**Impersonal, dense docs.** No personal name or narrative voice in docs, context,
+or agent surfaces. Maintainer identity lives once, in CODEOWNERS — reference it as
+"the maintainer", never a restated handle. Functional handles are excepted (the
+CODEOWNERS list itself, the @-mention that triggers a notification, the LICENSE
+legal name). Maximize meaning per token: cut hedging, restatement, ceremony.
+
 Keep `agent/index.html` in sync with Grant's behavior — workflow logic,
 validation rules, schema, trigger conditions. Mismatch is a bug.
 
@@ -117,12 +123,26 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
 | `scout-reddit.yml` | Weekly (Friday) or manual | Scouts Reddit (`site:reddit.com` searches) for benefit mentions (`MODE=discover`) and posting opportunities (`MODE=scout`, → Discord via the `DISCORD_WEBHOOK_URL` secret). State in `agent/state/reddit-state.json`; `DRY_RUN=true` skips writes and the webhook. |
 | `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
+| `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, @-mentions the maintainer (from CODEOWNERS) and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict but gates only on CI; never merges. Deterministic — no LLM. |
 
 Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
 
 When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
 
 No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-event) both fire on any label event and the non-matching one skips correctly. Revisit a dispatcher at 3+ label-triggered workflows.
+
+### Falsifiability (scheduled workflows)
+
+Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some weeks, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 weekly cycles (~2 months)**, adjustable per workflow.
+
+| Workflow | Working-when (positive trace) | N |
+|---|---|---|
+| `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 8 wk |
+| `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 8 wk |
+| `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
+| `scout-reddit` | `reddit-state.json` `last_run` advances (committed by the push step) | 8 wk |
+
+**The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. This is live: `agent/state/last-benefits-discovery.json` is **absent** (discover-benefits appears to have never committed) and `reddit-state.json` `last_run` is **months stale** (~2026-03) — the exact silent-cron failure. So **verify each working-when against the live Actions run history before trusting any "stays current automatically" claim** (the Core-values "keeps itself current" line is unverified until the run log confirms scheduled runs are firing). A missing/stale state file is the alarm, not noise.
 
 ### Agent state files
 
@@ -176,8 +196,8 @@ gh workflow run maintain-benefits.yml --repo student-benefits/student-benefits.g
 - All changes go through PRs — never push directly to `main`
 - PRs must have a written Summary (not just a template placeholder)
 - GitHub Pages serves the site directly from the `main` branch root
-- Every PR automatically requests review from @jonasneves (via CODEOWNERS)
-- Branch protection requires @jonasneves approval before any PR can merge
+- Every PR automatically requests review from the maintainer (via CODEOWNERS)
+- Branch protection requires maintainer approval (CODEOWNERS) before any PR can merge
 
 ---
 

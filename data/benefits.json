@@ -100,20 +100,6 @@
     "popularity": 9
   },
   {
-    "id": "digitalocean",
-    "name": "DigitalOcean",
-    "category": "Cloud & Hosting",
-    "offer_type": "credits",
-    "description": "$200 in credits valid for 1 year via GitHub Student Pack. Deploy droplets, databases, and Kubernetes clusters.",
-    "link": "https://www.digitalocean.com/github-students",
-    "tags": [
-      "Cloud",
-      "VPS",
-      "Hosting"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "aws-educate",
     "name": "AWS Educate",
     "category": "Cloud & Hosting",
@@ -147,7 +133,7 @@
     "name": "Heroku",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
-    "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
+    "description": "$13/month platform credit for 24 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
     "tags": [
       "PaaS",
@@ -204,7 +190,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
-    "link": "https://www.notion.com/product/notion-for-education",
+    "link": "https://www.notion.so/product/notion-for-education",
     "tags": [
       "Notes",
       "Planning",
@@ -525,7 +511,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://academy.hackthebox.com/login",
+    "link": "https://academy.hackthebox.com/billing",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -595,7 +581,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Starter plan via Goodstack verification. Project management with timelines, boards, and team collaboration.",
-    "link": "https://asana.com/industry/students",
+    "link": "https://asana.com/industry/education",
     "tags": [
       "Project Management",
       "Tasks",
@@ -644,20 +630,6 @@
       "DevOps"
     ],
     "popularity": 6
-  },
-  {
-    "id": "google-student-clubs",
-    "name": "Google Developer Student Clubs",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Join 2,100+ campus clubs for workshops, networking, and Google Solution Challenge. Free resources and community.",
-    "link": "https://developers.google.com/community/gdsc",
-    "tags": [
-      "Google",
-      "Community",
-      "Events"
-    ],
-    "popularity": 7
   },
   {
     "id": "termius-pro",
@@ -987,6 +959,21 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "adobe-creative-cloud",
+    "name": "Adobe Creative Cloud",
+    "category": "Design",
+    "offer_type": "discount",
+    "description": "60%+ off 20+ apps including Photoshop, Illustrator, and Premiere. $19.99/month for the first year.",
+    "link": "https://www.adobe.com/creativecloud/buy/students.html",
+    "tags": [
+      "Design",
+      "Photography",
+      "Video",
+      "Creative"
+    ],
+    "popularity": 9
   },
   {
     "id": "popsql",
