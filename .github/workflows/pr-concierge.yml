@@ -1,10 +1,11 @@
 name: PR Concierge
 
-# Once-daily sweep of open PRs. When a PR has crossed "ready" — required checks
-# green AND any bot review (e.g. Copilot) is in — it posts a single @-mention
-# comment so the maintainer can make the merge call, then labels the PR
-# `ready-for-review` so it is never pinged twice. Deterministic: no LLM, no token
-# cost. The merge itself stays a human decision (the trust boundary).
+# Once-daily sweep of open PRs. When a PR's required checks are green it posts a
+# single @-mention comment so the maintainer can make the merge call, then labels
+# the PR `ready-for-review` so it is never pinged twice. Any bot review (e.g.
+# Copilot) is surfaced in the comment for context but does NOT gate the ping —
+# CI is the only gate. Deterministic: no LLM, no token cost. The merge itself
+# stays a human decision (the trust boundary).
 
 on:
   schedule:
@@ -36,7 +37,7 @@ jobs:
           gh label create ready-for-review \
             --repo "$GITHUB_REPOSITORY" \
             --color 0E8A16 \
-            --description "CI green + bot-reviewed; awaiting maintainer merge" \
+            --description "CI green; flagged by PR Concierge, awaiting maintainer merge" \
             --force
 
       - name: Sweep open PRs and flag the ready ones
@@ -50,7 +51,7 @@ jobs:
           # handled. An empty rollup (PRs touching no checked paths) is CI-clear,
           # not a block. Copilot's verdict is surfaced for context but never gates
           # the ping (it sometimes errors), so a green PR is never stuck on it.
-          ready=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+          ready=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --limit 200 \
             --json number,title,isDraft,author,labels,statusCheckRollup,reviews \
             | jq -c '
               def copilot:
@@ -75,10 +76,11 @@ jobs:
                   cilabel: (if ((.statusCheckRollup // []) | length) == 0
                             then "no CI checks" else "checks ✓" end),
                   copilot: ( copilot as $r
+                    | ($r.body // "") as $b   # body can be null; coercing avoids a test() throw
                     | if   $r == null then "not reviewed yet"
-                      elif ($r.body | test("encountered an error")) then "errored — review manually"
-                      elif ($r.body | test("generated [0-9]+ comment"))
-                        then ($r.body | capture("generated (?<n>[0-9]+) comment").n + " comment(s)")
+                      elif ($b | test("encountered an error")) then "errored — review manually"
+                      elif ($b | test("generated [0-9]+ comment"))
+                        then ($b | capture("generated (?<n>[0-9]+) comment").n + " comment(s)")
                       else "reviewed" end ) }
               | select(.ci == "ok")
             ')
