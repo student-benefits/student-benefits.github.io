@@ -1,16 +1,15 @@
 {
-  "issue": 226,
-  "title": "adobe creative cloud",
-  "timestamp": "2026-06-08T00:00:00Z",
+  "issue": 215,
+  "title": "namecheap",
+  "timestamp": "2026-06-01T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Adobe Creative Cloud student discount 2026 pricing" },
-    { "name": "webfetch", "url": "https://www.adobe.com/creativecloud/buy/students.html" },
+    { "name": "webfetch", "url": "https://nc.me/landing/github" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
   "benefit": {
-    "name": "Adobe Creative Cloud",
-    "category": "Design",
-    "description": "60%+ off 20+ apps including Photoshop, Illustrator, and Premiere. $19.99/month for the first year."
+    "name": "Namecheap",
+    "category": "Cloud & Hosting",
+    "description": "Free .me domain and SSL certificate for 1 year via GitHub Student Pack."
   }
 }
