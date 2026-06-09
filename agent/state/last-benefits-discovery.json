@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-06-08T17:30:42Z",
+  "known_sources_checked": [
+    "https://education.github.com/pack/offers",
+    "https://www.jetbrains.com/community/education/",
+    "https://buildyourfuture.withgoogle.com/programs",
+    "https://www.microsoft.com/en-us/education",
+    "https://aws.amazon.com/education/awseducate/",
+    "https://www.figma.com/education/",
+    "https://www.notion.so/product/notion-for-education",
+    "https://www.canva.com/education/",
+    "https://www.autodesk.com/education/edu-software/overview"
+  ],
+  "keyword_queries": [
+    "\"student plan\" OR \"education plan\" developer tools software 2026 free",
+    "\"free for students\" OR \"academic license\" AI tools cloud 2026",
+    "productivity OR domains student discount OR \"free for students\" 2026",
+    "student grant OR credits developer tools 2026 apply individual",
+    "site:reddit.com \"free for students\" software tools list 2026",
+    "site:reddit.com \"student discount\" developer OR design tools 2026"
+  ],
+  "discovered": [
+    {
+      "name": "Adafruit",
+      "link": "https://www.adafruit.com/github-students",
+      "source": "known-source"
+    },
+    {
+      "name": "Adobe Creative Cloud",
+      "link": "https://www.adobe.com/creativecloud/buy/students.html",
+      "source": "keyword"
+    },
+    {
+      "name": "PopSQL",
+      "link": "https://popsql.com/github-students",
+      "source": "known-source"
+    },
+    {
+      "name": "Travis CI",
+      "link": "https://www.travis-ci.com/education/",
+      "source": "known-source"
+    },
+    {
+      "name": "Stripe",
+      "link": "https://education.github.com/pack/redeem/stripe-student",
+      "source": "known-source"
+    }
+  ],
+  "issues_created": 5
+}

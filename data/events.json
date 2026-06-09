@@ -39,6 +39,19 @@
     "expires": "2026-06-30"
   },
   {
+    "id": "breakthrough-junior-challenge-2026",
+    "name": "Breakthrough Junior Challenge 2026",
+    "organizer": "Breakthrough Prize Foundation",
+    "category": "grant",
+    "date": "2026-05-11",
+    "date_end": "2026-09-15",
+    "remote": true,
+    "eligibility": "Students ages 13–18 worldwide; submit a 2-minute video explaining a concept in physics, life sciences, or mathematics",
+    "why": "$250,000 post-secondary scholarship, a $50k teacher prize, and a $100k school lab for the best 2-minute science video. No lab or team required; open now through September 15.",
+    "link": "https://breakthroughjuniorchallenge.org/enter",
+    "expires": "2026-09-15"
+  },
+  {
     "id": "mcw-young-leaders-fellowship-2026",
     "name": "MCW Global Young Leaders Fellowship 2026",
     "organizer": "MCW Global (Miracle Corners of the World)",
@@ -215,6 +228,34 @@
     "why": "Full scholarships covering travel, hotel, and registration. Career fair access to Google, Microsoft, and Meta engineers that is difficult to replicate any other way.",
     "link": "https://tapiaconference.cmd-it.org/registration/",
     "expires": "2026-09-18"
+  },
+  {
+    "id": "hackmit-2026",
+    "name": "HackMIT 2026",
+    "organizer": "HackMIT / MIT",
+    "category": "hackathon",
+    "date": "2026-09-16",
+    "date_end": "2026-09-17",
+    "location": "Cambridge, MA",
+    "remote": false,
+    "eligibility": "Undergraduate and graduate students from any university worldwide; applications open in August",
+    "why": "MIT's flagship 24-hour hackathon with 1,000+ college hackers. Sponsor challenges include cash prizes and direct internship and full-time interview pipelines at top tech companies.",
+    "link": "https://hackmit.org/",
+    "expires": "2026-09-17"
+  },
+  {
+    "id": "mhacks-2026",
+    "name": "MHacks 2026",
+    "organizer": "Michigan Hackers / University of Michigan",
+    "category": "hackathon",
+    "date": "2026-09-20",
+    "date_end": "2026-09-22",
+    "location": "Ann Arbor, MI",
+    "remote": false,
+    "eligibility": "Students currently enrolled in or recently left any high school, college, or university worldwide",
+    "why": "$30,000+ in prizes at one of the world's largest collegiate hackathons. 1,000+ hackers from 100+ universities over 36 hours with strong alumni-to-company placement track record.",
+    "link": "https://www.mhacks.org/",
+    "expires": "2026-09-22"
   },
   {
     "id": "ethglobal-tokyo-2026",
