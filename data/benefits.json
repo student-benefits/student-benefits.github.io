@@ -1002,5 +1002,20 @@
       "Dev Tools"
     ],
     "popularity": 5
+  },
+  {
+    "id": "arduino-cloud",
+    "name": "Arduino Cloud",
+    "category": "Dev Tools",
+    "offer_type": "trial",
+    "description": "Free 6-month Arduino Cloud Maker Plan plus hardware discounts (25–50% off select boards) via GitHub Student Pack.",
+    "link": "https://www.arduino.cc/github/students",
+    "tags": [
+      "IoT",
+      "Hardware",
+      "Cloud",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]
