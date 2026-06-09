@@ -133,7 +133,7 @@
     "name": "Heroku",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
-    "description": "$13/month platform credit for 12 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
+    "description": "$13/month platform credit for 24 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
     "link": "https://www.heroku.com/github-students",
     "tags": [
       "PaaS",
