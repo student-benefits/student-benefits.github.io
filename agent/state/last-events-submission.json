@@ -5,7 +5,7 @@
   "outcome": "accepted",
   "tools": [
     { "name": "github-issue_read", "summary": "Read issue #112" },
-    { "name": "tavily_search", "query": "Paul Daisy Soros Fellowship New Americans application 2026 2027" },
+    { "name": "websearch", "query": "Paul Daisy Soros Fellowship New Americans application 2026 2027" },
     { "name": "web_fetch", "url": "https://pdsoros.org/" },
     { "name": "web_fetch", "url": "https://pdsoros.org/application-process/" },
     { "name": "edit", "summary": "Added entry to events.json" }
