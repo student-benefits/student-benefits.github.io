@@ -1,12 +1,25 @@
 {
-  "issue": 227,
-  "title": "popsql",
-  "timestamp": "2026-06-08T17:32:02Z",
+  "issue": 229,
+  "title": "stripe",
+  "timestamp": "2026-06-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "PopSQL student discount GitHub Student Pack" },
-    { "name": "webfetch", "url": "https://popsql.com/github-students" },
-    { "name": "edit", "summary": "Added entry to data/benefits.json" }
+    {
+      "name": "websearch",
+      "query": "Stripe student discount education program GitHub Student Pack 2026"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://education.github.com/pack/redeem/stripe-student"
+    },
+    {
+      "name": "edit",
+      "summary": "Added entry to data/benefits.json"
+    }
   ],
-  "benefit": { "name": "PopSQL", "category": "Dev Tools", "description": "Free Business plan — SQL editor with dashboards, scheduled queries, and connections to BigQuery, Snowflake, and more." }
+  "benefit": {
+    "name": "Stripe",
+    "category": "Dev Tools",
+    "description": "Waived transaction fees on first $1,000 in revenue processed."
+  }
 }
