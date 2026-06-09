@@ -1074,5 +1074,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "travis-ci",
+    "name": "Travis CI",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack.",
+    "link": "https://www.travis-ci.com/education/",
+    "tags": [
+      "CI/CD",
+      "Automation",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]

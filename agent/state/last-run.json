@@ -1,25 +1,12 @@
 {
-  "issue": 229,
-  "title": "stripe",
+  "issue": 228,
+  "title": "travis ci",
   "timestamp": "2026-06-08T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Stripe student discount education program GitHub Student Pack 2026"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://education.github.com/pack/redeem/stripe-student"
-    },
-    {
-      "name": "edit",
-      "summary": "Added entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "Travis CI student discount GitHub Student Developer Pack education program 2026" },
+    { "name": "webfetch", "url": "https://www.travis-ci.com/education/" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "Stripe",
-    "category": "Dev Tools",
-    "description": "Waived transaction fees on first $1,000 in revenue processed."
-  }
+  "benefit": { "name": "Travis CI", "category": "Dev Tools", "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack." }
 }
