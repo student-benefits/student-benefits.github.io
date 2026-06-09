@@ -117,6 +117,7 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
 | `scout-reddit.yml` | Weekly (Friday) or manual | Scouts Reddit (`site:reddit.com` searches) for benefit mentions (`MODE=discover`) and posting opportunities (`MODE=scout`, → Discord via the `DISCORD_WEBHOOK_URL` secret). State in `agent/state/reddit-state.json`; `DRY_RUN=true` skips writes and the webhook. |
 | `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
+| `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, posts one `@jonasneves` comment and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict in the comment but gates only on CI; never merges. Deterministic — no LLM. |
 
 Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
 
