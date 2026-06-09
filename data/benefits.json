@@ -1017,5 +1017,19 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "clerk",
+    "name": "Clerk",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro plan until graduation ($240/yr value) — 50K MAUs, MFA, SSO, and Organizations.",
+    "link": "https://clerk.com/github-student-developer-pack",
+    "tags": [
+      "Authentication",
+      "Identity",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
   }
 ]

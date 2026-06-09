@@ -1,16 +1,16 @@
 {
-  "issue": 216,
-  "title": "arduino cloud",
+  "issue": 217,
+  "title": "clerk",
   "timestamp": "2026-06-01T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Arduino student discount education program" },
-    { "name": "webfetch", "url": "https://www.arduino.cc/github/students" },
+    { "name": "websearch", "query": "Clerk student discount GitHub Student Developer Pack" },
+    { "name": "webfetch", "url": "https://clerk.com/github-student-developer-pack" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
   "benefit": {
-    "name": "Arduino Cloud",
+    "name": "Clerk",
     "category": "Dev Tools",
-    "description": "Free 6-month Arduino Cloud Maker Plan plus hardware discounts (25–50% off select boards) via GitHub Student Pack."
+    "description": "Free Pro plan until graduation ($240/yr value) — 50K MAUs, MFA, SSO, and Organizations."
   }
 }
