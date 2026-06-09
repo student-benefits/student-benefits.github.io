@@ -1,0 +1,110 @@
+name: PR Concierge
+
+# Once-daily sweep of open PRs. When a PR has crossed "ready" — required checks
+# green AND any bot review (e.g. Copilot) is in — it posts a single @-mention
+# comment so the maintainer can make the merge call, then labels the PR
+# `ready-for-review` so it is never pinged twice. Deterministic: no LLM, no token
+# cost. The merge itself stays a human decision (the trust boundary).
+
+on:
+  schedule:
+    # 13:00 UTC daily — batches overnight bot-PR bursts into one review session.
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (classify and log, but post no comments or labels)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  concierge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      pull-requests: write   # post comments, add the label to a PR
+      issues: write          # gh label create (labels are the issues API)
+      contents: read
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+    steps:
+      - name: Ensure ready-for-review label exists
+        if: env.DRY_RUN != 'true'
+        run: |
+          gh label create ready-for-review \
+            --repo "$GITHUB_REPOSITORY" \
+            --color 0E8A16 \
+            --description "CI green + bot-reviewed; awaiting maintainer merge" \
+            --force
+
+      - name: Sweep open PRs and flag the ready ones
+        run: |
+          set -euo pipefail
+
+          # A PR is "ready" when, ignoring drafts / the maintainer's own PRs /
+          # already-flagged PRs, every check is positively green. The rollup is a
+          # union: GitHub Actions emit CheckRun (.status + .conclusion); legacy
+          # commit-status integrations emit StatusContext (.state only) — both are
+          # handled. An empty rollup (PRs touching no checked paths) is CI-clear,
+          # not a block. Copilot's verdict is surfaced for context but never gates
+          # the ping (it sometimes errors), so a green PR is never stuck on it.
+          ready=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open \
+            --json number,title,isDraft,author,labels,statusCheckRollup,reviews \
+            | jq -c '
+              def copilot:
+                ([.reviews[]? | select(.author.login=="copilot-pull-request-reviewer")] | last);
+              def bad:   (.conclusion // .state) as $x
+                | ($x=="FAILURE" or $x=="CANCELLED" or $x=="TIMED_OUT"
+                   or $x=="ACTION_REQUIRED" or $x=="STARTUP_FAILURE" or $x=="ERROR");
+              def green: (.status=="COMPLETED"
+                          and (.conclusion=="SUCCESS" or .conclusion=="NEUTRAL"
+                               or .conclusion=="SKIPPED"))
+                         or (.state=="SUCCESS");
+              def ci:
+                (.statusCheckRollup // []) as $c
+                | if   ($c | any(bad))         then "failed"
+                  elif ($c | any(green | not)) then "pending"
+                  else "ok" end;
+              .[]
+              | select(.isDraft | not)
+              | select(.author.login != "jonasneves")
+              | select([.labels[]?.name] | index("ready-for-review") | not)
+              | { number, title, ci: ci,
+                  cilabel: (if ((.statusCheckRollup // []) | length) == 0
+                            then "no CI checks" else "checks ✓" end),
+                  copilot: ( copilot as $r
+                    | if   $r == null then "not reviewed yet"
+                      elif ($r.body | test("encountered an error")) then "errored — review manually"
+                      elif ($r.body | test("generated [0-9]+ comment"))
+                        then ($r.body | capture("generated (?<n>[0-9]+) comment").n + " comment(s)")
+                      else "reviewed" end ) }
+              | select(.ci == "ok")
+            ')
+
+          if [ -z "$ready" ]; then
+            echo "Nothing newly ready. No comments posted."
+            exit 0
+          fi
+
+          echo "$ready" | while IFS= read -r pr; do
+            num=$(echo "$pr"     | jq -r .number)
+            cilabel=$(echo "$pr" | jq -r .cilabel)
+            copilot=$(echo "$pr" | jq -r .copilot)
+            body=$(printf '@jonasneves Ready for review — %s · Copilot: %s\n\n<sub>Auto-flagged by PR Concierge: required checks are green. The merge call is yours.</sub>' "$cilabel" "$copilot")
+
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "[dry-run] would flag #$num (CI: $cilabel; Copilot: $copilot)"
+              continue
+            fi
+
+            # Label first: it is the dedup token. If it lands but the comment fails,
+            # the PR is silently skipped next run (recoverable) rather than re-pinged.
+            # Each write is non-fatal so one bad PR doesn't abort the rest of the sweep.
+            gh pr edit "$num" --repo "$GITHUB_REPOSITORY" --add-label ready-for-review \
+              || { echo "warn: could not label #$num — skipping"; continue; }
+            gh pr comment "$num" --repo "$GITHUB_REPOSITORY" --body "$body" \
+              || { echo "warn: labeled #$num but comment failed"; continue; }
+            echo "flagged #$num (CI: $cilabel; Copilot: $copilot)"
+          done
