@@ -75,6 +75,12 @@ benefits — all data must go through this file.
 - `popularity`: integer 1–10; use 5 as default for new entries
 - `repo`: optional; only for open-source projects
 
+Entries are sorted by `id` (ascending); the validator enforces it. Insert new
+entries in sorted position — never append to the end. (Sorted insertion spreads
+concurrent additions across the file, so a burst of add-benefit PRs auto-merges
+instead of all colliding at the array tail. Display order is unaffected — the UI
+re-sorts client-side by popularity.)
+
 ---
 
 ## Source of truth: `data/events.json`
