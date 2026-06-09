@@ -11,7 +11,7 @@ Grant discovers new programs each week, validates community submissions opened a
 
 ## How it works
 
-Content enters through multiple paths. Humans submit issues; Grant validates and opens a PR. A separate `discover-benefits` workflow searches the web weekly and opens issues for new programs. A `discover-events` workflow finds upcoming student events and creates PRs, removing expired entries automatically. A `maintain-benefits` workflow audits link health every Sunday. A human reviews and merges. Grant cannot publish directly. The merge is the trust boundary.
+Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events, audit link health, and scout Reddit on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`CLAUDE.md`](CLAUDE.md#automated-workflows) — the canonical source.
 
 The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture so the system can be understood and replicated.
 
