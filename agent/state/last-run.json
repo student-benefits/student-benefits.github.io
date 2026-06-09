@@ -1,15 +1,25 @@
 {
-  "issue": 215,
-  "title": "namecheap",
+  "issue": 218,
+  "title": "tower",
   "timestamp": "2026-06-01T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "webfetch", "url": "https://nc.me/landing/github" },
-    { "name": "edit", "summary": "Added entry to data/benefits.json" }
+    {
+      "name": "websearch",
+      "query": "Tower Git client student discount education program 2026"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://www.git-tower.com/students"
+    },
+    {
+      "name": "edit",
+      "summary": "Added entry to data/benefits.json"
+    }
   ],
   "benefit": {
-    "name": "Namecheap",
-    "category": "Cloud & Hosting",
-    "description": "Free .me domain and SSL certificate for 1 year via GitHub Student Pack."
+    "name": "Tower",
+    "category": "Dev Tools",
+    "description": "Free Tower Pro Git client for 12 months, renewable annually while enrolled. No credit card required."
   }
 }
