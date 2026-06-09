@@ -95,6 +95,10 @@ def validate_benefits() -> None:
         if isinstance(b.get("link"), str):
             check_link(name, b["link"])
 
+    ids = [b.get("id", "") for b in data if b.get("id")]
+    if ids != sorted(ids):
+        err("benefits.json: entries must be sorted by id (ascending) — insert new entries in sorted position, do not append to the end")
+
 
 def validate_events() -> None:
     data = load("events.json")

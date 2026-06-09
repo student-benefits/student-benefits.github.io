@@ -93,7 +93,7 @@ jobs:
 
             ## Step 5: Write files
 
-            Append the entry to `data/benefits.json` (preserve 2-space indent, trailing newline).
+            Insert the entry into `data/benefits.json` in its `id`-sorted position — the file is kept sorted by `id` (ascending), and CI rejects out-of-order entries. Do NOT append to the end. Preserve 2-space indent and trailing newline.
 
             Replace `agent/state/last-run.json` entirely with:
             ```json
