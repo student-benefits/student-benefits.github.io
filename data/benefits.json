@@ -990,6 +990,20 @@
     "popularity": 5
   },
   {
+    "id": "tower",
+    "name": "Tower",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Tower Pro Git client for 12 months, renewable annually while enrolled. No credit card required.",
+    "link": "https://www.git-tower.com/students",
+    "tags": [
+      "Git",
+      "GitHub Student Pack",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "arduino-cloud",
     "name": "Arduino Cloud",
     "category": "Dev Tools",
