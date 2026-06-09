@@ -959,5 +959,20 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
+  },
+  {
+    "id": "adobe-creative-cloud",
+    "name": "Adobe Creative Cloud",
+    "category": "Design",
+    "offer_type": "discount",
+    "description": "60%+ off 20+ apps including Photoshop, Illustrator, and Premiere. $19.99/month for the first year.",
+    "link": "https://www.adobe.com/creativecloud/buy/students.html",
+    "tags": [
+      "Design",
+      "Photography",
+      "Video",
+      "Creative"
+    ],
+    "popularity": 9
   }
 ]
