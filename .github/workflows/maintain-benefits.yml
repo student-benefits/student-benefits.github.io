@@ -7,7 +7,7 @@ name: Maintain Benefits
 #     case leaves no artifact, so liveness here is verified primarily from the Actions run log showing the scheduled run ran
 #     green. A Sunday with NO run in the Actions log = the cron silently isn't firing → broken, not empty.
 #   Teardown after N: 8 weekly cycles (~2 months). If no scheduled run appears for 8 consecutive Sundays, the
-#     auto-maintenance thesis is wrong → remove this workflow. (N is Jonas's to tune.)
+#     auto-maintenance thesis is wrong → remove this workflow. (N is adjustable.)
 
 on:
   schedule:

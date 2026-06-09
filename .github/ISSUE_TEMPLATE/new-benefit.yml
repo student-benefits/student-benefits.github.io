@@ -6,15 +6,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        **Just tell us about the benefit - be as brief or detailed as you like.**
-
-        Our AI will identify the product, find the correct signup URL, and extract all the details. You don't need to be formal or include every detail.
+        **Name the benefit — a few words is enough.** Grant finds the signup URL and extracts the details.
 
   - type: textarea
     id: description
     attributes:
       label: What's the benefit?
-      description: Describe it however you want - a sentence, a few words, or a detailed explanation all work fine.
+      description: A few words or a full description — both work.
       placeholder: |
         Examples of valid submissions:
 

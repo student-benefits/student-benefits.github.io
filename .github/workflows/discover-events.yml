@@ -7,7 +7,7 @@ name: Discover Student Events
 #     a timestamp that never advances = the cron silently isn't firing → broken, not empty. (Stale events not auto-expiring
 #     is the observable symptom of this being broken.)
 #   Teardown after N: 8 weekly cycles (~2 months). If working-when is unmet for 8 consecutive Wednesdays, the thesis is
-#     wrong → remove this workflow. (N is Jonas's to tune.)
+#     wrong → remove this workflow. (N is adjustable.)
 
 on:
   schedule:

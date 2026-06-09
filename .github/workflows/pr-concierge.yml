@@ -44,6 +44,11 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Maintainer handle comes from CODEOWNERS (single source) — not hardcoded.
+          owner=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/CODEOWNERS" \
+            --jq '.content' | base64 -d | grep -oE '@[A-Za-z0-9-]+' | head -1 | tr -d '@')
+          [ -n "$owner" ] || { echo "no CODEOWNERS owner found"; exit 1; }
+
           # A PR is "ready" when, ignoring drafts / the maintainer's own PRs /
           # already-flagged PRs, every check is positively green. The rollup is a
           # union: GitHub Actions emit CheckRun (.status + .conclusion); legacy
@@ -53,7 +58,7 @@ jobs:
           # the ping (it sometimes errors), so a green PR is never stuck on it.
           ready=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --limit 200 \
             --json number,title,isDraft,author,labels,statusCheckRollup,reviews \
-            | jq -c '
+            | jq -c --arg owner "$owner" '
               def copilot:
                 ([.reviews[]? | select(.author.login=="copilot-pull-request-reviewer")] | last);
               def bad:   (.conclusion // .state) as $x
@@ -70,7 +75,7 @@ jobs:
                   else "ok" end;
               .[]
               | select(.isDraft | not)
-              | select(.author.login != "jonasneves")
+              | select(.author.login != $owner)
               | select([.labels[]?.name] | index("ready-for-review") | not)
               | { number, title, ci: ci,
                   cilabel: (if ((.statusCheckRollup // []) | length) == 0
@@ -94,7 +99,7 @@ jobs:
             num=$(echo "$pr"     | jq -r .number)
             cilabel=$(echo "$pr" | jq -r .cilabel)
             copilot=$(echo "$pr" | jq -r .copilot)
-            body=$(printf '@jonasneves Ready for review — %s · Copilot: %s\n\n<sub>Auto-flagged by PR Concierge: required checks are green. The merge call is yours.</sub>' "$cilabel" "$copilot")
+            body="@$owner ready for review — $cilabel · Copilot: $copilot"
 
             if [ "$DRY_RUN" = "true" ]; then
               echo "[dry-run] would flag #$num (CI: $cilabel; Copilot: $copilot)"

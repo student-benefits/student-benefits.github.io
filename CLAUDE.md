@@ -36,6 +36,12 @@ and architecture. The seams are visible by design so the system can be
 understood and replicated. When working on this project, preserve that
 transparency: keep workflows documented, keep the agent page accurate.
 
+**Impersonal, dense docs.** No personal name or narrative voice in docs, context,
+or agent surfaces. Maintainer identity lives once, in CODEOWNERS — reference it as
+"the maintainer", never a restated handle. Functional handles are excepted (the
+CODEOWNERS list itself, the @-mention that triggers a notification, the LICENSE
+legal name). Maximize meaning per token: cut hedging, restatement, ceremony.
+
 Keep `agent/index.html` in sync with Grant's behavior — workflow logic,
 validation rules, schema, trigger conditions. Mismatch is a bug.
 
@@ -117,7 +123,7 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
 | `scout-reddit.yml` | Weekly (Friday) or manual | Scouts Reddit (`site:reddit.com` searches) for benefit mentions (`MODE=discover`) and posting opportunities (`MODE=scout`, → Discord via the `DISCORD_WEBHOOK_URL` secret). State in `agent/state/reddit-state.json`; `DRY_RUN=true` skips writes and the webhook. |
 | `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
-| `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, posts one `@jonasneves` comment and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict in the comment but gates only on CI; never merges. Deterministic — no LLM. |
+| `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, @-mentions the maintainer (from CODEOWNERS) and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict but gates only on CI; never merges. Deterministic — no LLM. |
 
 Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
 
@@ -127,7 +133,7 @@ No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-
 
 ### Falsifiability (scheduled workflows)
 
-Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some weeks, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 weekly cycles (~2 months)** for each; Jonas's to tune.
+Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some weeks, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 weekly cycles (~2 months)**, adjustable per workflow.
 
 | Workflow | Working-when (positive trace) | N |
 |---|---|---|
@@ -190,8 +196,8 @@ gh workflow run maintain-benefits.yml --repo student-benefits/student-benefits.g
 - All changes go through PRs — never push directly to `main`
 - PRs must have a written Summary (not just a template placeholder)
 - GitHub Pages serves the site directly from the `main` branch root
-- Every PR automatically requests review from @jonasneves (via CODEOWNERS)
-- Branch protection requires @jonasneves approval before any PR can merge
+- Every PR automatically requests review from the maintainer (via CODEOWNERS)
+- Branch protection requires maintainer approval (CODEOWNERS) before any PR can merge
 
 ---
 

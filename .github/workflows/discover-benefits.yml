@@ -6,7 +6,7 @@ name: Discover Student Benefits
 #     nothing met the bar" heartbeat). NOT a found-count: silence-by-design (a dry week) is healthy iff the heartbeat moves.
 #     A run that opens nothing AND doesn't bump the timestamp = the cron silently isn't firing/committing → broken, not empty.
 #   Teardown after N: 8 weekly cycles (~2 months). If working-when is unmet for 8 consecutive Mondays (timestamp never
-#     advances / Actions shows no scheduled runs), the discovery thesis is wrong → remove this workflow. (N is Jonas's to tune.)
+#     advances / Actions shows no scheduled runs), the discovery thesis is wrong → remove this workflow. (N is adjustable.)
 
 on:
   schedule:
