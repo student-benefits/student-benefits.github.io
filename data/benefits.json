@@ -976,6 +976,20 @@
     "popularity": 9
   },
   {
+    "id": "namecheap",
+    "name": "Namecheap",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free .me domain and SSL certificate for 1 year via GitHub Student Pack.",
+    "link": "https://nc.me/landing/github",
+    "tags": [
+      "Domain",
+      "SSL",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "adafruit",
     "name": "Adafruit",
     "category": "Dev Tools",
