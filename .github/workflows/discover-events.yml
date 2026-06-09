@@ -1,5 +1,14 @@
 name: Discover Student Events
 
+# Falsifiability (per the "running systems" convention — criterion is contract, cycle history is the Actions run log).
+#   Working-when: each scheduled run COMPLETES and leaves a positive trace — either a PR opened (new events and/or expired
+#     removals), OR `agent/state/last-events-discovery.json` rewritten with a fresh `timestamp` (the dated "searched + checked
+#     expiries, nothing actionable" heartbeat). NOT a found-count. A run that bumps the timestamp but never PRs is healthy;
+#     a timestamp that never advances = the cron silently isn't firing → broken, not empty. (Stale events not auto-expiring
+#     is the observable symptom of this being broken.)
+#   Teardown after N: 8 weekly cycles (~2 months). If working-when is unmet for 8 consecutive Wednesdays, the thesis is
+#     wrong → remove this workflow. (N is adjustable.)
+
 on:
   schedule:
     - cron: '0 14 * * 3'  # Wednesday 14:00 UTC

@@ -6,9 +6,10 @@ const TOOLS = {
   add_comment:           { actor: 'github', label: 'GitHub',        explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
   close_issue:           { actor: 'github', label: 'GitHub',        explain: null },
   create_issue:          { actor: 'github', label: 'GitHub',        explain: 'Opens a new GitHub issue for a discovered student program, queuing it for the add-benefit workflow to process.' },
-  tavily_search:         { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' },
-  search:                { actor: 'tavily', label: 'Tavily Search', explain: 'Runs a live web search via Tavily to verify the student program exists and find the official signup URL.' }, // alias — MCP tool name varies by server version
-  web_fetch:             { actor: 'web',    label: 'Web',           explain: 'Opens the most relevant search result to confirm the student program details and extract the correct URL.' },
+  'github-issue_read':   { actor: 'github', label: 'GitHub',        explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
+  websearch:             { actor: 'web',    label: 'Web Search',    explain: 'Runs a live web search (Claude Code’s built-in WebSearch tool) to verify the student program exists and find the official signup URL.' },
+  web_fetch:             { actor: 'web',    label: 'Web Fetch',     explain: 'Opens the most relevant search result (Claude Code’s built-in WebFetch tool) to confirm the student program details and extract the correct URL.' },
+  webfetch:              { actor: 'web',    label: 'Web Fetch',     explain: 'Opens the most relevant search result (Claude Code’s built-in WebFetch tool) to confirm the student program details and extract the correct URL.' },
   edit:                  { actor: 'grant',  label: 'Grant',         explain: 'Appends the new benefit entry to <code>data/benefits.json</code> in the repository.' },
 };
 
@@ -137,14 +138,13 @@ function renderRun(data) {
 
 function applyPacketRates(tools, outcome) {
   // conn-search and conn-validate: speed encodes call frequency
-  const counts = { tavily: 0, web: 0, github: 0 };
+  const counts = { web: 0, github: 0 };
   for (const t of tools) {
     const actor = (TOOLS[t.name] || {}).actor || 'grant';
-    if (actor === 'tavily') counts.tavily++;
-    else if (actor === 'web') counts.web++;
+    if (actor === 'web') counts.web++;
     else if (actor === 'github') counts.github++;
   }
-  setPacketRate('conn-search',   counts.tavily + counts.web);
+  setPacketRate('conn-search',   counts.web);
   setPacketRate('conn-validate', counts.github);
   // conn-pr: binary — PR either went to reviewer or it didn't
   setPacketRate('conn-pr', outcome === 'accepted' ? 1 : 0);
@@ -165,7 +165,6 @@ function setPacketRate(id, count) {
 const ACTOR_COLOR = {
   grant:  'var(--grant-color)',
   github: 'var(--github-color)',
-  tavily: 'var(--tavily-color)',
   web:    'var(--web-color)',
 };
 
@@ -211,8 +210,8 @@ const SIM_STEPS = [
     annotation: null
   },
   {
-    stepClass: 'actor-tavily', badge: 'badge-tavily', badgeLabel: 'Tavily',
-    headLabel: 'search', detail: 'Adobe Creative Cloud student discount education',
+    stepClass: 'actor-web', badge: 'badge-web', badgeLabel: 'Web',
+    headLabel: 'websearch', detail: 'Adobe Creative Cloud student discount education',
     primary: '5 results found. Top result: <code>adobe.com/creativecloud/plans/student-and-teacher.html</code>',
     annotation: 'Searches the live web to confirm the program is real and currently active. Not just from training data.'
   },
