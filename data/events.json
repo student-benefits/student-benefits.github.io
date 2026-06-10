@@ -244,6 +244,20 @@
     "expires": "2026-09-17"
   },
   {
+    "id": "hack-the-north-2026",
+    "name": "Hack the North 2026",
+    "organizer": "Hack the North / University of Waterloo",
+    "category": "hackathon",
+    "date": "2026-09-18",
+    "date_end": "2026-09-20",
+    "location": "Waterloo, Ontario, Canada",
+    "remote": false,
+    "eligibility": "Students at any education level worldwide (13+); travel and accommodation covered for non-Waterloo attendees",
+    "why": "Canada's largest hackathon. 36 hours, free admission, travel and lodging covered for non-local attendees. Cash sponsor prizes and direct interview pipelines at top tech companies.",
+    "link": "https://hackthenorth.com/",
+    "expires": "2026-09-20"
+  },
+  {
     "id": "mhacks-2026",
     "name": "MHacks 2026",
     "organizer": "Michigan Hackers / University of Michigan",
@@ -284,5 +298,19 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
+  },
+  {
+    "id": "neurips-2026",
+    "name": "NeurIPS 2026",
+    "organizer": "NeurIPS Foundation",
+    "category": "conference",
+    "date": "2026-12-06",
+    "date_end": "2026-12-12",
+    "location": "Sydney, Australia",
+    "remote": false,
+    "eligibility": "Open to all; student travel grants via NeurIPS financial assistance, Citadel, and Jump Trading — deadline October 2026",
+    "why": "World's premier ML/AI conference — 14,000+ attendees, top researcher talks, and student travel grants from NeurIPS, Citadel, and Jump Trading that cover full attendance costs.",
+    "link": "https://neurips.cc/Conferences/2026",
+    "expires": "2026-12-12"
   }
 ]
