@@ -938,6 +938,20 @@
     "popularity": 5
   },
   {
+    "id": "simple-analytics",
+    "name": "Simple Analytics",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant.",
+    "link": "https://simpleanalytics.com/github-students",
+    "tags": [
+      "Analytics",
+      "Privacy",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "sketch",
     "name": "Sketch",
     "category": "Design",
