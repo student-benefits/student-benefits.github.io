@@ -896,6 +896,21 @@
     "popularity": 7
   },
   {
+    "id": "requestly",
+    "name": "Requestly",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Professional plan for 1 year (worth $270). Intercept requests, mock APIs, and redirect URLs.",
+    "link": "https://requestly.com/github-education/",
+    "tags": [
+      "GitHub Student Pack",
+      "API",
+      "Networking",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "red-hat-developer",
     "name": "Red Hat Developer",
     "category": "Cloud & Hosting",
