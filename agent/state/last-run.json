@@ -1,12 +1,17 @@
 {
-  "issue": 228,
-  "title": "travis ci",
-  "timestamp": "2026-06-08T00:00:00Z",
+  "issue": 242,
+  "title": "digitalocean",
+  "timestamp": "2026-06-15T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Travis CI student discount GitHub Student Developer Pack education program 2026" },
-    { "name": "webfetch", "url": "https://www.travis-ci.com/education/" },
+    { "name": "websearch", "query": "DigitalOcean student discount GitHub Student Pack education program" },
+    { "name": "webfetch", "url": "https://www.digitalocean.com/landing/github-students" },
+    { "name": "webfetch", "url": "https://education.github.com/pack" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Travis CI", "category": "Dev Tools", "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack." }
+  "benefit": {
+    "name": "DigitalOcean",
+    "category": "Cloud & Hosting",
+    "description": "$200 in platform credit for 1 year via GitHub Student Pack. Usable on Droplets, Kubernetes, and Managed Databases."
+  }
 }

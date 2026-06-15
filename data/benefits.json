@@ -355,6 +355,21 @@
     "popularity": 5
   },
   {
+    "id": "digitalocean",
+    "name": "DigitalOcean",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "$200 in platform credit for 1 year via GitHub Student Pack. Usable on Droplets, Kubernetes, and Managed Databases.",
+    "link": "https://www.digitalocean.com/landing/github-students",
+    "tags": [
+      "Cloud",
+      "Hosting",
+      "GitHub Student Pack",
+      "Kubernetes"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "doppler",
     "name": "Doppler",
     "category": "Security",
