@@ -739,6 +739,21 @@
     "repo": "mongodb/mongo"
   },
   {
+    "id": "name-com",
+    "name": "Name.com",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free 1-year domain (15+ TLDs: .dev, .app, .live, .studio, .software, .engineer) plus SSL and Advanced Security.",
+    "link": "https://www.name.com/github-students",
+    "tags": [
+      "Domain",
+      "SSL",
+      "GitHub Student Pack",
+      "Hosting"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "namecheap",
     "name": "Namecheap",
     "category": "Cloud & Hosting",
