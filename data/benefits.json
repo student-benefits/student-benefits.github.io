@@ -1076,6 +1076,21 @@
     "popularity": 8
   },
   {
+    "id": "visme",
+    "name": "Visme",
+    "category": "Design",
+    "offer_type": "trial",
+    "description": "Free Starter plan for 3 months. Create presentations, infographics, and social media graphics.",
+    "link": "https://www.visme.co/github-students/",
+    "tags": [
+      "Design",
+      "Presentations",
+      "GitHub Student Pack",
+      "Graphics"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "youtube-premium-student",
     "name": "YouTube Premium Student",
     "category": "Lifestyle",

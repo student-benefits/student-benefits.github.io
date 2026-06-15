@@ -1,12 +1,11 @@
 {
-  "issue": 228,
-  "title": "travis ci",
-  "timestamp": "2026-06-08T00:00:00Z",
+  "issue": 246,
+  "title": "visme",
+  "timestamp": "2026-06-15T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Travis CI student discount GitHub Student Developer Pack education program 2026" },
-    { "name": "webfetch", "url": "https://www.travis-ci.com/education/" },
+    { "name": "webfetch", "url": "https://www.visme.co/github-students/" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Travis CI", "category": "Dev Tools", "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack." }
+  "benefit": { "name": "Visme", "category": "Design", "description": "Free Starter plan for 3 months. Create presentations, infographics, and social media graphics." }
 }
