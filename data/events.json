@@ -65,48 +65,6 @@
     "expires": "2026-06-30"
   },
   {
-    "id": "jamhacks-10-2026",
-    "name": "JAMHacks 10",
-    "organizer": "JAMHacks / University of Waterloo",
-    "category": "hackathon",
-    "date": "2026-06-12",
-    "date_end": "2026-06-14",
-    "location": "Waterloo, Ontario, Canada",
-    "remote": false,
-    "eligibility": "High school students, free attendance with accommodations",
-    "why": "Canada's largest high school hackathon celebrating 10 years. 36 hours of building with free meals, accommodations, mentorship, and prizes. Strong hacker density makes co-founder connections likely.",
-    "link": "https://jamhacks.ca/",
-    "expires": "2026-06-14"
-  },
-  {
-    "id": "ethglobal-newyork-2026",
-    "name": "ETHGlobal New York 2026",
-    "organizer": "ETHGlobal",
-    "category": "hackathon",
-    "date": "2026-06-12",
-    "date_end": "2026-06-14",
-    "location": "New York City, NY",
-    "remote": false,
-    "eligibility": "Open to all builders; 800+ attendees expected",
-    "why": "Premier Web3 hackathon with $150k+ prize pool. 3 days of building with free food, technical mentorship, and exclusive workshops. Refundable ETH stake required to ensure commitment.",
-    "link": "https://ethglobal.com/events/newyork2026/apply",
-    "expires": "2026-06-14"
-  },
-  {
-    "id": "hackprix-season-3-2026",
-    "name": "HackPrix Season 3",
-    "organizer": "HackPrix / Major League Hacking",
-    "category": "hackathon",
-    "date": "2026-06-13",
-    "date_end": "2026-06-14",
-    "location": "Hyderabad, India",
-    "remote": false,
-    "eligibility": "University students interested in technology and innovation",
-    "why": "36-hour MLH-backed hackathon with 700+ students and $3000+ prize pool. Build for social good with mentor support, workshops, and networking at one of India's premier student tech events.",
-    "link": "https://hackprix-2026.devfolio.co/",
-    "expires": "2026-06-14"
-  },
-  {
     "id": "usaii-global-ai-hackathon-2026",
     "name": "USAII Global AI Hackathon 2026",
     "organizer": "United States Artificial Intelligence Institute",
@@ -244,6 +202,20 @@
     "expires": "2026-09-17"
   },
   {
+    "id": "hack-the-north-2026",
+    "name": "Hack the North 2026",
+    "organizer": "Hack the North / University of Waterloo",
+    "category": "hackathon",
+    "date": "2026-09-18",
+    "date_end": "2026-09-20",
+    "location": "Waterloo, Ontario, Canada",
+    "remote": false,
+    "eligibility": "High school and university students worldwide; free attendance with travel and accommodations covered",
+    "why": "Canada's largest hackathon: 1,000+ hackers, 36 hours at University of Waterloo, free attendance with travel and meals included. Strong sponsor engagement and career placement track record.",
+    "link": "https://hackthenorth.com/",
+    "expires": "2026-09-20"
+  },
+  {
     "id": "mhacks-2026",
     "name": "MHacks 2026",
     "organizer": "Michigan Hackers / University of Michigan",
@@ -272,6 +244,20 @@
     "expires": "2026-09-27"
   },
   {
+    "id": "claude-corps-2026",
+    "name": "Claude Corps",
+    "organizer": "Anthropic / CodePath",
+    "category": "fellowship",
+    "date": "2026-10-19",
+    "date_end": "2027-10-19",
+    "location": "United States",
+    "remote": false,
+    "eligibility": "18+, US work authorization required, under two years full-time work experience; no education requirement; apply by July 17",
+    "why": "$85k/year salary + benefits to deploy AI at nonprofits nationwide. Anthropic's $150M flagship initiative — 100-fellow first cohort starts October 2026. Apply by July 17.",
+    "link": "https://job-boards.greenhouse.io/claudecorps/jobs/4250200009",
+    "expires": "2027-10-19"
+  },
+  {
     "id": "grace-hopper-celebration-2026",
     "name": "Grace Hopper Celebration 2026",
     "organizer": "AnitaB.org",
@@ -284,5 +270,19 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
+  },
+  {
+    "id": "citadel-neurips-grant-2026",
+    "name": "Citadel NeurIPS Travel Grant 2026",
+    "organizer": "Citadel / Citadel Securities",
+    "category": "grant",
+    "date": "2026-12-06",
+    "date_end": "2026-12-12",
+    "location": "Sydney, Australia",
+    "remote": false,
+    "eligibility": "Current bachelor's, master's, or PhD students in CS, math, statistics, or quantitative fields; preference for NeurIPS paper submitters",
+    "why": "All-expenses-paid trip to NeurIPS — the world's top ML conference. Citadel books flights, hotel, and conference pass. Open to undergrads. Apply by October 5.",
+    "link": "https://www.citadel.com/careers/programs-and-events/conference-travel-grant/",
+    "expires": "2026-12-12"
   }
 ]
