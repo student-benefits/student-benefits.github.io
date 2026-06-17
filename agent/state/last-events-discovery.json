@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-03T00:00:00Z",
+  "timestamp": "2026-06-17T00:00:00Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -17,26 +17,27 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "google-io-2026",
-    "quackhacks-3-2026"
+    "jamhacks-10-2026",
+    "ethglobal-newyork-2026",
+    "hackprix-season-3-2026"
   ],
   "discovered": [
     {
-      "name": "Breakthrough Junior Challenge 2026",
-      "date": "2026-05-11",
-      "link": "https://breakthroughjuniorchallenge.org/enter",
+      "name": "Hack the North 2026",
+      "date": "2026-09-18",
+      "link": "https://hackthenorth.com/",
       "source": "keyword"
     },
     {
-      "name": "HackMIT 2026",
-      "date": "2026-09-16",
-      "link": "https://hackmit.org/",
+      "name": "Claude Corps",
+      "date": "2026-10-19",
+      "link": "https://job-boards.greenhouse.io/claudecorps/jobs/4250200009",
       "source": "known-source"
     },
     {
-      "name": "MHacks 2026",
-      "date": "2026-09-20",
-      "link": "https://www.mhacks.org/",
+      "name": "Citadel NeurIPS Travel Grant 2026",
+      "date": "2026-12-06",
+      "link": "https://www.citadel.com/careers/programs-and-events/conference-travel-grant/",
       "source": "keyword"
     }
   ],
