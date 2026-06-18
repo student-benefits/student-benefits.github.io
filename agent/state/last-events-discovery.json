@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-03T00:00:00Z",
+  "timestamp": "2026-06-10T17:34:17Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -16,27 +16,18 @@
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [
-    "google-io-2026",
-    "quackhacks-3-2026"
-  ],
+  "expired_removed": [],
   "discovered": [
     {
-      "name": "Breakthrough Junior Challenge 2026",
-      "date": "2026-05-11",
-      "link": "https://breakthroughjuniorchallenge.org/enter",
+      "name": "Hack the North 2026",
+      "date": "2026-09-18",
+      "link": "https://hackthenorth.com/",
       "source": "keyword"
     },
     {
-      "name": "HackMIT 2026",
-      "date": "2026-09-16",
-      "link": "https://hackmit.org/",
-      "source": "known-source"
-    },
-    {
-      "name": "MHacks 2026",
-      "date": "2026-09-20",
-      "link": "https://www.mhacks.org/",
+      "name": "NeurIPS 2026",
+      "date": "2026-12-06",
+      "link": "https://neurips.cc/Conferences/2026",
       "source": "keyword"
     }
   ],
