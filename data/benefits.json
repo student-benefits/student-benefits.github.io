@@ -355,6 +355,21 @@
     "popularity": 5
   },
   {
+    "id": "digitalocean",
+    "name": "DigitalOcean",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "$200 in platform credit for 1 year via GitHub Student Pack. Usable on Droplets, Kubernetes, and Managed Databases.",
+    "link": "https://www.digitalocean.com/landing/github-students",
+    "tags": [
+      "Cloud",
+      "Hosting",
+      "GitHub Student Pack",
+      "Kubernetes"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "doppler",
     "name": "Doppler",
     "category": "Security",
@@ -739,6 +754,21 @@
     "repo": "mongodb/mongo"
   },
   {
+    "id": "name-com",
+    "name": "Name.com",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free 1-year domain (15+ TLDs: .dev, .app, .live, .studio, .software, .engineer) plus SSL and Advanced Security.",
+    "link": "https://www.name.com/github-students",
+    "tags": [
+      "Domain",
+      "SSL",
+      "GitHub Student Pack",
+      "Hosting"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "namecheap",
     "name": "Namecheap",
     "category": "Cloud & Hosting",
@@ -772,7 +802,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
-    "link": "https://www.notion.so/product/notion-for-education",
+    "link": "https://www.notion.com/product/notion-for-education",
     "tags": [
       "Notes",
       "Planning",
@@ -910,6 +940,21 @@
     "popularity": 6
   },
   {
+    "id": "requestly",
+    "name": "Requestly",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Professional plan for 1 year (worth $270). Intercept requests, mock APIs, and redirect URLs.",
+    "link": "https://requestly.com/github-education/",
+    "tags": [
+      "GitHub Student Pack",
+      "API",
+      "Networking",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "samsung-education",
     "name": "Samsung Education",
     "category": "Lifestyle",
@@ -933,6 +978,20 @@
     "tags": [
       "Error Tracking",
       "Monitoring",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "simple-analytics",
+    "name": "Simple Analytics",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant.",
+    "link": "https://dashboard.simpleanalytics.com/students",
+    "tags": [
+      "Analytics",
+      "Privacy",
       "GitHub Student Pack"
     ],
     "popularity": 5
@@ -1074,6 +1133,21 @@
       "Engine"
     ],
     "popularity": 8
+  },
+  {
+    "id": "visme",
+    "name": "Visme",
+    "category": "Design",
+    "offer_type": "trial",
+    "description": "Free Starter plan for 3 months. Create presentations, infographics, and social media graphics.",
+    "link": "https://www.visme.co/github-students/",
+    "tags": [
+      "Design",
+      "Presentations",
+      "GitHub Student Pack",
+      "Graphics"
+    ],
+    "popularity": 5
   },
   {
     "id": "youtube-premium-student",

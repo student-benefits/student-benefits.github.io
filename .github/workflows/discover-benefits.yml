@@ -87,6 +87,8 @@ jobs:
 
             Shortlist up to **5 new benefits** across both passes.
 
+            The `**Signup**` URL you record in Step 5 MUST be a URL you actually loaded with WebFetch in this run (the program page from this step, or a real signup link found on it). Never construct or guess a path from the product name — an invented `/github-students`-style URL that 404s poisons the downstream add-benefit PR, which trusts the link you provide. Copy the working URL verbatim; if a redirect occurred, record the final URL.
+
             ## Step 5: Open issues
 
             For each, create one GitHub issue:
@@ -94,7 +96,7 @@ jobs:
             - **Body**:
               ```
               **What students get**: <one specific sentence — plan, amount, or duration>
-              **Signup**: <direct URL>
+              **Signup**: <direct URL — must be one you loaded successfully in Step 4, copied verbatim>
               **Discovered via**: <known-source | keyword>
               **Pack**: GitHub Student Pack
               ```
