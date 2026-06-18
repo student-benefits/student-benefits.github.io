@@ -204,6 +204,7 @@ gh workflow run maintain-benefits.yml --repo student-benefits/student-benefits.g
 - GitHub Pages serves the site directly from the `main` branch root
 - Every PR automatically requests review from the maintainer (via CODEOWNERS)
 - Branch protection requires maintainer approval (CODEOWNERS) before any PR can merge
+- **Authorship: the agent authors, the maintainer approves and merges** — the merge is the trust boundary. A PR's GitHub author is fixed by the token that opens it: workflow-opened PRs are authored by the Claude GitHub App (`app/claude`), the intended state. A PR opened from a locally maintainer-authenticated `gh` is authored by the maintainer instead — so to keep the agent as author, push commits onto an existing `app/claude` branch (e.g. when consolidating) rather than opening a fresh PR, and author commits as `Claude <noreply@anthropic.com>`. Never self-approve or self-merge.
 
 ---
 
