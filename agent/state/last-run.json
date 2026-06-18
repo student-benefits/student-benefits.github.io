@@ -1,12 +1,13 @@
 {
-  "issue": 228,
-  "title": "travis ci",
-  "timestamp": "2026-06-08T00:00:00Z",
+  "issue": 244,
+  "title": "simple analytics",
+  "timestamp": "2026-06-15T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Travis CI student discount GitHub Student Developer Pack education program 2026" },
-    { "name": "webfetch", "url": "https://www.travis-ci.com/education/" },
+    { "name": "websearch", "query": "Simple Analytics GitHub Student Pack free plan education" },
+    { "name": "webfetch", "url": "https://simpleanalytics.com/github-students" },
+    { "name": "webfetch", "url": "https://dashboard.simpleanalytics.com/students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Travis CI", "category": "Dev Tools", "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack." }
+  "benefit": { "name": "Simple Analytics", "category": "Dev Tools", "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant." }
 }
