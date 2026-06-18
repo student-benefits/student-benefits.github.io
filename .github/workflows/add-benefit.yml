@@ -87,9 +87,19 @@ jobs:
             - `tags`: 2–4 relevant tags. If body contains `**Pack**: GitHub Student Pack`, include `"GitHub Student Pack"`
             - Add `"repo": "owner/repo"` if open source
 
-            Prefer the user-provided link; otherwise find the official student signup URL.
+            Start from the user-provided link if present; otherwise find the official student signup URL. Either way, the link is a candidate to verify in Step 4.5 — not a value to trust as-is.
 
             `link` MUST be the program's own signup, pricing, or program-overview page (e.g. `/students`, `/education`, `/edu`, `/pricing`). Never use a help/docs/support article URL — subdomains `help.`/`support.`/`docs.` or paths containing `/articles/`. Those are documentation, not signup destinations. If only a help-article URL is available, WebSearch the underlying program page and use that instead.
+
+            ## Step 4.5: Verify the link actually loads (required — do not skip)
+
+            The `link` you write MUST be a URL you loaded successfully **in this run**. Never construct or guess a path from the product name (e.g. inventing `/github-students` because it looks plausible) — that is how dead links reach the directory.
+
+            1. `WebFetch` your chosen `link`. A real page must load — not a 404, "page not found", or error page. Treat a redirect's final URL as the real link and use that.
+            2. If it does not load: `WebSearch` for the program's actual student signup/education page, `WebFetch` the top candidate, and use the URL that genuinely loads. Copy it **verbatim** — do not edit the path by hand.
+            3. If no working student-program URL loads after this, the program isn't addable: comment "**Cannot add:** could not confirm a live student signup page", append to `rejected.json` (Step 3 format), close the issue, and stop.
+
+            This applies even when the user supplied the link — a submitted URL is a candidate, not a verified one.
 
             ## Step 5: Write files
 
