@@ -86,6 +86,8 @@ jobs:
 
             See the data/events.json schema in CLAUDE.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
 
+            The `link` for each entry MUST be a URL you actually loaded with WebFetch in Step 5 (the event page, or a real registration link found on it). Never construct or guess a path from the event name — a plausible-looking but dead URL poisons the PR. Copy the working URL verbatim; if a redirect occurred, record the final URL. Drop any entry whose link you can't confirm loads.
+
             ## Step 7: Open one PR
 
             Updated `data/events.json`: remove expired IDs from Step 2, append new entries from Step 6 (in date order earliest first), preserve 2-space indent + trailing newline.

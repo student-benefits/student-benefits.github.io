@@ -69,6 +69,16 @@ jobs:
 
             See the data/events.json schema in CLAUDE.md. Categories: `hackathon | conference | fellowship | summit | workshop | grant`. Write `why` yourself (max 200 chars, don't copy marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
 
+            ## Step 5.5: Verify the link actually loads (required — do not skip)
+
+            The `link` you write MUST be a URL you loaded successfully **in this run**. Never construct or guess a path from the event name — a plausible-looking but dead URL is the failure to prevent.
+
+            1. `WebFetch` your chosen `link`. A real application/registration page must load — not a 404, "page not found", or error page. Treat a redirect's final URL as the real link and use that.
+            2. If it does not load: `WebSearch` for the event's actual registration/application page, `WebFetch` the top candidate, and use the URL that genuinely loads. Copy it **verbatim** — do not edit the path by hand.
+            3. If no working event URL loads, you can't confirm it: comment "**Cannot add:** could not confirm a live registration page", close the issue, and stop.
+
+            This applies even when the user supplied the link — a submitted URL is a candidate, not a verified one.
+
             ## Step 6: Update files
 
             Insert the new event into `data/events.json` in date order (earliest first), preserving 2-space indent and trailing newline.
