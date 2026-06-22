@@ -912,6 +912,20 @@
     "popularity": 8
   },
   {
+    "id": "proton-vpn",
+    "name": "Proton VPN",
+    "category": "Security",
+    "offer_type": "discount",
+    "description": "70% off VPN Plus for 12 months ($2.49/mo) via Student Beans. Includes NetShield ad blocker.",
+    "link": "https://proton.me/student",
+    "tags": [
+      "VPN",
+      "Privacy",
+      "Security"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "raycast-pro",
     "name": "Raycast Pro",
     "category": "Productivity",
