@@ -783,6 +783,20 @@
     "popularity": 5
   },
   {
+    "id": "navicat",
+    "name": "Navicat",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year non-commercial license for Navicat Premium, Data Modeler, and Monitor, plus Cloud Pro Plan.",
+    "link": "https://www.navicat.com/en/sponsorship/education/student",
+    "tags": [
+      "Database",
+      "SQL",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "new-relic",
     "name": "New Relic",
     "category": "Dev Tools",
