@@ -1162,5 +1162,20 @@
       "Music"
     ],
     "popularity": 9
+  },
+  {
+    "id": "zyte",
+    "name": "Zyte",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Scrapy Cloud: unlimited projects & team members, 120-day data caching, and auto-scaling spider deployment.",
+    "link": "https://www.zyte.com/scrapy-cloud-student-backpack/",
+    "tags": [
+      "GitHub Student Pack",
+      "Web Scraping",
+      "Cloud",
+      "Python"
+    ],
+    "popularity": 5
   }
 ]

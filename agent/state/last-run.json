@@ -1,13 +1,12 @@
 {
-  "issue": 244,
-  "title": "simple analytics",
-  "timestamp": "2026-06-15T00:00:00Z",
+  "issue": 258,
+  "title": "zyte",
+  "timestamp": "2026-06-22T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Simple Analytics GitHub Student Pack free plan education" },
-    { "name": "webfetch", "url": "https://simpleanalytics.com/github-students" },
-    { "name": "webfetch", "url": "https://dashboard.simpleanalytics.com/students" },
+    { "name": "websearch", "query": "Zyte student discount education program" },
+    { "name": "webfetch", "url": "https://www.zyte.com/scrapy-cloud-student-backpack/" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Simple Analytics", "category": "Dev Tools", "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant." }
+  "benefit": { "name": "Zyte", "category": "Dev Tools", "description": "Free Scrapy Cloud: unlimited projects & team members, 120-day data caching, and auto-scaling spider deployment." }
 }
