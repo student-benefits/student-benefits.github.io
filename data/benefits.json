@@ -969,6 +969,21 @@
     "popularity": 8
   },
   {
+    "id": "sas-viya-for-learners",
+    "name": "SAS Viya for Learners",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free SAS Viya cloud platform: 2 CPU cores, 10 GB storage, Python/R, AI/ML tools. Renews annually with student email.",
+    "link": "https://www.sas.com/en_us/learn/academic-programs/students.html",
+    "tags": [
+      "AI Tools",
+      "Data Science",
+      "Analytics",
+      "Cloud"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "sentry",
     "name": "Sentry",
     "category": "Dev Tools",

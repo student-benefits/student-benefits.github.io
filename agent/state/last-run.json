@@ -1,13 +1,15 @@
 {
-  "issue": 244,
-  "title": "simple analytics",
-  "timestamp": "2026-06-15T00:00:00Z",
+  "issue": 261,
+  "title": "sas viya for learners",
+  "timestamp": "2026-06-22T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Simple Analytics GitHub Student Pack free plan education" },
-    { "name": "webfetch", "url": "https://simpleanalytics.com/github-students" },
-    { "name": "webfetch", "url": "https://dashboard.simpleanalytics.com/students" },
+    { "name": "webfetch", "url": "https://www.sas.com/en_us/learn/academic-programs/students.html" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Simple Analytics", "category": "Dev Tools", "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant." }
+  "benefit": {
+    "name": "SAS Viya for Learners",
+    "category": "AI Tools",
+    "description": "Free SAS Viya cloud platform: 2 CPU cores, 10 GB storage, Python/R, AI/ML tools. Renews annually with student email."
+  }
 }
