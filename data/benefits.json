@@ -1150,6 +1150,22 @@
     "popularity": 5
   },
   {
+    "id": "weights-and-biases",
+    "name": "Weights & Biases",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free.",
+    "link": "https://wandb.ai/site/academic",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "Experiment Tracking",
+      "Research"
+    ],
+    "popularity": 5,
+    "repo": "wandb/wandb"
+  },
+  {
     "id": "youtube-premium-student",
     "name": "YouTube Premium Student",
     "category": "Lifestyle",

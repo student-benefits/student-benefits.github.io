@@ -1,13 +1,12 @@
 {
-  "issue": 244,
-  "title": "simple analytics",
-  "timestamp": "2026-06-15T00:00:00Z",
+  "issue": 257,
+  "title": "weights & biases",
+  "timestamp": "2026-06-22T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Simple Analytics GitHub Student Pack free plan education" },
-    { "name": "webfetch", "url": "https://simpleanalytics.com/github-students" },
-    { "name": "webfetch", "url": "https://dashboard.simpleanalytics.com/students" },
+    { "name": "websearch", "query": "Weights & Biases student academic program free" },
+    { "name": "webfetch", "url": "https://wandb.ai/site/academic" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Simple Analytics", "category": "Dev Tools", "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant." }
+  "benefit": { "name": "Weights & Biases", "category": "AI Tools", "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free." }
 }
