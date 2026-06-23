@@ -355,6 +355,20 @@
     "popularity": 5
   },
   {
+    "id": "devolens",
+    "name": "DevoLens",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 10 licenses and unlimited end users while enrolled. License and sell your software with analytics.",
+    "link": "https://app.cryptolens.io/user/githubstudent",
+    "tags": [
+      "Software Licensing",
+      "Dev Tools",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "digitalocean",
     "name": "DigitalOcean",
     "category": "Cloud & Hosting",
@@ -783,6 +797,20 @@
     "popularity": 5
   },
   {
+    "id": "navicat",
+    "name": "Navicat",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year non-commercial license for Navicat Premium, Data Modeler, and Monitor, plus Cloud Pro Plan.",
+    "link": "https://www.navicat.com/en/sponsorship/education/student",
+    "tags": [
+      "Database",
+      "SQL",
+      "Dev Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "new-relic",
     "name": "New Relic",
     "category": "Dev Tools",
@@ -967,6 +995,21 @@
       "Laptops"
     ],
     "popularity": 8
+  },
+  {
+    "id": "sas-viya-for-learners",
+    "name": "SAS Viya for Learners",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free SAS Viya cloud platform: 2 CPU cores, 10 GB storage, Python/R, AI/ML tools. Renews annually with student email.",
+    "link": "https://www.sas.com/en_us/learn/academic-programs/students.html",
+    "tags": [
+      "AI Tools",
+      "Data Science",
+      "Analytics",
+      "Cloud"
+    ],
+    "popularity": 5
   },
   {
     "id": "sentry",
@@ -1155,7 +1198,7 @@
     "category": "AI Tools",
     "offer_type": "free",
     "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free.",
-    "link": "https://wandb.ai/site/academic",
+    "link": "https://wandb.ai/site/research/",
     "tags": [
       "AI",
       "Machine Learning",
@@ -1178,5 +1221,20 @@
       "Music"
     ],
     "popularity": 9
+  },
+  {
+    "id": "zyte",
+    "name": "Zyte",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Scrapy Cloud: unlimited projects & team members, 120-day data caching, and auto-scaling spider deployment.",
+    "link": "https://www.zyte.com/scrapy-cloud-student-backpack/",
+    "tags": [
+      "GitHub Student Pack",
+      "Web Scraping",
+      "Cloud",
+      "Python"
+    ],
+    "popularity": 5
   }
 ]
