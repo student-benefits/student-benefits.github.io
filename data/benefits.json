@@ -355,6 +355,20 @@
     "popularity": 5
   },
   {
+    "id": "devolens",
+    "name": "DevoLens",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 10 licenses and unlimited end users while enrolled. License and sell your software with analytics.",
+    "link": "https://app.cryptolens.io/user/githubstudent",
+    "tags": [
+      "Software Licensing",
+      "Dev Tools",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "digitalocean",
     "name": "DigitalOcean",
     "category": "Cloud & Hosting",
