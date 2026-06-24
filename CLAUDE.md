@@ -6,15 +6,22 @@ This file is loaded automatically by Claude Code in every session.
 
 ## Project Context
 
-A community-curated directory of student discounts, free tiers, and perks. The
-site is a single static HTML/JS page (`index.html`) that reads from `data/benefits.json`
-and renders a searchable, filterable card grid. Deployed via GitHub Pages.
+A community-curated directory of student benefits that help students **build,
+learn, and ship** — dev tools, cloud credits, AI/ML platforms, design and
+learning resources. The site is a single static HTML/JS page (`index.html`) that
+reads from `data/benefits.json` and renders a searchable, filterable card grid.
+Deployed via GitHub Pages.
 
 ### Core values
 
-**Specificity.** Descriptions must say exactly what students get. Vague copy
-("Student discount available") is rejected in favor of concrete offers
-("Free Pro plan for 1 year").
+**Build & grow, not consumption.** The curation thesis — what earns an entry.
+A benefit qualifies if it helps a student *create, learn, ship, or research*:
+dev tools, infrastructure, cloud/AI credits, design and learning platforms, the
+hardware students build on. It does **not** qualify if it's a consumption perk —
+entertainment (music, video streaming), shopping, or broad discount aggregators —
+however good the deal. The test isn't "is this a real student discount?" (the
+proxy) but "does this advance building or learning?" (the criterion). A genuine,
+well-priced consumer VPN or music subscription is still a reject.
 
 **Data integrity.** All benefit data lives in `data/benefits.json` — one source of
 truth, never hardcoded in HTML.

@@ -60,6 +60,8 @@ jobs:
 
             Use WebSearch ("{product} student discount" or "{product} education program") and WebFetch on the top result to confirm a real student program exists. Don't rely solely on training data.
 
+            **Build & grow (the curation thesis):** the benefit must help a student *create, learn, ship, or research* — dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Reject consumption perks regardless of how good the deal is: entertainment (music, video streaming), shopping, consumer subscriptions (e.g. a consumer VPN), and broad discount aggregators (Student Beans / UNiDAYS-style). The test isn't "is this a real student discount?" but "does this advance building or learning?" — if it doesn't, it's a reject even when the offer is genuine and well-priced.
+
             If invalid, comment "**Cannot add:** {reason}". Then append to `agent/state/rejected.json`:
             ```json
             { "name": "{name}", "domain": "{hostname or null}", "reason": "{reason}", "checked": "{YYYY-MM-DD}" }
