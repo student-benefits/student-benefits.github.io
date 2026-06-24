@@ -57,23 +57,9 @@
     "popularity": 7
   },
   {
-    "id": "amazon-prime-student",
-    "name": "Amazon Prime Student",
-    "category": "Lifestyle",
-    "offer_type": "trial",
-    "description": "6-month free trial, then $7.49/month (50% off). Free shipping, Prime Video, Music, Grubhub+, and 5% cash back.",
-    "link": "https://www.amazon.com/joinstudent",
-    "tags": [
-      "Shopping",
-      "Shipping",
-      "Streaming"
-    ],
-    "popularity": 10
-  },
-  {
     "id": "apple-education",
     "name": "Apple Education Pricing",
-    "category": "Lifestyle",
+    "category": "Hardware",
     "offer_type": "discount",
     "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season.",
     "link": "https://www.apple.com/us-edu/store",
@@ -81,20 +67,6 @@
       "Hardware",
       "Apple",
       "MacBook"
-    ],
-    "popularity": 9
-  },
-  {
-    "id": "apple-music-student",
-    "name": "Apple Music Student",
-    "category": "Lifestyle",
-    "offer_type": "discount",
-    "description": "$5.99/month (45% off) with free Apple TV+ included. Verify via UNiDAYS, valid up to 4 years.",
-    "link": "https://offers.applemusic.apple/student-offer",
-    "tags": [
-      "Music",
-      "Streaming",
-      "Apple"
     ],
     "popularity": 9
   },
@@ -985,7 +957,7 @@
   {
     "id": "samsung-education",
     "name": "Samsung Education",
-    "category": "Lifestyle",
+    "category": "Hardware",
     "offer_type": "discount",
     "description": "Up to 30% off Galaxy phones, tablets, laptops, and accessories. Verify with .edu email or ID.me.",
     "link": "https://www.samsung.com/us/shop/offer-program/education/",
@@ -1054,20 +1026,6 @@
     "popularity": 7
   },
   {
-    "id": "spotify-student",
-    "name": "Spotify Premium Student",
-    "category": "Lifestyle",
-    "offer_type": "discount",
-    "description": "$6.99/month (50% off) with Hulu included. Ad-free music, offline downloads, unlimited skips. Valid for up to 4 years.",
-    "link": "https://www.spotify.com/us/student/",
-    "tags": [
-      "Music",
-      "Streaming",
-      "Hulu"
-    ],
-    "popularity": 10
-  },
-  {
     "id": "stripe",
     "name": "Stripe",
     "category": "Dev Tools",
@@ -1080,19 +1038,6 @@
       "GitHub Student Pack"
     ],
     "popularity": 5
-  },
-  {
-    "id": "student-beans",
-    "name": "Student Beans",
-    "category": "Lifestyle",
-    "offer_type": "discount",
-    "description": "Free platform with 10,000+ student discounts on fashion, tech, food, and travel. Digital student ID included.",
-    "link": "https://www.studentbeans.com/us",
-    "tags": [
-      "Discounts",
-      "Shopping"
-    ],
-    "popularity": 8
   },
   {
     "id": "termius-pro",
@@ -1151,19 +1096,6 @@
     "popularity": 7
   },
   {
-    "id": "unidays",
-    "name": "UNiDAYS",
-    "category": "Lifestyle",
-    "offer_type": "discount",
-    "description": "Free access to hundreds of verified student discounts on fashion, tech, food, travel, and entertainment.",
-    "link": "https://www.myunidays.com/US/en-US/account/register",
-    "tags": [
-      "Discounts",
-      "Shopping"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "unity-student",
     "name": "Unity Student",
     "category": "Design",
@@ -1207,20 +1139,6 @@
     ],
     "popularity": 5,
     "repo": "wandb/wandb"
-  },
-  {
-    "id": "youtube-premium-student",
-    "name": "YouTube Premium Student",
-    "category": "Lifestyle",
-    "offer_type": "discount",
-    "description": "$7.99/month (50% off). Ad-free videos, offline downloads, YouTube Music included. Valid up to 4 years.",
-    "link": "https://www.youtube.com/premium/student",
-    "tags": [
-      "Video",
-      "Streaming",
-      "Music"
-    ],
-    "popularity": 9
   },
   {
     "id": "zyte",
