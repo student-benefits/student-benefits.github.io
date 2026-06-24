@@ -65,19 +65,6 @@
     "expires": "2026-06-30"
   },
   {
-    "id": "usaii-global-ai-hackathon-2026",
-    "name": "USAII Global AI Hackathon 2026",
-    "organizer": "United States Artificial Intelligence Institute",
-    "category": "hackathon",
-    "date": "2026-06-14",
-    "date_end": "2026-06-21",
-    "remote": true,
-    "eligibility": "High school (grades 9-12), undergraduate, graduate, and doctoral students worldwide",
-    "why": "Premier global AI competition with $15k+ prize pool. Students build real-world AI solutions with mentor support. Award winners receive AI certification scholarships.",
-    "link": "https://aihackathon.usaii.org/",
-    "expires": "2026-06-21"
-  },
-  {
     "id": "yc-summer-fellows-2026",
     "name": "YC Summer Fellows Grants",
     "organizer": "Y Combinator",
@@ -90,34 +77,6 @@
     "why": "$20k cash + $90k in compute credits to build a self-directed AI project in SF. YC picks 20–50 students; no company or team required.",
     "link": "https://events.ycombinator.com/summer-grants-26",
     "expires": "2026-08-22"
-  },
-  {
-    "id": "yc-ai-startup-school-2026",
-    "name": "YC AI Startup School",
-    "organizer": "Y Combinator",
-    "category": "conference",
-    "date": "2026-06-16",
-    "date_end": "2026-06-17",
-    "location": "San Francisco, CA",
-    "remote": false,
-    "eligibility": "CS undergrads, masters, and PhD students",
-    "why": "Free, in-person, highly selective. Speakers include Sam Altman, Andrej Karpathy, and Andrew Ng — for CS students who want to build AI companies, this is the room.",
-    "link": "https://www.ycombinator.com/blog/ai-startupschool",
-    "expires": "2026-06-17"
-  },
-  {
-    "id": "berkeley-ai-hackathon-2026",
-    "name": "AI Hackathon 2026",
-    "organizer": "UC Berkeley",
-    "category": "hackathon",
-    "date": "2026-06-20",
-    "date_end": "2026-06-21",
-    "location": "Berkeley, CA",
-    "remote": false,
-    "eligibility": "Undergrad/grad students from any institution, recent grads (Fall 2024+); apply by May 17",
-    "why": "$100,000 in prizes across four specialized tracks. 1,300+ hackers, free meals and accommodations. One of the largest student AI hackathons in the US with strong industry connections.",
-    "link": "https://hive.hackberkeley.org",
-    "expires": "2026-06-21"
   },
   {
     "id": "apple-aiml-residency-2026",
@@ -244,6 +203,20 @@
     "expires": "2026-09-27"
   },
   {
+    "id": "hackharvard-2026",
+    "name": "HackHarvard 2026",
+    "organizer": "HackHarvard / Harvard University",
+    "category": "hackathon",
+    "date": "2026-10-16",
+    "date_end": "2026-10-18",
+    "location": "Cambridge, MA",
+    "remote": false,
+    "eligibility": "Undergraduate and graduate students worldwide; teams up to 4",
+    "why": "Harvard's 36-hour flagship hackathon. Themes span health, climate, and civic tech. Significant prize pool and industry mentorship; free for all student applicants worldwide.",
+    "link": "https://hhuh.io/",
+    "expires": "2026-10-18"
+  },
+  {
     "id": "claude-corps-2026",
     "name": "Claude Corps",
     "organizer": "Anthropic / CodePath",
@@ -270,6 +243,19 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
+  },
+  {
+    "id": "nasa-space-apps-2026",
+    "name": "NASA Space Apps Challenge 2026",
+    "organizer": "NASA",
+    "category": "hackathon",
+    "date": "2026-11-14",
+    "date_end": "2026-11-15",
+    "remote": false,
+    "eligibility": "All ages and skill levels worldwide; solo or team participation at local venues globally",
+    "why": "The world's largest annual hackathon, run by NASA. Teams use real NASA data to solve space and Earth challenges. 100k+ participants at 150+ local events; global winners earn NASA recognition.",
+    "link": "https://www.spaceappschallenge.org/",
+    "expires": "2026-11-15"
   },
   {
     "id": "neurips-2026",
