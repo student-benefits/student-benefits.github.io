@@ -79,11 +79,12 @@ jobs:
             For each result from Steps 2 and 3: WebFetch the program page. Skip if name or hostname is in the known/rejected sets. Note source (`known-source` or `keyword`).
 
             Quality bar — reject on any failure:
-            1. Substantial offer: free tier, 50%+ discount, or meaningful credits — reject token discounts <30% with no free tier
-            2. Recognizable product with real student community
-            3. Self-serve student program page (not "contact us" / institutional purchase)
-            4. Fills a gap (avoid 4th entry in saturated categories)
-            5. Active signup page
+            1. **Build & grow** (the curation thesis): the benefit must help a student *create, learn, ship, or research* — dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Reject consumption perks regardless of how good the deal is: entertainment (music, video streaming), shopping, consumer subscriptions (e.g. a consumer VPN), and broad discount aggregators (Student Beans / UNiDAYS-style). If it doesn't advance building or learning, skip it.
+            2. Substantial offer: free tier, 50%+ discount, or meaningful credits — reject token discounts <30% with no free tier
+            3. Recognizable product with real student community
+            4. Self-serve student program page (not "contact us" / institutional purchase)
+            5. Fills a gap (avoid 4th entry in saturated categories)
+            6. Active signup page
 
             Shortlist up to **5 new benefits** across both passes.
 

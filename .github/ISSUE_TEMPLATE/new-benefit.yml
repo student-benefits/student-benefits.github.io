@@ -8,6 +8,8 @@ body:
       value: |
         **Name the benefit — a few words is enough.** Grant finds the signup URL and extracts the details.
 
+        This directory is for benefits that help students **build, learn, and ship** — dev tools, cloud/AI credits, design and learning resources. Consumption perks (music, video streaming, shopping, broad discount aggregators) are out of scope, however good the deal.
+
   - type: textarea
     id: description
     attributes:
@@ -19,7 +21,7 @@ body:
         "Notion is free for students"
         "JetBrains gives free IDEs"
         "check out figma education"
-        "Spotify has 50% off for students - includes Hulu"
+        "GitHub Copilot is free for verified students"
 
         Or be more detailed if you prefer:
         "Cursor offers one free year of Cursor Pro for verified university students. It's an AI-powered code editor with 500 fast requests per month. Sign up at cursor.com/students"
