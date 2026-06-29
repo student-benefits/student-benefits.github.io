@@ -129,8 +129,8 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `add-benefit.yml` | Issue labeled `new-benefit` | Validates submission, deduplicates, creates PR |
-| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar, deduplicates, creates PR |
+| `add-benefit.yml` | Issue labeled `new-benefit` | Validates + deduplicates, then appends to the rolling `pending-benefits` PR (one PR to review) — standalone PR only as a fallback |
+| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar + deduplicates, then appends to the rolling `pending-events` PR — standalone PR only as a fallback |
 | `discover-benefits.yml` | Weekly (Monday) or manual | Searches for new student benefits, opens issues for the best finds |
 | `discover-events.yml` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens one PR |
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
@@ -143,6 +143,8 @@ Edit a workflow's `prompt:` directly to change Grant's behavior — no compile s
 When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
 
 No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-event) both fire on any label event and the non-matching one skips correctly. Revisit a dispatcher at 3+ label-triggered workflows.
+
+**Rolling consolidation PRs.** So the maintainer reviews one PR instead of one-per-submission, `add-benefit`/`add-event` append each new entry to a single open PR labelled `pending-benefits` / `pending-events` (branch `add-benefit-pending` / `add-event-pending`) rather than opening a fresh PR each time. Each contributing issue is referenced with its own plain-text `Closes #N`, so the one merge closes them all. It's **best-effort**: on any git/PR failure (e.g. two runs racing the same branch) the workflow falls back to a standalone PR — a submission is never dropped, at worst you get an extra PR. Consolidation never merges anything; the merge stays the human trust boundary.
 
 ### Falsifiability (scheduled workflows)
 
@@ -176,8 +178,11 @@ the data files) enforces the structural rules below automatically: schema,
 `id`/`category`/`offer_type` validity, ≤120-char descriptions, canonical
 formatting, and the forbidden-link rule (no `help.`/`support.`/`docs.`/`blog.`
 subdomains, `/articles/` paths, or bare homepages). A red check means the data
-is invalid — don't merge. The remaining items below still need a human eye
-(liveness, duplicates, whether the link is genuinely the signup page).
+is invalid — don't merge. (The data-writing workflows now run this same
+validator in-loop and fix what it flags before opening a PR, so a red check
+should be rare — CI is the backstop, not the first line.) The remaining items
+below still need a human eye (liveness, duplicates, whether the link is
+genuinely the signup page).
 
 When reviewing PRs (especially those created by the add-benefit workflow):
 

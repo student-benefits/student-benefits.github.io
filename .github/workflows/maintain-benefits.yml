@@ -32,74 +32,34 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
-            You audit every entry in `data/benefits.json` for link health and quality, fix every finding you can, and open a single PR. Findings go directly to a PR — you don't open issues.
+            You audit every entry in `data/benefits.json`, fix what you can, validate, and open a single PR. Findings go to the PR — never open issues.
 
-            ## Step 1: Read
+            ## The structural gate is `scripts/validate_data.py` — defer to it
 
-            Read `data/benefits.json`. Note today's UTC ISO 8601 date.
+            That script is the source of truth for every mechanical rule: https-only links, no `help.`/`support.`/`docs.`/`blog.` subdomains, no `/articles/` paths, valid `id`/`category`/`offer_type`, ≤120-char descriptions, and id-sort order. Do NOT re-derive these by hand — you'll run the script in Step 4 and fix whatever it flags. Your job is the judgment the script *can't* make:
 
-            ## Step 2: Link health
+            - **Liveness** — does the link actually load? WebFetch each `link` (rate-limit ~1/sec). Treat a clear 404 or network/DNS failure as **broken**; a final URL whose *hostname* differs (cross-domain) as **redirected** (same-domain path changes don't count); skip 403s (usually bot-blocking, not dead).
+            - **Genuine signup page** — is the link the program's own student signup/pricing/overview page, not a marketing homepage (`/`, `/home`) or a doc article? (The script catches forbidden subdomains/paths; you catch bare homepages and "looks official but isn't the offer.")
+            - **Specific offer** — does the description name a real number, plan, or duration (not "student discount available")?
+            - **Self-serve** — flag descriptions gated on an institution ("through your university", "ask your institution", "contact IT").
+            - **Offer-type accuracy** — does `offer_type` match what the description actually says (e.g. "% off" must not be `free`)? The script checks it's a *valid* value; you check it's the *right* one.
 
-            For each benefit, WebFetch its `link`. Classify:
-            - **Broken**: fetch fails (network/DNS), or page is clearly 404. Skip 403s (often bot-blocking).
-            - **Redirected**: final URL's hostname differs from original (cross-domain). Same-domain path changes don't count.
-            - **Healthy**: anything else.
+            Only act on unambiguous cases; when uncertain, leave the entry unchanged.
 
-            Rate-limit to 1 req/sec.
+            ## Step 1: Fix
 
-            ## Step 3: Quality review
+            For a broken/redirected link or a wrong/marketing link: WebSearch `"{name}" student discount signup`, WebFetch the best result, and update `link` to the program's own signup/pricing/overview page. If the program no longer offers a student benefit at all, remove the entry. Fix offer-type mismatches in place; trim over-long descriptions only without losing the offer specifics. Edit `data/benefits.json` directly — preserve 2-space indent, trailing newline, and id-sort order.
 
-            For each benefit, apply the bar. Only flag unambiguous violations; if uncertain, skip.
+            ## Step 2: Validate (required — this is the loop)
 
-            1. **Specific offer**: description must contain a percentage, dollar/credit amount, plan name, or duration. Flag generic descriptions.
-            2. **Direct signup link**: flag if path is exactly `/` or `/home`, or if subdomain is `support.`/`docs.`/`help.`/`blog.`, or if path contains `/articles/`. Help/docs/support articles are documentation, not signup — even when the article title mentions students. URL structure only — don't read page content.
-            3. **Self-serve**: flag if description contains "through your university", "ask your institution", or "contact IT".
-            4. **Offer type accuracy**: flag clear mismatches — description says "% off" / "discount" but `offer_type: free`; or description says "free" but `offer_type: discount`.
-            5. **Description length**: flag `description` exceeding 120 characters.
+            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix them, and run again. Repeat until it exits 0. Do not open a PR while the validator is red — a replacement link that trips a forbidden-subdomain or sort error is the validator's job to catch, not yours to memorize.
 
-            ## Step 4: Fix each finding
+            ## Step 3: Open a PR (only if you changed the file)
 
-            **Broken/redirected**: WebSearch `"{name}" student discount signup`, WebFetch top result. If valid student page found → update `link`. If program no longer offers a student program → remove the entry. Redirect destinations that are valid → update `link`; otherwise treat as broken.
+            Branch `maintain-benefits-{YYYY-MM-DD}`, title `[Maintenance]: Fix {N} benefit(s)` (N = entries changed or removed). Body: a one-sentence Summary plus a short table of what changed (benefit, problem, fix) and, separately, anything removed and why. Omit empty sections.
 
-            Any replacement `link` you choose MUST also pass the Step 3 rule #2 structure check — never a `help.`/`support.`/`docs.`/`blog.` subdomain, a `/articles/` path, or a bare homepage (`/` or `/home`), even if it's the top search result. If the only result is a help/docs article, keep searching for the program's own signup/pricing/overview page. A broken link is no excuse to introduce a forbidden one.
+            ## Step 4: Close `link-health` issues
 
-            **Quality flags**:
-            - **Direct signup link**: WebSearch for the direct student signup page; update `link` if found.
-            - **Offer type mismatch**: update `offer_type` to match the description.
-            - **Description length**: trim to ≤120 chars without losing the offer specifics. If trimming would lose meaning, leave unchanged.
-            - **Specific offer** / **Self-serve**: only fix if correct info is clearly findable via WebFetch. If uncertain, leave unchanged.
-
-            ## Step 5: Apply changes
-
-            If any fixes were made, edit `data/benefits.json` — preserve 2-space indent and trailing newline, maintain entry order.
-
-            ## Step 6: Open a PR (only if fixes made)
-
-            **Branch**: `maintain-benefits-{today YYYY-MM-DD}`
-            **Title**: `[Maintenance]: Fix {N} benefit(s)` where N = entries changed or removed.
-            **Body**:
-            ```
-            ## Summary
-
-            <one sentence>
-
-            ### Fixed
-            | Benefit | Issue | Change |
-            |---|---|---|
-            | {name} | {broken / redirected / type mismatch / ...} | {what changed} |
-
-            ### Removed
-            | Benefit | Reason |
-            |---|---|
-            | {name} | Program no longer offers a student benefit |
-            ```
-            Omit empty sections.
-
-            ## Step 7: Close link-health issues
-
-            Find open issues labeled `link-health`. Close each with a comment matching the outcome:
-            - **No findings from Steps 2 or 3**: "All benefits are healthy."
-            - **Findings existed but none fixable**: "Found {N} issue(s) that require manual review: {names}."
-            - **PR was opened**: "Fixed in PR #{pr_number}."
+            Close each open `link-health` issue with the matching outcome: "Fixed in PR #{n}." if a PR was opened; "All benefits are healthy." if nothing needed fixing; or "Found {N} issue(s) that require manual review: {names}." if findings exist that you couldn't safely fix.

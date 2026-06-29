@@ -31,7 +31,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
           allowed_bots: "claude"
-          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
             You process student benefit submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it, and either open a PR adding the benefit or comment explaining why it can't be added.
 
@@ -123,21 +123,28 @@ jobs:
             }
             ```
 
-            ## Step 6: Open PR + comment
+            ## Step 5.5: Validate (required — this closes the loop)
 
-            Branch: `add-benefit-{id}`. Title: `{name}`. Body:
-            ```
-            ## {name}
+            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/benefits.json`, and run again — repeat until it exits 0. Never open the PR while the validator is red: it is the deterministic gate for schema, link shape, and sort order, so let it catch what you missed instead of guessing.
 
-            **Category:** {category}
-            **Link:** {link}
+            ## Step 6: Add to the pending PR (or open it), then comment
 
-            {description}
+            New benefits accumulate on ONE rolling pull request labelled `pending-benefits`, so the maintainer reviews a single PR instead of one per submission. This is **best-effort**: if any git/PR step below fails, fall back to a standalone PR (6c) — never drop a submission, and never merge anything yourself.
 
-            ---
+            ### 6a — Find the pending PR
+            `gh pr list --label pending-benefits --state open --json number,headRefName --limit 1`
 
-            Closes #${{ github.event.issue.number || github.event.inputs.issue }}
-            ```
-            The Closes line must be plain text (not in a code fence) so GitHub auto-closes on merge.
+            ### 6b — If one exists, add to it
+            - `git fetch origin <headRefName> && git checkout <headRefName>` — it already holds earlier queued benefits; keep them all.
+            - Re-apply your Step 5 changes here: insert the entry into `data/benefits.json` in `id`-sorted position, and replace `agent/state/last-run.json`.
+            - Run `python3 scripts/validate_data.py` until it exits 0.
+            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push`. If the push is rejected because the branch moved, run `git fetch origin <headRefName> && git reset --hard origin/<headRefName>`, redo the insertion + validation on the fresh state, and push once more. If it still fails, go to 6c.
+            - `gh pr edit <number>`: set the title to `Add {N} student benefits` (N = entries now on the branch) and append to the body one line `- {name} ({category})` and, on its own plain-text line, `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` — so merging the single PR closes every contributing issue.
 
-            After the PR is open, comment on the issue: "Added **{name}** ({category}) — {description}\n\nPR: {pr_url}"
+            ### 6c — Otherwise (or on any 6b failure), open it
+            - `git checkout -B add-benefit-pending origin/main`. (On a 6b fallback, use branch `add-benefit-{id}` and skip the `--label` below — a standalone PR, not the rolling one.)
+            - Insert the entry, validate to green, commit, then `git push -u origin <branch>` (add `--force-with-lease` if the branch already exists from a previously-merged PR).
+            - `gh pr create --label pending-benefits --title "Add 1 student benefit: {name}"` with a body holding `- {name} ({category})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
+
+            ### 6d — Comment + close
+            Comment on the issue: "Added **{name}** ({category}) — {description}\n\nPR: {pr_url}". The merge stays a human decision.

@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 """Validate data/benefits.json and data/events.json against the schema.
 
-Deterministic gate for the data integrity rules in CLAUDE.md. Runs in CI on
-every PR that touches the data files, so the rules hold regardless of which
-workflow (or which model) produced the change.
+Deterministic gate (Anthropic, "Building Effective Agents") for the data
+integrity rules in CLAUDE.md. Runs in CI on every PR that touches the data
+files, so the rules hold regardless of which workflow (or which model) produced
+the change.
+
+It is also the maintain-benefits loop's verifiable environment (Karpathy,
+"Verifiability"): resettable (re-runnable on every attempt), efficient (offline,
+sub-second), and rewardable (exit 0/1 is an automated pass/fail). That is what
+lets the agent generate -> check -> fix until green instead of guessing — the
+loop iterates against a real reward signal, not self-assessment.
 
 Checks structure and URL shape only — never fetches links. Liveness is the
 maintain-benefits workflow's job; this gate is about what we can prove offline.

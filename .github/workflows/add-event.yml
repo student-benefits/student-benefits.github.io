@@ -31,7 +31,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
           allowed_bots: "claude"
-          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
             You process student event submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it against the quality bar, and either open a PR adding the event or comment explaining why it can't be added.
 
@@ -99,23 +99,28 @@ jobs:
             }
             ```
 
-            ## Step 7: Open PR + comment
+            ## Step 6.5: Validate (required — this closes the loop)
 
-            Branch: `add-event-{id}`. Title: `{name}`. Body:
-            ```
-            ## {name}
+            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/events.json`, and run again — repeat until it exits 0. Never open the PR while the validator is red: it is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
 
-            **Category:** {category}
-            **Date:** {date}{ – {date_end} if multi-day}
-            **Organizer:** {organizer}
-            **Link:** {link}
+            ## Step 7: Add to the pending PR (or open it), then comment
 
-            {why}
+            New events accumulate on ONE rolling pull request labelled `pending-events`, so the maintainer reviews a single PR instead of one per submission. This is **best-effort**: if any git/PR step below fails, fall back to a standalone PR (7c) — never drop a submission, and never merge anything yourself.
 
-            ---
+            ### 7a — Find the pending PR
+            `gh pr list --label pending-events --state open --json number,headRefName --limit 1`
 
-            Closes #${{ github.event.issue.number || github.event.inputs.issue }}
-            ```
-            The Closes line must be plain text (not in a code fence).
+            ### 7b — If one exists, add to it
+            - `git fetch origin <headRefName> && git checkout <headRefName>` — it already holds earlier queued events; keep them all.
+            - Re-apply your Step 6 changes here: insert the entry into `data/events.json` in date order (earliest first), and replace `agent/state/last-events-submission.json`.
+            - Run `python3 scripts/validate_data.py` until it exits 0.
+            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push`. If the push is rejected because the branch moved, run `git fetch origin <headRefName> && git reset --hard origin/<headRefName>`, redo the insertion + validation on the fresh state, and push once more. If it still fails, go to 7c.
+            - `gh pr edit <number>`: set the title to `Add {N} student events` (N = entries now on the branch) and append to the body one line `- {name} ({category}, {date})` and, on its own plain-text line, `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` — so merging the single PR closes every contributing issue.
 
-            Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}"
+            ### 7c — Otherwise (or on any 7b failure), open it
+            - `git checkout -B add-event-pending origin/main`. (On a 7b fallback, use branch `add-event-{id}` and skip the `--label` below — a standalone PR, not the rolling one.)
+            - Insert the entry, validate to green, commit, then `git push -u origin <branch>` (add `--force-with-lease` if the branch already exists from a previously-merged PR).
+            - `gh pr create --label pending-events --title "Add 1 student event: {name}"` with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
+
+            ### 7d — Comment + close
+            Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}". The merge stays a human decision.
