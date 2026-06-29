@@ -1,12 +1,13 @@
 {
-  "issue": 257,
-  "title": "weights & biases",
-  "timestamp": "2026-06-22T00:00:00Z",
+  "issue": 275,
+  "title": "codescene",
+  "timestamp": "2026-06-29T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Weights & Biases student academic program free" },
-    { "name": "webfetch", "url": "https://wandb.ai/site/academic" },
+    { "name": "websearch", "query": "CodeScene student discount GitHub Student Pack education program" },
+    { "name": "webfetch", "url": "https://codescene.com/github-students" },
+    { "name": "webfetch", "url": "https://codescene.com/resources/github-students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Weights & Biases", "category": "AI Tools", "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free." }
+  "benefit": { "name": "CodeScene", "category": "Dev Tools", "description": "Free student account with code health analysis, technical debt visualization, IDE extensions, and automated PR reviews." }
 }

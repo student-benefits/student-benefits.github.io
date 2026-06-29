@@ -255,6 +255,21 @@
     "popularity": 5
   },
   {
+    "id": "codescene",
+    "name": "CodeScene",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free student account with code health analysis, technical debt visualization, IDE extensions, and automated PR reviews.",
+    "link": "https://codescene.com/github-students",
+    "tags": [
+      "GitHub Student Pack",
+      "Code Analysis",
+      "IDE Extensions",
+      "Code Quality"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "cursor-pro",
     "name": "Cursor Pro",
     "category": "AI Tools",
@@ -569,6 +584,20 @@
     "popularity": 6
   },
   {
+    "id": "honeybadger",
+    "name": "Honeybadger",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Small plan for 1 year (worth $700+) — 225K errors/month, 60 uptime checks, unlimited apps.",
+    "link": "https://www.honeybadger.io/github-students/",
+    "tags": [
+      "Error Monitoring",
+      "Uptime",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "ibm-skillsbuild",
     "name": "IBM SkillsBuild",
     "category": "Learning",
@@ -667,6 +696,20 @@
       "Communication"
     ],
     "popularity": 7
+  },
+  {
+    "id": "lucidchart",
+    "name": "Lucidchart",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Education account auto-upgraded with school email. Real-time collaboration, custom templates, and revision history.",
+    "link": "https://lucid.co/lucidchart/use-cases/education",
+    "tags": [
+      "Diagramming",
+      "Collaboration",
+      "Design"
+    ],
+    "popularity": 5
   },
   {
     "id": "lumix-edu",
