@@ -176,8 +176,11 @@ the data files) enforces the structural rules below automatically: schema,
 `id`/`category`/`offer_type` validity, ≤120-char descriptions, canonical
 formatting, and the forbidden-link rule (no `help.`/`support.`/`docs.`/`blog.`
 subdomains, `/articles/` paths, or bare homepages). A red check means the data
-is invalid — don't merge. The remaining items below still need a human eye
-(liveness, duplicates, whether the link is genuinely the signup page).
+is invalid — don't merge. (The data-writing workflows now run this same
+validator in-loop and fix what it flags before opening a PR, so a red check
+should be rare — CI is the backstop, not the first line.) The remaining items
+below still need a human eye (liveness, duplicates, whether the link is
+genuinely the signup page).
 
 When reviewing PRs (especially those created by the add-benefit workflow):
 
