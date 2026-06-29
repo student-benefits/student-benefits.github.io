@@ -1,12 +1,11 @@
 {
-  "issue": 257,
-  "title": "weights & biases",
-  "timestamp": "2026-06-22T00:00:00Z",
+  "issue": 273,
+  "title": "lucidchart",
+  "timestamp": "2026-06-29T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Weights & Biases student academic program free" },
-    { "name": "webfetch", "url": "https://wandb.ai/site/academic" },
+    { "name": "webfetch", "url": "https://lucid.co/lucidchart/use-cases/education" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Weights & Biases", "category": "AI Tools", "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free." }
+  "benefit": { "name": "Lucidchart", "category": "Design", "description": "Free Education account auto-upgraded with school email. Real-time collaboration, custom templates, and revision history." }
 }

@@ -669,6 +669,20 @@
     "popularity": 7
   },
   {
+    "id": "lucidchart",
+    "name": "Lucidchart",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Education account auto-upgraded with school email. Real-time collaboration, custom templates, and revision history.",
+    "link": "https://lucid.co/lucidchart/use-cases/education",
+    "tags": [
+      "Diagramming",
+      "Collaboration",
+      "Design"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "lumix-edu",
     "name": "LUMIX EDU",
     "category": "Design",
