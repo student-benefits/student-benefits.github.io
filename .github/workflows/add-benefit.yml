@@ -31,7 +31,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_non_write_users: "*"
           allowed_bots: "claude"
-          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
+          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
             You process student benefit submissions from GitHub issues. Read issue #${{ github.event.issue.number || github.event.inputs.issue }}, validate it, and either open a PR adding the benefit or comment explaining why it can't be added.
 
@@ -122,6 +122,10 @@ jobs:
               "benefit": { "name": "...", "category": "...", "description": "..." }
             }
             ```
+
+            ## Step 5.5: Validate (required — this closes the loop)
+
+            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/benefits.json`, and run again — repeat until it exits 0. Never open the PR while the validator is red: it is the deterministic gate for schema, link shape, and sort order, so let it catch what you missed instead of guessing.
 
             ## Step 6: Open PR + comment
 
