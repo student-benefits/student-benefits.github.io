@@ -1,12 +1,11 @@
 {
-  "issue": 257,
-  "title": "weights & biases",
-  "timestamp": "2026-06-22T00:00:00Z",
+  "issue": 274,
+  "title": "honeybadger",
+  "timestamp": "2026-06-29T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Weights & Biases student academic program free" },
-    { "name": "webfetch", "url": "https://wandb.ai/site/academic" },
+    { "name": "webfetch", "url": "https://www.honeybadger.io/github-students/" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Weights & Biases", "category": "AI Tools", "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free." }
+  "benefit": { "name": "Honeybadger", "category": "Dev Tools", "description": "Free Small plan for 1 year (worth $700+) — 225K errors/month, 60 uptime checks, unlimited apps." }
 }

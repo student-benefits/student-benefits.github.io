@@ -569,6 +569,20 @@
     "popularity": 6
   },
   {
+    "id": "honeybadger",
+    "name": "Honeybadger",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Small plan for 1 year (worth $700+) — 225K errors/month, 60 uptime checks, unlimited apps.",
+    "link": "https://www.honeybadger.io/github-students/",
+    "tags": [
+      "Error Monitoring",
+      "Uptime",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "ibm-skillsbuild",
     "name": "IBM SkillsBuild",
     "category": "Learning",
