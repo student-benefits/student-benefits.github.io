@@ -255,6 +255,21 @@
     "popularity": 5
   },
   {
+    "id": "codescene",
+    "name": "CodeScene",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free student account with code health analysis, technical debt visualization, IDE extensions, and automated PR reviews.",
+    "link": "https://codescene.com/github-students",
+    "tags": [
+      "GitHub Student Pack",
+      "Code Analysis",
+      "IDE Extensions",
+      "Code Quality"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "cursor-pro",
     "name": "Cursor Pro",
     "category": "AI Tools",
