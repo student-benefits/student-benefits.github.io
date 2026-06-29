@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f0">
-  <meta name="description" content="Grant is the AI agent that curates Student Benefits Hub. See how it works and what it did last.">
+  <meta name="description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows, a deterministic gate, and a human in the loop. See the loop, in the field's own terms.">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <title>Grant · AI Agent · Student Benefits Hub</title>
+  <title>Grant · How the loop works · Student Benefits Hub</title>
   <link rel="stylesheet" href="/agent/agent.css">
 </head>
 <body>
@@ -23,16 +23,47 @@
 
 <main class="main">
 
+  <!-- ── identity ─────────────────────────────────────── -->
   <section class="identity">
     <h1 class="identity-name">Grant</h1>
-    <p class="identity-role">AI agent · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4.6</a> · Student Benefits Hub</p>
+    <p class="identity-role">Agentic system · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4.6</a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant is an AI agent that curates this directory by verifying submissions, searching the web for new student programs, and opening pull requests. It runs on a schedule to discover and add benefits without waiting for a human to suggest them. A human reviews and merges every PR — Grant handles correctness, the reviewer exercises judgment.
+      Grant keeps this directory current. It’s tempting to call it “an AI agent,” but the honest version is
+      smaller and more interesting: a few <strong>workflows</strong> that each run Claude on a fixed path,
+      a deterministic <strong>gate</strong> that checks every change, and a <strong>human</strong> who merges.
+      That restraint is the design.
     </p>
   </section>
 
+  <!-- ── the loop (thesis) ────────────────────────────── -->
   <section class="section">
-    <p class="section-label">Architecture</p>
+    <p class="section-label">The loop</p>
+    <div class="loop" role="img" aria-label="The build loop: Claude generates a change, a gate verifies it, the loop iterates on failure, and a human merges a passing change to go live.">
+      <div class="loop-stage loop-stage--gen">
+        <span class="loop-stage-k">generate</span>
+        <span class="loop-stage-v">Claude writes a change</span>
+      </div>
+      <span class="loop-link"><span class="loop-link-l">proposes</span></span>
+      <div class="loop-stage loop-stage--gate">
+        <span class="loop-stage-k">verify</span>
+        <span class="loop-stage-v">the gate checks it</span>
+      </div>
+      <span class="loop-link loop-link--pass"><span class="loop-link-l">pass</span></span>
+      <div class="loop-stage loop-stage--human">
+        <span class="loop-stage-k">merge</span>
+        <span class="loop-stage-v">a human ships it</span>
+      </div>
+      <span class="loop-live">live</span>
+      <span class="loop-iterate"><span class="loop-iterate-l">fail → iterate</span></span>
+    </div>
+    <p class="loop-caption">
+      Generate, verify, and iterate until the gate passes — then a person merges. Everything below is this loop, in detail.
+    </p>
+  </section>
+
+  <!-- ── architecture ─────────────────────────────────── -->
+  <section class="section">
+    <p class="section-label">Architecture <span class="section-label-tag">tap a node</span></p>
     <div class="arch-diagram" role="region" aria-label="Interactive architecture diagram. Click any node to learn what it does.">
       <div class="arch-nodes">
 
@@ -43,7 +74,7 @@
           </button>
           <button class="arch-node arch-node--github" id="node-schedule" aria-expanded="false" aria-controls="panel-schedule">
             <span class="arch-node-label">Schedule</span>
-            <span class="arch-node-sublabel">Mon, Wed + Sun weekly</span>
+            <span class="arch-node-sublabel">weekly cron</span>
           </button>
         </div>
 
@@ -55,7 +86,7 @@
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--grant" id="node-grant" aria-expanded="false" aria-controls="panel-grant">
             <span class="arch-node-label">Grant</span>
-            <span class="arch-node-sublabel">Claude Sonnet 4.6</span>
+            <span class="arch-node-sublabel">augmented LLM</span>
           </button>
         </div>
 
@@ -78,14 +109,25 @@
 
         <div class="arch-connector" id="conn-validate" aria-hidden="true">
           <span class="packet packet-req"></span>
+          <span class="arch-connector-label">writes entry</span>
+        </div>
+
+        <div class="arch-node-wrap">
+          <button class="arch-node arch-node--gate" id="node-gate" aria-expanded="false" aria-controls="panel-gate">
+            <span class="arch-node-label">Gate</span>
+            <span class="arch-node-sublabel">validate_data.py</span>
+          </button>
+        </div>
+
+        <div class="arch-connector" id="conn-gate" aria-hidden="true">
           <span class="packet packet-res"></span>
-          <span class="arch-connector-label">validated entry</span>
+          <span class="arch-connector-label">pass</span>
         </div>
 
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output">
             <span class="arch-node-label">GitHub</span>
-            <span class="arch-node-sublabel">PR · issue · comment</span>
+            <span class="arch-node-sublabel">PR · comment</span>
           </button>
         </div>
 
@@ -106,124 +148,73 @@
       <div class="node-panels-slot">
         <div id="panel-issue" class="node-panel" hidden>
           <p class="node-panel-title">GitHub Issue</p>
-          <p>Anyone can suggest a benefit by opening an issue. When it's labeled <code>new-benefit</code>, GitHub fires a webhook that starts Grant. The title and body are the only inputs. Everything else Grant discovers on its own.</p>
+          <p>Anyone can suggest a benefit by opening an issue. When it’s labeled <code>new-benefit</code>, GitHub fires a webhook that starts a workflow. The title and body are the only inputs — everything else Grant finds on its own.</p>
         </div>
         <div id="panel-schedule" class="node-panel" hidden>
-          <p class="node-panel-title">Weekly Schedule</p>
-          <p>Three scheduled workflows run without human prompting. On Mondays, <code>discover-benefits</code> searches the web for new student programs and opens GitHub issues for the best discoveries — feeding Grant's own queue. On Wednesdays, <code>discover-events</code> searches for notable student events, removes expired entries, and opens PRs directly. On Sundays, <code>maintain-benefits</code> checks every existing entry for broken links and quality issues, fixes what it can, and opens a PR with the changes.</p>
-          <p>Two issue-triggered workflows process community submissions. <code>add-benefit</code> fires when an issue is labeled <code>new-benefit</code>; <code>add-event</code> fires when an issue is labeled <code>new-event</code>. Both validate the submission, check for duplicates, and open a PR — or comment and close the issue if the submission doesn't pass.</p>
+          <p class="node-panel-title">Weekly schedule</p>
+          <p>Scheduled workflows run without a human prompting them. <code>discover-benefits</code> searches for new programs and opens issues for the best ones; <code>discover-events</code> finds student events; <code>maintain-benefits</code> audits every link and fixes what it can. Each is a <strong>workflow</strong> — Claude on a fixed path, not a free-roaming agent.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
-          <p class="node-panel-title">Grant · Claude Sonnet 4.6</p>
-          <p>The orchestrator. Grant reads the issue, decides which tools to call, interprets the results, and determines the outcome without human approval of intermediate steps. Its output depends on the workflow and the outcome — a PR, a comment, a closed issue, or a combination. Its instructions are a Markdown file checked into this repository.</p>
+          <p class="node-panel-title">Grant · the augmented LLM</p>
+          <p>The building block Anthropic calls the <em>augmented LLM</em>: Claude plus a few tools, reasoning step by step. It reads the issue, decides which tool to call next, and writes the change — but it can’t publish. Its instructions are a plain Markdown prompt checked into the repo.</p>
         </div>
         <div id="panel-search" class="node-panel" hidden>
           <p class="node-panel-title">Web Search</p>
-          <p>Claude Code’s built-in <code>WebSearch</code> tool. Grant calls it to verify whether a student program exists by searching the live web beyond its training data, returning candidate results Grant can reason over directly.</p>
+          <p>Claude’s built-in <code>WebSearch</code> tool. Grant calls it to confirm a student program actually exists on the live web — beyond training data — and returns candidate results it can reason over.</p>
         </div>
         <div id="panel-web" class="node-panel" hidden>
           <p class="node-panel-title">Web Fetch</p>
-          <p>Claude Code’s built-in <code>WebFetch</code> tool. After Web Search returns candidate URLs, Grant fetches the actual pages to confirm the program is real, active, and has a direct student signup link. The link Grant records must be one it loaded successfully in the same run — never a path guessed from the product name — so dead URLs don’t reach a PR. Read-only. No forms submitted, no side effects.</p>
+          <p>Claude’s built-in <code>WebFetch</code> tool. Grant opens the actual page to confirm the program is real and grab the correct signup link. The link it records must be one it loaded in the same run — never a path guessed from the name — so dead URLs don’t reach a PR. Read-only, no side effects.</p>
+        </div>
+        <div id="panel-gate" class="node-panel" hidden>
+          <p class="node-panel-title">The gate · <code>validate_data.py</code></p>
+          <p>A deterministic check — no LLM. It runs against every change and exits <code>0</code> (pass) or <code>1</code> (fail) on schema, link shape, and sort order. This is the loop’s <strong>verifiable environment</strong>: <em>resettable</em> (re-runs each attempt), <em>efficient</em> (offline, sub-second), and <em>rewardable</em> (an automatic pass/fail). It’s what lets Grant iterate against a real signal instead of grading its own work.</p>
         </div>
         <div id="panel-output" class="node-panel" hidden>
-          <p class="node-panel-title">GitHub Output</p>
-          <p>Grant's outputs depend on the workflow. For benefit and event submissions: if valid and new, it opens a pull request and comments on the issue; if rejected or duplicate, it comments with the reason and closes the issue. For <code>discover-benefits</code>: it opens new issues for the best discoveries it found. For <code>discover-events</code>: it opens a PR directly. For <code>maintain-benefits</code>: it fixes broken links and quality flags directly in <code>data/benefits.json</code> and opens a PR. All writes go through GitHub's API. PRs wait for a human reviewer to merge — Grant cannot publish directly.</p>
+          <p class="node-panel-title">GitHub output</p>
+          <p>Once the gate passes, Grant opens a pull request and comments on the issue. For a rejection or duplicate it comments the reason and closes the issue. Every write goes through GitHub’s API — and stops short of merging.</p>
         </div>
         <div id="panel-human" class="node-panel" hidden>
-          <p class="node-panel-title">Human Reviewer</p>
-          <p>Grant cannot merge its own pull requests. Each workflow runs with a scoped GitHub Actions <code>permissions:</code> block (<code>contents</code>, <code>issues</code>, <code>pull-requests</code>) — enough to commit to a branch, open a PR, and comment, but not to merge. The merge itself is gated by <code>CODEOWNERS</code> and branch protection, so it stays a human decision. Grant handles correctness (format, links, duplicates); the reviewer exercises judgment (editorial fit, quality).</p>
+          <p class="node-panel-title">Human reviewer</p>
+          <p>Grant can’t merge its own PRs. Each workflow runs with a scoped <code>permissions:</code> block — enough to branch, open a PR, and comment, never to merge. The merge is held by <code>CODEOWNERS</code> and branch protection, so going live is always a person’s call. Grant handles correctness; the reviewer handles judgment.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ── workflow ↔ agent spectrum (replaces "what makes this an agent?") -->
   <section class="section">
-    <p class="section-label">What makes this an agent?</p>
-
-    <div class="prop-radial" role="region" aria-label="Agent properties. Click any dimension to learn more.">
-      <div class="prop-radial-center" aria-hidden="true">
-        <span class="prop-radial-center-name">Grant</span>
-        <span class="prop-radial-center-sub">AI agent</span>
+    <p class="section-label">Workflow or agent?</p>
+    <p class="spectrum-lede">
+      Anthropic draws one line: a <strong>workflow</strong> runs Claude on a path you wrote; an
+      <strong>agent</strong> directs its own path. Each piece of Grant sits closer to one end. The honest
+      answer is “mostly workflow” — and that’s the point.
+    </p>
+    <div class="spectrum" role="img" aria-label="A spectrum from workflow (predefined path) to agent (self-directing). Grant's pieces cluster toward the workflow end.">
+      <div class="spectrum-axis">
+        <span class="spectrum-end spectrum-end--l">workflow<small>predefined path</small></span>
+        <span class="spectrum-line"></span>
+        <span class="spectrum-end spectrum-end--r">agent<small>self-directing</small></span>
       </div>
-
-      <button class="prop-chip prop-radial-node" id="pchip-tool" style="left:50%;top:14%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-        Tool use
-      </button>
-      <button class="prop-chip prop-radial-node" id="pchip-decision" style="left:70%;top:32%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v9m0 0l-4 4m4-4l4 4M8 20h8"/></svg>
-        Decision-making
-      </button>
-      <button class="prop-chip prop-radial-node" id="pchip-autonomy" style="left:70%;top:68%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        Autonomy
-      </button>
-      <button class="prop-chip prop-radial-node" id="pchip-memory" style="left:50%;top:86%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><ellipse cx="12" cy="7" rx="8" ry="2.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5V7"/><path stroke-linecap="round" stroke-linejoin="round" d="M4 12v5c0 1.38 3.58 2.5 8 2.5s8-1.12 8-2.5v-5"/></svg>
-        Memory
-      </button>
-      <button class="prop-chip prop-radial-node" id="pchip-self" style="left:30%;top:68%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-        Self-direction
-      </button>
-      <button class="prop-chip prop-radial-node" id="pchip-oversight" style="left:30%;top:32%" aria-expanded="false">
-        <svg class="prop-chip-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-        Human oversight
-      </button>
+      <ul class="spectrum-marks">
+        <li class="mark" style="--x:6%"><span class="mark-dot mark-dot--gate"></span><span class="mark-l"><code>validate-data</code><small>the gate · no LLM</small></span></li>
+        <li class="mark" style="--x:30%"><span class="mark-dot"></span><span class="mark-l"><code>add-benefit</code><small>prompt chaining + gate</small></span></li>
+        <li class="mark" style="--x:50%"><span class="mark-dot"></span><span class="mark-l"><code>maintain-benefits</code><small>evaluator-optimizer</small></span></li>
+        <li class="mark" style="--x:68%"><span class="mark-dot"></span><span class="mark-l"><code>discover-benefits</code><small>bounded search</small></span></li>
+      </ul>
     </div>
-
-    <div class="prop-detail-slot">
-      <div id="ppanel-tool" class="node-panel" hidden>
-        <p class="node-panel-title">Tool use</p>
-        <p>An agent selects tools based on what it finds, not a fixed sequence. Grant calls GitHub, web search, and web fetch in an order that varies with every submission.</p>
-      </div>
-      <div id="ppanel-decision" class="node-panel" hidden>
-        <p class="node-panel-title">Decision-making</p>
-        <p>An agent uses LLM reasoning to choose a path at each step, not a fixed branching script. Every submission ends in one of three outcomes:</p>
-        <div class="outcomes-grid">
-          <div class="outcome-card accepted">
-            <p class="outcome-label">✓ Accepted</p>
-            <p class="outcome-desc">Real program, not a duplicate. PR opened, issue commented.</p>
-          </div>
-          <div class="outcome-card rejected">
-            <p class="outcome-label">✗ Rejected</p>
-            <p class="outcome-desc">No student program found, or the benefit is a consumption perk rather than build &amp; grow. Issue closed, domain logged.</p>
-          </div>
-          <div class="outcome-card duplicate">
-            <p class="outcome-label">⚠ Duplicate</p>
-            <p class="outcome-desc">Already in directory. Issue closed with a pointer to existing entry.</p>
-          </div>
-        </div>
-      </div>
-      <div id="ppanel-autonomy" class="node-panel" hidden>
-        <p class="node-panel-title">Autonomy</p>
-        <p>An agent runs end-to-end without a human approving intermediate steps. Grant goes from issue trigger to PR without any checkpoint — but the merge is held for a human. Grant controls how the process runs; humans decide what goes live.</p>
-      </div>
-      <div id="ppanel-memory" class="node-panel" hidden>
-        <p class="node-panel-title">Memory</p>
-        <p>An agent persists state across runs. Grant saves rejected programs in <code>state/rejected.json</code>. Future submissions for the same product skip re-verification entirely.</p>
-      </div>
-      <div id="ppanel-self" class="node-panel" hidden>
-        <p class="node-panel-title">Self-direction</p>
-        <p>An agent generates its own tasks rather than waiting for human input. Grant runs weekly, searches for new student benefits, and creates issues for itself to process.</p>
-      </div>
-      <div id="ppanel-oversight" class="node-panel" hidden>
-        <p class="node-panel-title">Human oversight</p>
-        <p>Grant cannot merge or push to <code>main</code> — every benefit that goes live required a human to approve it. The run log on this page exists so review is informed, not a rubber stamp: a reviewer can see exactly what Grant searched, fetched, and reasoned before deciding.</p>
-      </div>
-    </div>
-
   </section>
 
+  <!-- ── simulated run ────────────────────────────────── -->
   <section class="section">
-    <p class="section-label">How it works <span class="section-label-tag">simulated</span></p>
+    <p class="section-label">Watch a submission <span class="section-label-tag">simulated</span></p>
 
     <div class="sim-task">
       <div class="sim-task-head">
         <span class="sim-task-label">GitHub Issue</span>
         <span class="sim-task-num">#67</span>
       </div>
-      <div class="sim-task-body"><strong>"Adobe Creative Cloud is discounted for students"</strong></div>
+      <div class="sim-task-body"><strong>“Adobe Creative Cloud is discounted for students”</strong></div>
     </div>
 
     <div class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated agent trace"></div>
@@ -237,14 +228,15 @@
     </div>
   </section>
 
-  <section class="section" id="run-section">
-    <details class="run-details" id="run-details">
-      <summary class="run-summary">
-        <span class="section-label">Last run</span>
+  <!-- ── last run ─────────────────────────────────────── -->
+  <section class="section">
+    <details class="run-details">
+      <summary>
+        <span class="section-label">Last real run</span>
         <span class="run-summary-meta" id="run-summary-meta"></span>
       </summary>
-      <div id="run-output">
-        <div class="state-loading">Loading run data…</div>
+      <div id="run-output" class="run-output">
+        <div class="state-loading">Loading the last run…</div>
       </div>
     </details>
   </section>
@@ -252,10 +244,15 @@
 </main>
 
 <footer class="site-footer">
-  <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io/tree/main/.github/workflows" target="_blank" rel="noopener noreferrer">Read the workflows</a> to see exactly what it does, or open an issue to suggest a new benefit or event and watch it run for real.</p>
+  <p class="footer-sources">
+    Built on published practice —
+    <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">Building Effective Agents</a>,
+    <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer">Effective Harnesses</a>, and
+    <a href="https://karpathy.bearblog.dev/verifiability/" target="_blank" rel="noopener noreferrer">Karpathy on Verifiability</a>.
+  </p>
+  <p>Grant is open source. <a href="https://github.com/student-benefits/student-benefits.github.io" target="_blank" rel="noopener noreferrer">Read the workflows</a> to see exactly what it does, or open an issue and watch it run for real.</p>
 </footer>
 
-<script src="/assets/shared.js"></script>
 <script src="/agent/agent.js"></script>
 </body>
 </html>

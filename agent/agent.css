@@ -769,3 +769,138 @@ body {
   .identity-name { font-size: 1.75rem; }
   .trace-head-detail { display: none; }
 }
+
+/* ── gate actor (green; reuses the unused tavily ramp) ── */
+:root {
+  --gate-color:  #1a7a4a;
+  --gate-bg:     #f0faf4;
+  --gate-border: #b8e0c8;
+}
+.arch-node--gate { border-color: var(--gate-border); color: var(--gate-color); background: var(--gate-bg); }
+.arch-node--gate[aria-expanded="true"] { box-shadow: 0 0 0 2px var(--gate-color); }
+.actor-gate .trace-dot { border-color: var(--gate-color); background: var(--gate-color); }
+.badge-gate { background: var(--gate-bg); color: var(--gate-color); border: 1px solid var(--gate-border); }
+
+/* ── the loop (thesis device) ─────────────────────────── */
+.loop {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: relative;
+  padding: 1.75rem 1.5rem 2.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.loop-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid;
+  border-radius: var(--radius-lg);
+  background: var(--surface-raised);
+  min-width: 8.5rem;
+  flex: 1 1 8.5rem;
+}
+.loop-stage-k { font-size: 0.85rem; font-weight: 700; }
+.loop-stage-v { font-size: 0.75rem; color: var(--text-muted); }
+.loop-stage--gen   { border-color: var(--grant-border); color: var(--grant-color); }
+.loop-stage--gate  { border-color: var(--gate-border);  color: var(--gate-color); }
+.loop-stage--human { border-color: var(--github-border); color: var(--github-color); }
+.loop-link {
+  position: relative;
+  flex: 0 0 2.25rem;
+  height: 2px;
+  background: var(--border);
+  align-self: center;
+}
+.loop-link::after {
+  content: ''; position: absolute; right: -1px; top: 50%;
+  width: 6px; height: 6px;
+  border-top: 2px solid var(--border); border-right: 2px solid var(--border);
+  transform: translateY(-50%) rotate(45deg);
+}
+.loop-link--pass, .loop-link--pass::after { background: var(--gate-color); border-color: var(--gate-color); }
+.loop-link-l {
+  position: absolute; top: -1.1rem; left: 50%; transform: translateX(-50%);
+  font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  white-space: nowrap; color: var(--text-muted);
+}
+.loop-link--pass .loop-link-l { color: var(--gate-color); }
+.loop-live {
+  align-self: center; font-size: 0.8rem; font-weight: 700; color: var(--gate-color);
+  padding-left: 0.35rem; white-space: nowrap;
+}
+.loop-iterate {
+  position: absolute; left: 1.5rem; right: 30%; bottom: 0.75rem; height: 1rem;
+  border: 1.5px solid var(--grant-border); border-top: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.loop-iterate-l {
+  position: absolute; left: 50%; bottom: -0.55rem; transform: translateX(-50%);
+  font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--grant-color); background: var(--surface); padding: 0 0.4rem; white-space: nowrap;
+}
+.loop-caption { margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted); max-width: 540px; line-height: 1.6; }
+
+/* ── workflow↔agent spectrum ──────────────────────────── */
+.spectrum-lede {
+  font-size: 0.95rem; color: var(--text-muted); max-width: 560px; line-height: 1.65; margin-bottom: 1.75rem;
+}
+.spectrum-lede strong { color: var(--text); }
+.spectrum-axis { display: flex; align-items: center; gap: 0.75rem; }
+.spectrum-end {
+  display: flex; flex-direction: column; line-height: 1.2;
+  font-size: 0.78rem; font-weight: 700; white-space: nowrap;
+}
+.spectrum-end small { font-weight: 400; font-size: 0.65rem; color: var(--text-muted); }
+.spectrum-end--l { color: var(--gate-color); }
+.spectrum-end--r { color: var(--github-color); text-align: right; }
+.spectrum-line {
+  flex: 1; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--gate-color), var(--border) 55%, var(--github-color));
+}
+.spectrum-marks { list-style: none; position: relative; height: 7rem; margin-top: 1.5rem; }
+.mark {
+  position: absolute; left: var(--x); top: 0; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+  width: max-content; max-width: 9.5rem;
+}
+.mark:nth-child(even) { top: 3.4rem; }
+.mark-dot {
+  width: 9px; height: 9px; border-radius: 50%; background: var(--grant-color);
+  box-shadow: 0 0 0 4px var(--grant-bg);
+}
+.mark-dot--gate { background: var(--gate-color); box-shadow: 0 0 0 4px var(--gate-bg); }
+.mark-l { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; text-align: center; }
+.mark-l code { font-size: 0.72rem; }
+.mark-l small { font-size: 0.66rem; color: var(--text-muted); line-height: 1.3; }
+
+/* code chips inline */
+code {
+  font-family: var(--mono); font-size: 0.85em;
+  background: var(--surface-raised); border: 1px solid var(--border-subtle);
+  border-radius: var(--radius); padding: 0.05em 0.32em; color: var(--text);
+}
+.identity-desc em, .node-panel em, .spectrum-lede em, .loop-caption em { font-style: normal; font-weight: 600; color: var(--text); }
+.identity-desc strong, .node-panel strong { color: var(--text); }
+
+.footer-sources { margin-bottom: 0.6rem; }
+
+@media (max-width: 600px) {
+  .loop { flex-direction: column; align-items: stretch; }
+  .loop-stage { flex: none; }
+  .loop-link { width: 2px; height: 1.4rem; flex-basis: 1.4rem; align-self: center; }
+  .loop-link::after { right: 50%; top: auto; bottom: -1px; transform: translateX(50%) rotate(135deg); }
+  .loop-link-l { top: 50%; left: 1rem; transform: translateY(-50%); }
+  .loop-live { align-self: flex-start; padding-left: 0; }
+  .loop-iterate { display: none; }
+  .spectrum-marks { height: auto; display: grid; gap: 0.7rem; }
+  .mark { position: static; transform: none; flex-direction: row; align-items: center; gap: 0.6rem; max-width: none; }
+  .mark:nth-child(even) { top: 0; }
+  .mark-l { align-items: flex-start; text-align: left; }
+  .spectrum-line { background: var(--border); }
+}
