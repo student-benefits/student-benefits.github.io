@@ -25,20 +25,6 @@
     "expires": "2027-04-04"
   },
   {
-    "id": "iim-ahmedabad-ai-residency-2026",
-    "name": "IIM Ahmedabad AI Summer Residency 2026",
-    "organizer": "IIM Ahmedabad Ventures",
-    "category": "fellowship",
-    "date": "2026-05-07",
-    "date_end": "2026-06-30",
-    "location": "Ahmedabad, India",
-    "remote": false,
-    "eligibility": "STEM undergraduates comfortable building end-to-end prototypes; deadline March 31",
-    "why": "Free 4-6 week residency with housing, cloud credits, and mentorship to build production-ready AI products. Move beyond hackathon demos to real-world applications.",
-    "link": "https://gp12pzj7qtu.typeform.com/ai-residency",
-    "expires": "2026-06-30"
-  },
-  {
     "id": "breakthrough-junior-challenge-2026",
     "name": "Breakthrough Junior Challenge 2026",
     "organizer": "Breakthrough Prize Foundation",
@@ -50,19 +36,6 @@
     "why": "$250,000 post-secondary scholarship, a $50k teacher prize, and a $100k school lab for the best 2-minute science video. No lab or team required; open now through September 15.",
     "link": "https://breakthroughjuniorchallenge.org/enter",
     "expires": "2026-09-15"
-  },
-  {
-    "id": "mcw-young-leaders-fellowship-2026",
-    "name": "MCW Global Young Leaders Fellowship 2026",
-    "organizer": "MCW Global (Miracle Corners of the World)",
-    "category": "fellowship",
-    "date": "2026-06-01",
-    "date_end": "2026-06-30",
-    "remote": true,
-    "eligibility": "Young people worldwide ages 18-26; fluent English required",
-    "why": "Fully funded year-long leadership program with 10-day in-person training, alumni mentorship, and $15k+ project funding. Past graduates lead major NGOs and social enterprises.",
-    "link": "https://mcwglobal.org/young-leaders-fellowship-2026/",
-    "expires": "2026-06-30"
   },
   {
     "id": "yc-summer-fellows-2026",
@@ -229,6 +202,20 @@
     "why": "$85k/year salary + benefits to deploy AI at nonprofits nationwide. Anthropic's $150M flagship initiative — 100-fellow first cohort starts October 2026. Apply by July 17.",
     "link": "https://job-boards.greenhouse.io/claudecorps/jobs/4250200009",
     "expires": "2027-10-19"
+  },
+  {
+    "id": "ai-genesis-hackathon-2026",
+    "name": "AI Genesis Hackathon 2026",
+    "organizer": "Deriv & /function1",
+    "category": "hackathon",
+    "date": "2026-10-26",
+    "date_end": "2026-11-03",
+    "location": "Dubai, UAE",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide; solo or team; online build phase is global, top teams invited to the Dubai finale",
+    "why": "$45,500+ across six AI tracks — security, generative AI, Web3, collaboration tools, autonomous agents, and industry solutions. Online build phase is global; top teams earn a trip to the Dubai finale.",
+    "link": "https://fnctn1.com/ai_genesis_hackathon",
+    "expires": "2026-11-03"
   },
   {
     "id": "grace-hopper-celebration-2026",
