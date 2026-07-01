@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-24T00:00:00Z",
+  "timestamp": "2026-07-01T00:00:00Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -11,27 +11,20 @@
     "https://hack.mit.edu"
   ],
   "keyword_queries": [
-    "student hackathon 2026 free apply open registration",
+    "student hackathon 2026 free apply open",
     "\"open to students\" conference 2026 free OR fellowship application",
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "usaii-global-ai-hackathon-2026",
-    "yc-ai-startup-school-2026",
-    "berkeley-ai-hackathon-2026"
+    "iim-ahmedabad-ai-residency-2026",
+    "mcw-young-leaders-fellowship-2026"
   ],
   "discovered": [
     {
-      "name": "HackHarvard 2026",
-      "date": "2026-10-16",
-      "link": "https://hhuh.io/",
-      "source": "keyword"
-    },
-    {
-      "name": "NASA Space Apps Challenge 2026",
-      "date": "2026-11-14",
-      "link": "https://www.spaceappschallenge.org/",
+      "name": "AI Genesis Hackathon 2026",
+      "date": "2026-10-26",
+      "link": "https://fnctn1.com/ai_genesis_hackathon",
       "source": "keyword"
     }
   ],
