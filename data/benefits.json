@@ -897,6 +897,20 @@
     "repo": "obsidianmd/obsidian-releases"
   },
   {
+    "id": "openai-codex-students",
+    "name": "OpenAI Codex for Students",
+    "category": "AI Tools",
+    "offer_type": "credits",
+    "description": "$100 in Codex credits (2,500 credits) for AI-powered coding; valid 12 months. US and Canada only.",
+    "link": "https://developers.openai.com/community/students",
+    "tags": [
+      "AI Coding",
+      "Credits",
+      "Coding Assistant"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "oracle-cloud",
     "name": "Oracle Cloud",
     "category": "Cloud & Hosting",

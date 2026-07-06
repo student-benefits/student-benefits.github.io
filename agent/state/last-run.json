@@ -1,12 +1,16 @@
 {
-  "issue": 283,
-  "title": "configcat",
+  "issue": 285,
+  "title": "openai codex",
   "timestamp": "2026-07-06T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "ConfigCat student discount education program 2026" },
-    { "name": "webfetch", "url": "https://configcat.com/student/" },
+    { "name": "websearch", "query": "OpenAI Codex student credits program signup 2026" },
+    { "name": "webfetch", "url": "https://developers.openai.com/community/students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ConfigCat", "category": "Dev Tools", "description": "Free Pro plan while enrolled — manage up to 1,000 feature flags with unlimited seats for classmates." }
+  "benefit": {
+    "name": "OpenAI Codex for Students",
+    "category": "AI Tools",
+    "description": "$100 in Codex credits (2,500 credits) for AI-powered coding; valid 12 months. US and Canada only."
+  }
 }
