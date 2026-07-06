@@ -1,12 +1,11 @@
 {
-  "issue": 284,
-  "title": "camber",
+  "issue": 286,
+  "title": "todiagram",
   "timestamp": "2026-07-06T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Camber student discount scientific computing" },
-    { "name": "webfetch", "url": "https://www.cambercloud.com/github-student-pack" },
+    { "name": "webfetch", "url": "https://todiagram.com/education" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Camber", "category": "Cloud & Hosting", "description": "Free Student plan: 200 CPU hours, 75 GB storage, and 200 LLM messages/month for scientific computing." }
+  "benefit": { "name": "ToDiagram", "category": "Dev Tools", "description": "Free Pro plan via GitHub Student Pack — convert JSON, YAML, CSV, and XML to interactive diagrams; 200 cloud docs." }
 }

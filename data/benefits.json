@@ -1140,6 +1140,20 @@
     "popularity": 5
   },
   {
+    "id": "todiagram",
+    "name": "ToDiagram",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro plan via GitHub Student Pack — convert JSON, YAML, CSV, and XML to interactive diagrams; 200 cloud docs.",
+    "link": "https://todiagram.com/education",
+    "tags": [
+      "Diagrams",
+      "Data Visualization",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "tower",
     "name": "Tower",
     "category": "Dev Tools",
