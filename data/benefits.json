@@ -57,6 +57,20 @@
     "popularity": 7
   },
   {
+    "id": "algolia",
+    "name": "Algolia",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "100k records and 1M search operations/month free for 1 year via GitHub Student Pack.",
+    "link": "https://education.github.com/pack",
+    "tags": [
+      "Search",
+      "API",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "apple-education",
     "name": "Apple Education Pricing",
     "category": "Hardware",

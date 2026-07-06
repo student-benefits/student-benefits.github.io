@@ -1,11 +1,13 @@
 {
-  "issue": 286,
-  "title": "todiagram",
+  "issue": 287,
+  "title": "algolia",
   "timestamp": "2026-07-06T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "webfetch", "url": "https://todiagram.com/education" },
+    { "name": "websearch", "query": "Algolia GitHub Student Developer Pack education program signup 2026" },
+    { "name": "webfetch", "url": "https://raw.githubusercontent.com/github-education-resources/Student-Developer-Pack-Current-Partners-FAQ/main/SDP-changelog.md" },
+    { "name": "webfetch", "url": "https://education.github.com/pack" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ToDiagram", "category": "Dev Tools", "description": "Free Pro plan via GitHub Student Pack — convert JSON, YAML, CSV, and XML to interactive diagrams; 200 cloud docs." }
+  "benefit": { "name": "Algolia", "category": "Dev Tools", "description": "100k records and 1M search operations/month free for 1 year via GitHub Student Pack." }
 }
