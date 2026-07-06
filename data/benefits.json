@@ -184,6 +184,21 @@
     "popularity": 5
   },
   {
+    "id": "camber",
+    "name": "Camber",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free Student plan: 200 CPU hours, 75 GB storage, and 200 LLM messages/month for scientific computing.",
+    "link": "https://www.cambercloud.com/github-student-pack",
+    "tags": [
+      "GitHub Student Pack",
+      "Cloud",
+      "HPC",
+      "AI"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "canva",
     "name": "Canva for Education",
     "category": "Design",

@@ -1,16 +1,12 @@
 {
-  "issue": 285,
-  "title": "openai codex",
+  "issue": 284,
+  "title": "camber",
   "timestamp": "2026-07-06T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "OpenAI Codex student credits program signup 2026" },
-    { "name": "webfetch", "url": "https://developers.openai.com/community/students" },
+    { "name": "websearch", "query": "Camber student discount scientific computing" },
+    { "name": "webfetch", "url": "https://www.cambercloud.com/github-student-pack" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "OpenAI Codex for Students",
-    "category": "AI Tools",
-    "description": "$100 in Codex credits (2,500 credits) for AI-powered coding; valid 12 months. US and Canada only."
-  }
+  "benefit": { "name": "Camber", "category": "Cloud & Hosting", "description": "Free Student plan: 200 CPU hours, 75 GB storage, and 200 LLM messages/month for scientific computing." }
 }
