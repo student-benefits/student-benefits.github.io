@@ -270,6 +270,20 @@
     "popularity": 5
   },
   {
+    "id": "configcat",
+    "name": "ConfigCat",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro plan while enrolled — manage up to 1,000 feature flags with unlimited seats for classmates.",
+    "link": "https://configcat.com/student/",
+    "tags": [
+      "Feature Flags",
+      "Dev Tools",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "cursor-pro",
     "name": "Cursor Pro",
     "category": "AI Tools",
