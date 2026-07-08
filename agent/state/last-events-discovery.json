@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-01T00:00:00Z",
+  "timestamp": "2026-07-08T00:00:00Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -16,15 +16,18 @@
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [
-    "iim-ahmedabad-ai-residency-2026",
-    "mcw-young-leaders-fellowship-2026"
-  ],
+  "expired_removed": [],
   "discovered": [
     {
-      "name": "AI Genesis Hackathon 2026",
-      "date": "2026-10-26",
-      "link": "https://fnctn1.com/ai_genesis_hackathon",
+      "name": "a16z Speedrun Alpha Fellowship",
+      "date": "2026-09-01",
+      "link": "https://alpha.a16zspeedrun.com/apply",
+      "source": "known-source"
+    },
+    {
+      "name": "Microsoft Imagine Cup 2027",
+      "date": "2027-01-08",
+      "link": "https://imaginecup.microsoft.com/en-us/",
       "source": "keyword"
     }
   ],
