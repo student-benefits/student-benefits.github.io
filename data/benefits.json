@@ -90,7 +90,7 @@
     "category": "Dev Tools",
     "offer_type": "trial",
     "description": "Free 6-month Arduino Cloud Maker Plan plus hardware discounts (25–50% off select boards) via GitHub Student Pack.",
-    "link": "https://www.arduino.cc/github/students",
+    "link": "https://www.arduino.cc/education/github-students",
     "tags": [
       "IoT",
       "Hardware",
@@ -105,7 +105,7 @@
     "category": "Productivity",
     "offer_type": "free",
     "description": "Free Starter plan via Goodstack verification. Project management with timelines, boards, and team collaboration.",
-    "link": "https://asana.com/industry/education",
+    "link": "https://asana.com/industry/students",
     "tags": [
       "Project Management",
       "Tasks",
@@ -511,20 +511,6 @@
       "GCP"
     ],
     "popularity": 9
-  },
-  {
-    "id": "google-gemini-pro",
-    "name": "Google Gemini Pro",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free 12-month Google AI Pro for students. Includes Gemini 2.5 Pro, Deep Research, and NotebookLM Plus.",
-    "link": "https://gemini.google/students/",
-    "tags": [
-      "AI",
-      "Google",
-      "Research"
-    ],
-    "popularity": 10
   },
   {
     "id": "gorails",
