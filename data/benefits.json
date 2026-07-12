@@ -270,21 +270,6 @@
     "popularity": 5
   },
   {
-    "id": "cursor-pro",
-    "name": "Cursor Pro",
-    "category": "AI Tools",
-    "offer_type": "free",
-    "description": "Free year of Cursor Pro for verified university students. AI code editor with 500 fast requests/month.",
-    "link": "https://cursor.com/students",
-    "tags": [
-      "AI",
-      "Editor",
-      "IDE"
-    ],
-    "popularity": 9,
-    "repo": "getcursor/cursor"
-  },
-  {
     "id": "dashlane",
     "name": "Dashlane",
     "category": "Security",
@@ -332,7 +317,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours.",
-    "link": "https://deepnote.com/docs/student",
+    "link": "https://deepnote.com/docs/edu-verification",
     "tags": [
       "Data Science",
       "Jupyter",
@@ -404,7 +389,7 @@
     "name": "Evernote Student",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "40% off Evernote Professional via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
+    "description": "40% off Evernote Advanced via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
     "link": "https://evernote.com/unidays",
     "tags": [
       "Notes",
@@ -547,7 +532,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://academy.hackthebox.com/billing",
+    "link": "https://academy.hackthebox.com/faq",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -589,7 +574,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
-    "link": "https://skillsbuild.org/students",
+    "link": "https://skillsbuild.org/college-students",
     "tags": [
       "Courses",
       "Certifications",
