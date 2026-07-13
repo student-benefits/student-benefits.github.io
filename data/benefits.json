@@ -1140,6 +1140,21 @@
     "popularity": 5
   },
   {
+    "id": "symfonycasts",
+    "name": "SymfonyCasts",
+    "category": "Learning",
+    "offer_type": "trial",
+    "description": "Free 3-month subscription to all PHP and Symfony video tutorial courses (worth $75).",
+    "link": "https://symfonycasts.com/github-student",
+    "tags": [
+      "PHP",
+      "Symfony",
+      "Video Tutorials",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "termius-pro",
     "name": "Termius Pro",
     "category": "Dev Tools",
