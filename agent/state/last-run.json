@@ -1,12 +1,14 @@
 {
-  "issue": 292,
-  "title": "testmu ai",
+  "issue": 294,
+  "title": "carto",
   "timestamp": "2026-07-13T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "TestMu AI student discount education program cross-browser testing" },
-    { "name": "webfetch", "url": "https://www.testmuai.com/github-students/" },
+    { "name": "websearch", "query": "CARTO student program geospatial GitHub Student Pack 2026" },
+    { "name": "webfetch", "url": "https://app.carto.com/students" },
+    { "name": "webfetch", "url": "https://docs.carto.com/faqs/carto-for-education" },
+    { "name": "webfetch", "url": "https://education.github.com/pack" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "TestMu AI", "category": "Dev Tools", "description": "Free Live-1 parallel plan for 1 year — unlimited manual cross-browser testing, screenshots, and local tunnel testing." }
+  "benefit": { "name": "CARTO", "category": "Dev Tools", "description": "Free account with increased storage, real-time data, Location Data Services credits, and premium features for 2 years." }
 }

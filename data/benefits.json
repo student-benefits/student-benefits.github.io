@@ -227,6 +227,21 @@
     "popularity": 9
   },
   {
+    "id": "carto",
+    "name": "CARTO",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free account with increased storage, real-time data, Location Data Services credits, and premium features for 2 years.",
+    "link": "https://app.carto.com/students",
+    "tags": [
+      "Geospatial",
+      "Maps",
+      "Data Analytics",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "clerk",
     "name": "Clerk",
     "category": "Dev Tools",
