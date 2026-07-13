@@ -1,14 +1,11 @@
 {
-  "issue": 294,
-  "title": "carto",
+  "issue": 293,
+  "title": "appfigures",
   "timestamp": "2026-07-13T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "CARTO student program geospatial GitHub Student Pack 2026" },
-    { "name": "webfetch", "url": "https://app.carto.com/students" },
-    { "name": "webfetch", "url": "https://docs.carto.com/faqs/carto-for-education" },
-    { "name": "webfetch", "url": "https://education.github.com/pack" },
+    { "name": "webfetch", "url": "https://appfigures.com/landing/github-student" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "CARTO", "category": "Dev Tools", "description": "Free account with increased storage, real-time data, Location Data Services credits, and premium features for 2 years." }
+  "benefit": { "name": "Appfigures", "category": "Dev Tools", "description": "Free app analytics and ASO tools for 1 year — metrics, keyword intelligence, and competitor analysis." }
 }

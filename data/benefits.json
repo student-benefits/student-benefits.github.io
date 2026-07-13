@@ -71,6 +71,21 @@
     "popularity": 5
   },
   {
+    "id": "appfigures",
+    "name": "Appfigures",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free app analytics and ASO tools for 1 year — metrics, keyword intelligence, and competitor analysis.",
+    "link": "https://appfigures.com/landing/github-student",
+    "tags": [
+      "Analytics",
+      "App Store",
+      "Mobile",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "apple-education",
     "name": "Apple Education Pricing",
     "category": "Hardware",
