@@ -1055,6 +1055,20 @@
     "popularity": 5
   },
   {
+    "id": "retool",
+    "name": "Retool",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Team or Business plan for students with .edu email — build internal tools, admin panels, and dashboards.",
+    "link": "https://retool.com/pricing",
+    "tags": [
+      "Dev Tools",
+      "No-Code",
+      "Internal Tools"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "samsung-education",
     "name": "Samsung Education",
     "category": "Hardware",
