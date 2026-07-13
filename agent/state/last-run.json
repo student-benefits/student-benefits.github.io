@@ -1,14 +1,12 @@
 {
-  "issue": 296,
-  "title": "retool",
+  "issue": 292,
+  "title": "testmu ai",
   "timestamp": "2026-07-13T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Retool student discount education program signup 2026" },
-    { "name": "webfetch", "url": "https://docs.retool.com/support/discount-programs" },
-    { "name": "webfetch", "url": "https://retool.com/pricing" },
-    { "name": "webfetch", "url": "https://form.typeform.com/to/ABdF0oDN" },
+    { "name": "websearch", "query": "TestMu AI student discount education program cross-browser testing" },
+    { "name": "webfetch", "url": "https://www.testmuai.com/github-students/" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Retool", "category": "Dev Tools", "description": "Free Team or Business plan for students with .edu email — build internal tools, admin panels, and dashboards." }
+  "benefit": { "name": "TestMu AI", "category": "Dev Tools", "description": "Free Live-1 parallel plan for 1 year — unlimited manual cross-browser testing, screenshots, and local tunnel testing." }
 }

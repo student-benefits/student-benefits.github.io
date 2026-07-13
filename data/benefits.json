@@ -1183,6 +1183,20 @@
     "popularity": 5
   },
   {
+    "id": "testmu-ai",
+    "name": "TestMu AI",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Live-1 parallel plan for 1 year — unlimited manual cross-browser testing, screenshots, and local tunnel testing.",
+    "link": "https://www.testmuai.com/github-students/",
+    "tags": [
+      "Cross-Browser Testing",
+      "GitHub Student Pack",
+      "Testing"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "todiagram",
     "name": "ToDiagram",
     "category": "Dev Tools",
