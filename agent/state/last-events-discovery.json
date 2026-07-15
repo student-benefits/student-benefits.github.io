@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-01T00:00:00Z",
+  "timestamp": "2026-07-15T00:00:00Z",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -16,15 +16,24 @@
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [
-    "iim-ahmedabad-ai-residency-2026",
-    "mcw-young-leaders-fellowship-2026"
-  ],
+  "expired_removed": [],
   "discovered": [
     {
-      "name": "AI Genesis Hackathon 2026",
-      "date": "2026-10-26",
-      "link": "https://fnctn1.com/ai_genesis_hackathon",
+      "name": "Junction 2026",
+      "date": "2026-11-13",
+      "link": "https://2026.hackjunction.com/",
+      "source": "keyword"
+    },
+    {
+      "name": "MLH Fellowship Fall 2026",
+      "date": "2026-09-14",
+      "link": "https://fellowship.mlh.com/",
+      "source": "keyword"
+    },
+    {
+      "name": "Outreachy December 2026",
+      "date": "2026-12-01",
+      "link": "https://www.outreachy.org/",
       "source": "keyword"
     }
   ],
