@@ -331,8 +331,8 @@
     "name": "Deepnote",
     "category": "Dev Tools",
     "offer_type": "free",
-    "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours.",
-    "link": "https://deepnote.com/docs/student",
+    "description": "Free Education plan for students while enrolled. Browser-based collaborative notebooks with unlimited team members.",
+    "link": "https://deepnote.com/education",
     "tags": [
       "Data Science",
       "Jupyter",
@@ -404,7 +404,7 @@
     "name": "Evernote Student",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "40% off Evernote Professional via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
+    "description": "40% off Evernote Advanced Annual plan via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
     "link": "https://evernote.com/unidays",
     "tags": [
       "Notes",
@@ -531,8 +531,8 @@
     "id": "grammarly",
     "name": "Grammarly",
     "category": "Productivity",
-    "offer_type": "discount",
-    "description": "Student discounts available via SheerID/UNiDAYS verification. Free Premium tier plus AI features for students.",
+    "offer_type": "free",
+    "description": "Free AI writing assistant for students with grammar check, style suggestions, and AI-powered writing tools.",
     "link": "https://www.grammarly.com/students",
     "tags": [
       "Writing",
