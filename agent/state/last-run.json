@@ -1,11 +1,12 @@
 {
-  "issue": 301,
-  "title": "configcat",
+  "issue": 300,
+  "title": "blackfire",
   "timestamp": "2026-07-20T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "webfetch", "url": "https://configcat.com/student/" },
-    { "name": "edit", "summary": "ConfigCat already on add-benefit-pending branch; added Closes #301 to PR #289" }
+    { "name": "websearch", "query": "Blackfire student discount education program 2026" },
+    { "name": "webfetch", "url": "https://www.blackfire.io/students" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ConfigCat", "category": "Dev Tools", "description": "Free Pro plan while enrolled — manage up to 1,000 feature flags with unlimited seats for classmates." }
+  "benefit": { "name": "Blackfire", "category": "Dev Tools", "description": "Free Developer plan for 1 year (€348 value) — PHP and Python profiling with SQL and HTTP request analysis." }
 }

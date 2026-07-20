@@ -171,6 +171,21 @@
     "popularity": 9
   },
   {
+    "id": "blackfire",
+    "name": "Blackfire",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Developer plan for 1 year (€348 value) — PHP and Python profiling with SQL and HTTP request analysis.",
+    "link": "https://www.blackfire.io/students",
+    "tags": [
+      "GitHub Student Pack",
+      "Profiling",
+      "PHP",
+      "Python"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "boot-dev",
     "name": "Boot.dev",
     "category": "Learning",
