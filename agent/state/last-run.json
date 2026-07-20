@@ -1,11 +1,11 @@
 {
-  "issue": 293,
-  "title": "appfigures",
-  "timestamp": "2026-07-13T00:00:00Z",
+  "issue": 301,
+  "title": "configcat",
+  "timestamp": "2026-07-20T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "webfetch", "url": "https://appfigures.com/landing/github-student" },
-    { "name": "edit", "summary": "Added entry to data/benefits.json" }
+    { "name": "webfetch", "url": "https://configcat.com/student/" },
+    { "name": "edit", "summary": "ConfigCat already on add-benefit-pending branch; added Closes #301 to PR #289" }
   ],
-  "benefit": { "name": "Appfigures", "category": "Dev Tools", "description": "Free app analytics and ASO tools for 1 year — metrics, keyword intelligence, and competitor analysis." }
+  "benefit": { "name": "ConfigCat", "category": "Dev Tools", "description": "Free Pro plan while enrolled — manage up to 1,000 feature flags with unlimited seats for classmates." }
 }
