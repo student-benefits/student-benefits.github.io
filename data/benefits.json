@@ -332,7 +332,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours.",
-    "link": "https://deepnote.com/docs/student",
+    "link": "https://deepnote.com/github-student-pack",
     "tags": [
       "Data Science",
       "Jupyter",
@@ -352,21 +352,6 @@
       "Software Licensing",
       "Dev Tools",
       "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "digitalocean",
-    "name": "DigitalOcean",
-    "category": "Cloud & Hosting",
-    "offer_type": "credits",
-    "description": "$200 in platform credit for 1 year via GitHub Student Pack. Usable on Droplets, Kubernetes, and Managed Databases.",
-    "link": "https://www.digitalocean.com/landing/github-students",
-    "tags": [
-      "Cloud",
-      "Hosting",
-      "GitHub Student Pack",
-      "Kubernetes"
     ],
     "popularity": 5
   },
@@ -547,7 +532,7 @@
     "category": "Learning",
     "offer_type": "discount",
     "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://academy.hackthebox.com/billing",
+    "link": "https://academy.hackthebox.com/faq",
     "tags": [
       "Cybersecurity",
       "Hacking",
@@ -589,7 +574,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
-    "link": "https://skillsbuild.org/students",
+    "link": "https://skillsbuild.org/college-students",
     "tags": [
       "Courses",
       "Certifications",
@@ -1060,7 +1045,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Waived transaction fees on first $1,000 in revenue processed.",
-    "link": "https://education.github.com/pack/redeem/stripe-student",
+    "link": "https://education.github.com/pack",
     "tags": [
       "Payments",
       "Dev Tools",
