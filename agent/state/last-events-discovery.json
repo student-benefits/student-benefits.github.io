@@ -1,31 +1,48 @@
 {
-  "timestamp": "2026-07-01T00:00:00Z",
+  "timestamp": "2026-07-29T00:00:00Z",
   "known_sources_checked": [
-    "https://events.ycombinator.com",
-    "https://mlh.io/seasons/2026/events",
-    "https://a16z.com/programs",
+    "https://ycombinator.com/events",
+    "https://www.mlh.com/seasons/2026/events",
     "https://www.anthropic.com/news",
-    "https://openai.com/news",
-    "https://buildyourfuture.withgoogle.com/programs",
     "https://education.github.com/events",
-    "https://hack.mit.edu"
+    "https://ethglobal.com/events",
+    "https://ethglobal.com/events/ethonline2026/info/start",
+    "https://ethglobal.com/events/mumbai/info/details",
+    "https://sparai.org/",
+    "https://forms.sparai.org/spar/mentee-app"
   ],
   "keyword_queries": [
     "student hackathon 2026 free apply open",
     "\"open to students\" conference 2026 free OR fellowship application",
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
-    "student residency OR cohort OR program 2026 free technical AI"
+    "student residency OR cohort OR program 2026 free technical AI",
+    "ETHGlobal Mumbai 2026 hackathon prizes apply November registration",
+    "ETHOnline 2026 hackathon September prizes remote apply registration",
+    "SPAR AI safety fellowship credibility organization founded mentors",
+    "AI safety fellowship 2026 fall cohort open application students",
+    "major tech AI student program fellowship fall 2026 paid stipend open applications"
   ],
   "expired_removed": [
-    "iim-ahmedabad-ai-residency-2026",
-    "mcw-young-leaders-fellowship-2026"
+    "ethglobal-lisbon-2026"
   ],
   "discovered": [
     {
-      "name": "AI Genesis Hackathon 2026",
-      "date": "2026-10-26",
-      "link": "https://fnctn1.com/ai_genesis_hackathon",
+      "name": "ETHOnline 2026",
+      "date": "2026-09-04",
+      "link": "https://ethglobal.com/events/ethonline2026/info/start",
+      "source": "known-source"
+    },
+    {
+      "name": "SPAR Research Fellowship Fall 2026",
+      "date": "2026-09-14",
+      "link": "https://forms.sparai.org/spar/mentee-app",
       "source": "keyword"
+    },
+    {
+      "name": "ETHGlobal Mumbai 2026",
+      "date": "2026-11-06",
+      "link": "https://ethglobal.com/events/mumbai/info/details",
+      "source": "known-source"
     }
   ],
   "pr_opened": true
