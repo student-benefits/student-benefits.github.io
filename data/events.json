@@ -79,20 +79,6 @@
     "expires": "2026-10-31"
   },
   {
-    "id": "ethglobal-lisbon-2026",
-    "name": "ETHGlobal Lisbon 2026",
-    "organizer": "ETHGlobal",
-    "category": "hackathon",
-    "date": "2026-07-24",
-    "date_end": "2026-07-26",
-    "location": "Lisbon, Portugal",
-    "remote": false,
-    "eligibility": "Open to all builders worldwide",
-    "why": "Major Ethereum hackathon with substantial prize pool, free meals, and mentorship from top blockchain protocols. Small refundable ETH stake required; alternatives available for financial constraints.",
-    "link": "https://ethglobal.com/events/lisbon2026",
-    "expires": "2026-07-26"
-  },
-  {
     "id": "iaps-ai-policy-fellowship-2026",
     "name": "IAPS AI Policy Fellowship",
     "organizer": "Institute for AI Policy and Strategy",
@@ -104,6 +90,32 @@
     "why": "$15–22k stipend, two-week DC residency, direct mentorship from leading AI governance experts. Past fellows joined CSET, GovAI, and major tech policy shops.",
     "link": "https://www.iaps.ai/fellowship",
     "expires": "2026-11-30"
+  },
+  {
+    "id": "ethonline-2026",
+    "name": "ETHOnline 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-09-04",
+    "date_end": "2026-09-16",
+    "remote": true,
+    "eligibility": "Open to all builders worldwide; solo or team; small ETH stake required to secure a spot",
+    "why": "$100,000+ in sponsor prizes across a 10-day async global hackathon. Build from scratch or extend open source — no travel required.",
+    "link": "https://ethglobal.com/events/ethonline2026/info/start",
+    "expires": "2026-09-16"
+  },
+  {
+    "id": "spar-fall-2026",
+    "name": "SPAR Research Fellowship Fall 2026",
+    "organizer": "SPAR / Kairos AI Project",
+    "category": "fellowship",
+    "date": "2026-09-14",
+    "date_end": "2026-12-14",
+    "remote": true,
+    "eligibility": "Undergraduate, graduate, and PhD students worldwide; technical or policy background preferred; no prior research experience required",
+    "why": "3-month mentored AI safety research with project compute covered. Past fellows published at ICML and NeurIPS; cohorts led to job offers at METR, Redwood, GovAI. Apply by August 18.",
+    "link": "https://forms.sparai.org/spar/mentee-app",
+    "expires": "2026-12-14"
   },
   {
     "id": "richard-tapia-2026",
@@ -230,6 +242,20 @@
     "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
     "link": "https://ghc.anitab.org/",
     "expires": "2026-10-30"
+  },
+  {
+    "id": "ethglobal-mumbai-2026",
+    "name": "ETHGlobal Mumbai 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-11-06",
+    "date_end": "2026-11-08",
+    "location": "Mumbai, India",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide; solo or team; small ETH stake required",
+    "why": "36-hour ETHGlobal hackathon in Mumbai — multiple sponsor prize tracks and on-site mentorship from leading Web3 protocols. Finalist teams demo live to judges.",
+    "link": "https://ethglobal.com/events/mumbai/info/details",
+    "expires": "2026-11-08"
   },
   {
     "id": "nasa-space-apps-2026",
