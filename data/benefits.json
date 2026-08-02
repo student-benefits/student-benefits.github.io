@@ -332,7 +332,7 @@
     "category": "Dev Tools",
     "offer_type": "free",
     "description": "Free Team plan for collaborative data notebooks while enrolled. Unlimited collaborators and Basic machine hours.",
-    "link": "https://deepnote.com/docs/student",
+    "link": "https://deepnote.com/education",
     "tags": [
       "Data Science",
       "Jupyter",
@@ -674,8 +674,8 @@
     "name": "Loom Education",
     "category": "Productivity",
     "offer_type": "discount",
-    "description": "50-75% off Loom for verified students and educators. Unlimited recordings, HD quality, and full editing tools.",
-    "link": "https://www.loom.com/use-case/education",
+    "description": "75% off Loom Business plan for eligible students and educators. Apply via Atlassian classroom license form.",
+    "link": "https://www.atlassian.com/licensing/purchase-licensing",
     "tags": [
       "Video",
       "Recording",
