@@ -79,18 +79,29 @@
     "expires": "2026-10-31"
   },
   {
-    "id": "ethglobal-lisbon-2026",
-    "name": "ETHGlobal Lisbon 2026",
-    "organizer": "ETHGlobal",
+    "id": "agentic-cinema-hackathon-2026",
+    "name": "Agentic Cinema: The Blockbuster Hackathon",
+    "organizer": "Google Cloud",
     "category": "hackathon",
-    "date": "2026-07-24",
-    "date_end": "2026-07-26",
-    "location": "Lisbon, Portugal",
-    "remote": false,
-    "eligibility": "Open to all builders worldwide",
-    "why": "Major Ethereum hackathon with substantial prize pool, free meals, and mentorship from top blockchain protocols. Small refundable ETH stake required; alternatives available for financial constraints.",
-    "link": "https://ethglobal.com/events/lisbon2026",
-    "expires": "2026-07-26"
+    "date": "2026-07-27",
+    "date_end": "2026-09-07",
+    "remote": true,
+    "eligibility": "Above legal age worldwide; some countries excluded; must build with Gemini and Google Cloud",
+    "why": "$75,000 across five sponsor tracks (IBM, Grafana, Replit, Clickhouse, Parallel). Build AI agents for media workflows using Gemini and Google Cloud. Submit by September 7.",
+    "link": "https://agentic-cinema.devpost.com/rules",
+    "expires": "2026-09-07"
+  },
+  {
+    "id": "build-with-gemini-xprize-2026",
+    "name": "Build with Gemini XPRIZE",
+    "organizer": "XPRIZE",
+    "category": "hackathon",
+    "date": "2026-08-17",
+    "remote": true,
+    "eligibility": "Above legal age worldwide; individuals, small teams, and orgs under 25 employees; some countries excluded",
+    "why": "$2,000,000 prize pool — top prize $500,000 — to build a real AI-powered business using Google Cloud. 20+ additional cash awards. Solo or team. Submit by August 17.",
+    "link": "https://xprize.devpost.com/rules",
+    "expires": "2026-08-17"
   },
   {
     "id": "iaps-ai-policy-fellowship-2026",
@@ -104,6 +115,19 @@
     "why": "$15–22k stipend, two-week DC residency, direct mentorship from leading AI governance experts. Past fellows joined CSET, GovAI, and major tech policy shops.",
     "link": "https://www.iaps.ai/fellowship",
     "expires": "2026-11-30"
+  },
+  {
+    "id": "ai-alignment-research-fellowship-2026",
+    "name": "AI Alignment Research Fellowship 2026",
+    "organizer": "AI Alignment Foundation",
+    "category": "fellowship",
+    "date": "2026-09-08",
+    "date_end": "2026-10-30",
+    "remote": true,
+    "eligibility": "Any career stage with strong ML background and AI safety interest; full-time 40 hrs/week; contractor payment capability required; apply by August 17",
+    "why": "$12,000 stipend plus cloud compute budget for 8 weeks of full-time AI safety research with AE Studio mentors. Six spots per cohort; demo day with travel covered in Los Angeles.",
+    "link": "https://www.aialignmentfoundation.org/fellowship/apply",
+    "expires": "2026-10-30"
   },
   {
     "id": "richard-tapia-2026",
