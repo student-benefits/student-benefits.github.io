@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-07-01T00:00:00Z",
+  "timestamp": "2026-08-05T00:00:00Z",
   "known_sources_checked": [
-    "https://events.ycombinator.com",
-    "https://mlh.io/seasons/2026/events",
+    "https://ycombinator.com/events",
+    "https://www.mlh.com/seasons/2026/events",
     "https://a16z.com/programs",
     "https://www.anthropic.com/news",
     "https://openai.com/news",
@@ -17,14 +17,25 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "iim-ahmedabad-ai-residency-2026",
-    "mcw-young-leaders-fellowship-2026"
+    "ethglobal-lisbon-2026"
   ],
   "discovered": [
     {
-      "name": "AI Genesis Hackathon 2026",
-      "date": "2026-10-26",
-      "link": "https://fnctn1.com/ai_genesis_hackathon",
+      "name": "Agentic Cinema: The Blockbuster Hackathon",
+      "date": "2026-07-27",
+      "link": "https://agentic-cinema.devpost.com/rules",
+      "source": "keyword"
+    },
+    {
+      "name": "Build with Gemini XPRIZE",
+      "date": "2026-08-17",
+      "link": "https://xprize.devpost.com/rules",
+      "source": "keyword"
+    },
+    {
+      "name": "AI Alignment Research Fellowship 2026",
+      "date": "2026-09-08",
+      "link": "https://www.aialignmentfoundation.org/fellowship/apply",
       "source": "keyword"
     }
   ],

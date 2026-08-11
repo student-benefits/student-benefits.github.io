@@ -79,18 +79,29 @@
     "expires": "2026-10-31"
   },
   {
-    "id": "ethglobal-lisbon-2026",
-    "name": "ETHGlobal Lisbon 2026",
-    "organizer": "ETHGlobal",
+    "id": "agentic-cinema-hackathon-2026",
+    "name": "Agentic Cinema: The Blockbuster Hackathon",
+    "organizer": "Google Cloud",
     "category": "hackathon",
-    "date": "2026-07-24",
-    "date_end": "2026-07-26",
-    "location": "Lisbon, Portugal",
-    "remote": false,
-    "eligibility": "Open to all builders worldwide",
-    "why": "Major Ethereum hackathon with substantial prize pool, free meals, and mentorship from top blockchain protocols. Small refundable ETH stake required; alternatives available for financial constraints.",
-    "link": "https://ethglobal.com/events/lisbon2026",
-    "expires": "2026-07-26"
+    "date": "2026-07-27",
+    "date_end": "2026-09-07",
+    "remote": true,
+    "eligibility": "Above legal age worldwide; some countries excluded; must build with Gemini and Google Cloud",
+    "why": "$75,000 across five sponsor tracks (IBM, Grafana, Replit, Clickhouse, Parallel). Build AI agents for media workflows using Gemini and Google Cloud. Submit by September 7.",
+    "link": "https://agentic-cinema.devpost.com/rules",
+    "expires": "2026-09-07"
+  },
+  {
+    "id": "build-with-gemini-xprize-2026",
+    "name": "Build with Gemini XPRIZE",
+    "organizer": "XPRIZE",
+    "category": "hackathon",
+    "date": "2026-08-17",
+    "remote": true,
+    "eligibility": "Above legal age worldwide; individuals, small teams, and orgs under 25 employees; some countries excluded",
+    "why": "$2,000,000 prize pool — top prize $500,000 — to build a real AI-powered business using Google Cloud. 20+ additional cash awards. Solo or team. Submit by August 17.",
+    "link": "https://xprize.devpost.com/rules",
+    "expires": "2026-08-17"
   },
   {
     "id": "iaps-ai-policy-fellowship-2026",
@@ -104,6 +115,72 @@
     "why": "$15–22k stipend, two-week DC residency, direct mentorship from leading AI governance experts. Past fellows joined CSET, GovAI, and major tech policy shops.",
     "link": "https://www.iaps.ai/fellowship",
     "expires": "2026-11-30"
+  },
+  {
+    "id": "a16z-speedrun-alpha-fellowship",
+    "name": "a16z Speedrun Alpha Fellowship",
+    "organizer": "a16z",
+    "category": "fellowship",
+    "date": "2026-09-01",
+    "date_end": "2027-08-31",
+    "location": "San Francisco, CA",
+    "remote": false,
+    "eligibility": "Software engineers and recent grads within 3 years of graduation; US work authorization required; full-time in-person commitment",
+    "why": "$20k equity-free grant + $250k follow-on on the startup track, or full-time placement at Substack, Sesame AI, and other a16z portfolio companies. Cohort 2 opens September 2026.",
+    "link": "https://alpha.a16zspeedrun.com/apply",
+    "expires": "2027-08-31"
+  },
+  {
+    "id": "ethonline-2026",
+    "name": "ETHOnline 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-09-04",
+    "date_end": "2026-09-16",
+    "remote": true,
+    "eligibility": "Open to all builders worldwide; solo or team; small ETH stake required to secure a spot",
+    "why": "$100,000+ in sponsor prizes across a 10-day async global hackathon. Build from scratch or extend open source — no travel required.",
+    "link": "https://ethglobal.com/events/ethonline2026/info/start",
+    "expires": "2026-09-16"
+  },
+  {
+    "id": "ai-alignment-research-fellowship-2026",
+    "name": "AI Alignment Research Fellowship 2026",
+    "organizer": "AI Alignment Foundation",
+    "category": "fellowship",
+    "date": "2026-09-08",
+    "date_end": "2026-10-30",
+    "remote": true,
+    "eligibility": "Any career stage with strong ML background and AI safety interest; full-time 40 hrs/week; contractor payment capability required; apply by August 17",
+    "why": "$12,000 stipend plus cloud compute budget for 8 weeks of full-time AI safety research with AE Studio mentors. Six spots per cohort; demo day with travel covered in Los Angeles.",
+    "link": "https://www.aialignmentfoundation.org/fellowship/apply",
+    "expires": "2026-10-30"
+  },
+  {
+    "id": "mlh-fellowship-fall-2026",
+    "name": "MLH Fellowship Fall 2026",
+    "organizer": "Major League Hacking",
+    "category": "fellowship",
+    "date": "2026-09-14",
+    "date_end": "2026-12-04",
+    "remote": true,
+    "eligibility": "Age 18+; coding proficiency in at least one language; 20+ hrs/week commitment; non-embargoed country",
+    "why": "12-week remote open source fellowship — contribute to projects used by millions under mentorship from senior engineers at top tech companies. Need-based stipend available.",
+    "link": "https://fellowship.mlh.com/",
+    "expires": "2026-12-04"
+  },
+  {
+    "id": "spar-fall-2026",
+    "name": "SPAR Research Fellowship Fall 2026",
+    "organizer": "SPAR / Kairos AI Project",
+    "category": "fellowship",
+    "date": "2026-09-14",
+    "date_end": "2026-12-14",
+    "remote": true,
+    "eligibility": "Undergraduate, graduate, and PhD students worldwide; technical or policy background preferred; no prior research experience required",
+    "why": "3-month mentored AI safety research with project compute covered. Past fellows published at ICML and NeurIPS; cohorts led to job offers at METR, Redwood, GovAI. Apply by August 18.",
+    "link": "https://forms.sparai.org/spar/mentee-app",
+    "expires": "2026-12-14"
   },
   {
     "id": "richard-tapia-2026",
@@ -232,6 +309,34 @@
     "expires": "2026-10-30"
   },
   {
+    "id": "ethglobal-mumbai-2026",
+    "name": "ETHGlobal Mumbai 2026",
+    "organizer": "ETHGlobal",
+    "category": "hackathon",
+    "date": "2026-11-06",
+    "date_end": "2026-11-08",
+    "location": "Mumbai, India",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide; solo or team; small ETH stake required",
+    "why": "36-hour ETHGlobal hackathon in Mumbai — multiple sponsor prize tracks and on-site mentorship from leading Web3 protocols. Finalist teams demo live to judges.",
+    "link": "https://ethglobal.com/events/mumbai/info/details",
+    "expires": "2026-11-08"
+  },
+  {
+    "id": "junction-2026",
+    "name": "Junction 2026",
+    "organizer": "Junction",
+    "category": "hackathon",
+    "date": "2026-11-13",
+    "date_end": "2026-11-15",
+    "location": "Espoo, Finland",
+    "remote": false,
+    "eligibility": "Open to all builders worldwide; limited travel grants for strongest international applicants",
+    "why": "Europe's largest hackathon — 2,000 builders, 48 hours, €100,000 in prizes. Travel grants for top international applications; apply by September 6.",
+    "link": "https://2026.hackjunction.com/",
+    "expires": "2026-11-15"
+  },
+  {
     "id": "nasa-space-apps-2026",
     "name": "NASA Space Apps Challenge 2026",
     "organizer": "NASA",
@@ -243,6 +348,19 @@
     "why": "The world's largest annual hackathon, run by NASA. Teams use real NASA data to solve space and Earth challenges. 100k+ participants at 150+ local events; global winners earn NASA recognition.",
     "link": "https://www.spaceappschallenge.org/",
     "expires": "2026-11-15"
+  },
+  {
+    "id": "outreachy-dec-2026",
+    "name": "Outreachy December 2026",
+    "organizer": "Software Freedom Conservancy",
+    "category": "fellowship",
+    "date": "2026-12-01",
+    "date_end": "2027-03-01",
+    "remote": true,
+    "eligibility": "People facing underrepresentation or systemic bias in the tech industry of their country; applications open August 2026",
+    "why": "$7,000 stipend to contribute to major open source projects (Linux, GNOME, Mozilla) for 3 months. Applications open late August; one of the most accessible paid open source programs.",
+    "link": "https://www.outreachy.org/",
+    "expires": "2027-03-01"
   },
   {
     "id": "neurips-2026",
@@ -271,5 +389,18 @@
     "why": "All-expenses-paid trip to NeurIPS — the world's top ML conference. Citadel books flights, hotel, and conference pass. Open to undergrads. Apply by October 5.",
     "link": "https://www.citadel.com/careers/programs-and-events/conference-travel-grant/",
     "expires": "2026-12-12"
+  },
+  {
+    "id": "microsoft-imagine-cup-2027",
+    "name": "Microsoft Imagine Cup 2027",
+    "organizer": "Microsoft",
+    "category": "hackathon",
+    "date": "2027-01-08",
+    "date_end": "2027-06-30",
+    "remote": false,
+    "eligibility": "Enrolled students 18+ at accredited institutions worldwide; teams of 1–4; free to enter",
+    "why": "$50k–$100k in cash prizes across two tracks. Scale Track winners meet Satya Nadella and receive Microsoft for Startups support. Registration open now.",
+    "link": "https://imaginecup.microsoft.com/en-us/",
+    "expires": "2027-06-30"
   }
 ]
