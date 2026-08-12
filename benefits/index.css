@@ -255,14 +255,32 @@
   line-height: 1.5;
 }
 
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.375rem;
-  margin-top: 0.75rem;
   position: relative;
   z-index: 1;
 }
+
+.repo-link {
+  flex-shrink: 0;
+  display: inline-flex;
+  color: var(--slate-500);
+  position: relative;
+  z-index: 1;
+  transition: color var(--dur-normal);
+}
+.repo-link:hover { color: var(--indigo-300); }
+.repo-link svg { width: 16px; height: 16px; }
 
 .tag {
   font-size: 0.75rem;
