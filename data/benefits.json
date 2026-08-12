@@ -143,6 +143,20 @@
     "popularity": 7
   },
   {
+    "id": "astra-security",
+    "name": "Astra Security",
+    "category": "Security",
+    "offer_type": "free",
+    "description": "Free Pro Plan for 6 months (worth $144) via GitHub Student Pack. Vulnerability and security scanning.",
+    "link": "https://www.getastra.com/github-student-developer-pack/",
+    "tags": [
+      "Security",
+      "Vulnerability Scanning",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "autodesk",
     "name": "Autodesk",
     "category": "Design",
@@ -557,6 +571,20 @@
     "popularity": 7
   },
   {
+    "id": "google-ai-plus",
+    "name": "Google AI Plus",
+    "category": "AI Tools",
+    "offer_type": "trial",
+    "description": "Free 12-month trial via Handshake, then $7.99/mo. Gemini Pro model, study guides, deep research.",
+    "link": "https://app.joinhandshake.com/gemini",
+    "tags": [
+      "AI",
+      "Research",
+      "Study"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "google-cloud",
     "name": "Google Cloud Credits",
     "category": "Cloud & Hosting",
@@ -969,6 +997,20 @@
     "popularity": 8
   },
   {
+    "id": "poeditor",
+    "name": "POEditor",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Plus plan for 1 year via GitHub Student Pack. Manage software translations and localization.",
+    "link": "https://poeditor.com/register/github_education",
+    "tags": [
+      "Localization",
+      "Translation",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "polypane",
     "name": "Polypane",
     "category": "Dev Tools",
@@ -1041,6 +1083,20 @@
     "popularity": 6
   },
   {
+    "id": "replit",
+    "name": "Replit",
+    "category": "Dev Tools",
+    "offer_type": "discount",
+    "description": "50% off Replit Core ($10/mo) with .edu email. Cloud-based IDE, hosting, and AI coding agent.",
+    "link": "https://replit.com/edu/students",
+    "tags": [
+      "IDE",
+      "Cloud Hosting",
+      "AI"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "requestly",
     "name": "Requestly",
     "category": "Dev Tools",
@@ -1095,6 +1151,20 @@
       "Data Science",
       "Analytics",
       "Cloud"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "scrimba",
+    "name": "Scrimba",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "Free 1-month Pro access via GitHub Student Pack. Interactive coding screencasts and Pro Discord.",
+    "link": "https://scrimba.com/github-education",
+    "tags": [
+      "Courses",
+      "Coding",
+      "GitHub Student Pack"
     ],
     "popularity": 5
   },
@@ -1297,6 +1367,49 @@
     ],
     "popularity": 5,
     "repo": "wandb/wandb"
+  },
+  {
+    "id": "wispr-flow",
+    "name": "Wispr Flow",
+    "category": "Productivity",
+    "offer_type": "trial",
+    "description": "3 months free (new users), then 50% off at $6/mo with .edu email. Voice-to-text AI dictation.",
+    "link": "https://wisprflow.ai/students",
+    "tags": [
+      "AI",
+      "Dictation",
+      "Productivity"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "working-copy",
+    "name": "Working Copy",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro features while enrolled via GitHub Student Pack. Full-featured iOS/iPadOS Git client.",
+    "link": "https://workingcopyapp.com/education",
+    "tags": [
+      "Git",
+      "iOS",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
+    "id": "zed",
+    "name": "Zed",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Zed Pro for 12 months incl. $10/mo AI credits. AI-native code editor, 18+ students only.",
+    "link": "https://zed.dev/education",
+    "tags": [
+      "Code Editor",
+      "AI",
+      "Collaboration"
+    ],
+    "popularity": 5,
+    "repo": "zed-industries/zed"
   },
   {
     "id": "zyte",
