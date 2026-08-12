@@ -1,0 +1,25 @@
+name: Biweekly cadence gate
+description: >
+  Skips a scheduled run on odd ISO weeks so the calling workflow effectively
+  runs every other week; any other trigger (workflow_dispatch, etc.) always
+  proceeds. Cron itself can't express "every 2 weeks", so this is the
+  standard workaround: keep the weekly cron trigger, gate the actual work.
+
+outputs:
+  should-run:
+    description: "'true' if the calling workflow should proceed"
+    value: ${{ steps.check.outputs.run }}
+
+runs:
+  using: composite
+  steps:
+    - id: check
+      shell: bash
+      run: |
+        week=$(date -u +%V)
+        if [ "${{ github.event_name }}" != "schedule" ] || [ $((10#$week % 2)) -eq 0 ]; then
+          echo "run=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "run=false" >> "$GITHUB_OUTPUT"
+          echo "Skipping — ISO week $week is odd, this workflow runs biweekly on even weeks"
+        fi
