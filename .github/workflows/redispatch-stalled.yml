@@ -1,0 +1,52 @@
+name: Redispatch Stalled Submissions
+
+# Deterministic (no LLM) safety net for add-benefit.yml / add-event.yml runs
+# that silently produce nothing — see scripts/redispatch_stalled.py for the
+# full rationale (issues #267 and #320). Detects the symptom (issue open,
+# labeled, zero comments, past a grace period) and redispatches once via
+# workflow_dispatch; flags for manual review if that doesn't resolve it.
+#
+# Falsifiability (per the "running systems" convention).
+#   Working-when: each scheduled run completes without error — most runs
+#     will legitimately find nothing to redispatch, which is healthy, not
+#     silence. The Actions run log itself is the heartbeat here (no state
+#     file — the mechanism is stateless, tracked entirely via issue labels).
+#   Teardown after N: 8 consecutive scheduled runs erroring (not "finding
+#     nothing") means the mechanism itself is broken.
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # hourly
+  workflow_dispatch:
+
+jobs:
+  redispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Ensure labels exist
+        run: |
+          gh label create redispatched --repo "$GITHUB_REPOSITORY" \
+            --color FBCA04 \
+            --description "add-benefit/add-event redispatched once after appearing stalled" \
+            --force
+          gh label create needs-manual-review --repo "$GITHUB_REPOSITORY" \
+            --color D93F0B \
+            --description "Automatic redispatch didn't resolve this — needs a human to process it directly" \
+            --force
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Sweep and redispatch stalled submissions
+        run: python3 scripts/redispatch_stalled.py

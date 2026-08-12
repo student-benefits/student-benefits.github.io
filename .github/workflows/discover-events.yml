@@ -6,12 +6,14 @@ name: Discover Student Events
 #     expiries, nothing actionable" heartbeat). NOT a found-count. A run that bumps the timestamp but never PRs is healthy;
 #     a timestamp that never advances = the cron silently isn't firing → broken, not empty. (Stale events not auto-expiring
 #     is the observable symptom of this being broken.)
-#   Teardown after N: 8 weekly cycles (~2 months). If working-when is unmet for 8 consecutive Wednesdays, the thesis is
-#     wrong → remove this workflow. (N is adjustable.)
+#   Teardown after N: 4 biweekly cycles (~2 months — same real-world window as the original 8 weekly cycles). If
+#     working-when is unmet for 4 consecutive scheduled cycles, the thesis is wrong → remove this workflow.
+#   Cadence (2026-08-11 scar): cut from weekly to biweekly, same reasoning as discover-benefits.yml — find quality was
+#     fine, throughput was outrunning review capacity.
 
 on:
   schedule:
-    - cron: '0 14 * * 3'  # Wednesday 14:00 UTC
+    - cron: '0 14 * * 3'  # Wednesday 14:00 UTC — gated to even ISO weeks below (biweekly)
   workflow_dispatch:
 
 jobs:
@@ -25,11 +27,24 @@ jobs:
       id-token: write
 
     steps:
+      - name: Check cadence (biweekly — even ISO weeks only; manual runs always proceed)
+        id: cadence
+        run: |
+          week=$(date -u +%V)
+          if [ "${{ github.event_name }}" != "schedule" ] || [ $((10#$week % 2)) -eq 0 ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Skipping — ISO week $week is odd, this workflow runs biweekly on even weeks"
+          fi
+
       - uses: actions/checkout@v4
+        if: steps.cadence.outputs.run == 'true'
         with:
           fetch-depth: 1
 
       - uses: anthropics/claude-code-action@v1
+        if: steps.cadence.outputs.run == 'true'
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"

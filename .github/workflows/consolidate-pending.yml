@@ -1,0 +1,52 @@
+name: Consolidate Pending Submissions
+
+# Deterministic (no LLM, no claude-code-action) — folds standalone
+# add-benefit-N / add-event-N PRs (opened one-per-issue by add-benefit.yml /
+# add-event.yml) into a single review-ready PR per data file, so the
+# maintainer still reviews one PR instead of one per submission.
+#
+# Replaces the old shared-rolling-branch pattern: that pattern needed a
+# git reset --hard fallback to resolve concurrent-push races, and
+# claude-code-action's headless mode has a built-in, non-configurable
+# restriction on exactly that command shape — which was silently stalling
+# add-benefit/add-event runs (see issue #320). Running the consolidation as
+# plain script logic outside the agent loop sidesteps the restriction
+# entirely: there's no agent here to have permissions denied.
+#
+# Falsifiability (per the "running systems" convention).
+#   Working-when: any run where scripts/consolidate_pending.py finds
+#     candidate PRs completes without error — observable as a PR opened/
+#     updated, or (nothing pending) a clean "Nothing to consolidate" log
+#     line. NOT an output count: most runs will legitimately find nothing.
+#   Teardown after N: 8 consecutive scheduled runs failing (not "finding
+#     nothing" — actually erroring) means the mechanism itself is broken →
+#     revisit before add-benefit/add-event's per-issue PRs pile up unreviewed.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # every 6 hours
+  workflow_dispatch:
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Consolidate pending benefits
+        run: python3 scripts/consolidate_pending.py benefits
+
+      - name: Consolidate pending events
+        run: python3 scripts/consolidate_pending.py events
