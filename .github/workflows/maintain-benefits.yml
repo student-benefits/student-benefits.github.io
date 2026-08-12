@@ -48,6 +48,10 @@ jobs:
 
             Only act on unambiguous cases; when uncertain, leave the entry unchanged.
 
+            ## Step 0: Supersede a stale maintenance PR
+
+            `gh pr list --state open --search "[Maintenance]: in:title" --json number,title --limit 5`. If any are open, close each one: `gh pr close <number> --comment "Superseded by this week's fresh audit."` A full audit against current main always supersedes an older one sitting unmerged — there's no reason to keep more than one maintenance PR in flight, and multiple independently-audited PRs stacked against the same stale base tend to re-find the same issues with conflicting fixes.
+
             ## Step 1: Fix
 
             For a broken/redirected link or a wrong/marketing link: WebSearch `"{name}" student discount signup`, WebFetch the best result, and update `link` to the program's own signup/pricing/overview page. If the program no longer offers a student benefit at all, remove the entry. Fix offer-type mismatches in place; trim over-long descriptions only without losing the offer specifics. Edit `data/benefits.json` directly — preserve 2-space indent, trailing newline, and id-sort order.
