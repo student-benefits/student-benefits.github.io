@@ -32,12 +32,3 @@ function renderFilterTabs(container, categories, activeCategory, labelFn, toolti
 function renderEmptyState(container, message) {
   container.innerHTML = '<div class="empty"><h2>No results</h2><p>' + escapeHtml(message) + '</p></div>';
 }
-
-// Renders `count` skeleton cards into `container` (replaces existing content).
-function renderSkeletons(container, count) {
-  var cards = '';
-  for (var i = 0; i < count; i++) {
-    cards += '<div class="skeleton-card"></div>';
-  }
-  container.innerHTML = '<div class="skeleton">' + cards + '</div>';
-}

@@ -114,21 +114,29 @@ def main() -> int:
         for nid in new_ids:
             candidates.append((pr["number"], issue_number, by_id[nid]))
 
-    if not candidates and not skipped_stale:
-        print("Nothing to consolidate.")
+    # Close stale PRs immediately — this doesn't depend on whether any
+    # candidate below successfully consolidates, so it must not live behind
+    # an early return further down (a run with only stale PRs and no
+    # candidates would otherwise never close them).
+    for src_pr in skipped_stale:
+        run_ok(["gh", "pr", "close", str(src_pr), "--comment",
+                "Superseded — this entry is already on main."])
+
+    if not candidates:
+        print(f"Nothing to consolidate. {len(skipped_stale)} stale PR(s) closed.")
         return 0
 
     # Build the consolidated branch fresh off current main.
     run(["git", "checkout", "-B", mode["consolidated_branch"], "origin/main"])
     write_json(data_path, main_data)
 
-    included = []   # (pr_number, issue_number, entry)
-    duplicate = []  # (pr_number, issue_number, entry) — id collided, needs a human
+    included = []     # (pr_number, issue_number, entry)
+    needs_review = []  # (pr_number, issue_number, entry, reason) — id collision or validation failure
     working = {e["id"]: e for e in main_data}
 
     for pr_number, issue_number, entry in candidates:
         if entry["id"] in working:
-            duplicate.append((pr_number, issue_number, entry))
+            needs_review.append((pr_number, issue_number, entry, "id collision"))
             continue
         working[entry["id"]] = entry
         merged = sorted(working.values(), key=mode["sort_key"])
@@ -140,19 +148,21 @@ def main() -> int:
             del working[entry["id"]]
             merged = sorted(working.values(), key=mode["sort_key"])
             write_json(data_path, merged)
-            duplicate.append((pr_number, issue_number, entry))
+            needs_review.append((pr_number, issue_number, entry, "validation failure"))
             continue
         included.append((pr_number, issue_number, entry))
 
     if not included:
-        print("Nothing validated cleanly; nothing to push.")
+        print(f"Nothing validated cleanly; nothing to push. "
+              f"{len(needs_review)} need manual attention.")
         run(["git", "checkout", "-"])
         return 0
 
     run(["git", "add", mode["data_file"]])
     diff = run_ok(["git", "diff", "--cached", "--quiet"])
     if diff.returncode == 0:
-        print("No diff against main after merge — nothing to push.")
+        print(f"No diff against main after merge — nothing to push. "
+              f"{len(needs_review)} need manual attention.")
         return 0
 
     n = len(included)
@@ -179,16 +189,12 @@ def main() -> int:
         run_ok(["gh", "pr", "close", str(src_pr), "--comment",
                 f"Folded into #{pr_number}."])
 
-    for src_pr in skipped_stale:
-        run_ok(["gh", "pr", "close", str(src_pr), "--comment",
-                "Superseded — this entry is already on main."])
-
-    for src_pr, issue_number, entry in duplicate:
+    for src_pr, issue_number, entry, reason in needs_review:
         print(f"PR #{src_pr} (issue #{issue_number}, id={entry['id']!r}) "
-              f"needs manual attention — id collision or validation failure.")
+              f"needs manual attention — {reason}.")
 
     print(f"Consolidated {n} {sys.argv[1]} into PR #{pr_number}. "
-          f"{len(duplicate)} need manual attention. {len(skipped_stale)} already stale.")
+          f"{len(needs_review)} need manual attention. {len(skipped_stale)} already stale.")
     return 0
 
 
