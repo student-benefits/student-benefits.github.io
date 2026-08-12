@@ -30,7 +30,9 @@ function getFilteredAndSorted() {
 }
 
 function renderFilters() {
-  renderFilterTabs(filterBar, categories, activeCategory);
+  withFocusPreserved(filterBar, function () {
+    renderFilterTabs(filterBar, categories, activeCategory);
+  });
 }
 
 function renderCard(b) {
@@ -47,7 +49,7 @@ function renderCard(b) {
           <span class="badge" data-cat="${escapeHtml(b.category)}">${escapeHtml(b.category)}</span>
           ${pill}
         </div>
-        <h3 class="card-name">${escapeHtml(b.name)}</h3>
+        <h2 class="card-name">${escapeHtml(b.name)}</h2>
         <p class="card-desc">${escapeHtml(b.description)}</p>
       </a>
       <div class="tags">${tags}</div>
@@ -85,7 +87,7 @@ function renderGrid(filtered) {
 
 function render() {
   const filtered = getFilteredAndSorted();
-  renderResultsBar(filtered);
+  withFocusPreserved(resultsBar, function () { renderResultsBar(filtered); });
   renderGrid(filtered);
 }
 
@@ -106,6 +108,7 @@ resultsBar.addEventListener('click', function (e) {
     searchQuery = '';
     searchInput.value = '';
     render();
+    searchInput.focus(); // the clear button itself no longer exists post-render
   }
 });
 
@@ -123,7 +126,7 @@ searchInput.addEventListener('input', function () {
 });
 
 document.addEventListener('keydown', function (e) {
-  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) return;
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
     searchInput.focus();
@@ -136,6 +139,7 @@ content.addEventListener('click', function (e) {
   searchQuery = tag.dataset.tag;
   searchInput.value = searchQuery;
   render();
+  searchInput.focus(); // the clicked tag itself no longer exists post-render
 });
 
 // Excludes offer-type colors (#a78bfa trial, #60a5fa credits, #fbbf24 discount, #4ade80 free)

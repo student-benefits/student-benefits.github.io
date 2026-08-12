@@ -14,6 +14,28 @@ function hashColor(name, palette) {
   return palette[h % palette.length];
 }
 
+// Runs `renderFn` (an innerHTML-replacing render), then restores keyboard
+// focus to the equivalent new element if the focus was inside `container`
+// beforehand — an innerHTML swap destroys the focused node outright, which
+// otherwise drops a keyboard user back to the start of the page on every
+// filter click, toggle, or sort change.
+function withFocusPreserved(container, renderFn) {
+  var active = document.activeElement;
+  var selector = null;
+  if (active && container.contains(active)) {
+    if (active.id) {
+      selector = '#' + CSS.escape(active.id);
+    } else if (active.dataset && active.dataset.cat !== undefined) {
+      selector = '[data-cat="' + CSS.escape(active.dataset.cat) + '"]';
+    }
+  }
+  renderFn();
+  if (selector) {
+    var el = container.querySelector(selector);
+    if (el) el.focus();
+  }
+}
+
 // Renders filter tab buttons into `container`.
 // `categories` is an array of category strings.
 // `activeCategory` is the currently selected value.

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/benefits/index.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="page">
     <div class="container">
       <header>
@@ -46,16 +47,18 @@
         </div>
       </header>
 
-      <div id="results-bar" class="results-bar"></div>
+      <main id="main-content">
+        <div id="results-bar" class="results-bar" aria-live="polite" aria-atomic="true"></div>
 
-      <div id="content">
-        <div class="skeleton">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
+        <div id="content">
+          <div class="skeleton">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
         </div>
-      </div>
+      </main>
 
       <footer><a href="https://neves.cloud" target="_blank" rel="noopener">neves.cloud</a></footer>
     </div>

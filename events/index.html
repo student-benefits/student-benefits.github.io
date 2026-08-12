@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/events/events.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
   <div class="page">
     <div class="container">
 
@@ -35,21 +36,23 @@
           </div>
         </div>
         <p class="subtitle">Hackathons, grants, fellowships, and conferences — curated, not aggregated.</p>
+
+        <div class="filter-wrap">
+          <div id="filter-bar" class="filter-bar" role="group" aria-label="Filter events"></div>
+        </div>
       </header>
 
-      <div class="filter-wrap">
-        <div id="filter-bar" class="filter-bar" role="group" aria-label="Filter events"></div>
-      </div>
+      <main id="main-content">
+        <div id="results-bar" class="results-bar" aria-live="polite" aria-atomic="true"></div>
 
-      <div id="results-bar" class="results-bar"></div>
-
-      <div id="content">
-        <div class="skeleton">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
+        <div id="content">
+          <div class="skeleton">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+          </div>
         </div>
-      </div>
+      </main>
 
       <footer><a href="https://neves.cloud" target="_blank" rel="noopener">neves.cloud</a></footer>
     </div>
