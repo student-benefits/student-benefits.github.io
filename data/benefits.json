@@ -1055,6 +1055,20 @@
     "popularity": 8
   },
   {
+    "id": "protopie",
+    "name": "ProtoPie",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code.",
+    "link": "https://www.protopie.io/plans/education",
+    "tags": [
+      "Design",
+      "Prototyping",
+      "UI/UX"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "raycast-pro",
     "name": "Raycast Pro",
     "category": "Productivity",
