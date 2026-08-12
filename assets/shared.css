@@ -17,10 +17,7 @@
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
-  --dur-fast: 80ms;
   --dur-normal: 150ms;
-  --dur-slow: 300ms;
-  --ease: cubic-bezier(0.165, 0.85, 0.45, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
