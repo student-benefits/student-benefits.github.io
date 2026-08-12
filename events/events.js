@@ -76,7 +76,9 @@ function renderCard(e) {
   const cd = countdown(e.date, e.expires || e.date_end);
   const locationPill = e.remote
     ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
-    : `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`;
+    : e.location
+    ? `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`
+    : '';
 
   return `<article class="event-card">
     <a class="event-card-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">

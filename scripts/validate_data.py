@@ -51,11 +51,20 @@ def load(name: str):
     return data
 
 
-def check_link(name: str, link: str) -> None:
-    parsed = urlparse(link)
-    if parsed.scheme != "https":
+def check_link_https(name: str, link: str) -> bool:
+    """Applies to any link, benefit or event. Returns True if https."""
+    if urlparse(link).scheme != "https":
         err(f"{name}: link must be https — {link}")
+        return False
+    return True
+
+
+def check_link(name: str, link: str) -> None:
+    """Benefits-only: a signup/program page, never a homepage or docs article.
+    Doesn't apply to events — many legitimate event links are bare homepages."""
+    if not check_link_https(name, link):
         return
+    parsed = urlparse(link)
     host = parsed.netloc.lower()
     path = parsed.path or "/"
     if host.startswith(FORBIDDEN_SUBDOMAINS):
@@ -120,6 +129,8 @@ def validate_events() -> None:
         for key in ("id", "name", "organizer", "category", "date", "remote", "eligibility", "why", "link", "expires"):
             if key not in e:
                 err(f"{name}: missing required field '{key}'")
+        if e.get("remote") is False and not e.get("location"):
+            err(f"{name}: location is required when remote is false")
         eid = e.get("id", "")
         if eid:
             if not ID_RE.match(eid):
@@ -136,6 +147,8 @@ def validate_events() -> None:
                 err(f"{name}: {dk} '{e[dk]}' must be YYYY-MM-DD")
         if isinstance(e.get("date"), str) and DATE_RE.match(e["date"]):
             dates.append(e["date"])
+        if isinstance(e.get("link"), str):
+            check_link_https(name, e["link"])
     if dates != sorted(dates):
         err("events.json: entries must be sorted by date (earliest first)")
 
