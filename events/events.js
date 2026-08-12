@@ -39,16 +39,16 @@ function countdown(date, expires) {
     if (expires) {
       const end = new Date(expires + 'T00:00:00');
       const left = Math.round((end - now) / 86400000);
-      if (left === 0) return { text: 'Ends today', cls: 'event-countdown--soon' };
-      if (left === 1) return { text: 'Ends tomorrow', cls: 'event-countdown--soon' };
-      if (left <= 14) return { text: 'Ends in ' + left + ' days', cls: 'event-countdown--soon' };
+      if (left === 0) return { text: 'Ends today', cls: 'event-countdown--soon', urgent: true };
+      if (left === 1) return { text: 'Ends tomorrow', cls: 'event-countdown--soon', urgent: true };
+      if (left <= 14) return { text: 'Ends in ' + left + ' days', cls: 'event-countdown--soon', urgent: true };
     }
-    return { text: 'Ongoing', cls: 'event-countdown--upcoming' };
+    return { text: 'Ongoing', cls: 'event-countdown--upcoming', urgent: false };
   }
-  if (days === 0) return { text: 'Today', cls: 'event-countdown--soon' };
-  if (days === 1) return { text: 'Tomorrow', cls: 'event-countdown--soon' };
-  if (days <= 14) return { text: days + ' days away', cls: 'event-countdown--soon' };
-  return { text: days + ' days away', cls: 'event-countdown--upcoming' };
+  if (days === 0) return { text: 'Today', cls: 'event-countdown--soon', urgent: true };
+  if (days === 1) return { text: 'Tomorrow', cls: 'event-countdown--soon', urgent: true };
+  if (days <= 14) return { text: days + ' days away', cls: 'event-countdown--soon', urgent: true };
+  return { text: days + ' days away', cls: 'event-countdown--upcoming', urgent: false };
 }
 
 function isExpired(e) {
@@ -82,7 +82,7 @@ function renderCard(e) {
         <span class="event-cat">${escapeHtml(e.category)}</span>
         ${locationPill}
       </div>
-      <h3 class="event-name">${escapeHtml(e.name)}</h3>
+      <h2 class="event-name">${escapeHtml(e.name)}</h2>
       <div class="event-meta">
         <span class="event-meta-line">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
@@ -96,7 +96,7 @@ function renderCard(e) {
       <p class="event-why">${escapeHtml(e.why)}</p>
     </a>
     <div class="event-footer">
-      <span class="event-countdown ${escapeHtml(cd.cls)}">${escapeHtml(cd.text)}</span>
+      <span class="event-countdown ${escapeHtml(cd.cls)}">${cd.urgent ? '<span class="sr-only">Time-sensitive: </span>' : ''}${escapeHtml(cd.text)}</span>
       <a class="event-apply" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
         Apply
         <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -109,10 +109,12 @@ function renderFilters() {
   const filterBar = document.getElementById('filter-bar');
   const usedCats = new Set(events.filter(function(e) { return !isExpired(e); }).map(function(e) { return e.category; }));
   const visibleCategories = categories.filter(function(c) { return c === 'All' || usedCats.has(c); });
-  renderFilterTabs(filterBar, visibleCategories, activeCategory, function(c) {
-    return c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
-  }, function(c) {
-    return categoryTooltips[c] || '';
+  withFocusPreserved(filterBar, function () {
+    renderFilterTabs(filterBar, visibleCategories, activeCategory, function(c) {
+      return c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
+    }, function(c) {
+      return categoryTooltips[c] || '';
+    });
   });
 }
 
@@ -121,8 +123,10 @@ function render() {
   const resultsBar = document.getElementById('results-bar');
   const content = document.getElementById('content');
   const label = filtered.length === 1 ? 'event' : 'events';
-  resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>` +
-    `<button class="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
+  withFocusPreserved(resultsBar, function () {
+    resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>` +
+      `<button class="remote-toggle" id="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
+  });
 
   if (filtered.length > 0) {
     content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
