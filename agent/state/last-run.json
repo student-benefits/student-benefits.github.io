@@ -1,12 +1,14 @@
 {
-  "issue": 300,
-  "title": "blackfire",
-  "timestamp": "2026-07-20T00:00:00Z",
+  "issue": 323,
+  "title": "protopie",
+  "timestamp": "2026-08-12T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "Blackfire student discount education program 2026" },
-    { "name": "webfetch", "url": "https://www.blackfire.io/students" },
+    { "name": "websearch", "query": "ProtoPie student discount education program 2026" },
+    { "name": "webfetch", "url": "https://www.protopie.io/plans/education" },
+    { "name": "webfetch", "url": "https://www.protopie.io/use-cases/education" },
+    { "name": "webfetch", "url": "https://www.studentbeans.com/student-discount/us/protopie" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "Blackfire", "category": "Dev Tools", "description": "Free Developer plan for 1 year (€348 value) — PHP and Python profiling with SQL and HTTP request analysis." }
+  "benefit": { "name": "ProtoPie", "category": "Design", "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code." }
 }
