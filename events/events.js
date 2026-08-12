@@ -19,19 +19,14 @@ const categoryTooltips = {
 
 function orgColor(name) { return hashColor(name, ORG_PALETTE); }
 
+const DATE_RANGE_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
 function fmtDate(date, dateEnd) {
-  const opts = { month: 'short', day: 'numeric', year: 'numeric' };
   const start = new Date(date + 'T12:00:00');
   if (!dateEnd || dateEnd === date) {
-    return start.toLocaleDateString('en-US', opts);
+    return DATE_RANGE_FMT.format(start);
   }
-  const end = new Date(dateEnd + 'T12:00:00');
-  if (start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth()) {
-    return start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
-      '–' + end.getDate() + ', ' + end.getFullYear();
-  }
-  return start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) +
-    ' – ' + end.toLocaleDateString('en-US', opts);
+  return DATE_RANGE_FMT.formatRange(start, new Date(dateEnd + 'T12:00:00'));
 }
 
 function countdown(date, expires) {
@@ -146,8 +141,8 @@ document.getElementById('results-bar').addEventListener('click', function(e) {
 });
 
 Promise.all([
-  fetch('../data/events.json').then(function(r) { return r.json(); }),
-  fetch('../data/event-categories.json').then(function(r) { return r.json(); })
+  fetch('/data/events.json').then(function(r) { return r.json(); }),
+  fetch('/data/event-categories.json').then(function(r) { return r.json(); })
 ]).then(function(results) {
   events = results[0];
   categories = ['All'].concat(results[1]);

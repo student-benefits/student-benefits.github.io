@@ -182,8 +182,6 @@
   user-select: none;
 }
 
-/* Category badge colors injected dynamically from data/categories.json at load time */
-
 .offer-pill {
   display: inline-flex;
   align-items: center;

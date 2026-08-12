@@ -49,7 +49,7 @@ function renderCard(b) {
     <div class="card-body">
       <a class="card-link" href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
-          <span class="badge" data-cat="${escapeHtml(b.category)}">${escapeHtml(b.category)}</span>
+          <span class="badge" style="color:${catColor(b.category)}">${escapeHtml(b.category)}</span>
           ${pill}
         </div>
         <h3 class="card-name">${escapeHtml(b.name)}</h3>
@@ -157,11 +157,6 @@ Promise.all([
 ]).then(function (results) {
   benefits = results[0];
   categories = ['All'].concat(results[1]);
-  const sheet = document.createElement('style');
-  sheet.textContent = results[1].map(function (cat) {
-    return `.badge[data-cat="${cat.replace(/"/g, '\\"')}"] { color: ${catColor(cat)}; }`;
-  }).join('\n');
-  document.head.appendChild(sheet);
   renderFilters();
   render();
 }).catch(function () {
