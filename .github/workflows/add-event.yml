@@ -103,24 +103,13 @@ jobs:
 
             Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/events.json`, and run again — repeat until it exits 0. Never open the PR while the validator is red: it is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
 
-            ## Step 7: Add to the pending PR (or open it), then comment
+            ## Step 7: Open a PR, then comment
 
-            New events accumulate on ONE rolling pull request labelled `pending-events`, so the maintainer reviews a single PR instead of one per submission. This is **best-effort**: if any git/PR step below fails, fall back to a standalone PR (7c) — never drop a submission, and never merge anything yourself.
+            Every run gets its own branch and its own standalone PR — never share a branch with another run, and never force-push or reset one. A separate deterministic workflow (`consolidate-pending.yml`, no Claude involved) batches these into one PR for the maintainer to review on its own schedule; your only job here is a clean, self-contained PR for this one entry.
 
-            ### 7a — Find the pending PR
-            `gh pr list --label pending-events --state open --json number,headRefName --limit 1`
-
-            ### 7b — If one exists, add to it
-            - `git fetch origin <headRefName> && git checkout <headRefName>` — it already holds earlier queued events; keep them all.
-            - Re-apply your Step 6 changes here: insert the entry into `data/events.json` in date order (earliest first), and replace `agent/state/last-events-submission.json`.
+            - `git checkout -B add-event-${{ github.event.issue.number || github.event.inputs.issue }} origin/main`
+            - Insert the entry into `data/events.json` in date order (earliest first), per Step 6, and replace `agent/state/last-events-submission.json` per Step 6.
             - Run `python3 scripts/validate_data.py` until it exits 0.
-            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push`. If the push is rejected because the branch moved, run `git fetch origin <headRefName> && git reset --hard origin/<headRefName>`, redo the insertion + validation on the fresh state, and push once more. If it still fails, go to 7c.
-            - `gh pr edit <number>`: set the title to `Add {N} student events` (N = entries now on the branch) and append to the body one line `- {name} ({category}, {date})` and, on its own plain-text line, `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` — so merging the single PR closes every contributing issue.
-
-            ### 7c — Otherwise (or on any 7b failure), open it
-            - `git checkout -B add-event-pending origin/main`. (On a 7b fallback, use branch `add-event-{id}` and skip the `--label` below — a standalone PR, not the rolling one.)
-            - Insert the entry, validate to green, commit, then `git push -u origin <branch>` (add `--force-with-lease` if the branch already exists from a previously-merged PR).
+            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-event-${{ github.event.issue.number || github.event.inputs.issue }}`. This branch is new and unique to this issue — the push should never be rejected; if it somehow is, stop and comment "**Could not open a PR:** {reason}" rather than attempting any reset/force-push recovery.
             - `gh pr create --label pending-events --title "Add 1 student event: {name}"` with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
-
-            ### 7d — Comment + close
-            Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}". The merge stays a human decision.
+            - Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}". The merge stays a human decision.
