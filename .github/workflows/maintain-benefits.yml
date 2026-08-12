@@ -32,7 +32,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-6 --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
+          claude_args: "--model ${{ vars.CLAUDE_MODEL }} --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
             You audit every entry in `data/benefits.json`, fix what you can, validate, and open a single PR. Findings go to the PR — never open issues.
 
