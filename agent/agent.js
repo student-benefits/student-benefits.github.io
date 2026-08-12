@@ -237,7 +237,7 @@ function addSimStep(step, trace, btn) {
 
 document.getElementById('sim-btn').addEventListener('click', simNext);
 
-fetch('../data/benefits.json')
+fetch('/data/benefits.json')
   .then(r => r.ok ? r.json() : [])
   .then(data => { SIM_STEPS[1].primary = data.length + ' existing benefits loaded. Checking for name and hostname matches…'; })
   .catch(() => {});
