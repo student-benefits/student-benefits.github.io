@@ -27,8 +27,8 @@ well-priced consumer VPN or music subscription is still a reject.
 truth, never hardcoded in HTML.
 
 **Active discovery, not passive curation.** Content enters through multiple
-paths: humans submit issues (pull); `discover-benefits` searches the web weekly
-for new student programs (push); `discover-events` finds upcoming student events
+paths: humans submit issues (pull); `discover-benefits` searches the web
+biweekly for new student programs (push); `discover-events` finds upcoming student events
 and removes expired ones automatically (push + self-maintenance). The system
 surfaces what people haven't thought to add and keeps itself current.
 
@@ -162,6 +162,7 @@ Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-
 | `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
 | `consolidate-pending` | Green scheduled run in Actions log (most runs legitimately find nothing to fold) | 8 × 6h |
 | `redispatch-stalled` | Green scheduled run in Actions log (most runs legitimately find nothing stalled) | 8 × 1h |
+| `pr-concierge` | Green scheduled run in Actions log (most days legitimately find nothing newly ready) | 8 × 1d |
 
 **The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. Verify each working-when against the live Actions run history before trusting any "stays current automatically" claim; a missing/stale state file is the alarm, not noise. (Scar 2026-08-11: two different failure shapes hid behind the same symptom. `last-benefits-discovery.json` sat 2 months stale — not because the cron wasn't firing, but because its PRs weren't being merged, masking a real backlog. `reddit-state.json` was stuck since March for a genuine reason — `scout-reddit.yml`'s commit step ran after `claude-code-action` revoked its own push token, so every scheduled run hard-failed for 10 straight weeks. Diagnosed and removed rather than fixed, since it had never produced a usable find in that time. Lesson: a stale heartbeat means "go find out why," not "assume the obvious cause.")
 

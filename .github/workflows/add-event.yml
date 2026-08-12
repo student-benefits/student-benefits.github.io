@@ -111,5 +111,5 @@ jobs:
             - Insert the entry into `data/events.json` in date order (earliest first), per Step 6, and replace `agent/state/last-events-submission.json` per Step 6.
             - Run `python3 scripts/validate_data.py` until it exits 0.
             - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-event-${{ github.event.issue.number || github.event.inputs.issue }}`. This branch is new and unique to this issue — the push should never be rejected; if it somehow is, stop and comment "**Could not open a PR:** {reason}" rather than attempting any reset/force-push recovery.
-            - `gh pr create --label pending-events --title "Add 1 student event: {name}"` with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
+            - `gh pr create --title "Add 1 student event: {name}"` (no label — `consolidate-pending.yml` matches candidate PRs by branch name and author, not by label; the `pending-events` label is reserved for the consolidated PR) with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
             - Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}". The merge stays a human decision.

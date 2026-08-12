@@ -10,7 +10,7 @@ name: Discover Student Benefits
 #   Cadence (2026-08-11 scar): cut from weekly to biweekly. Discovery quality was fine (validated batches came back
 #     legitimate), but throughput was outrunning review capacity — a month of unreviewed backlog piled up before this
 #     was caught. Halving find volume is the fix, not a stricter quality bar. See the redesigned per-issue-PR +
-#     scripts/consolidate_pending.py flow this now feeds into (CLAUDE.md's "Rolling consolidation" section).
+#     scripts/consolidate_pending.py flow this now feeds into (CLAUDE.md's "Per-issue PRs, consolidated deterministically" section).
 
 on:
   schedule:
@@ -132,3 +132,5 @@ jobs:
               "issues_created": <number>
             }
             ```
+
+            This is the heartbeat this workflow's working-when criterion depends on — commit and push it directly to `main`, no PR needed (it's internal state, not public data): `git add agent/state/last-benefits-discovery.json && git commit --author="Claude <noreply@anthropic.com>" -m "Update benefits discovery log" && git push origin HEAD:main`. Do this every run, whether or not you opened any issues — a run that finds nothing is still a healthy heartbeat as long as this file moves.

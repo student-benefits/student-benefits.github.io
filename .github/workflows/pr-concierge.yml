@@ -6,6 +6,19 @@ name: PR Concierge
 # Copilot) is surfaced in the comment for context but does NOT gate the ping —
 # CI is the only gate. Deterministic: no LLM, no token cost. The merge itself
 # stays a human decision (the trust boundary).
+#
+# Excludes add-benefit-N / add-event-N branches: those are transient per-issue
+# PRs meant to be folded by consolidate-pending.yml (every 6h) before a human
+# ever needs to look at them individually — pinging on one defeats the point of
+# that consolidation.
+#
+# Falsifiability (per the "running systems" convention).
+#   Working-when: each scheduled run completes without error — most days will
+#     legitimately have nothing newly ready, which is healthy, not silence. The
+#     Actions run log is the heartbeat (no state file — purely deterministic,
+#     nothing to persist between runs beyond the labels already on each PR).
+#   Teardown after N: 8 consecutive scheduled runs erroring (not "finding
+#     nothing ready") means the mechanism itself is broken.
 
 on:
   schedule:
@@ -57,7 +70,7 @@ jobs:
           # not a block. Copilot's verdict is surfaced for context but never gates
           # the ping (it sometimes errors), so a green PR is never stuck on it.
           ready=$(gh pr list --repo "$GITHUB_REPOSITORY" --state open --limit 200 \
-            --json number,title,isDraft,author,labels,statusCheckRollup,reviews \
+            --json number,title,isDraft,author,labels,statusCheckRollup,reviews,headRefName \
             | jq -c --arg owner "$owner" '
               def copilot:
                 ([.reviews[]? | select(.author.login=="copilot-pull-request-reviewer")] | last);
@@ -77,6 +90,7 @@ jobs:
               | select(.isDraft | not)
               | select(.author.login != $owner)
               | select([.labels[]?.name] | index("ready-for-review") | not)
+              | select(.headRefName | test("^add-(benefit|event)-[0-9]+$") | not)
               | { number, title, ci: ci,
                   cilabel: (if ((.statusCheckRollup // []) | length) == 0
                             then "no CI checks" else "checks ✓" end),

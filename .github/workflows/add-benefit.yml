@@ -62,11 +62,15 @@ jobs:
 
             **Build & grow (the curation thesis):** the benefit must help a student *create, learn, ship, or research* — dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Reject consumption perks regardless of how good the deal is: entertainment (music, video streaming), shopping, consumer subscriptions (e.g. a consumer VPN), and broad discount aggregators (Student Beans / UNiDAYS-style). The test isn't "is this a real student discount?" but "does this advance building or learning?" — if it doesn't, it's a reject even when the offer is genuine and well-priced.
 
-            If invalid, comment "**Cannot add:** {reason}". Then append to `agent/state/rejected.json`:
+            If invalid, comment "**Cannot add:** {reason}". Then append to `agent/state/rejected.json` and commit it (see "Committing `rejected.json`" below):
             ```json
             { "name": "{name}", "domain": "{hostname or null}", "reason": "{reason}", "checked": "{YYYY-MM-DD}" }
             ```
             Close the issue and stop.
+
+            ### Committing `rejected.json`
+
+            This file is internal state, not public data — commit and push it directly to `main`, no PR needed: `git add agent/state/rejected.json && git commit --author="Claude <noreply@anthropic.com>" -m "Reject {name}" && git push origin HEAD:main`. Do this every time you append to it, from either Step 3 or Step 4.5 — a rejection that's never committed can't be deduplicated against next time, defeating the point of keeping this file.
 
             ## Step 4: Generate the entry
 
@@ -99,7 +103,7 @@ jobs:
 
             1. `WebFetch` your chosen `link`. A real page must load — not a 404, "page not found", or error page. Treat a redirect's final URL as the real link and use that.
             2. If it does not load: `WebSearch` for the program's actual student signup/education page, `WebFetch` the top candidate, and use the URL that genuinely loads. Copy it **verbatim** — do not edit the path by hand.
-            3. If no working student-program URL loads after this, the program isn't addable: comment "**Cannot add:** could not confirm a live student signup page", append to `rejected.json` (Step 3 format), close the issue, and stop.
+            3. If no working student-program URL loads after this, the program isn't addable: comment "**Cannot add:** could not confirm a live student signup page", append to `rejected.json` and commit it (Step 3 format and commit instructions), close the issue, and stop.
 
             This applies even when the user supplied the link — a submitted URL is a candidate, not a verified one.
 
@@ -135,5 +139,5 @@ jobs:
             - Insert the entry into `data/benefits.json` in its `id`-sorted position (per Step 5), and replace `agent/state/last-run.json` (per Step 5).
             - Run `python3 scripts/validate_data.py` until it exits 0.
             - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-benefit-${{ github.event.issue.number || github.event.inputs.issue }}`. This branch is new and unique to this issue — the push should never be rejected; if it somehow is, stop and comment "**Could not open a PR:** {reason}" rather than attempting any reset/force-push recovery.
-            - `gh pr create --label pending-benefits --title "Add 1 student benefit: {name}"` with a body holding `- {name} ({category})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
+            - `gh pr create --title "Add 1 student benefit: {name}"` (no label — `consolidate-pending.yml` matches candidate PRs by branch name and author, not by label; the `pending-benefits` label is reserved for the consolidated PR) with a body holding `- {name} ({category})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
             - Comment on the issue: "Added **{name}** ({category}) — {description}\n\nPR: {pr_url}". The merge stays a human decision.

@@ -109,7 +109,7 @@ jobs:
 
             Then run `python3 scripts/validate_data.py` and fix `data/events.json` until it exits 0 before opening the PR — never open it while the validator is red. It is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
 
-            **Branch**: `discover-events-{YYYY-MM-DD}` (today's date) — never reuse or invent another name; this keeps each week's run on its own branch so runs never race each other.
+            **Branch**: `discover-events-{YYYY-MM-DD}` (today's date) — never reuse or invent another name; this keeps each run on its own branch so runs never race each other.
 
             **Title**: `[Events]: <comma-separated new event names>` (or `Expire stale entries` if only removing)
 
