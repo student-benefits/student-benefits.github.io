@@ -11,7 +11,7 @@ Grant is a set of workflows, a deterministic validation gate, and a human who me
 
 ## How it works
 
-Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events, audit link health, and scout Reddit on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`CLAUDE.md`](CLAUDE.md#automated-workflows) — the canonical source.
+Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events and audit link health on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`CLAUDE.md`](CLAUDE.md#automated-workflows) — the canonical source.
 
 The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture so the system can be understood and replicated.
 

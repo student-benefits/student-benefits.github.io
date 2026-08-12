@@ -134,7 +134,6 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 | `discover-benefits.yml` | Weekly (Monday) or manual | Searches for new student benefits, opens issues for the best finds |
 | `discover-events.yml` | Weekly (Wednesday) or manual | Searches for notable student events, removes expired entries, opens one PR |
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR |
-| `scout-reddit.yml` | Weekly (Friday) or manual | Scouts Reddit (`site:reddit.com` searches) for benefit mentions (`MODE=discover`) and posting opportunities (`MODE=scout`, → Discord via the `DISCORD_WEBHOOK_URL` secret). State in `agent/state/reddit-state.json`; `DRY_RUN=true` skips writes and the webhook. |
 | `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
 | `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, @-mentions the maintainer (from CODEOWNERS) and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict but gates only on CI; never merges. Deterministic — no LLM. |
 
@@ -155,9 +154,8 @@ Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-
 | `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 8 wk |
 | `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 8 wk |
 | `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
-| `scout-reddit` | `reddit-state.json` `last_run` advances (committed by the push step) | 8 wk |
 
-**The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. This is live: `agent/state/last-benefits-discovery.json` is **absent** (discover-benefits appears to have never committed) and `reddit-state.json` `last_run` is **months stale** (~2026-03) — the exact silent-cron failure. So **verify each working-when against the live Actions run history before trusting any "stays current automatically" claim** (the Core-values "keeps itself current" line is unverified until the run log confirms scheduled runs are firing). A missing/stale state file is the alarm, not noise.
+**The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. Verify each working-when against the live Actions run history before trusting any "stays current automatically" claim; a missing/stale state file is the alarm, not noise. (Scar 2026-08-11: two different failure shapes hid behind the same symptom. `last-benefits-discovery.json` sat 2 months stale — not because the cron wasn't firing, but because its PRs weren't being merged, masking a real backlog. `reddit-state.json` was stuck since March for a genuine reason — `scout-reddit.yml`'s commit step ran after `claude-code-action` revoked its own push token, so every scheduled run hard-failed for 10 straight weeks. Diagnosed and removed rather than fixed, since it had never produced a usable find in that time. Lesson: a stale heartbeat means "go find out why," not "assume the obvious cause.")
 
 ### Agent state files
 
@@ -166,8 +164,7 @@ Workflows write these; `agent/index.html` reads them to render run history. Neve
 - `agent/state/last-run.json` — last add-benefit run
 - `agent/state/last-events-submission.json` — last add-event run
 - `agent/state/last-events-discovery.json` — last discover-events run
-- `agent/state/reddit-state.json` — reddit scout state (processed post IDs, subreddit scores, counters)
-- `agent/state/rejected.json` — rejected programs, used for deduplication by add-benefit and scout-reddit
+- `agent/state/rejected.json` — rejected programs, used for deduplication by add-benefit
 
 ---
 
