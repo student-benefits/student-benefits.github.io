@@ -1,17 +1,9 @@
 name: Consolidate Pending Submissions
 
 # Deterministic (no LLM, no claude-code-action) — folds standalone
-# add-benefit-N / add-event-N PRs (opened one-per-issue by add-benefit.yml /
-# add-event.yml) into a single review-ready PR per data file, so the
-# maintainer still reviews one PR instead of one per submission.
-#
-# Replaces the old shared-rolling-branch pattern: that pattern needed a
-# git reset --hard fallback to resolve concurrent-push races, and
-# claude-code-action's headless mode has a built-in, non-configurable
-# restriction on exactly that command shape — which was silently stalling
-# add-benefit/add-event runs (see issue #320). Running the consolidation as
-# plain script logic outside the agent loop sidesteps the restriction
-# entirely: there's no agent here to have permissions denied.
+# add-benefit-N / add-event-N PRs into one review-ready PR per data file.
+# Full rationale (why not a shared branch — see issue #320) lives in
+# scripts/consolidate_pending.py's docstring, nearest the code it explains.
 #
 # Falsifiability (per the "running systems" convention).
 #   Working-when: any run where scripts/consolidate_pending.py finds
