@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-08T17:30:42Z",
+  "timestamp": "2026-07-06T00:00:00Z",
   "known_sources_checked": [
     "https://education.github.com/pack/offers",
     "https://www.jetbrains.com/community/education/",
@@ -20,31 +20,11 @@
     "site:reddit.com \"student discount\" developer OR design tools 2026"
   ],
   "discovered": [
-    {
-      "name": "Adafruit",
-      "link": "https://www.adafruit.com/github-students",
-      "source": "known-source"
-    },
-    {
-      "name": "Adobe Creative Cloud",
-      "link": "https://www.adobe.com/creativecloud/buy/students.html",
-      "source": "keyword"
-    },
-    {
-      "name": "PopSQL",
-      "link": "https://popsql.com/github-students",
-      "source": "known-source"
-    },
-    {
-      "name": "Travis CI",
-      "link": "https://www.travis-ci.com/education/",
-      "source": "known-source"
-    },
-    {
-      "name": "Stripe",
-      "link": "https://education.github.com/pack/redeem/stripe-student",
-      "source": "known-source"
-    }
+    { "name": "ConfigCat", "link": "https://configcat.com/student/", "source": "known-source" },
+    { "name": "Camber", "link": "https://www.cambercloud.com/github-student-pack", "source": "known-source" },
+    { "name": "OpenAI Codex", "link": "https://developers.openai.com/community/students", "source": "keyword" },
+    { "name": "ToDiagram", "link": "https://todiagram.com/education", "source": "known-source" },
+    { "name": "Algolia", "link": "https://www.algolia.com/blog/algolia/github-student-developer-pack", "source": "known-source" }
   ],
   "issues_created": 5
 }

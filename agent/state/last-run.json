@@ -1,13 +1,12 @@
 {
-  "issue": 275,
-  "title": "codescene",
-  "timestamp": "2026-06-29T00:00:00Z",
+  "issue": 300,
+  "title": "blackfire",
+  "timestamp": "2026-07-20T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "CodeScene student discount GitHub Student Pack education program" },
-    { "name": "webfetch", "url": "https://codescene.com/github-students" },
-    { "name": "webfetch", "url": "https://codescene.com/resources/github-students" },
+    { "name": "websearch", "query": "Blackfire student discount education program 2026" },
+    { "name": "webfetch", "url": "https://www.blackfire.io/students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "CodeScene", "category": "Dev Tools", "description": "Free student account with code health analysis, technical debt visualization, IDE extensions, and automated PR reviews." }
+  "benefit": { "name": "Blackfire", "category": "Dev Tools", "description": "Free Developer plan for 1 year (€348 value) — PHP and Python profiling with SQL and HTTP request analysis." }
 }
