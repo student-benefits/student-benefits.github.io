@@ -3,10 +3,11 @@
 into one review-ready PR, without an LLM in the loop.
 
 add-benefit.yml / add-event.yml each open their own standalone PR per issue
-(never a shared branch — see CLAUDE.md's "Rolling consolidation" section for
-why: claude-code-action's headless mode has a built-in, non-configurable
-restriction on force-push/reset-shaped commands, and a shared branch needs
-exactly that to resolve concurrent-push races). This script is the plain,
+(never a shared branch — see CLAUDE.md's "Per-issue PRs, consolidated
+deterministically" section for why: claude-code-action's headless mode has
+a built-in, non-configurable restriction on force-push/reset-shaped
+commands, and a shared branch needs exactly that to resolve concurrent-push
+races). This script is the plain,
 non-agentic step that does the consolidation instead: read each open
 candidate PR, extract the one entry it adds (by set-difference against
 current main, robust to main having moved since that PR branched), fold all

@@ -3,15 +3,13 @@ name: Validate Data
 on:
   pull_request:
     paths:
-      - 'data/benefits.json'
-      - 'data/events.json'
-      - 'data/categories.json'
+      - 'data/**'
       - 'scripts/validate_data.py'
   push:
     branches: [main]
     paths:
-      - 'data/benefits.json'
-      - 'data/events.json'
+      - 'data/**'
+      - 'scripts/validate_data.py'
   workflow_dispatch:
 
 jobs:
