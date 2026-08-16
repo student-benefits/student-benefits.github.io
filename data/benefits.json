@@ -205,7 +205,7 @@
     "category": "Learning",
     "offer_type": "free",
     "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
-    "link": "https://www.boot.dev/pricing",
+    "link": "https://www.boot.dev/try/github-education-pack",
     "tags": [
       "GitHub Student Pack",
       "Backend",
@@ -761,7 +761,7 @@
     "category": "Productivity",
     "offer_type": "discount",
     "description": "75% off Loom Business plan for eligible students and educators. Apply via Atlassian classroom license form.",
-    "link": "https://www.atlassian.com/licensing/purchase-licensing",
+    "link": "https://www.atlassian.com/software/loom/pricing",
     "tags": [
       "Video",
       "Recording",
