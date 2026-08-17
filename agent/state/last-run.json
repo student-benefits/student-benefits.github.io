@@ -1,14 +1,12 @@
 {
-  "issue": 323,
-  "title": "protopie",
-  "timestamp": "2026-08-12T00:00:00Z",
+  "issue": 335,
+  "title": "xojo",
+  "timestamp": "2026-08-17T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "ProtoPie student discount education program 2026" },
-    { "name": "webfetch", "url": "https://www.protopie.io/plans/education" },
-    { "name": "webfetch", "url": "https://www.protopie.io/use-cases/education" },
-    { "name": "webfetch", "url": "https://www.studentbeans.com/student-discount/us/protopie" },
+    { "name": "websearch", "query": "Xojo student discount education program" },
+    { "name": "webfetch", "url": "https://xojo.com/educators/" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ProtoPie", "category": "Design", "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code." }
+  "benefit": { "name": "Xojo", "category": "Dev Tools", "description": "Free Desktop license via GitHub Student Pack to compile and distribute native desktop apps for Mac, Windows, and Linux" }
 }

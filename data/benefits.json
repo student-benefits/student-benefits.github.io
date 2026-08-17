@@ -1411,6 +1411,21 @@
     "popularity": 5
   },
   {
+    "id": "xojo",
+    "name": "Xojo",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Desktop license via GitHub Student Pack to compile and distribute native desktop apps for Mac, Windows, and Linux",
+    "link": "https://xojo.com/educators/",
+    "tags": [
+      "IDE",
+      "Desktop",
+      "Cross-Platform",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "zed",
     "name": "Zed",
     "category": "Dev Tools",
