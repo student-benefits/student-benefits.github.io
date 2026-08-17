@@ -1,14 +1,15 @@
 {
-  "issue": 323,
-  "title": "protopie",
-  "timestamp": "2026-08-12T00:00:00Z",
+  "issue": 336,
+  "title": "pageclip",
+  "timestamp": "2026-08-17T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "ProtoPie student discount education program 2026" },
-    { "name": "webfetch", "url": "https://www.protopie.io/plans/education" },
-    { "name": "webfetch", "url": "https://www.protopie.io/use-cases/education" },
-    { "name": "webfetch", "url": "https://www.studentbeans.com/student-discount/us/protopie" },
+    { "name": "webfetch", "url": "https://pageclip.co/github-students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ProtoPie", "category": "Design", "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code." }
+  "benefit": {
+    "name": "Pageclip",
+    "category": "Dev Tools",
+    "description": "Free Basic plan with unlimited forms and 20,000 submissions/month via GitHub Student Pack."
+  }
 }

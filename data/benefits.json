@@ -983,6 +983,21 @@
     "popularity": 6
   },
   {
+    "id": "pageclip",
+    "name": "Pageclip",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Basic plan with unlimited forms and 20,000 submissions/month via GitHub Student Pack.",
+    "link": "https://pageclip.co/github-students",
+    "tags": [
+      "Forms",
+      "GitHub Student Pack",
+      "Static Sites",
+      "Backend"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "perplexity-pro",
     "name": "Perplexity Pro",
     "category": "AI Tools",
