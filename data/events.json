@@ -92,18 +92,6 @@
     "expires": "2026-09-07"
   },
   {
-    "id": "build-with-gemini-xprize-2026",
-    "name": "Build with Gemini XPRIZE",
-    "organizer": "XPRIZE",
-    "category": "hackathon",
-    "date": "2026-08-17",
-    "remote": true,
-    "eligibility": "Above legal age worldwide; individuals, small teams, and orgs under 25 employees; some countries excluded",
-    "why": "$2,000,000 prize pool — top prize $500,000 — to build a real AI-powered business using Google Cloud. 20+ additional cash awards. Solo or team. Submit by August 17.",
-    "link": "https://xprize.devpost.com/rules",
-    "expires": "2026-08-17"
-  },
-  {
     "id": "iaps-ai-policy-fellowship-2026",
     "name": "IAPS AI Policy Fellowship",
     "organizer": "Institute for AI Policy and Strategy",
@@ -237,6 +225,20 @@
     "why": "$30,000+ in prizes at one of the world's largest collegiate hackathons. 1,000+ hackers from 100+ universities over 36 hours with strong alumni-to-company placement track record.",
     "link": "https://www.mhacks.org/",
     "expires": "2026-09-22"
+  },
+  {
+    "id": "recurse-center-fall-2026",
+    "name": "Recurse Center Fall 2 2026",
+    "organizer": "Recurse Center",
+    "category": "fellowship",
+    "date": "2026-09-21",
+    "date_end": "2026-12-11",
+    "location": "New York, NY",
+    "remote": false,
+    "eligibility": "Anyone with solid programming experience; no degree or enrollment required; need-based grants available",
+    "why": "Tuition-free 12-week programming retreat in Brooklyn (or remote) in a peer cohort of ~30. Integrated recruiting places alumni at Stripe, Google, and top startups. Apply by Sep 3.",
+    "link": "https://www.recurse.com/apply",
+    "expires": "2026-12-11"
   },
   {
     "id": "ethglobal-tokyo-2026",
@@ -404,5 +406,19 @@
     "why": "$50k–$100k in cash prizes across two tracks. Scale Track winners meet Satya Nadella and receive Microsoft for Startups support. Registration open now.",
     "link": "https://imaginecup.microsoft.com/en-us/",
     "expires": "2027-06-30"
+  },
+  {
+    "id": "mats-winter-2027",
+    "name": "MATS Winter 2027",
+    "organizer": "MATS Program",
+    "category": "fellowship",
+    "date": "2027-01-19",
+    "date_end": "2027-04-10",
+    "location": "Berkeley, CA",
+    "remote": false,
+    "eligibility": "Anyone 18+ worldwide motivated by AI safety; all backgrounds welcome; no prior publications required",
+    "why": "$1,600/week stipend plus free housing, meals, and travel for 12 weeks of full-time AI safety research in Berkeley or London. No prior publications required. Apply by Sep 6.",
+    "link": "https://www.matsprogram.org/apply",
+    "expires": "2027-04-10"
   }
 ]
