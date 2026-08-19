@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-08-05T00:00:00Z",
+  "timestamp": "2026-08-19T00:00:00Z",
   "known_sources_checked": [
-    "https://ycombinator.com/events",
-    "https://www.mlh.com/seasons/2026/events",
+    "https://events.ycombinator.com",
+    "https://mlh.io/seasons/2026/events",
     "https://a16z.com/programs",
     "https://www.anthropic.com/news",
     "https://openai.com/news",
@@ -17,25 +17,19 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "ethglobal-lisbon-2026"
+    "build-with-gemini-xprize-2026"
   ],
   "discovered": [
     {
-      "name": "Agentic Cinema: The Blockbuster Hackathon",
-      "date": "2026-07-27",
-      "link": "https://agentic-cinema.devpost.com/rules",
+      "name": "Recurse Center Fall 2 2026",
+      "date": "2026-09-21",
+      "link": "https://www.recurse.com/apply",
       "source": "keyword"
     },
     {
-      "name": "Build with Gemini XPRIZE",
-      "date": "2026-08-17",
-      "link": "https://xprize.devpost.com/rules",
-      "source": "keyword"
-    },
-    {
-      "name": "AI Alignment Research Fellowship 2026",
-      "date": "2026-09-08",
-      "link": "https://www.aialignmentfoundation.org/fellowship/apply",
+      "name": "MATS Winter 2027",
+      "date": "2027-01-19",
+      "link": "https://www.matsprogram.org/apply",
       "source": "keyword"
     }
   ],
