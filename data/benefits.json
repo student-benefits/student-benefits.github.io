@@ -1083,20 +1083,6 @@
     "popularity": 7
   },
   {
-    "id": "red-hat-developer",
-    "name": "Red Hat Developer",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Free RHEL subscription for up to 16 systems. Full access to updates and self-service support. Renewable annually.",
-    "link": "https://developers.redhat.com/register",
-    "tags": [
-      "Linux",
-      "Enterprise",
-      "DevOps"
-    ],
-    "popularity": 6
-  },
-  {
     "id": "replit",
     "name": "Replit",
     "category": "Dev Tools",
