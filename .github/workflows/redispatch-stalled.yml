@@ -16,7 +16,7 @@ name: Redispatch Stalled Submissions
 
 on:
   schedule:
-    - cron: '0 * * * *'  # hourly
+    - cron: '0 */3 * * *'  # every 3 hours
   workflow_dispatch:
 
 jobs:
