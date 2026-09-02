@@ -2,7 +2,7 @@
 
 **Grant — an agentic system powered by Claude — curates a directory of student benefits that help you build, learn, and ship.**
 
-Grant is a set of workflows, a deterministic validation gate, and a human who merges — not one autonomous agent. It discovers new programs on a biweekly cadence, validates community submissions opened as issues, and audits link health. Every change is checked by the gate and approved by a person before it goes live — the merge is the trust boundary. Run logs and tool traces are open. **[→ student-benefits.github.io](https://student-benefits.github.io)**
+Grant is a set of workflows, a deterministic validation gate, and a human who merges — not one autonomous agent. It discovers new programs twice a month, validates community submissions opened as issues, and audits link health weekly. Every change is checked by the gate and approved by a person before it goes live — the merge is the trust boundary. Run logs and tool traces are open. **[→ student-benefits.github.io](https://student-benefits.github.io)**
 
 [![Live](https://img.shields.io/badge/live-student--benefits.github.io-blue)](https://student-benefits.github.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
@@ -13,7 +13,7 @@ Grant is a set of workflows, a deterministic validation gate, and a human who me
 
 Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events and audit link health on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`CLAUDE.md`](CLAUDE.md#automated-workflows) — the canonical source.
 
-The **[/agent/](https://student-benefits.github.io/agent/)** page exposes Grant's run log, tool trace, and architecture so the system can be understood and replicated.
+The **[/agent/](https://student-benefits.github.io/agent/)** page shows the loop, every workflow with its live run status, the PR and gate ledger read from the GitHub API, and the last real run trace — so the system can be checked, not just described.
 
 ---
 

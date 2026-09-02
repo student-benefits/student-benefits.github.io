@@ -11,7 +11,10 @@ races). This script is the plain,
 non-agentic step that does the consolidation instead: read each open
 candidate PR, extract the one entry it adds (by set-difference against
 current main, robust to main having moved since that PR branched), fold all
-of them into current main in one pass, and push a single consolidated PR.
+of them into current main in one pass, and push a single consolidated PR. The newest
+agent/state/last-run.json (or last-events-submission.json) among the folded
+PRs rides along, so the run trace /agent/ renders is the latest real one —
+otherwise it dies with the per-issue PR that carried it.
 
 Run with no side effects beyond git/gh calls already scoped by the calling
 workflow's permissions. Safe to run repeatedly — a run with nothing new to
@@ -30,6 +33,7 @@ ROOT = Path(__file__).resolve().parent.parent
 MODES = {
     "benefits": dict(
         data_file="data/benefits.json",
+        state_file="agent/state/last-run.json",
         branch_re=re.compile(r"^add-benefit-(\d+)$"),
         consolidated_branch="pending-benefits-consolidated",
         label="pending-benefits",
@@ -39,6 +43,7 @@ MODES = {
     ),
     "events": dict(
         data_file="data/events.json",
+        state_file="agent/state/last-events-submission.json",
         branch_re=re.compile(r"^add-event-(\d+)$"),
         consolidated_branch="pending-events-consolidated",
         label="pending-events",
@@ -93,6 +98,7 @@ def main() -> int:
                     "number,headRefName,author", "--limit", "100"])
 
     candidates = []  # (pr_number, issue_number, entry)
+    states = {}  # pr_number -> that branch's state file (the run trace)
     skipped_stale = []  # PRs whose branch added nothing new (already superseded)
     for pr in prs:
         m = mode["branch_re"].match(pr["headRefName"])
@@ -113,6 +119,7 @@ def main() -> int:
         by_id = {e["id"]: e for e in branch_data}
         for nid in new_ids:
             candidates.append((pr["number"], issue_number, by_id[nid]))
+        states[pr["number"]] = load_json_at_ref("FETCH_HEAD", mode["state_file"])
 
     # Close stale PRs immediately — this doesn't depend on whether any
     # candidate below successfully consolidates, so it must not live behind
@@ -159,6 +166,11 @@ def main() -> int:
         return 0
 
     run(["git", "add", mode["data_file"]])
+    newest = max((states[p] for p, _, _ in included if states.get(p)),
+                 key=lambda s: str(s.get("timestamp", "")), default=None)
+    if newest:
+        write_json(ROOT / mode["state_file"], newest)
+        run(["git", "add", mode["state_file"]])
     diff = run_ok(["git", "diff", "--cached", "--quiet"])
     if diff.returncode == 0:
         print(f"No diff against main after merge — nothing to push. "

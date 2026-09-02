@@ -5,22 +5,22 @@ name: Discover Student Benefits
 #     issue opened, OR `agent/state/last-benefits-discovery.json` rewritten with a fresh `timestamp` (the dated "searched,
 #     nothing met the bar" heartbeat). NOT a found-count: silence-by-design (a dry cycle) is healthy iff the heartbeat moves.
 #     A run that opens nothing AND doesn't bump the timestamp = the cron silently isn't firing/committing → broken, not empty.
-#   Teardown after N: 4 biweekly cycles (~2 months — same real-world window as the original 8 weekly cycles). If
-#     working-when is unmet for 4 consecutive scheduled cycles, the discovery thesis is wrong → remove this workflow.
-#   Cadence (2026-08-11 scar): cut from weekly to biweekly. Discovery quality was fine (validated batches came back
-#     legitimate), but throughput was outrunning review capacity — a month of unreviewed backlog piled up before this
-#     was caught. Halving find volume is the fix, not a stricter quality bar. See the redesigned per-issue-PR +
-#     scripts/consolidate_pending.py flow this now feeds into (CLAUDE.md's "Per-issue PRs, consolidated deterministically" section).
+#   Teardown after N: 4 cycles (~2 months). If working-when is unmet for 4 consecutive scheduled cycles, the
+#     discovery thesis is wrong → remove this workflow.
+#   Cadence: twice a month (2026-08-11 scar: weekly outran review capacity and a month of backlog piled up; halving
+#     find volume was the fix, not a stricter bar). Fixed days rather than an even-ISO-week gate so every scheduled
+#     run in the Actions log is a real run — a gate-skipped run read as "success" and hid a stale heartbeat.
+#   Budget: successful runs take 11–16 min; 3 of 10 were killed at the old 20-min cap (2026-06-29, 08-10, 08-31).
 
 on:
   schedule:
-    - cron: '0 14 * * 1'  # Monday 14:00 UTC — gated to even ISO weeks below (biweekly)
+    - cron: '0 14 1,15 * *'  # 1st and 15th, 14:00 UTC
   workflow_dispatch:
 
 jobs:
   discover:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     permissions:
       contents: write
       issues: write
@@ -31,12 +31,15 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Check cadence (biweekly — even ISO weeks only; manual runs always proceed)
-        id: cadence
-        uses: ./.github/actions/biweekly-gate
+      - id: now
+        run: |
+          {
+            echo "iso=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "date=$(date -u +%F)"
+            echo "year=$(date -u +%Y)"
+          } >> "$GITHUB_OUTPUT"
 
       - uses: anthropics/claude-code-action@v1
-        if: steps.cadence.outputs.should-run == 'true'
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model ${{ vars.CLAUDE_MODEL }} --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*)'"
@@ -74,7 +77,7 @@ jobs:
 
             ## Step 3: Keyword pass (WebSearch)
 
-            Use WebSearch (not WebFetch on a search URL) for each. Use the current year for `YEAR`:
+            Use WebSearch (not WebFetch on a search URL) for each, with `YEAR` = ${{ steps.now.outputs.year }}:
 
             1. `"student plan" OR "education plan" developer tools software YEAR free`
             2. `"free for students" OR "academic license" AI tools cloud YEAR`
@@ -117,7 +120,8 @@ jobs:
             Replace `agent/state/last-benefits-discovery.json` entirely:
             ```json
             {
-              "timestamp": "<UTC ISO 8601>",
+              "timestamp": "${{ steps.now.outputs.iso }}",
+              "model": "${{ vars.CLAUDE_MODEL }}",
               "known_sources_checked": ["<url>", "..."],
               "keyword_queries": ["<q1>", "..."],
               "discovered": [{ "name": "...", "link": "...", "source": "known-source | keyword" }],

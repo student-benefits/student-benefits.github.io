@@ -8,9 +8,9 @@ This file is loaded automatically by Claude Code in every session.
 
 A community-curated directory of student benefits that help students **build,
 learn, and ship** — dev tools, cloud credits, AI/ML platforms, design and
-learning resources. The site is a single static HTML/JS page (`index.html`) that
-reads from `data/benefits.json` and renders a searchable, filterable card grid.
-Deployed via GitHub Pages.
+learning resources. Static HTML/JS on GitHub Pages, no build step: `/benefits/`
+(the directory, from `data/benefits.json`), `/events/` (from `data/events.json`),
+`/agent/` (how Grant works — reads `agent/state/*.json` and the public GitHub API).
 
 ### Core values
 
@@ -28,7 +28,7 @@ truth, never hardcoded in HTML.
 
 **Active discovery, not passive curation.** Content enters through multiple
 paths: humans submit issues (pull); `discover-benefits` searches the web
-biweekly for new student programs (push); `discover-events` finds upcoming student events
+twice a month for new student programs (push); `discover-events` finds upcoming student events
 and removes expired ones automatically (push + self-maintenance). The system
 surfaces what people haven't thought to add and keeps itself current.
 
@@ -129,12 +129,11 @@ Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent 
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `add-benefit.yml` | Issue labeled `new-benefit` | Validates + deduplicates, then opens its own standalone PR (branch `add-benefit-{issue}`) |
-| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar + deduplicates, then opens its own standalone PR (branch `add-event-{issue}`) |
-| `consolidate-pending.yml` | Every 6h or manual | Deterministic, no LLM. Folds open standalone `add-benefit-N`/`add-event-N` PRs into one review-ready PR per data file |
-| `redispatch-stalled.yml` | Hourly or manual | Deterministic, no LLM. Safety net: redispatches `add-benefit`/`add-event` runs that produced no comment/PR within 15 min, once; flags `needs-manual-review` if that doesn't resolve it |
-| `discover-benefits.yml` | Biweekly (Monday, even ISO weeks) or manual | Searches for new student benefits, opens issues for the best finds |
-| `discover-events.yml` | Biweekly (Wednesday, even ISO weeks) or manual | Searches for notable student events, removes expired entries, opens one PR |
+| `add-benefit.yml` | Issue labeled `new-benefit` | Validates + deduplicates, then opens its own standalone PR (branch `add-benefit-{issue}`). A failed run retries itself once, then hands the issue to the maintainer (see below) |
+| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar + deduplicates, then opens its own standalone PR (branch `add-event-{issue}`). Same failure handling |
+| `consolidate-pending.yml` | Every 6h or manual | Deterministic, no LLM. Folds open standalone `add-benefit-N`/`add-event-N` PRs into one review-ready PR per data file, carrying the newest run trace with it |
+| `discover-benefits.yml` | 1st and 15th, or manual | Searches for new student benefits, opens issues for the best finds |
+| `discover-events.yml` | 3rd and 17th, or manual | Searches for notable student events, removes expired entries, opens one PR |
 | `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR (closes any still-open prior `[Maintenance]` PR of its own first) |
 | `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
 | `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, @-mentions the maintainer (from CODEOWNERS) and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict but gates only on CI; never merges. Deterministic — no LLM. |
@@ -149,26 +148,25 @@ No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-
 
 `consolidate-pending.yml` (plain Python, no Claude, every 6h) folds every open standalone PR into one review-ready PR per data file — matched structurally (branch pattern **and** `app/claude` authorship, never title text, which anyone can set). Never silently drops a submission: an id collision or post-merge validation failure leaves the source PR open, unfolded, for manual attention. Consolidation never merges anything; the merge stays the human trust boundary.
 
-`redispatch-stalled.yml` is the companion safety net (hourly), covering #267 (non-collaborator label events fail the GitHub App token exchange before the agent step starts — no override exists) and any other silent-stall cause: an issue left open with zero comments past a 15-minute grace period gets redispatched once via `workflow_dispatch` (write-privileged, sidesteps the actor-permission gate), tracked via the `redispatched` label so it never loops. Still stalled after that → `needs-manual-review` label + one comment, then left alone.
+**Failure handling rides the run, not a cron.** Each `add-*` workflow ends in an `on-failure` job (`if: !success()`, so a timeout counts): a failed label-triggered run is retried once through `workflow_dispatch` — which `claude-code-action` exempts from its actor check, the fix for #267 (non-collaborator label events fail the GitHub App token exchange before the agent step starts; no override exists) — and the issue is labeled `redispatched`; a failed retry gets `needs-manual-review` plus one `@maintainer` comment carrying the by-hand command. This replaced the hourly `redispatch-stalled` sweep on 2026-09-02: 314 runs in its final month, zero redispatches, never exercised end-to-end.
 
 ### Falsifiability (scheduled workflows)
 
-Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some cycles, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 cycles at that workflow's own cadence** — total elapsed time varies (biweekly workflows use N=4 for the same ~2-month window; the two deterministic hourly/6h mechanisms are pure plumbing with no content-volume signal, so their N is about the mechanism erroring, not finding nothing).
+Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some cycles, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 cycles at that workflow's own cadence** — total elapsed time varies (the twice-monthly workflows use N=4 for the same ~2-month window; the deterministic 6h/daily mechanisms are pure plumbing with no content-volume signal, so their N is about the mechanism erroring, not finding nothing).
 
 | Workflow | Working-when (positive trace) | N |
 |---|---|---|
-| `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 4 biwk |
-| `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 4 biwk |
+| `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 4 × half-month |
+| `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 4 × half-month |
 | `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
 | `consolidate-pending` | Green scheduled run in Actions log (most runs legitimately find nothing to fold) | 8 × 6h |
-| `redispatch-stalled` | Green scheduled run in Actions log (most runs legitimately find nothing stalled) | 8 × 1h |
 | `pr-concierge` | Green scheduled run in Actions log (most days legitimately find nothing newly ready) | 8 × 1d |
 
 **The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. Verify each working-when against the live Actions run history before trusting any "stays current automatically" claim; a missing/stale state file is the alarm, not noise. (Scar 2026-08-11: two different failure shapes hid behind the same symptom. `last-benefits-discovery.json` sat 2 months stale — not because the cron wasn't firing, but because its PRs weren't being merged, masking a real backlog. `reddit-state.json` was stuck since March for a genuine reason — `scout-reddit.yml`'s commit step ran after `claude-code-action` revoked its own push token, so every scheduled run hard-failed for 10 straight weeks. Diagnosed and removed rather than fixed, since it had never produced a usable find in that time. Lesson: a stale heartbeat means "go find out why," not "assume the obvious cause.")
 
 ### Agent state files
 
-Workflows write these; `agent/index.html` reads them to render run history. Never hand-edit — they're regenerated each run.
+Workflows write these; `agent/index.html` reads them to render run history. Never hand-edit — they're regenerated each run. Each carries `model` (the `CLAUDE_MODEL` repo variable at run time) so the page reads it instead of hardcoding it, and `timestamp` comes from the runner's clock (a `now` step), not the model's guess. A submission's trace is written on its per-issue branch, so `consolidate-pending` carries the newest one onto the consolidated PR — without that it died with the folded PR and the page froze.
 
 - `agent/state/last-run.json` — last add-benefit run
 - `agent/state/last-events-submission.json` — last add-event run

@@ -14,7 +14,7 @@ jobs:
   add-benefit:
     if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'new-benefit'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     permissions:
       contents: write
       issues: write
@@ -26,10 +26,20 @@ jobs:
         with:
           fetch-depth: 1
 
+      - id: now
+        run: |
+          {
+            echo "iso=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "date=$(date -u +%F)"
+            echo "year=$(date -u +%Y)"
+          } >> "$GITHUB_OUTPUT"
+
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          allowed_non_write_users: "*"
+          # allowed_non_write_users is a no-op here — it only takes effect with
+          # github_token auth, not the GitHub App auth this workflow uses. External
+          # (non-collaborator) submitters are handled by the on-failure job below.
           allowed_bots: "claude"
           claude_args: "--model ${{ vars.CLAUDE_MODEL }} --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
@@ -64,7 +74,7 @@ jobs:
 
             If invalid, comment "**Cannot add:** {reason}". Then append to `agent/state/rejected.json` and commit it (see "Committing `rejected.json`" below):
             ```json
-            { "name": "{name}", "domain": "{hostname or null}", "reason": "{reason}", "checked": "{YYYY-MM-DD}" }
+            { "name": "{name}", "domain": "{hostname or null}", "reason": "{reason}", "checked": "${{ steps.now.outputs.date }}" }
             ```
             Close the issue and stop.
 
@@ -116,7 +126,8 @@ jobs:
             {
               "issue": ${{ github.event.issue.number || github.event.inputs.issue }},
               "title": "<issue title lowercased>",
-              "timestamp": "<current UTC ISO 8601>",
+              "timestamp": "${{ steps.now.outputs.iso }}",
+              "model": "${{ vars.CLAUDE_MODEL }}",
               "outcome": "accepted",
               "tools": [
                 { "name": "websearch", "query": "..." },
@@ -141,3 +152,37 @@ jobs:
             - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-benefit-${{ github.event.issue.number || github.event.inputs.issue }}`. This branch is new and unique to this issue — the push should never be rejected; if it somehow is, stop and comment "**Could not open a PR:** {reason}" rather than attempting any reset/force-push recovery.
             - `gh pr create --title "Add 1 student benefit: {name}"` (no label — `consolidate-pending.yml` matches candidate PRs by branch name and author, not by label; the `pending-benefits` label is reserved for the consolidated PR) with a body holding `- {name} ({category})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
             - Comment on the issue: "Added **{name}** ({category}) — {description}\n\nPR: {pr_url}". The merge stays a human decision.
+
+  on-failure:
+    needs: add-benefit
+    if: ${{ !success() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+      actions: write
+      contents: read
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ISSUE: ${{ github.event.issue.number || github.event.inputs.issue }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    steps:
+      # A label-triggered run can fail before the agent starts (#267: the Claude
+      # App token exchange rejects non-collaborator actors, no override exists).
+      # workflow_dispatch skips that check, so retry once through it; the retry
+      # is itself a workflow_dispatch run, so it never loops. A failed retry is
+      # handed to the maintainer on the issue.
+      - name: Retry once via workflow_dispatch, else hand to the maintainer
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "issues" ]; then
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label redispatched
+            gh workflow run add-benefit.yml --repo "$GITHUB_REPOSITORY" -f issue="$ISSUE"
+            echo "retried #$ISSUE via workflow_dispatch"
+          else
+            owner=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/CODEOWNERS" \
+              --jq '.content' | base64 -d | grep -oE '@[A-Za-z0-9-]+' | head -1 | tr -d '@')
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label needs-manual-review
+            gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+              --body "@$owner the automated run failed twice ($RUN_URL). Process by hand: \`gh workflow run add-benefit.yml -f issue=$ISSUE\`."
+          fi
