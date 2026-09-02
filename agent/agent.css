@@ -757,6 +757,8 @@ body {
 .stat-value { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; color: var(--text); }
 .stat-value.stat-bad { color: var(--outcome-rejected-color); }
 .stat-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.4rem; }
+.ledger-caption { grid-column: 1 / -1; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; margin-top: 0.25rem; }
+.ledger-caption a { color: var(--grant-color); text-underline-offset: 2px; }
 
 /* code chips inline */
 code {
