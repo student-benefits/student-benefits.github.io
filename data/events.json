@@ -38,20 +38,6 @@
     "expires": "2026-09-15"
   },
   {
-    "id": "yc-summer-fellows-2026",
-    "name": "YC Summer Fellows Grants",
-    "organizer": "Y Combinator",
-    "category": "grant",
-    "date": "2026-06-15",
-    "date_end": "2026-08-22",
-    "location": "San Francisco, CA",
-    "remote": false,
-    "eligibility": "Undergraduate CS or engineering students worldwide; no company required",
-    "why": "$20k cash + $90k in compute credits to build a self-directed AI project in SF. YC picks 20–50 students; no company or team required.",
-    "link": "https://events.ycombinator.com/summer-grants-26",
-    "expires": "2026-08-22"
-  },
-  {
     "id": "apple-aiml-residency-2026",
     "name": "Apple AIML Residency 2026",
     "organizer": "Apple",
@@ -255,6 +241,20 @@
     "expires": "2026-09-27"
   },
   {
+    "id": "knight-hacks-ix-2026",
+    "name": "Knight Hacks IX",
+    "organizer": "Knight Hacks / University of Central Florida",
+    "category": "hackathon",
+    "date": "2026-10-09",
+    "date_end": "2026-10-11",
+    "location": "Orlando, FL",
+    "remote": false,
+    "eligibility": "College students at any skill level; beginners welcome; free for accepted hackers with meals provided",
+    "why": "Florida's top collegiate hackathon — 36 hours across AI/ML, app dev, game dev, and embedded software tracks with cash sponsor prizes. Free admission, meals included.",
+    "link": "https://2026.knighthacks.org",
+    "expires": "2026-10-11"
+  },
+  {
     "id": "hackharvard-2026",
     "name": "HackHarvard 2026",
     "organizer": "HackHarvard / Harvard University",
@@ -269,6 +269,19 @@
     "expires": "2026-10-18"
   },
   {
+    "id": "nsf-grfp-2026",
+    "name": "NSF Graduate Research Fellowship Program 2026",
+    "organizer": "National Science Foundation",
+    "category": "fellowship",
+    "date": "2026-10-16",
+    "date_end": "2026-10-23",
+    "remote": true,
+    "eligibility": "Early-career US graduate students or those planning to enroll in a STEM research degree; US citizen or permanent resident",
+    "why": "$37,000/year stipend plus $16,000 tuition allowance for 3 years — the US's most prestigious graduate STEM fellowship. Field-specific deadlines Oct 16–23.",
+    "link": "https://www.nsf.gov/funding/initiatives/grfp",
+    "expires": "2026-10-23"
+  },
+  {
     "id": "claude-corps-2026",
     "name": "Claude Corps",
     "organizer": "Anthropic / CodePath",
@@ -281,6 +294,20 @@
     "why": "$85k/year salary + benefits to deploy AI at nonprofits nationwide. Anthropic's $150M flagship initiative — 100-fellow first cohort starts October 2026. Apply by July 17.",
     "link": "https://job-boards.greenhouse.io/claudecorps/jobs/4250200009",
     "expires": "2027-10-19"
+  },
+  {
+    "id": "cal-hacks-13",
+    "name": "Cal Hacks 13.0",
+    "organizer": "Hackathons @ Berkeley",
+    "category": "hackathon",
+    "date": "2026-10-23",
+    "date_end": "2026-10-25",
+    "location": "San Francisco, CA",
+    "remote": false,
+    "eligibility": "Undergraduates, graduate students, and new grads within 1 year of graduation; apply by Sep 13 (priority) or Sep 20 (regular)",
+    "why": "$100,000 in prizes at Berkeley's flagship 36-hour hackathon in SF. Priority application deadline Sep 13; decisions out Sep 17.",
+    "link": "https://www.calhacks.io/",
+    "expires": "2026-10-25"
   },
   {
     "id": "ai-genesis-hackathon-2026",
