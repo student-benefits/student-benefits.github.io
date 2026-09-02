@@ -500,6 +500,21 @@
     "popularity": 10
   },
   {
+    "id": "firecrawl",
+    "name": "Firecrawl",
+    "category": "Dev Tools",
+    "offer_type": "credits",
+    "description": "10,000 free API credits for web scraping and crawling; sign up with academic email, redeem code STUDENTEDU",
+    "link": "https://www.firecrawl.dev/student-program",
+    "tags": [
+      "API",
+      "Web Scraping",
+      "AI",
+      "RAG"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "framer",
     "name": "Framer",
     "category": "Design",
