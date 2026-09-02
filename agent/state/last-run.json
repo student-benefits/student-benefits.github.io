@@ -1,14 +1,12 @@
 {
-  "issue": 323,
-  "title": "protopie",
-  "timestamp": "2026-08-12T00:00:00Z",
+  "issue": 345,
+  "title": "lovable",
+  "timestamp": "2026-09-02T00:00:00Z",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "ProtoPie student discount education program 2026" },
-    { "name": "webfetch", "url": "https://www.protopie.io/plans/education" },
-    { "name": "webfetch", "url": "https://www.protopie.io/use-cases/education" },
-    { "name": "webfetch", "url": "https://www.studentbeans.com/student-discount/us/protopie" },
+    { "name": "websearch", "query": "Lovable student discount" },
+    { "name": "webfetch", "url": "https://lovable.dev/students" },
     { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": { "name": "ProtoPie", "category": "Design", "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code." }
+  "benefit": { "name": "Lovable", "category": "AI Tools", "description": "50% off Lovable Pro for 12 months ($12.50/month); build full-stack apps with AI from text prompts." }
 }

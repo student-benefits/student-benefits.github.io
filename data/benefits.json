@@ -770,6 +770,20 @@
     "popularity": 7
   },
   {
+    "id": "lovable",
+    "name": "Lovable",
+    "category": "AI Tools",
+    "offer_type": "discount",
+    "description": "50% off Lovable Pro for 12 months ($12.50/month); build full-stack apps with AI from text prompts.",
+    "link": "https://lovable.dev/students",
+    "tags": [
+      "AI",
+      "Full-Stack",
+      "App Builder"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "lucidchart",
     "name": "Lucidchart",
     "category": "Design",
