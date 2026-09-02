@@ -237,10 +237,164 @@ function addSimStep(step, trace, btn) {
 
 document.getElementById('sim-btn').addEventListener('click', simNext);
 
+/* ── live workflow status ─────────────────────────────── */
+const REPO = 'student-benefits/student-benefits.github.io';
+
+// Static per-file metadata the public Actions API can't tell us: whether a
+// workflow calls Claude, and its intended cadence. A file missing from this
+// map still renders — labeled "unclassified" — instead of silently vanishing,
+// so adding a workflow without updating this map is visible, not silent.
+const WORKFLOW_INFO = {
+  'add-benefit.yml':         { kind: 'llm',   cadence: 'on submission' },
+  'add-event.yml':           { kind: 'llm',   cadence: 'on submission' },
+  'discover-benefits.yml':   { kind: 'llm',   cadence: '1st & 15th' },
+  'discover-events.yml':     { kind: 'llm',   cadence: '3rd & 17th' },
+  'maintain-benefits.yml':   { kind: 'llm',   cadence: 'weekly' },
+  'consolidate-pending.yml': { kind: 'plain', cadence: 'every 6h' },
+  'pr-concierge.yml':        { kind: 'plain', cadence: 'daily' },
+  'validate-data.yml':       { kind: 'plain', cadence: 'on every PR' },
+};
+
+const CONCLUSION_LABELS = {
+  success:        { icon: '✓', label: 'passed',    cls: 'ok' },
+  failure:        { icon: '✗', label: 'failed',    cls: 'bad' },
+  timed_out:      { icon: '✗', label: 'timed out', cls: 'bad' },
+  action_required:{ icon: '✗', label: 'blocked',   cls: 'bad' },
+  cancelled:      { icon: '–', label: 'cancelled', cls: 'muted' },
+  skipped:        { icon: '–', label: 'skipped',   cls: 'muted' },
+  neutral:        { icon: '–', label: 'neutral',   cls: 'muted' },
+  stale:          { icon: '–', label: 'stale',      cls: 'muted' },
+};
+
+function relTime(iso) {
+  const mins = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (mins < 1) return 'just now';
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.round(mins / 60);
+  if (hrs < 48) return hrs + 'h ago';
+  return Math.round(hrs / 24) + 'd ago';
+}
+
+function renderWorkflowRow(filename, info, run) {
+  const kindBadge = info.kind === 'llm'
+    ? '<span class="kind-badge kind-llm">Claude</span>'
+    : info.kind === 'plain'
+      ? '<span class="kind-badge kind-plain">no LLM</span>'
+      : '<span class="kind-badge kind-unknown">unclassified</span>';
+
+  let statusHtml = '<span class="wf-status wf-status--none">no run in the last 100</span>';
+  if (run) {
+    const inProgress = run.status !== 'completed';
+    const s = inProgress
+      ? { icon: '●', label: 'running', cls: 'progress' }
+      : (CONCLUSION_LABELS[run.conclusion] || { icon: '?', label: run.conclusion || 'unknown', cls: 'muted' });
+    statusHtml = `<a class="wf-status wf-status--${s.cls}" href="${escapeHtml(run.html_url)}" target="_blank" rel="noopener noreferrer">` +
+      `<span class="wf-status-icon" aria-hidden="true">${s.icon}</span>${s.label} · ${relTime(run.created_at)}</a>`;
+  }
+
+  return `
+    <div class="wf-row">
+      <div class="wf-name"><code>${escapeHtml(filename)}</code>${kindBadge}</div>
+      <div class="wf-cadence">${escapeHtml(info.cadence || '')}</div>
+      ${statusHtml}
+    </div>`;
+}
+
+async function loadWorkflowStatus() {
+  const el = document.getElementById('workflows-live');
+  try {
+    // One call covers every workflow: the repo's 100 most recent runs, newest
+    // first. Grouping by file path and keeping the first hit per path is that
+    // file's latest run — cheaper and simpler than a separate per-workflow
+    // call, and it stays under the unauthenticated 60-req/hr rate limit.
+    const res = await fetch(`https://api.github.com/repos/${REPO}/actions/runs?per_page=100`);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const latestByPath = {};
+    for (const run of data.workflow_runs || []) {
+      if (!(run.path in latestByPath)) latestByPath[run.path] = run;
+    }
+    const rows = Object.keys(WORKFLOW_INFO).sort().map(filename => {
+      const path = '.github/workflows/' + filename;
+      return renderWorkflowRow(filename, WORKFLOW_INFO[filename], latestByPath[path] || null);
+    });
+    el.innerHTML = rows.join('');
+    return latestByPath;
+  } catch (e) {
+    el.innerHTML = '<div class="state-error">Live status unavailable right now — ' +
+      `<a href="https://github.com/${REPO}/actions" target="_blank" rel="noopener noreferrer">see the Actions log directly</a>.</div>`;
+    return {};
+  }
+}
+
+/* ── live ledger ───────────────────────────────────────── */
+async function ghSearchCount(q) {
+  const r = await fetch(`https://api.github.com/search/issues?q=${encodeURIComponent(q)}&per_page=1`);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return (await r.json()).total_count;
+}
+
+async function ghRunCount(workflowId, query) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/actions/workflows/${workflowId}/runs?per_page=1&${query}`);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  return (await r.json()).total_count;
+}
+
+function statTile(value, label, cls) {
+  return `<div class="stat-tile"><div class="stat-value${cls ? ' ' + cls : ''}">${value}</div><div class="stat-label">${escapeHtml(label)}</div></div>`;
+}
+
+// Counts Grant's own pull requests the same way the linked analysis did —
+// opened, merged, still open — plus how often the deterministic gate has
+// failed a PR. `validateDataWorkflowId` rides along from loadWorkflowStatus's
+// fetch instead of a second lookup call.
+async function loadLedger(validateDataWorkflowId) {
+  const el = document.getElementById('ledger-live');
+  try {
+    // Space-joined, not literal '+' — encodeURIComponent turns a literal '+'
+    // into '%2B', which GitHub's search parser rejects (422) rather than
+    // reading as the qualifier separator a raw '+' in a URL would be.
+    const base = `repo:${REPO} is:pr author:app/claude`;
+    const [opened, merged, open] = await Promise.all([
+      ghSearchCount(base),
+      ghSearchCount(base + ' is:merged'),
+      ghSearchCount(base + ' is:open'),
+    ]);
+    const tiles = [
+      statTile(opened, 'PRs opened by Grant'),
+      statTile(merged, 'merged'),
+      statTile(opened - merged - open, 'closed without merging'),
+      statTile(open, 'open now'),
+    ];
+    if (validateDataWorkflowId) {
+      const [gatePass, gateFail] = await Promise.all([
+        ghRunCount(validateDataWorkflowId, 'event=pull_request&status=success'),
+        ghRunCount(validateDataWorkflowId, 'event=pull_request&status=failure'),
+      ]);
+      tiles.push(statTile(gatePass, 'gate passes on PRs'));
+      tiles.push(statTile(gateFail, 'gate failures', gateFail > 0 ? 'stat-bad' : ''));
+    }
+    el.innerHTML = tiles.join('');
+  } catch (e) {
+    el.innerHTML = '<div class="state-error">Ledger unavailable right now — ' +
+      `<a href="https://github.com/${REPO}/pulls?q=is%3Apr+author%3Aapp%2Fclaude" target="_blank" rel="noopener noreferrer">see the PRs directly</a>.</div>`;
+  }
+}
+
+loadWorkflowStatus().then(latestByPath => {
+  const vd = latestByPath['.github/workflows/validate-data.yml'];
+  loadLedger(vd && vd.workflow_id);
+});
+
 fetch('/data/benefits.json')
   .then(r => r.ok ? r.json() : [])
   .then(data => { SIM_STEPS[1].primary = data.length + ' existing benefits loaded. Checking for name and hostname matches…'; })
   .catch(() => {});
+
+// Model display names for the identity byline — keyed by the `model` field
+// state files started carrying 2026-09-02. An unmapped or missing value falls
+// back to the raw slug rather than a guess, so this can't silently go stale.
+const MODEL_LABELS = { 'claude-sonnet-4-6': 'Claude Sonnet 4.6' };
 
 fetch('state/last-run.json')
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
@@ -251,6 +405,10 @@ fetch('state/last-run.json')
       meta.innerHTML =
         `<span class="run-outcome ${escapeHtml(data.outcome)}">${outcomeLabel(data.outcome)}</span>` +
         `<span class="run-summary-issue">Issue #${escapeHtml(String(data.issue))} — ${escapeHtml(data.title)}</span>`;
+    }
+    const modelEl = document.getElementById('identity-model');
+    if (modelEl && data.model) {
+      modelEl.textContent = MODEL_LABELS[data.model] || data.model;
     }
   })
   .catch(() => {

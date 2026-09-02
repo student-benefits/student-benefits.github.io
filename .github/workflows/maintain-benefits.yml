@@ -29,6 +29,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      - id: now
+        run: |
+          {
+            echo "iso=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "date=$(date -u +%F)"
+            echo "year=$(date -u +%Y)"
+          } >> "$GITHUB_OUTPUT"
+
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -64,7 +72,7 @@ jobs:
 
             ## Step 3: Open a PR (only if you changed the file)
 
-            Branch `maintain-benefits-{YYYY-MM-DD}`, title `[Maintenance]: Fix {N} benefit(s)` (N = entries changed or removed). Body: a one-sentence Summary plus a short table of what changed (benefit, problem, fix) and, separately, anything removed and why. Omit empty sections.
+            Branch `maintain-benefits-${{ steps.now.outputs.date }}`, title `[Maintenance]: Fix {N} benefit(s)` (N = entries changed or removed). Body: a one-sentence Summary plus a short table of what changed (benefit, problem, fix) and, separately, anything removed and why. Omit empty sections.
 
             ## Step 4: Close `link-health` issues
 

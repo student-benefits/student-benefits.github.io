@@ -2,13 +2,33 @@
   "issue": 323,
   "title": "protopie",
   "timestamp": "2026-08-12T00:00:00Z",
+  "model": "claude-sonnet-4-6",
   "outcome": "accepted",
   "tools": [
-    { "name": "websearch", "query": "ProtoPie student discount education program 2026" },
-    { "name": "webfetch", "url": "https://www.protopie.io/plans/education" },
-    { "name": "webfetch", "url": "https://www.protopie.io/use-cases/education" },
-    { "name": "webfetch", "url": "https://www.studentbeans.com/student-discount/us/protopie" },
-    { "name": "edit", "summary": "Added entry to data/benefits.json" }
+    {
+      "name": "websearch",
+      "query": "ProtoPie student discount education program 2026"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://www.protopie.io/plans/education"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://www.protopie.io/use-cases/education"
+    },
+    {
+      "name": "webfetch",
+      "url": "https://www.studentbeans.com/student-discount/us/protopie"
+    },
+    {
+      "name": "edit",
+      "summary": "Added entry to data/benefits.json"
+    }
   ],
-  "benefit": { "name": "ProtoPie", "category": "Design", "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code." }
+  "benefit": {
+    "name": "ProtoPie",
+    "category": "Design",
+    "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code."
+  }
 }

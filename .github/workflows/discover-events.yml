@@ -6,20 +6,19 @@ name: Discover Student Events
 #     expiries, nothing actionable" heartbeat). NOT a found-count. A run that bumps the timestamp but never PRs is healthy;
 #     a timestamp that never advances = the cron silently isn't firing → broken, not empty. (Stale events not auto-expiring
 #     is the observable symptom of this being broken.)
-#   Teardown after N: 4 biweekly cycles (~2 months — same real-world window as the original 8 weekly cycles). If
-#     working-when is unmet for 4 consecutive scheduled cycles, the thesis is wrong → remove this workflow.
-#   Cadence (2026-08-11 scar): cut from weekly to biweekly, same reasoning as discover-benefits.yml — find quality was
-#     fine, throughput was outrunning review capacity.
+#   Teardown after N: 4 cycles (~2 months). If working-when is unmet for 4 consecutive scheduled cycles, the
+#     thesis is wrong → remove this workflow.
+#   Cadence + budget: twice a month on fixed days, 35-min cap — same reasoning as discover-benefits.yml.
 
 on:
   schedule:
-    - cron: '0 14 * * 3'  # Wednesday 14:00 UTC — gated to even ISO weeks below (biweekly)
+    - cron: '0 14 3,17 * *'  # 3rd and 17th, 14:00 UTC
   workflow_dispatch:
 
 jobs:
   discover:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     permissions:
       contents: write
       issues: write
@@ -31,17 +30,20 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Check cadence (biweekly — even ISO weeks only; manual runs always proceed)
-        id: cadence
-        uses: ./.github/actions/biweekly-gate
+      - id: now
+        run: |
+          {
+            echo "iso=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "date=$(date -u +%F)"
+            echo "year=$(date -u +%Y)"
+          } >> "$GITHUB_OUTPUT"
 
       - uses: anthropics/claude-code-action@v1
-        if: steps.cadence.outputs.should-run == 'true'
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model ${{ vars.CLAUDE_MODEL }} --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
-            You discover student events worth a student's time, remove expired entries, and open one PR with both. Today's date is needed in UTC ISO 8601 — derive it.
+            You discover student events worth a student's time, remove expired entries, and open one PR with both. Today is ${{ steps.now.outputs.date }} (UTC).
 
             ## Step 1: Read state
 
@@ -70,7 +72,7 @@ jobs:
 
             ## Step 4: Keyword pass (WebSearch)
 
-            Use WebSearch for each. Replace `YEAR` with the current year:
+            Use WebSearch for each, with `YEAR` = ${{ steps.now.outputs.year }}:
 
             1. `student hackathon YEAR free apply open`
             2. `"open to students" conference YEAR free OR fellowship application`
@@ -101,7 +103,7 @@ jobs:
 
             Then run `python3 scripts/validate_data.py` and fix `data/events.json` until it exits 0 before opening the PR — never open it while the validator is red. It is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
 
-            **Branch**: `discover-events-{YYYY-MM-DD}` (today's date) — never reuse or invent another name; this keeps each run on its own branch so runs never race each other.
+            **Branch**: `discover-events-${{ steps.now.outputs.date }}` — never reuse or invent another name; this keeps each run on its own branch so runs never race each other.
 
             **Title**: `[Events]: <comma-separated new event names>` (or `Expire stale entries` if only removing)
 
@@ -127,7 +129,8 @@ jobs:
             Replace `agent/state/last-events-discovery.json` entirely:
             ```json
             {
-              "timestamp": "<UTC ISO 8601>",
+              "timestamp": "${{ steps.now.outputs.iso }}",
+              "model": "${{ vars.CLAUDE_MODEL }}",
               "known_sources_checked": ["<url>", "..."],
               "keyword_queries": ["<q1>", "..."],
               "expired_removed": ["<id>", "..."],

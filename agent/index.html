@@ -28,12 +28,13 @@
   <!-- ── identity ─────────────────────────────────────── -->
   <section class="identity">
     <h1 class="identity-name">Grant</h1>
-    <p class="identity-role">Agentic system · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">Claude Sonnet 4.6</a> · Student Benefits Hub</p>
+    <p class="identity-role">Agentic system · <a href="https://claude.ai" target="_blank" rel="noopener noreferrer"><span id="identity-model">Claude</span></a> · Student Benefits Hub</p>
     <p class="identity-desc">
-      Grant keeps this directory current. It’s tempting to call it “an AI agent,” but the honest version is
-      smaller and more interesting: a few <strong>workflows</strong> that each run Claude on a fixed path,
-      a deterministic <strong>gate</strong> that checks every change, and a <strong>human</strong> who merges.
-      That restraint is the design.
+      The directory Grant curates — the actual content — is <a href="/benefits/">Student Benefits Hub</a>;
+      this page is its engineering explainer. It’s tempting to call Grant “an AI agent,” but the honest
+      version is smaller and more interesting: a few <strong>workflows</strong> that each run Claude on a
+      fixed path, a deterministic <strong>gate</strong> that checks every change, and a <strong>human</strong>
+      who merges. That restraint is the design.
     </p>
   </section>
 
@@ -154,7 +155,7 @@
         </div>
         <div id="panel-schedule" class="node-panel" hidden>
           <p class="node-panel-title">Scheduled workflows</p>
-          <p>Scheduled workflows run without a human prompting them, on cadences that fit each job: <code>discover-benefits</code> and <code>discover-events</code> search biweekly for new programs and events; <code>maintain-benefits</code> audits every link weekly and fixes what it can. Each is a <strong>workflow</strong> — Claude on a fixed path, not a free-roaming agent. Three more run on a schedule with no Claude involved at all: <code>consolidate-pending</code> (every 6h) folds standalone submission PRs into one for review, <code>redispatch-stalled</code> (hourly) retries submissions that silently stalled, and <code>pr-concierge</code> (daily) flags CI-green PRs for the maintainer.</p>
+          <p>Scheduled workflows run without a human prompting them, on cadences that fit each job: <code>discover-benefits</code> and <code>discover-events</code> search twice a month for new programs and events; <code>maintain-benefits</code> audits every link weekly and fixes what it can. Each is a <strong>workflow</strong> — Claude on a fixed path, not a free-roaming agent. Two more run on a schedule with no Claude involved at all: <code>consolidate-pending</code> (every 6h) folds standalone submission PRs into one for review, and <code>pr-concierge</code> (daily) flags CI-green PRs for the maintainer.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · the augmented LLM</p>
@@ -184,31 +185,28 @@
     </div>
   </section>
 
-  <!-- ── workflow ↔ agent spectrum (replaces "what makes this an agent?") -->
+  <!-- ── live workflow status ─────────────────────────── -->
   <section class="section">
-    <p class="section-label">Workflow or agent?</p>
-    <p class="spectrum-lede">
+    <p class="section-label">Workflows <span class="section-label-tag">live, from the Actions API</span></p>
+    <p class="workflows-lede">
       Anthropic draws one line: a <strong>workflow</strong> runs Claude on a path you wrote; an
-      <strong>agent</strong> directs its own path. Each piece of Grant sits closer to one end. The honest
-      answer is “mostly workflow” — and that’s the point.
+      <strong>agent</strong> directs its own path. Grant's pieces sit mostly at the workflow end — and
+      below is their actual state right now, fetched from GitHub, not a diagram of it.
     </p>
-    <div class="spectrum" role="img" aria-label="A spectrum from workflow (predefined path) to agent (self-directing). Grant's pieces cluster toward the workflow end.">
-      <div class="spectrum-axis">
-        <span class="spectrum-end spectrum-end--l">workflow<small>predefined path</small></span>
-        <span class="spectrum-line"></span>
-        <span class="spectrum-end spectrum-end--r">agent<small>self-directing</small></span>
-      </div>
-      <ul class="spectrum-marks">
-        <li class="mark" style="--x:9%"><span class="mark-dot mark-dot--gate"></span><span class="mark-l"><code>validate-data</code><small>the gate · no LLM</small></span></li>
-        <li class="mark" style="--x:19%"><span class="mark-dot mark-dot--gate"></span><span class="mark-l"><code>pr-concierge</code><small>PR sweep · no LLM</small></span></li>
-        <li class="mark" style="--x:30%"><span class="mark-dot mark-dot--gate"></span><span class="mark-l"><code>consolidate-pending</code><small>merge script · no LLM</small></span></li>
-        <li class="mark" style="--x:40%"><span class="mark-dot mark-dot--gate"></span><span class="mark-l"><code>redispatch-stalled</code><small>retry sweep · no LLM</small></span></li>
-        <li class="mark" style="--x:50%"><span class="mark-dot"></span><span class="mark-l"><code>add-benefit</code><small>prompt chaining + gate</small></span></li>
-        <li class="mark" style="--x:61%"><span class="mark-dot"></span><span class="mark-l"><code>add-event</code><small>prompt chaining + gate</small></span></li>
-        <li class="mark" style="--x:71%"><span class="mark-dot"></span><span class="mark-l"><code>maintain-benefits</code><small>evaluator-optimizer</small></span></li>
-        <li class="mark" style="--x:82%"><span class="mark-dot"></span><span class="mark-l"><code>discover-benefits</code><small>bounded search</small></span></li>
-        <li class="mark" style="--x:92%"><span class="mark-dot"></span><span class="mark-l"><code>discover-events</code><small>bounded search</small></span></li>
-      </ul>
+    <div id="workflows-live" class="workflows-live" aria-live="polite">
+      <div class="state-loading">Loading live workflow status…</div>
+    </div>
+  </section>
+
+  <!-- ── live ledger ───────────────────────────────────── -->
+  <section class="section">
+    <p class="section-label">The ledger <span class="section-label-tag">live, from the GitHub API</span></p>
+    <p class="workflows-lede">
+      What Grant's pull requests actually became, and how often the gate has caught something — counted the
+      same way <a href="https://jonasneves.com/posts/two-rejections-from-the-gate.html" target="_blank" rel="noopener noreferrer">this analysis</a> did, but live rather than a dated snapshot.
+    </p>
+    <div id="ledger-live" class="ledger-live" aria-live="polite">
+      <div class="state-loading">Loading the ledger…</div>
     </div>
   </section>
 
