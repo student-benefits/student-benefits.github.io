@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-17T00:00:00Z",
+  "timestamp": "2026-09-02T00:00:00Z",
   "known_sources_checked": [
     "https://education.github.com/pack/offers",
     "https://www.jetbrains.com/community/education/",
@@ -21,14 +21,14 @@
   ],
   "discovered": [
     {
-      "name": "Xojo",
-      "link": "https://xojo.com/educators/",
-      "source": "known-source"
+      "name": "Lovable",
+      "link": "https://lovable.dev/students",
+      "source": "keyword"
     },
     {
-      "name": "Pageclip",
-      "link": "https://pageclip.co/github-students",
-      "source": "known-source"
+      "name": "Firecrawl",
+      "link": "https://firecrawl.dev/student-program",
+      "source": "keyword"
     }
   ],
   "issues_created": 2
