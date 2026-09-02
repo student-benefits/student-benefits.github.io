@@ -282,7 +282,7 @@ function renderWorkflowRow(filename, info, run) {
       ? '<span class="kind-badge kind-plain">no LLM</span>'
       : '<span class="kind-badge kind-unknown">unclassified</span>';
 
-  let statusHtml = '<span class="wf-status wf-status--none">no run in the last 100</span>';
+  let statusHtml = '<span class="wf-status wf-status--none">no run in the last 100 runs</span>';
   if (run) {
     const inProgress = run.status !== 'completed';
     const s = inProgress
@@ -374,7 +374,10 @@ async function loadLedger(validateDataWorkflowId) {
       tiles.push(statTile(gatePass, 'gate passes on PRs'));
       tiles.push(statTile(gateFail, 'gate failures', gateFail > 0 ? 'stat-bad' : ''));
     }
-    el.innerHTML = tiles.join('');
+    el.innerHTML = tiles.join('') +
+      '<p class="ledger-caption">Most of "closed without merging" is consolidation — a per-issue PR folded ' +
+      'into a batch, not a rejection. <a href="https://jonasneves.com/posts/two-rejections-from-the-gate.html" ' +
+      'target="_blank" rel="noopener noreferrer">The linked analysis</a> breaks down how many were an actual reject.</p>';
   } catch (e) {
     el.innerHTML = '<div class="state-error">Ledger unavailable right now — ' +
       `<a href="https://github.com/${REPO}/pulls?q=is%3Apr+author%3Aapp%2Fclaude" target="_blank" rel="noopener noreferrer">see the PRs directly</a>.</div>`;
