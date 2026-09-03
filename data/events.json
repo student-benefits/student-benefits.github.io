@@ -352,6 +352,20 @@
     "expires": "2026-11-08"
   },
   {
+    "id": "hackprinceton-fall-2026",
+    "name": "HackPrinceton Fall 2026",
+    "organizer": "HackPrinceton / Princeton University",
+    "category": "hackathon",
+    "date": "2026-11-13",
+    "date_end": "2026-11-15",
+    "location": "Princeton, NJ",
+    "remote": false,
+    "eligibility": "Undergraduate and graduate students from any university worldwide; solo or team up to 4",
+    "why": "Princeton's flagship 36-hour hackathon. Free for accepted hackers; open worldwide. Cash prizes across sponsor tracks and a dedicated startup launch track. Apply by September 28.",
+    "link": "https://www.hackprinceton.com/",
+    "expires": "2026-11-15"
+  },
+  {
     "id": "junction-2026",
     "name": "Junction 2026",
     "organizer": "Junction",
