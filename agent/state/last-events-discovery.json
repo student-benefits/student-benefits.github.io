@@ -1,5 +1,6 @@
 {
-  "timestamp": "2026-09-02T00:00:00Z",
+  "timestamp": "2026-09-03T17:24:08Z",
+  "model": "claude-sonnet-4-6",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
@@ -11,32 +12,18 @@
     "https://hack.mit.edu"
   ],
   "keyword_queries": [
-    "student hackathon 2026 free apply open cash prizes",
+    "student hackathon 2026 free apply open",
     "\"open to students\" conference 2026 free OR fellowship application",
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [
-    "yc-summer-fellows-2026"
-  ],
+  "expired_removed": [],
   "discovered": [
     {
-      "name": "Knight Hacks IX",
-      "date": "2026-10-09",
-      "link": "https://2026.knighthacks.org",
-      "source": "known-source"
-    },
-    {
-      "name": "NSF Graduate Research Fellowship Program 2026",
-      "date": "2026-10-16",
-      "link": "https://www.nsf.gov/funding/initiatives/grfp",
+      "name": "HackPrinceton Fall 2026",
+      "date": "2026-11-13",
+      "link": "https://www.hackprinceton.com/",
       "source": "keyword"
-    },
-    {
-      "name": "Cal Hacks 13.0",
-      "date": "2026-10-23",
-      "link": "https://www.calhacks.io/",
-      "source": "known-source"
     }
   ],
   "pr_opened": true
