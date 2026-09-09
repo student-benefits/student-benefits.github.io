@@ -280,6 +280,30 @@
 .repo-link:hover { color: var(--indigo-300); }
 .repo-link svg { width: 16px; height: 16px; }
 
+.card-actions {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* z-index lifts the control above .card-link::before, which covers the whole card. */
+.card-share {
+  display: inline-flex;
+  color: var(--slate-500);
+  position: relative;
+  z-index: 1;
+  transition: color var(--dur-normal);
+}
+.card-share:hover { color: var(--indigo-300); }
+.card-share svg { width: 16px; height: 16px; }
+.card-share--copied { color: #4ade80; }
+
+.card--targeted {
+  border-color: var(--indigo-400);
+  box-shadow: 0 0 0 1px var(--indigo-400);
+}
+
 .tag {
   font-size: 0.75rem;
   font-family: inherit;
