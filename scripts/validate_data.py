@@ -29,6 +29,12 @@ DATA = ROOT / "data"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 OFFER_TYPES = {"free", "discount", "credits", "trial"}
+# Deliberately narrow: only phrasings about the entry's own application. A bare
+# "deadline" also describes a travel grant or a funding round attached to an
+# otherwise open event (NeurIPS), where a `deadline` field would wrongly close it.
+DEADLINE_PROSE_RE = re.compile(
+    r"appl(?:y|ications?)\s+(?:by|close[sd]?|due)|application\s+deadline", re.I
+)
 # subdomains/paths that are documentation, not signup destinations (see PR #197)
 FORBIDDEN_SUBDOMAINS = ("help.", "support.", "docs.", "blog.")
 FORBIDDEN_PATH = "/articles/"
@@ -147,11 +153,13 @@ def validate_events() -> None:
                 err(f"{name}: {dk} '{e[dk]}' must be YYYY-MM-DD")
         if isinstance(e.get("date"), str) and DATE_RE.match(e["date"]):
             dates.append(e["date"])
-        # An application deadline after the event has ended is a data entry error,
-        # and it is the shape that put closed programs behind an "Apply" button.
         dl, exp = e.get("deadline"), e.get("expires")
         if isinstance(dl, str) and isinstance(exp, str) and DATE_RE.match(dl) and DATE_RE.match(exp) and dl > exp:
             err(f"{name}: deadline {dl} is after expires {exp}")
+        # A deadline stated only in prose renders no "closed" state, so the card
+        # keeps offering a shut application. Catch the prose without the field.
+        if not dl and DEADLINE_PROSE_RE.search(f"{e.get('why','')} {e.get('eligibility','')}"):
+            err(f"{name}: states an application deadline in prose but has no 'deadline' field")
         if isinstance(e.get("link"), str):
             check_link_https(name, e["link"])
     if dates != sorted(dates):
