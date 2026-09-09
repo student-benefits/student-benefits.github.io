@@ -216,3 +216,5 @@ footer a:hover { color: var(--slate-300); }
 @media (min-width: 1024px) {
   .page { padding: 3rem 2rem; }
 }
+
+.empty a { color: var(--indigo-300); }
