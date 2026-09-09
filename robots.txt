@@ -1,4 +1,3 @@
-# All crawlers welcome, including AI answer engines.
 User-agent: *
 Allow: /
 
