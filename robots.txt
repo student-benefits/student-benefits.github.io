@@ -1,0 +1,5 @@
+# All crawlers welcome, including AI answer engines.
+User-agent: *
+Allow: /
+
+Sitemap: https://student-benefits.github.io/sitemap.xml

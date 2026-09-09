@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#818cf8"/>
+  <text x="80" y="196" font-family="Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#ffffff">Student Benefits Hub</text>
+  <text x="80" y="286" font-family="Helvetica, Arial, sans-serif" font-size="40" fill="#a5b4fc">Free dev tools, cloud credits, and AI for students</text>
+  <text x="80" y="356" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#94a3b8">Programs that help you build, learn, and ship.</text>
+  <text x="80" y="404" font-family="Helvetica, Arial, sans-serif" font-size="32" fill="#94a3b8">No streaming, no shopping coupons.</text>
+  <g transform="translate(80,486)">
+    <rect x="0" y="0" width="248" height="56" rx="12" fill="#132a1f" stroke="#4ade80" stroke-width="2"/>
+    <text x="26" y="37" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#4ade80">100+ programs</text>
+    <rect x="272" y="0" width="300" height="56" rx="12" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+    <text x="298" y="37" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#cbd5e1">Links checked weekly</text>
+  </g>
+  <text x="80" y="596" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#64748b">student-benefits.github.io</text>
+</svg>

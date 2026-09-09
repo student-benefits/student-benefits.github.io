@@ -6,9 +6,42 @@
   <meta name="theme-color" content="#0f172a">
   <meta name="description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
-  <title>Events · Student Benefits Hub</title>
+  <title>Student Events — Hackathons, Fellowships and Grants · Student Benefits Hub</title>
+  <link rel="canonical" href="https://student-benefits.github.io/events/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Student Benefits Hub">
+  <meta property="og:title" content="Student Events — Hackathons, Fellowships and Grants">
+  <meta property="og:description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <meta property="og:url" content="https://student-benefits.github.io/events/">
+  <meta property="og:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Student Benefits Hub — free dev tools, cloud credits, and AI for students">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Student Events — Hackathons, Fellowships and Grants">
+  <meta name="twitter:description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <meta name="twitter:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <link rel="alternate" type="application/json" href="https://student-benefits.github.io/data/events.json" title="Every event as JSON">
   <link rel="stylesheet" href="/assets/shared.css">
   <link rel="stylesheet" href="/events/events.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Student Benefits Hub — Events",
+  "description": "Hackathons, fellowships, grants, and conferences worth a student's time, with dates and eligibility.",
+  "url": "https://student-benefits.github.io/events/",
+  "license": "https://github.com/student-benefits/student-benefits.github.io/blob/main/LICENSE",
+  "isAccessibleForFree": true,
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://student-benefits.github.io/data/events.json"
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
@@ -45,6 +78,13 @@
       <main id="main-content">
         <div id="results-bar" class="results-bar" aria-live="polite" aria-atomic="true"></div>
 
+        <noscript>
+          <div class="empty">
+            <h2>This listing needs JavaScript</h2>
+            <p>Every event — dates, eligibility, and application link — is also served as plain JSON at
+              <a href="/data/events.json">/data/events.json</a>, which needs no scripting to read.</p>
+          </div>
+        </noscript>
         <div id="content">
           <div class="skeleton">
             <div class="skeleton-card"></div>
