@@ -53,7 +53,13 @@ function getFilteredAndSorted() {
     })
     .sort(function (x, y) {
       if (sortOrder === 'alpha') return x.name.localeCompare(y.name);
-      return y.popularity - x.popularity;
+      if (y.popularity !== x.popularity) return y.popularity - x.popularity;
+      // Most entries share the default score of 5. Without a tie-break the stable
+      // sort falls back to id order, which put "starts with A" at the top of a
+      // list labelled by rank. Costing nothing beats costing something, then A-Z.
+      const free = function (b) { return b.offer_type === 'free' ? 0 : 1; };
+      if (free(x) !== free(y)) return free(x) - free(y);
+      return x.name.localeCompare(y.name);
     });
 }
 
@@ -64,6 +70,12 @@ function renderFilters() {
 }
 
 function renderCard(b) {
+  // Surfaced on the card itself, not left to a tag a skimming reader never reads:
+  // an undisclosed maintainer entry inside a curated directory is the kind of
+  // thing a reader should find from us rather than discover on their own.
+  const own = b.tags.indexOf("Maintainer's own") !== -1
+    ? `<span class="offer-pill offer-own" title="Built by this site's maintainer">Maintainer's own</span>`
+    : '';
   const tags = b.tags.slice(0, 3).map(function (t) {
     return `<button class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</button>`;
   }).join('');
@@ -83,7 +95,7 @@ function renderCard(b) {
       <a class="card-link" href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">
         <div class="card-top">
           <span class="badge" style="color:${catColor(b.category)}">${escapeHtml(b.category)}</span>
-          ${pill}
+          <span class="card-pills">${own}${pill}</span>
         </div>
         <h2 class="card-name">${escapeHtml(b.name)}</h2>
         <p class="card-desc">${escapeHtml(b.description)}</p>
@@ -103,7 +115,7 @@ function renderResultsBar(filtered) {
   bar += `<div class="bar-right">`;
   bar += `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
   bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
-    <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Popular</option>
+    <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Recommended</option>
     <option value="alpha"${sortOrder === 'alpha' ? ' selected' : ''}>A-Z</option>
   </select>`;
   if (searchQuery) {

@@ -72,6 +72,11 @@ jobs:
             | Notion for Education | `https://www.notion.so/product/notion-for-education` |
             | Canva for Education | `https://www.canva.com/education/` |
             | Autodesk Education | `https://www.autodesk.com/education/edu-software/overview` |
+            | Anthropic (Claude) | `https://www.anthropic.com/education` |
+            | OpenAI students | `https://developers.openai.com/community/students` |
+            | Google AI for students | `https://gemini.google/students/` |
+            | Kiro students | `https://kiro.dev/students/` |
+            | Hugging Face education | `https://huggingface.co/education` |
 
             Extract relevant tools/programs from each.
 
