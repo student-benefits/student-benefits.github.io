@@ -747,9 +747,10 @@
     "name": "Kandue for Students on Canvas LMS",
     "category": "Productivity",
     "offer_type": "free",
-    "description": "Free Chrome extension: every Canvas deadline in one panel, practice quizzes on-device. Built by this site's maintainer.",
+    "description": "Free Chrome extension: every Canvas deadline in one panel, practice quizzes on-device.",
     "link": "https://chromewebstore.google.com/detail/plodbfednbjngcmckbcilgpkhgijgado",
     "tags": [
+      "Maintainer's own",
       "Canvas",
       "Deadlines",
       "Planning"

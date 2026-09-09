@@ -79,7 +79,11 @@ benefits — all data must go through this file.
 - `category`: must exactly match one of the values in `data/categories.json` (the authoritative list)
 - `description`: specific about what students actually get (e.g. "Free Pro plan for 1 year", not "Student discount available"); max 120 chars
 - `offer_type`: required; one of `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period then paid/discounted)
-- `popularity`: integer 1–10; use 5 as default for new entries
+- `popularity`: integer 1–10; use 5 as default for new entries. It is an editorial
+  priority, never a usage measurement — nothing counts clicks. 5 means "not yet
+  ranked", which is most of the file, so the UI labels this sort "Recommended"
+  rather than "Popular" and breaks ties by free-first then A–Z. Raise a score only
+  when the offer is unusually generous or the tool unusually central.
 - `repo`: optional; only for open-source projects
 
 Entries are sorted by `id` (ascending); the validator enforces it. Insert new
