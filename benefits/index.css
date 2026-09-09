@@ -298,6 +298,7 @@
 .card-share:hover { color: var(--indigo-300); }
 .card-share svg { width: 16px; height: 16px; }
 .card-share--copied { color: #4ade80; }
+.card-share--failed { color: #f87171; }
 
 .card--targeted {
   border-color: var(--indigo-400);
