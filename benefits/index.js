@@ -13,9 +13,8 @@ const resultsBar = document.getElementById('results-bar');
 const content = document.getElementById('content');
 const copyStatus = document.getElementById('copy-status');
 
-// Filter state lives in the URL so a filtered view can be linked, not just reached.
-// replaceState (not pushState) keeps the back button pointing at wherever the
-// visitor came from rather than at their own filter clicks.
+// replaceState, not pushState: the back button should point at wherever the
+// visitor came from, not at their own filter clicks.
 function readUrlState() {
   const p = new URLSearchParams(location.search);
   const q = p.get('q');
@@ -27,10 +26,9 @@ function readUrlState() {
   if (sort === 'alpha' || sort === 'popularity') sortOrder = sort;
 }
 
-// keepHash is for the two writes that happen while a permalink is still being
-// resolved — dropping #id there would erase the anchor the visitor arrived on
-// before revealHashCard ever reads it. A filter the visitor changes themselves
-// does drop it, because the anchored card may no longer be on screen.
+// keepHash: writeUrlState must not clobber #id before revealHashCard reads it.
+// A filter the visitor changes themselves does drop it — the anchored card may
+// no longer be on screen.
 function writeUrlState(keepHash) {
   const p = new URLSearchParams();
   if (activeCategory !== 'All') p.set('cat', activeCategory);
@@ -165,9 +163,13 @@ filterBar.addEventListener('click', function (e) {
   render();
 });
 
+let urlWriteTimer = null;
 searchInput.addEventListener('input', function () {
   searchQuery = searchInput.value;
-  writeUrlState();
+  // Safari throws SecurityError past 100 replaceState calls in 30s and then
+  // disables the API — reachable by typing. The other call sites are clicks.
+  clearTimeout(urlWriteTimer);
+  urlWriteTimer = setTimeout(writeUrlState, 250);
   render();
 });
 
@@ -195,22 +197,23 @@ content.addEventListener('click', function (e) {
   searchInput.focus(); // the clicked tag itself no longer exists post-render
 });
 
-// The href is a real link, so right-click -> Copy Link Address still works if the
-// clipboard API is unavailable or the user denies it.
+// The href is a real link, so right-click -> Copy Link Address still works where
+// the clipboard API is unavailable or denied.
 function copyPermalink(el) {
   const url = location.origin + location.pathname + '#' + el.dataset.id;
-  const done = function (msg) {
-    if (copyStatus) copyStatus.textContent = msg;
-    el.classList.add('card-share--copied');
-    setTimeout(function () { el.classList.remove('card-share--copied'); }, 1400);
+  const FAILED = 'Copy failed — right-click the icon to copy the link';
+  const done = function (msg, cls) {
+    copyStatus.textContent = msg;
+    el.classList.add(cls);
+    setTimeout(function () { el.classList.remove(cls); }, 1400);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(
-      function () { done('Link copied'); },
-      function () { done('Copy failed — right-click the icon to copy the link'); }
+      function () { done('Link copied', 'card-share--copied'); },
+      function () { done(FAILED, 'card-share--failed'); }
     );
   } else {
-    done('Copy failed — right-click the icon to copy the link');
+    done(FAILED, 'card-share--failed');
   }
 }
 
