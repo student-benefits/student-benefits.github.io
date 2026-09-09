@@ -205,3 +205,5 @@
   color: var(--slate-500);
 }
 .empty h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--slate-400); }
+
+.empty a { color: var(--indigo-300); }

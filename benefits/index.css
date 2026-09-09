@@ -336,3 +336,5 @@
 @media (min-width: 1280px) {
   .grid, .skeleton { grid-template-columns: repeat(4, 1fr); }
 }
+
+.empty a { color: var(--indigo-300); }
