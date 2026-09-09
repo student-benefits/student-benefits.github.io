@@ -113,10 +113,10 @@ function renderCard(e) {
     </a>
     <div class="event-footer">
       <span class="event-countdown ${escapeHtml(cd.cls)}">${cd.urgent ? '<span class="sr-only">Time-sensitive: </span>' : ''}${escapeHtml(cd.text)}</span>
-      <a class="event-apply${applied && applied.closed ? ' event-apply--closed' : ''}" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
-        ${applied && applied.closed ? 'View event' : 'Apply'}
+      ${applied && applied.closed ? '' : `<a class="event-apply" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
+        Apply
         <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>
+      </a>`}
     </div>
   </article>`;
 }

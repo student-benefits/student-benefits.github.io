@@ -117,14 +117,6 @@ header { margin-bottom: 2rem; }
 }
 .grant-badge:hover { color: var(--slate-400); }
 
-.grant-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #4ade80;
-  flex-shrink: 0;
-}
-
 h1 {
   font-size: 1.75rem;
   font-weight: 700;
