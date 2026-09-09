@@ -142,11 +142,16 @@ def validate_events() -> None:
             err(f"{name}: category '{e.get('category')}' not in event-categories.json")
         if len(e.get("why", "")) > 200:
             err(f"{name}: why is {len(e.get('why',''))} chars (max 200)")
-        for dk in ("date", "date_end", "expires"):
+        for dk in ("date", "date_end", "expires", "deadline"):
             if dk in e and not DATE_RE.match(str(e[dk])):
                 err(f"{name}: {dk} '{e[dk]}' must be YYYY-MM-DD")
         if isinstance(e.get("date"), str) and DATE_RE.match(e["date"]):
             dates.append(e["date"])
+        # An application deadline after the event has ended is a data entry error,
+        # and it is the shape that put closed programs behind an "Apply" button.
+        dl, exp = e.get("deadline"), e.get("expires")
+        if isinstance(dl, str) and isinstance(exp, str) and DATE_RE.match(dl) and DATE_RE.match(exp) and dl > exp:
+            err(f"{name}: deadline {dl} is after expires {exp}")
         if isinstance(e.get("link"), str):
             check_link_https(name, e["link"])
     if dates != sorted(dates):

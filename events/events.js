@@ -29,6 +29,21 @@ function fmtDate(date, dateEnd) {
   return DATE_RANGE_FMT.formatRange(start, new Date(dateEnd + 'T12:00:00'));
 }
 
+// An application deadline, when known, outranks the event date: a student
+// reading "45 days away" about a program that stopped accepting applications
+// last month has been told the wrong thing.
+function applyState(e) {
+  if (!e.deadline) return null;
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const days = Math.round((new Date(e.deadline + 'T00:00:00') - now) / 86400000);
+  if (days < 0) return { closed: true, text: 'Applications closed', cls: 'event-countdown--closed' };
+  if (days === 0) return { closed: false, text: 'Apply by today', cls: 'event-countdown--soon', urgent: true };
+  if (days === 1) return { closed: false, text: 'Apply by tomorrow', cls: 'event-countdown--soon', urgent: true };
+  if (days <= 14) return { closed: false, text: 'Apply within ' + days + ' days', cls: 'event-countdown--soon', urgent: true };
+  return { closed: false, text: 'Apply within ' + days + ' days', cls: 'event-countdown--upcoming', urgent: false };
+}
+
 function countdown(date, expires) {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
@@ -68,7 +83,8 @@ function getFiltered() {
 
 function renderCard(e) {
   const color = orgColor(e.organizer);
-  const cd = countdown(e.date, e.expires || e.date_end);
+  const applied = applyState(e);
+  const cd = applied || countdown(e.date, e.expires || e.date_end);
   const locationPill = e.remote
     ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
     : e.location
@@ -97,8 +113,8 @@ function renderCard(e) {
     </a>
     <div class="event-footer">
       <span class="event-countdown ${escapeHtml(cd.cls)}">${cd.urgent ? '<span class="sr-only">Time-sensitive: </span>' : ''}${escapeHtml(cd.text)}</span>
-      <a class="event-apply" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
-        Apply
+      <a class="event-apply${applied && applied.closed ? ' event-apply--closed' : ''}" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
+        ${applied && applied.closed ? 'View event' : 'Apply'}
         <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
     </div>
