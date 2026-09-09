@@ -102,6 +102,7 @@ All event data lives in `data/events.json`. Schema:
   "category": "hackathon | conference | fellowship | summit | workshop | grant",
   "date": "YYYY-MM-DD",
   "date_end": "YYYY-MM-DD",
+  "deadline": "YYYY-MM-DD",
   "location": "City, State/Country",
   "remote": true,
   "eligibility": "Who can apply, concisely",
@@ -117,6 +118,10 @@ All event data lives in `data/events.json`. Schema:
 - `remote`: `true` only if fully virtual; `false` for in-person or hybrid
 - `expires`: same as `date_end`, or `date` if single-day
 - `date_end`: omit if single-day
+- `deadline`: the application deadline, when the event page states one. Distinct
+  from `date` — an event weeks away can have stopped accepting applications, and
+  before this field existed the UI showed those an "Apply" button. Omit when the
+  page states no deadline; never guess one. Must not fall after `expires`.
 - `location`: omit if fully remote
 
 Events are sorted by `date` (earliest first).
