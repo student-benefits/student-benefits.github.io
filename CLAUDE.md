@@ -118,10 +118,12 @@ All event data lives in `data/events.json`. Schema:
 - `remote`: `true` only if fully virtual; `false` for in-person or hybrid
 - `expires`: same as `date_end`, or `date` if single-day
 - `date_end`: omit if single-day
-- `deadline`: the application deadline, when the event page states one. Distinct
-  from `date` — an event weeks away can have stopped accepting applications, and
-  before this field existed the UI showed those an "Apply" button. Omit when the
-  page states no deadline; never guess one. Must not fall after `expires`.
+- `deadline`: the last date a student can still apply, when the event page states
+  one. Distinct from `date` — an event weeks away can have stopped accepting
+  applications. Where there are rounds, this is the final one; the earlier round
+  belongs in `why`. Omit when the page states no deadline; never guess one. Must
+  not fall after `expires`. The validator rejects an entry that states an
+  application deadline in prose without setting this field.
 - `location`: omit if fully remote
 
 Events are sorted by `date` (earliest first).
