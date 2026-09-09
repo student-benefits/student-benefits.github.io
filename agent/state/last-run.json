@@ -1,25 +1,17 @@
 {
-  "issue": 346,
-  "title": "firecrawl",
-  "timestamp": "2026-09-02T00:00:00Z",
+  "issue": 354,
+  "title": "[benefit]: kiro students — free kiro for one year",
+  "timestamp": "2026-09-09T03:28:46Z",
+  "model": "claude-sonnet-4-6",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Firecrawl student program education credits STUDENTEDU"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://www.firecrawl.dev/student-program"
-    },
-    {
-      "name": "edit",
-      "summary": "Added entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "Kiro student discount education program" },
+    { "name": "webfetch", "url": "https://kiro.dev/students/" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
   "benefit": {
-    "name": "Firecrawl",
-    "category": "Dev Tools",
-    "description": "10,000 free API credits for web scraping and crawling; sign up with academic email, redeem code STUDENTEDU"
+    "name": "Kiro Students",
+    "category": "AI Tools",
+    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools."
   }
 }

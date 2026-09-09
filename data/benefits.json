@@ -757,6 +757,21 @@
     "popularity": 5
   },
   {
+    "id": "kiro-students",
+    "name": "Kiro Students",
+    "category": "AI Tools",
+    "offer_type": "credits",
+    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools.",
+    "link": "https://kiro.dev/students/",
+    "tags": [
+      "AI Coding",
+      "Amazon",
+      "Credits",
+      "Student Verification"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "linear",
     "name": "Linear",
     "category": "Productivity",
