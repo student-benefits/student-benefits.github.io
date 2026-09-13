@@ -590,8 +590,8 @@
     "name": "Google AI Plus",
     "category": "AI Tools",
     "offer_type": "trial",
-    "description": "Free 12-month trial via Handshake, then $7.99/mo. Gemini Pro model, study guides, deep research.",
-    "link": "https://app.joinhandshake.com/gemini",
+    "description": "Free 1 year of Google AI Pro (US) or AI Plus (140+ countries). Sign in with enrolled student email.",
+    "link": "https://gemini.google.com/students",
     "tags": [
       "AI",
       "Research",
@@ -1289,7 +1289,7 @@
     "name": "Stripe",
     "category": "Dev Tools",
     "offer_type": "free",
-    "description": "Waived transaction fees on first $1,000 in revenue processed.",
+    "description": "$25 in Stripe credits to offset fees on Stripe Payments, Billing, and more via GitHub Student Pack.",
     "link": "https://education.github.com/pack",
     "tags": [
       "Payments",
