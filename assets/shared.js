@@ -54,3 +54,43 @@ function renderFilterTabs(container, categories, activeCategory, labelFn, toolti
 function renderEmptyState(container, message) {
   container.innerHTML = '<div class="empty"><h2>No results</h2><p>' + escapeHtml(message) + '</p></div>';
 }
+
+function prefersReducedMotion() {
+  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// Fades+lifts each element matching `selector` in as it scrolls into view
+// (each render() rebuilds the grid, so this re-observes every call — no
+// state to track between renders). No-ops under reduced motion or without
+// IntersectionObserver, leaving elements at their normal opacity — the
+// [data-reveal] attribute this depends on is never set in that case.
+function revealOnScroll(container, selector) {
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) return;
+  var els = container.querySelectorAll(selector);
+  if (!els.length) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.setAttribute('data-reveal', 'in');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
+  els.forEach(function (el) {
+    el.setAttribute('data-reveal', '');
+    io.observe(el);
+  });
+}
+
+// Cross-fades filter/sort/toggle renders (not keystrokes) via View Transitions;
+// falls back to a plain call when unsupported or reduced-motion.
+function renderWithTransition(renderFn) {
+  if (prefersReducedMotion() || !document.startViewTransition) {
+    renderFn();
+    return;
+  }
+  var transition = document.startViewTransition(renderFn);
+  // Silences a failed *animation* (renderFn already ran) so it isn't an unhandled rejection.
+  transition.ready.catch(function () {});
+  transition.finished.catch(function () {});
+  transition.updateCallbackDone.catch(function () {});
+}

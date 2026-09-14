@@ -153,11 +153,17 @@ function render() {
 
 document.getElementById('filter-bar').addEventListener('click', function(e) {
   const tab = e.target.closest('.filter-tab');
-  if (tab) { activeCategory = tab.dataset.cat; renderFilters(); render(); }
+  if (tab) {
+    activeCategory = tab.dataset.cat;
+    renderWithTransition(function () { renderFilters(); render(); });
+  }
 });
 
 document.getElementById('results-bar').addEventListener('click', function(e) {
-  if (e.target.closest('.remote-toggle')) { remoteOnly = !remoteOnly; render(); }
+  if (e.target.closest('.remote-toggle')) {
+    remoteOnly = !remoteOnly;
+    renderWithTransition(render);
+  }
 });
 
 Promise.all([
@@ -168,6 +174,7 @@ Promise.all([
   categories = ['All'].concat(results[1]);
   renderFilters();
   render();
+  revealOnScroll(document.getElementById('content'), '.event-card'); // entrance only — later render()s don't replay it
 }).catch(function() {
   document.getElementById('content').innerHTML =
     '<div class="empty"><h2>Failed to load</h2><p>Could not fetch event data. Please refresh.</p></div>';
