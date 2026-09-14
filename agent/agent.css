@@ -70,7 +70,7 @@
   font-weight: 600;
   border-radius: var(--radius-lg);
   text-decoration: none;
-  transition: top var(--dur-fast);
+  transition: top var(--dur-fast) var(--ease);
 }
 .skip-link:focus {
   top: 1rem;
@@ -104,7 +104,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  transition: color var(--dur-fast);
+  transition: color var(--dur-fast) var(--ease);
 }
 .back-link:hover { color: var(--text); }
 .back-link svg { width: 14px; height: 14px; }
@@ -177,7 +177,7 @@ body {
   content: '▶';
   font-size: 0.5rem;
   color: var(--text-muted);
-  transition: transform var(--dur-fast);
+  transition: transform var(--dur-fast) var(--ease);
   flex-shrink: 0;
 }
 .run-details[open] > summary::before { transform: rotate(90deg); }
@@ -436,7 +436,7 @@ body {
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity var(--dur-fast);
+  transition: opacity var(--dur-fast) var(--ease);
 }
 .sim-btn:hover { opacity: 0.88; }
 .sim-btn:focus-visible { outline: 2px solid var(--grant-color); outline-offset: 2px; }
@@ -498,7 +498,7 @@ body {
   cursor: pointer;
   text-align: left;
   font-family: var(--font);
-  transition: box-shadow var(--dur-fast), transform var(--dur-fast);
+  transition: box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
   min-width: 96px;
 }
 .arch-node:hover { box-shadow: var(--shadow-sm); }
@@ -542,7 +542,7 @@ body {
   box-shadow: var(--shadow-sm);
   opacity: 0;
   pointer-events: none;
-  transition: opacity var(--dur-fast);
+  transition: opacity var(--dur-fast) var(--ease);
 }
 .arch-connector:hover .arch-connector-label { opacity: 1; }
 .packet {

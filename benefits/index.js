@@ -146,7 +146,7 @@ resultsBar.addEventListener('change', function (e) {
   if (e.target.id === 'sort-select') {
     sortOrder = e.target.value;
     writeUrlState();
-    render();
+    renderWithTransition(render);
   }
 });
 
@@ -154,14 +154,14 @@ resultsBar.addEventListener('click', function (e) {
   if (e.target.closest('#free-toggle')) {
     freeOnly = !freeOnly;
     writeUrlState();
-    render();
+    renderWithTransition(render);
     return;
   }
   if (e.target.closest('#clear-btn')) {
     searchQuery = '';
     searchInput.value = '';
     writeUrlState();
-    render();
+    renderWithTransition(render);
     searchInput.focus(); // the clear button itself no longer exists post-render
   }
 });
@@ -171,8 +171,7 @@ filterBar.addEventListener('click', function (e) {
   if (!btn) return;
   activeCategory = btn.dataset.cat;
   writeUrlState();
-  renderFilters();
-  render();
+  renderWithTransition(function () { renderFilters(); render(); });
 });
 
 let urlWriteTimer = null;
@@ -205,7 +204,7 @@ content.addEventListener('click', function (e) {
   searchQuery = tag.dataset.tag;
   searchInput.value = searchQuery;
   writeUrlState();
-  render();
+  renderWithTransition(render);
   searchInput.focus(); // the clicked tag itself no longer exists post-render
 });
 
@@ -268,6 +267,7 @@ Promise.all([
   writeUrlState(true);
   renderFilters();
   render();
+  revealOnScroll(content, '.card'); // entrance only — later render()s (filter/search/sort) don't replay it
   revealHashCard();
 }).catch(function () {
   content.innerHTML = '<div class="empty"><h2>Failed to load</h2><p>Could not fetch benefit data. Please refresh.</p></div>';

@@ -18,6 +18,10 @@
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --dur-normal: 150ms;
+  /* Standard Material/Tailwind "ease-in-out" deceleration curve — one curve
+     everywhere reads as one system moving, rather than each transition
+     falling back to the browser's default (linear-ish) ease. */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -59,7 +63,7 @@ body {
   font-weight: 600;
   border-radius: var(--radius-md);
   text-decoration: none;
-  transition: top var(--dur-normal);
+  transition: top var(--dur-normal) var(--ease);
 }
 .skip-link:focus {
   top: 1rem;
@@ -72,7 +76,33 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 200ms;
+    animation-timing-function: var(--ease);
+  }
+}
+
+/* Scroll reveal for grid cards — shared.js sets [data-reveal] only when both
+   IntersectionObserver exists and motion isn't reduced, so unsupported/opted-out
+   visitors get cards at full opacity with no observer and no missing content. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease), transform 420ms var(--ease);
+}
+[data-reveal="in"] { opacity: 1; transform: none; }
+.grid > [data-reveal]:nth-child(4n+2) { transition-delay: 60ms; }
+.grid > [data-reveal]:nth-child(4n+3) { transition-delay: 120ms; }
+.grid > [data-reveal]:nth-child(4n+4) { transition-delay: 180ms; }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
@@ -99,7 +129,7 @@ header { margin-bottom: 2rem; }
   font-weight: 500;
   color: var(--slate-500);
   text-decoration: none;
-  transition: color var(--dur-normal);
+  transition: color var(--dur-normal) var(--ease);
 }
 .site-alt:hover { color: #fff; }
 
@@ -113,7 +143,7 @@ header { margin-bottom: 2rem; }
   font-size: 0.875rem;
   text-decoration: none;
   margin-top: 0.4rem;
-  transition: color var(--dur-normal);
+  transition: color var(--dur-normal) var(--ease);
 }
 .grant-badge:hover { color: var(--slate-400); }
 
@@ -135,13 +165,15 @@ h1 {
   background: rgba(30, 41, 59, 0.4);
   color: var(--slate-400);
   cursor: pointer;
-  transition: background-color var(--dur-normal), color var(--dur-normal), border-color var(--dur-normal);
+  transition: background-color var(--dur-normal) var(--ease), color var(--dur-normal) var(--ease),
+    border-color var(--dur-normal) var(--ease), transform var(--dur-normal) var(--ease);
 }
 .filter-tab:hover {
   background: rgba(51, 65, 85, 0.5);
   color: #fff;
   border-color: var(--slate-600);
 }
+.filter-tab:active { transform: scale(0.96); }
 .filter-tab[aria-pressed="true"] {
   background: rgba(99, 102, 241, 0.1);
   color: var(--indigo-300);
@@ -158,7 +190,7 @@ footer {
 footer a {
   color: var(--slate-500);
   text-decoration: none;
-  transition: color var(--dur-normal);
+  transition: color var(--dur-normal) var(--ease);
 }
 footer a:hover { color: var(--slate-300); }
 
@@ -187,7 +219,8 @@ footer a:hover { color: var(--slate-300); }
   color: var(--amber-300);
   font-size: 0.8125rem;
   text-decoration: none;
-  transition: background-color var(--dur-normal), border-color var(--dur-normal);
+  transition: background-color var(--dur-normal) var(--ease), border-color var(--dur-normal) var(--ease),
+    transform var(--dur-normal) var(--ease);
   white-space: nowrap;
 }
 .contribute-banner:hover {
@@ -195,6 +228,7 @@ footer a:hover { color: var(--slate-300); }
   border-color: rgba(245, 158, 11, 0.55);
   color: var(--amber-300);
 }
+.contribute-banner:active { transform: scale(0.97); }
 .contribute-banner svg {
   width: 0.875rem;
   height: 0.875rem;

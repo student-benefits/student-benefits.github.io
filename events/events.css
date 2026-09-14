@@ -16,7 +16,8 @@
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: border-color var(--dur-normal), color var(--dur-normal), background-color var(--dur-normal);
+  transition: border-color var(--dur-normal) var(--ease), color var(--dur-normal) var(--ease),
+    background-color var(--dur-normal) var(--ease), transform var(--dur-normal) var(--ease);
   border: 1px solid rgba(52, 211, 153, 0.3);
   background: rgba(52, 211, 153, 0.06);
   color: #34d399;
@@ -25,6 +26,7 @@
   background: rgba(52, 211, 153, 0.12);
   border-color: rgba(52, 211, 153, 0.5);
 }
+.remote-toggle:active { transform: scale(0.96); }
 .remote-toggle[aria-pressed="true"] {
   border-color: #34d399;
   background: rgba(52, 211, 153, 0.18);
@@ -61,13 +63,15 @@
   border-radius: var(--radius-lg);
   padding: 1.125rem;
   cursor: pointer;
-  transition: border-color var(--dur-normal), box-shadow var(--dur-normal);
+  transition: border-color var(--dur-normal) var(--ease), box-shadow var(--dur-normal) var(--ease),
+    transform var(--dur-normal) var(--ease);
 }
-.event-card:hover {
+.event-card:hover, .event-card:focus-within {
   border-color: rgba(129, 140, 248, 0.4);
   box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  transform: translateY(-2px);
 }
-.event-card:hover .event-name { text-decoration: underline; text-underline-offset: 3px; }
+.event-card:hover .event-name, .event-card:focus-within .event-name { text-decoration: underline; text-underline-offset: 3px; }
 .event-card-top {
   display: flex;
   flex-wrap: wrap;
@@ -161,7 +165,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color var(--dur-normal), border-color var(--dur-normal);
+  transition: background-color var(--dur-normal) var(--ease), border-color var(--dur-normal) var(--ease);
   white-space: nowrap;
 }
 .event-apply:hover {
