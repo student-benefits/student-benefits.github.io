@@ -1,5 +1,6 @@
 {
-  "timestamp": "2026-09-02T00:00:00Z",
+  "timestamp": "2026-09-15T18:09:51Z",
+  "model": "claude-sonnet-4-6",
   "known_sources_checked": [
     "https://education.github.com/pack/offers",
     "https://www.jetbrains.com/community/education/",
@@ -9,7 +10,12 @@
     "https://www.figma.com/education/",
     "https://www.notion.so/product/notion-for-education",
     "https://www.canva.com/education/",
-    "https://www.autodesk.com/education/edu-software/overview"
+    "https://www.autodesk.com/education/edu-software/overview",
+    "https://www.anthropic.com/education",
+    "https://developers.openai.com/community/students",
+    "https://gemini.google/students/",
+    "https://kiro.dev/students/",
+    "https://huggingface.co/education"
   ],
   "keyword_queries": [
     "\"student plan\" OR \"education plan\" developer tools software 2026 free",
@@ -21,14 +27,14 @@
   ],
   "discovered": [
     {
-      "name": "Lovable",
-      "link": "https://lovable.dev/students",
-      "source": "keyword"
+      "name": "Testmail",
+      "link": "https://testmail.app/github-students",
+      "source": "known-source"
     },
     {
-      "name": "Firecrawl",
-      "link": "https://firecrawl.dev/student-program",
-      "source": "keyword"
+      "name": "Vaadin",
+      "link": "https://vaadin.com/student-program",
+      "source": "known-source"
     }
   ],
   "issues_created": 2
