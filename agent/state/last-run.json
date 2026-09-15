@@ -1,26 +1,14 @@
 {
-  "issue": 354,
-  "title": "[benefit]: kiro students — free kiro for one year",
-  "timestamp": "2026-09-09T03:28:46Z",
+  "issue": 364,
+  "title": "vaadin",
+  "timestamp": "2026-09-15T18:09:44Z",
   "model": "claude-sonnet-4-6",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Kiro student discount education program"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://kiro.dev/students/"
-    },
-    {
-      "name": "edit",
-      "summary": "Added entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "Vaadin student program GitHub Student Pack free Pro" },
+    { "name": "webfetch", "url": "https://vaadin.com/blog/vaadin-pro-available-for-students" },
+    { "name": "webfetch", "url": "https://vaadin.com/education" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "Kiro Students",
-    "category": "AI Tools",
-    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools."
-  }
+  "benefit": { "name": "Vaadin", "category": "Dev Tools", "description": "Free Pro subscription while enrolled via GitHub Student Pack. Java UI framework with Charts, Designer, and TestBench." }
 }
