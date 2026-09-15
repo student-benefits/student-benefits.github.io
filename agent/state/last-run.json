@@ -1,26 +1,18 @@
 {
-  "issue": 354,
-  "title": "[benefit]: kiro students — free kiro for one year",
-  "timestamp": "2026-09-09T03:28:46Z",
+  "issue": 368,
+  "title": "[benefit]: chatgpt free for students for 4 months",
+  "timestamp": "2026-09-15T20:40:07Z",
   "model": "claude-sonnet-4-6",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Kiro student discount education program"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://kiro.dev/students/"
-    },
-    {
-      "name": "edit",
-      "summary": "Added entry to data/benefits.json"
-    }
+    { "name": "websearch", "query": "ChatGPT free for students 2026 student program offer" },
+    { "name": "websearch", "query": "chatgpt.com/students/2026 offer details eligibility US college students SheerID" },
+    { "name": "webfetch", "url": "https://chatgpt.com/students/2026/" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
   "benefit": {
-    "name": "Kiro Students",
+    "name": "ChatGPT Plus for Students",
     "category": "AI Tools",
-    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools."
+    "description": "Free 4 months of ChatGPT Plus (worth $80) for U.S. college students. Verify enrollment via SheerID; claim by Oct 31."
   }
 }
