@@ -1,26 +1,12 @@
 {
-  "issue": 354,
-  "title": "[benefit]: kiro students — free kiro for one year",
-  "timestamp": "2026-09-09T03:28:46Z",
+  "issue": 363,
+  "title": "testmail",
+  "timestamp": "2026-09-15T18:09:38Z",
   "model": "claude-sonnet-4-6",
   "outcome": "accepted",
   "tools": [
-    {
-      "name": "websearch",
-      "query": "Kiro student discount education program"
-    },
-    {
-      "name": "webfetch",
-      "url": "https://kiro.dev/students/"
-    },
-    {
-      "name": "edit",
-      "summary": "Added entry to data/benefits.json"
-    }
+    { "name": "webfetch", "url": "https://testmail.app/github-students" },
+    { "name": "edit", "summary": "Added entry to data/benefits.json" }
   ],
-  "benefit": {
-    "name": "Kiro Students",
-    "category": "AI Tools",
-    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools."
-  }
+  "benefit": { "name": "Testmail", "category": "Dev Tools", "description": "Free Essential Plan (worth $12/month) via GitHub Student Pack. Test email inboxes with API access for automated testing." }
 }

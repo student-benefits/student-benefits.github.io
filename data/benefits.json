@@ -1328,6 +1328,21 @@
     "popularity": 5
   },
   {
+    "id": "testmail",
+    "name": "Testmail",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Essential Plan (worth $12/month) via GitHub Student Pack. Test email inboxes with API access for automated testing.",
+    "link": "https://testmail.app/github-students",
+    "tags": [
+      "Testing",
+      "Email",
+      "API",
+      "GitHub Student Pack"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "testmu-ai",
     "name": "TestMu AI",
     "category": "Dev Tools",
