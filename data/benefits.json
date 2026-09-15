@@ -1412,6 +1412,21 @@
     "popularity": 8
   },
   {
+    "id": "vaadin",
+    "name": "Vaadin",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro subscription while enrolled via GitHub Student Pack. Java UI framework with Charts, Designer, and TestBench.",
+    "link": "https://vaadin.com/student-program",
+    "tags": [
+      "Java",
+      "UI Components",
+      "GitHub Student Pack",
+      "Web Development"
+    ],
+    "popularity": 5
+  },
+  {
     "id": "visme",
     "name": "Visme",
     "category": "Design",
