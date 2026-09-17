@@ -25,19 +25,6 @@
     "expires": "2027-04-04"
   },
   {
-    "id": "breakthrough-junior-challenge-2026",
-    "name": "Breakthrough Junior Challenge 2026",
-    "organizer": "Breakthrough Prize Foundation",
-    "category": "grant",
-    "date": "2026-05-11",
-    "date_end": "2026-09-15",
-    "remote": true,
-    "eligibility": "Students ages 13–18 worldwide; submit a 2-minute video explaining a concept in physics, life sciences, or mathematics",
-    "why": "$250,000 post-secondary scholarship, a $50k teacher prize, and a $100k school lab for the best 2-minute science video. No lab or team required; open now through September 15.",
-    "link": "https://breakthroughjuniorchallenge.org/enter",
-    "expires": "2026-09-15"
-  },
-  {
     "id": "apple-aiml-residency-2026",
     "name": "Apple AIML Residency 2026",
     "organizer": "Apple",
@@ -65,19 +52,6 @@
     "expires": "2026-10-31"
   },
   {
-    "id": "agentic-cinema-hackathon-2026",
-    "name": "Agentic Cinema: The Blockbuster Hackathon",
-    "organizer": "Google Cloud",
-    "category": "hackathon",
-    "date": "2026-07-27",
-    "date_end": "2026-09-07",
-    "remote": true,
-    "eligibility": "Above legal age worldwide; some countries excluded; must build with Gemini and Google Cloud",
-    "why": "$75,000 across five sponsor tracks (IBM, Grafana, Replit, Clickhouse, Parallel). Build AI agents for media workflows using Gemini and Google Cloud. Submit by September 7.",
-    "link": "https://agentic-cinema.devpost.com/rules",
-    "expires": "2026-09-07"
-  },
-  {
     "id": "iaps-ai-policy-fellowship-2026",
     "name": "IAPS AI Policy Fellowship",
     "organizer": "Institute for AI Policy and Strategy",
@@ -103,19 +77,6 @@
     "why": "$20k equity-free grant + $250k follow-on on the startup track, or full-time placement at Substack, Sesame AI, and other a16z portfolio companies. Cohort 2 opens September 2026.",
     "link": "https://alpha.a16zspeedrun.com/apply",
     "expires": "2027-08-31"
-  },
-  {
-    "id": "ethonline-2026",
-    "name": "ETHOnline 2026",
-    "organizer": "ETHGlobal",
-    "category": "hackathon",
-    "date": "2026-09-04",
-    "date_end": "2026-09-16",
-    "remote": true,
-    "eligibility": "Open to all builders worldwide; solo or team; small ETH stake required to secure a spot",
-    "why": "$100,000+ in sponsor prizes across a 10-day async global hackathon. Build from scratch or extend open source — no travel required.",
-    "link": "https://ethglobal.com/events/ethonline2026/info/start",
-    "expires": "2026-09-16"
   },
   {
     "id": "ai-alignment-research-fellowship-2026",
@@ -284,6 +245,20 @@
     "why": "$37,000/year stipend plus $16,000 tuition allowance for 3 years — the US's most prestigious graduate STEM fellowship. Field-specific deadlines Oct 16–23.",
     "link": "https://www.nsf.gov/funding/initiatives/grfp",
     "expires": "2026-10-23"
+  },
+  {
+    "id": "dubhacks-2026",
+    "name": "DubHacks '26",
+    "organizer": "DubHacks / University of Washington",
+    "category": "hackathon",
+    "date": "2026-10-17",
+    "date_end": "2026-10-18",
+    "location": "Seattle, WA",
+    "remote": false,
+    "eligibility": "All collegiate students worldwide across all disciplines; beginners welcome; individual entry with team formation available",
+    "why": "$44,000+ in prizes at UW's flagship 36-hour hackathon. AWS, Google Cloud, Meta sponsors plus career fair with direct recruiter access. 1,100+ hackers.",
+    "link": "https://dh26.dubhacks.co",
+    "expires": "2026-10-18"
   },
   {
     "id": "claude-corps-2026",
@@ -471,5 +446,19 @@
     "why": "$1,600/week stipend plus free housing, meals, and travel for 12 weeks of full-time AI safety research in Berkeley or London. No prior publications required.",
     "link": "https://www.matsprogram.org/apply",
     "expires": "2027-04-10"
+  },
+  {
+    "id": "treehacks-2027",
+    "name": "TreeHacks 2027",
+    "organizer": "TreeHacks / Stanford University",
+    "category": "hackathon",
+    "date": "2027-02-12",
+    "date_end": "2027-02-14",
+    "location": "Stanford, CA",
+    "remote": false,
+    "eligibility": "Any enrolled college student worldwide (undergrad or graduate); beginners welcome; individual entry with team matching offered",
+    "why": "$1M+ in prizes at Stanford's flagship 36-hour hackathon — travel, food, and lodging covered for all admitted hackers. 1,000+ participants, 36 corporate sponsors with recruiting.",
+    "link": "https://treehacks.com",
+    "expires": "2027-02-14"
   }
 ]
