@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-03T17:24:08Z",
+  "timestamp": "2026-09-17T17:52:26Z",
   "model": "claude-sonnet-4-6",
   "known_sources_checked": [
     "https://events.ycombinator.com",
@@ -17,12 +17,22 @@
     "student grant OR \"build grant\" 2026 apply individual cash stipend",
     "student residency OR cohort OR program 2026 free technical AI"
   ],
-  "expired_removed": [],
+  "expired_removed": [
+    "breakthrough-junior-challenge-2026",
+    "agentic-cinema-hackathon-2026",
+    "ethonline-2026"
+  ],
   "discovered": [
     {
-      "name": "HackPrinceton Fall 2026",
-      "date": "2026-11-13",
-      "link": "https://www.hackprinceton.com/",
+      "name": "DubHacks '26",
+      "date": "2026-10-17",
+      "link": "https://dh26.dubhacks.co",
+      "source": "keyword"
+    },
+    {
+      "name": "TreeHacks 2027",
+      "date": "2027-02-12",
+      "link": "https://treehacks.com",
       "source": "keyword"
     }
   ],
