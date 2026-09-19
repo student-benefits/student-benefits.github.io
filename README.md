@@ -15,7 +15,7 @@ The directory is kept current by **Grant** — a set of GitHub Actions workflows
 
 ## How it works
 
-Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events and audit link health on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`CLAUDE.md`](CLAUDE.md#automated-workflows) — the canonical source.
+Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events and audit link health on their own. Whatever the path, Grant opens a PR; a human reviews and merges. The full roster of workflows (triggers and what each does) is the table in [`AGENTS.md`](AGENTS.md#automated-workflows) — the canonical source.
 
 The **[/agent/](https://student-benefits.github.io/agent/)** page shows the loop, every workflow with its live run status, the PR and gate ledger read from the GitHub API, and the last real run trace — so the system can be checked, not just described.
 
@@ -29,7 +29,7 @@ The **[/agent/](https://student-benefits.github.io/agent/)** page shows the loop
 2. Grant validates and opens a PR within minutes
 3. A maintainer reviews and merges
 
-**Add benefits directly** — edit `data/benefits.json` following the schema in `CLAUDE.md` and open a PR.
+**Add benefits directly** — edit `data/benefits.json` following the schema in `AGENTS.md` and open a PR.
 
 **Improve Grant** — edit a workflow's `prompt:` in `.github/workflows/*.yml` directly. No compile step.
 

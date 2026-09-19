@@ -2,7 +2,7 @@
 """Validate data/benefits.json and data/events.json against the schema.
 
 Deterministic gate (Anthropic, "Building Effective Agents") for the data
-integrity rules in CLAUDE.md. Runs in CI on every PR that touches the data
+integrity rules in AGENTS.md. Runs in CI on every PR that touches the data
 files, so the rules hold regardless of which workflow (or which model) produced
 the change.
 

@@ -1,4 +1,4 @@
-# CLAUDE.md — student-benefits.github.io
+# AGENTS.md — student-benefits.github.io
 
 This file is loaded automatically by Claude Code in every session.
 

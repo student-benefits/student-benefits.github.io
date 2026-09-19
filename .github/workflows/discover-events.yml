@@ -93,7 +93,7 @@ jobs:
 
             ## Step 6: Draft entries
 
-            See the data/events.json schema in CLAUDE.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
+            See the data/events.json schema in AGENTS.md. Write `why` yourself (max 200 chars, no marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
 
             Set `deadline` to the LAST date a student can still apply, whenever the event page states one — a separate date from `date`, and what the page renders "Applications closed" from. Where a page gives rounds (priority then regular, or per-field dates), `deadline` is the final one and the earlier round goes in `why`; setting the first round closes the card while applications are still open. Omit it if no deadline is stated; never infer one. The validator rejects an entry that states an application deadline in prose without the field.
 

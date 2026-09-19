@@ -77,7 +77,7 @@ jobs:
 
             ## Step 5: Generate the entry
 
-            See the data/events.json schema in CLAUDE.md. Categories: `hackathon | conference | fellowship | summit | workshop | grant`. Write `why` yourself (max 200 chars, don't copy marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
+            See the data/events.json schema in AGENTS.md. Categories: `hackathon | conference | fellowship | summit | workshop | grant`. Write `why` yourself (max 200 chars, don't copy marketing). `expires` = `date_end` (or `date` if single-day). Omit `date_end` if single-day; omit `location` if fully remote.
 
             ## Step 5.5: Verify the link actually loads (required — do not skip)
 

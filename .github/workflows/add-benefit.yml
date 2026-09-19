@@ -84,7 +84,7 @@ jobs:
 
             ## Step 4: Generate the entry
 
-            Schema (mirrors CLAUDE.md):
+            Schema (mirrors AGENTS.md):
             ```json
             {
               "id": "url-safe-id",
