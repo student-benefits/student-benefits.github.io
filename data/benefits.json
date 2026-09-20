@@ -1033,7 +1033,7 @@
     "name": "OpenAI Codex for Students",
     "category": "AI Tools",
     "offer_type": "credits",
-    "description": "$100 in Codex credits (2,500 credits) for AI-powered coding; valid 12 months. US and Canada only.",
+    "description": "$100 in ChatGPT credits for AI-powered coding via Codex; valid 12 months. US and Canada only.",
     "link": "https://developers.openai.com/community/students",
     "tags": [
       "AI Coding",
