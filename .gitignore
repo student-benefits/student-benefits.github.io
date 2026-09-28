@@ -6,3 +6,4 @@
 # not arbitrary dotfiles, are what matter). Without this, new files under
 # .github/ are silently dropped by the rule above.
 !.github/
+flags.json

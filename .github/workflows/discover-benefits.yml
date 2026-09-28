@@ -7,8 +7,7 @@ name: Discover Student Benefits
 #     A run that opens nothing AND doesn't bump the timestamp = the cron silently isn't firing/committing → broken, not empty.
 #   Teardown after N: 4 cycles (~2 months). If working-when is unmet for 4 consecutive scheduled cycles, the
 #     discovery thesis is wrong → remove this workflow.
-#   Cadence: twice a month (2026-08-11 scar: weekly outran review capacity and a month of backlog piled up; halving
-#     find volume was the fix, not a stricter bar). Fixed days rather than an even-ISO-week gate so every scheduled
+#   Cadence: twice a month, on fixed days rather than an even-ISO-week gate so every scheduled
 #     run in the Actions log is a real run — a gate-skipped run read as "success" and hid a stale heartbeat.
 #   Budget: successful runs take 11–16 min; 3 of 10 were killed at the old 20-min cap (2026-06-29, 08-10, 08-31).
 

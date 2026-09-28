@@ -5,7 +5,7 @@ const TOOLS = {
   get_issue:             { actor: 'github', label: 'GitHub',     explain: 'Reads the GitHub issue to extract the submitted benefit name and any optional details.' },
   get_file_contents:     { actor: 'github', label: 'GitHub',     explain: 'Downloads <code>data/benefits.json</code> from the repo to check whether this benefit is already listed.' },
   create_or_update_file: { actor: 'github', label: 'GitHub',     explain: 'Writes or updates a file in the repository via the GitHub API.' },
-  create_pull_request:   { actor: 'github', label: 'GitHub',     explain: 'Creates a GitHub pull request with the change for human review before it goes live.' },
+  create_pull_request:   { actor: 'github', label: 'GitHub',     explain: 'Creates a GitHub pull request with the change; Grant merges it once the gate passes.' },
   add_comment:           { actor: 'github', label: 'GitHub',     explain: 'Posts a status comment on the original issue to close the loop with the submitter.' },
   close_issue:           { actor: 'github', label: 'GitHub',     explain: null },
   create_issue:          { actor: 'github', label: 'GitHub',     explain: 'Opens a new GitHub issue for a discovered student program, queuing it for the add-benefit workflow.' },
@@ -116,11 +116,11 @@ function renderRun(data) {
   }
 
   document.getElementById('run-output').innerHTML = html;
-  applyPacketRates(data.tools || [], data.outcome);
+  applyPacketRates(data.tools || []);
 }
 
 /* packet speed encodes how often each connector was used in the last run */
-function applyPacketRates(tools, outcome) {
+function applyPacketRates(tools) {
   const counts = { web: 0, github: 0 };
   for (const t of tools) {
     const actor = (TOOLS[t.name] || {}).actor || 'grant';
@@ -129,7 +129,6 @@ function applyPacketRates(tools, outcome) {
   }
   setPacketRate('conn-search',   counts.web);
   setPacketRate('conn-validate', counts.github);
-  setPacketRate('conn-pr', outcome === 'accepted' ? 1 : 0);
 }
 
 function setPacketRate(id, count) {
@@ -175,7 +174,7 @@ const SIM_STEPS = [
     annotation: 'The deterministic gate runs before any PR. On a fail, Grant fixes the entry and re-runs — that is the loop.' },
   { stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub', headLabel: 'create_pull_request', detail: 'PR #68',
     primary: 'Opened PR #68: <em>"Add 1 student benefit: Vercel"</em> on its own branch — no other run shares it.',
-    annotation: 'Creates a pull request for human review. The benefit goes live only after a person merges.' },
+    annotation: 'Creates a pull request, then squash-merges it. The benefit is live on merge.' },
   { stepClass: 'actor-github', badge: 'badge-github', badgeLabel: 'GitHub', headLabel: 'add_comment', detail: 'issue #67',
     primary: 'Commented on issue #67 with the PR link.',
     annotation: 'Closes the loop with the submitter.' }
@@ -250,9 +249,7 @@ const WORKFLOW_INFO = {
   'discover-benefits.yml':   { kind: 'llm',   cadence: '1st & 15th' },
   'discover-events.yml':     { kind: 'llm',   cadence: '3rd & 17th' },
   'maintain-benefits.yml':   { kind: 'llm',   cadence: 'weekly' },
-  'consolidate-pending.yml': { kind: 'plain', cadence: 'every 6h' },
-  'pr-concierge.yml':        { kind: 'plain', cadence: 'daily' },
-  'validate-data.yml':       { kind: 'plain', cadence: 'on every PR' },
+  'validate-data.yml':       { kind: 'plain', cadence: 'on PR & push' },
 };
 
 const CONCLUSION_LABELS = {
@@ -375,8 +372,8 @@ async function loadLedger(validateDataWorkflowId) {
       tiles.push(statTile(gateFail, 'gate failures', gateFail > 0 ? 'stat-bad' : ''));
     }
     el.innerHTML = tiles.join('') +
-      '<p class="ledger-caption">Most of "closed without merging" is consolidation — a per-issue PR folded ' +
-      'into a batch, not a rejection. <a href="https://jonasneves.com/posts/two-rejections-from-the-gate.html" ' +
+      '<p class="ledger-caption">Until 2026-09-28, most of "closed without merging" was consolidation — a per-issue PR ' +
+      'folded into a batch, not a rejection. <a href="https://jonasneves.com/posts/two-rejections-from-the-gate.html" ' +
       'target="_blank" rel="noopener noreferrer">The linked analysis</a> breaks down how many were an actual reject.</p>';
   } catch (e) {
     el.innerHTML = '<div class="state-error">Ledger unavailable right now — ' +

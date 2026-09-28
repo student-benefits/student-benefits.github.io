@@ -99,7 +99,7 @@ jobs:
 
             The `link` for each entry MUST be a URL you actually loaded with WebFetch in Step 5 (the event page, or a real registration link found on it). Never construct or guess a path from the event name — a plausible-looking but dead URL poisons the PR. Copy the working URL verbatim; if a redirect occurred, record the final URL. Drop any entry whose link you can't confirm loads.
 
-            ## Step 7: Open one PR
+            ## Step 7: Open one PR and merge it
 
             Updated `data/events.json`: remove expired IDs from Step 2, append new entries from Step 6 (in date order earliest first), preserve 2-space indent + trailing newline.
 
@@ -124,7 +124,7 @@ jobs:
             ### Why these events
             <For each added: one sentence on quality-bar pass>
             ```
-            Omit empty sections. One PR total.
+            Omit empty sections. One PR total. Commit with `--author="Claude <noreply@anthropic.com>"`, push, `gh pr create`, then `gh pr merge --squash --delete-branch`.
 
             ## Step 8: Update log
 
@@ -140,3 +140,5 @@ jobs:
               "pr_opened": <true | false>
             }
             ```
+
+            Commit it directly to `main` every run: `git checkout main && git pull -q && git add agent/state/last-events-discovery.json && git commit --author="Claude <noreply@anthropic.com>" -m "Update events discovery log" && git push origin HEAD:main`.
