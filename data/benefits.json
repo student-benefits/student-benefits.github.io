@@ -1303,7 +1303,7 @@
     "id": "stripe",
     "name": "Stripe",
     "category": "Dev Tools",
-    "offer_type": "free",
+    "offer_type": "credits",
     "description": "$25 in Stripe credits to offset fees on Stripe Payments, Billing, and more via GitHub Student Pack.",
     "link": "https://education.github.com/pack",
     "tags": [
