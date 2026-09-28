@@ -397,7 +397,7 @@ fetch('/data/benefits.json')
 // Model display names for the identity byline — keyed by the `model` field
 // state files started carrying 2026-09-02. An unmapped or missing value falls
 // back to the raw slug rather than a guess, so this can't silently go stale.
-const MODEL_LABELS = { 'claude-sonnet-4-6': 'Claude Sonnet 4.6' };
+const MODEL_LABELS = { 'claude-sonnet-5-5': 'Claude Sonnet 5.5', 'claude-sonnet-4-6': 'Claude Sonnet 4.6' };
 
 fetch('state/last-run.json')
   .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
