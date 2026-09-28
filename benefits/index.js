@@ -71,7 +71,7 @@ function getFilteredAndSorted() {
 function renderFilters(animate) {
   withFocusPreserved(filterBar, function () {
     renderChips(filterBar, ['All'].concat(categories), activeCategory, {
-      hue: function (c) { return catVar(categories, c); },
+      hue: function (c) { return catVar(c); },
       animate: animate
     });
   });
@@ -99,7 +99,7 @@ function renderCard(b) {
   const share = `<a class="icon-link card-share" href="#${escapeHtml(b.id)}" data-id="${escapeHtml(b.id)}" aria-label="Copy link to ${escapeHtml(b.name)}" title="Copy link to this benefit">${ICON_LINK}</a>`;
   return `<article class="card" id="${escapeHtml(b.id)}">
     <div class="card-top">
-      <span class="cat"><span class="dot" style="--c:${catVar(categories, b.category)}" aria-hidden="true"></span>${escapeHtml(b.category)}</span>
+      <span class="cat"><span class="dot" style="--c:${catVar(b.category)}" aria-hidden="true"></span>${escapeHtml(b.category)}</span>
       ${offer}
     </div>
     <h2 class="card-name"><a href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.name)}</a></h2>

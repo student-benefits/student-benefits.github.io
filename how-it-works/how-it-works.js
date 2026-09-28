@@ -7,10 +7,10 @@ const STATE = '/agent/state/';
 
 // Trace actors are categories, so each takes a category hue (a dot beside its name).
 const ACTORS = {
-  grant:  { label: 'Claude',    hue: 'var(--cat-1)' },
-  github: { label: 'GitHub',    hue: 'var(--cat-4)' },
-  web:    { label: 'Web',       hue: 'var(--cat-3)' },
-  gate:   { label: 'Validator', hue: 'var(--cat-5)' },
+  grant:  { label: 'Claude',    hue: 'var(--hue-copper)' },
+  github: { label: 'GitHub',    hue: 'var(--hue-blue)' },
+  web:    { label: 'Web',       hue: 'var(--hue-cyan)' },
+  gate:   { label: 'Validator', hue: 'var(--hue-orchid)' },
 };
 
 const TOOLS = {

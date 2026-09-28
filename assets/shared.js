@@ -6,11 +6,17 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// The category hue is the category's position in its categories file (--cat-1 … --cat-8), so one
-// category keeps one hue on every page and in both colour schemes.
-function catVar(list, cat) {
-  var i = list.indexOf(cat);
-  return i < 0 ? 'var(--muted)' : 'var(--cat-' + ((i % 8) + 1) + ')';
+// Each category's hue, keyed by name so reordering a categories file repaints nothing. Benefits avoid
+// the accent, green (Free) and red; events avoid the accent, red and amber (deadlines). A category
+// missing here shows a muted dot until it is added.
+var CATEGORY_HUE = {
+  'AI Tools': 'orchid', 'Dev Tools': 'cyan', 'Cloud & Hosting': 'copper', 'Learning': 'blue',
+  'Design': 'pink', 'Productivity': 'olive', 'Security': 'navy', 'Hardware': 'ochre',
+  conference: 'blue', grant: 'olive', hackathon: 'orchid', fellowship: 'teal', summit: 'pink', workshop: 'cyan'
+};
+function catVar(cat) {
+  var hue = CATEGORY_HUE[cat];
+  return hue ? 'var(--hue-' + hue + ')' : 'var(--muted)';
 }
 
 // Runs an innerHTML-replacing render, then puts keyboard focus back on the equivalent new element:
