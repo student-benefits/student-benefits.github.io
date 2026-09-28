@@ -514,9 +514,6 @@ body {
 .arch-node--web    { border-color: var(--web-border);    color: var(--web-color); }
 .arch-node--web[aria-expanded="true"]    { box-shadow: 0 0 0 2px var(--web-color); }
 
-.arch-node--human  { border-color: var(--border); color: var(--text-muted); }
-.arch-node--human[aria-expanded="true"]  { box-shadow: 0 0 0 2px var(--text); color: var(--text); }
-
 .arch-connector {
   flex-shrink: 0;
   width: 32px;
@@ -663,7 +660,7 @@ body {
 .loop-stage-v { font-size: 0.75rem; color: var(--text-muted); }
 .loop-stage--gen   { border-color: var(--grant-border); color: var(--grant-color); }
 .loop-stage--gate  { border-color: var(--gate-border);  color: var(--gate-color); }
-.loop-stage--human { border-color: var(--github-border); color: var(--github-color); }
+.loop-stage--merge { border-color: var(--github-border); color: var(--github-color); }
 .loop-link {
   position: relative;
   flex: 0 0 2.25rem;

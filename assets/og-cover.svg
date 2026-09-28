@@ -15,8 +15,8 @@
   <g transform="translate(80,486)">
     <rect x="0" y="0" width="248" height="56" rx="12" fill="#132a1f" stroke="#4ade80" stroke-width="2"/>
     <text x="26" y="37" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#4ade80">100+ programs</text>
-    <rect x="272" y="0" width="238" height="56" rx="12" fill="#1e293b" stroke="#475569" stroke-width="2"/>
-    <text x="298" y="37" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#cbd5e1">Human-reviewed</text>
+    <rect x="272" y="0" width="218" height="56" rx="12" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+    <text x="298" y="37" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#cbd5e1">Auto-validated</text>
   </g>
   <text x="80" y="596" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#64748b">student-benefits.github.io</text>
 </svg>

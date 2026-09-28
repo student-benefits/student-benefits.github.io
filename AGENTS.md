@@ -1,102 +1,44 @@
 # AGENTS.md — student-benefits.github.io
 
-This file is loaded automatically by Claude Code in every session.
+A community-curated directory of student benefits that help students build, learn, and ship. Static HTML/JS on GitHub Pages (served from `main` root), no build step: `/benefits/` renders `data/benefits.json`, `/events/` renders `data/events.json`, `/agent/` shows how Grant (the Claude workflows) works from `agent/state/*.json` and the public GitHub API.
 
----
+## Curation thesis
 
-## Project Context
+A benefit qualifies if it helps a student create, learn, ship, or research: dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Consumption perks are rejected however good the deal: entertainment (music, video streaming), shopping, broad discount aggregators, consumer VPNs. The test is "does this advance building or learning?", never "is this a real student discount?".
 
-A community-curated directory of student benefits that help students **build,
-learn, and ship** — dev tools, cloud credits, AI/ML platforms, design and
-learning resources. Static HTML/JS on GitHub Pages, no build step: `/benefits/`
-(the directory, from `data/benefits.json`), `/events/` (from `data/events.json`),
-`/agent/` (how Grant works — reads `agent/state/*.json` and the public GitHub API).
+## Operating rules
 
-### Core values
+- Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. The validator is the only gate.
+- Commits are authored `Claude <noreply@anthropic.com>`. `data/` changes go through a PR; `agent/state/` files are pushed directly to `main`.
+- Claude Code runs on subscription auth (no per-token billing); the Jev call in `check_links.py` is the only metered call.
+- No personal names in docs, context, or agent surfaces; the maintainer is `vars.MAINTAINER`, referenced as "the maintainer".
+- `agent/index.html` must match workflow behavior (logic, validation rules, schema, triggers). A mismatch is a bug.
 
-**Build & grow, not consumption.** The curation thesis — what earns an entry.
-A benefit qualifies if it helps a student *create, learn, ship, or research*:
-dev tools, infrastructure, cloud/AI credits, design and learning platforms, the
-hardware students build on. It does **not** qualify if it's a consumption perk —
-entertainment (music, video streaming), shopping, or broad discount aggregators —
-however good the deal. The test isn't "is this a real student discount?" (the
-proxy) but "does this advance building or learning?" (the criterion). A genuine,
-well-priced consumer VPN or music subscription is still a reject.
-
-**Data integrity.** All benefit data lives in `data/benefits.json` — one source of
-truth, never hardcoded in HTML.
-
-**Active discovery, not passive curation.** Content enters through multiple
-paths: humans submit issues (pull); `discover-benefits` searches the web
-twice a month for new student programs (push); `discover-events` finds upcoming student events
-and removes expired ones automatically (push + self-maintenance). The system
-surfaces what people haven't thought to add and keeps itself current.
-
-**Automation with human oversight.** Workflows handle validation and PR
-creation. Humans own the merge decision. Grant cannot publish directly —
-the merge is the trust boundary.
-
-**Zero-cost.** Built on free-tier GitHub services and Claude Code (subscription auth, no per-token billing).
-
-**Educational transparency.** The `/agent/` page exposes run logs, tool traces,
-and architecture. The seams are visible by design so the system can be
-understood and replicated. When working on this project, preserve that
-transparency: keep workflows documented, keep the agent page accurate.
-
-**Impersonal, dense docs.** No personal name or narrative voice in docs, context,
-or agent surfaces. Maintainer identity lives once, in CODEOWNERS — reference it as
-"the maintainer", never a restated handle. Functional handles are excepted (the
-CODEOWNERS list itself, the @-mention that triggers a notification, the LICENSE
-legal name). Maximize meaning per token: cut hedging, restatement, ceremony.
-
-Keep `agent/index.html` in sync with Grant's behavior — workflow logic,
-validation rules, schema, trigger conditions. Mismatch is a bug.
-
----
-
-## Source of truth: `data/benefits.json`
-
-All benefit data lives in `data/benefits.json`. Never modify the HTML to hardcode
-benefits — all data must go through this file.
-
-### Schema
+## `data/benefits.json`
 
 ```json
 {
   "id": "url-safe-id",
   "name": "Official Product Name",
-  "category": "one of the valid categories below",
+  "category": "one of data/categories.json",
   "offer_type": "free | discount | credits | trial",
   "description": "What students get; be specific, max 120 chars",
   "link": "Direct URL to student signup or discount page",
   "tags": ["Tag1", "Tag2"],
-  "popularity": 1,
+  "popularity": 5,
   "repo": "owner/repo"
 }
 ```
 
-- `id`: lowercase, hyphens, no leading/trailing hyphens, unique
-- `category`: must exactly match one of the values in `data/categories.json` (the authoritative list)
-- `description`: specific about what students actually get (e.g. "Free Pro plan for 1 year", not "Student discount available"); max 120 chars
-- `offer_type`: required; one of `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period then paid/discounted)
-- `popularity`: integer 1–10; use 5 as default for new entries. It is an editorial
-  priority, never a usage measurement — nothing counts clicks. 5 means "not yet
-  ranked", which is most of the file, so the UI labels this sort "Recommended"
-  rather than "Popular" and breaks ties by free-first then A–Z. Raise a score only
-  when the offer is unusually generous or the tool unusually central.
-- `repo`: optional; only for open-source projects
+- `id`: lowercase, hyphens, no leading/trailing hyphens, unique.
+- `category`: exactly one value from `data/categories.json`.
+- `offer_type`: required; `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period, then paid).
+- `description`: specific ("Free Pro plan for 1 year", not "Student discount available"); max 120 chars.
+- `popularity`: integer 1–10, default 5. An editorial priority, never a usage count (nothing counts clicks); 5 means "not yet ranked", so the UI labels the sort "Recommended" and breaks ties free-first, then A–Z. Raise only for an unusually generous offer or an unusually central tool.
+- `repo`: optional, open-source projects only.
+- Entries are sorted by `id`; insert in sorted position, never append. Sorted insertion spreads concurrent additions across the file so parallel add-benefit PRs merge without conflicting. The UI re-sorts client-side.
 
-Entries are sorted by `id` (ascending); the validator enforces it. Insert new
-entries in sorted position — never append to the end. (Sorted insertion spreads
-concurrent additions across the file, so a burst of add-benefit PRs auto-merges
-instead of all colliding at the array tail. Display order is unaffected — the UI
-re-sorts client-side by popularity.)
-
----
-
-## Source of truth: `data/events.json`
-
-All event data lives in `data/events.json`. Schema:
+## `data/events.json`
 
 ```json
 {
@@ -116,129 +58,40 @@ All event data lives in `data/events.json`. Schema:
 }
 ```
 
-- `id`: lowercase, hyphens, unique
-- `category`: must be one of the six listed values
-- `why`: written from the event page, not marketing copy; max 200 chars
-- `remote`: `true` only if fully virtual; `false` for in-person or hybrid
-- `expires`: same as `date_end`, or `date` if single-day
-- `date_end`: omit if single-day
-- `deadline`: the last date a student can still apply, when the event page states
-  one. Distinct from `date` — an event weeks away can have stopped accepting
-  applications. Where there are rounds, this is the final one; the earlier round
-  belongs in `why`. Omit when the page states no deadline; never guess one. Must
-  not fall after `expires`. The validator rejects an entry that states an
-  application deadline in prose without setting this field.
-- `location`: omit if fully remote
+- `id`: lowercase, hyphens, unique. `category`: one of the six values.
+- `why`: written from the event page, not marketing copy; max 200 chars.
+- `remote`: `true` only if fully virtual. `location`: omit if fully remote.
+- `date_end`: omit if single-day. `expires`: `date_end`, or `date` if single-day.
+- `deadline`: the last date a student can still apply, when the page states one (the final round if there are rounds; earlier rounds go in `why`). Omit when unstated; never guess. Must not fall after `expires`. The validator rejects an entry whose prose states a deadline without this field.
+- Sorted by `date`, earliest first.
 
-Events are sorted by `date` (earliest first).
+## Workflows
 
----
+Plain Actions YAML in `.github/workflows/`; the agent step is `anthropics/claude-code-action@v1` with `CLAUDE_CODE_OAUTH_TOKEN` and model `vars.CLAUDE_MODEL`. Edit a workflow's `prompt:` to change behavior.
 
-## Automated workflows
-
-Each workflow is a plain GitHub Actions YAML in `.github/workflows/`. The agent step is `anthropics/claude-code-action@v1`, authenticated via `CLAUDE_CODE_OAUTH_TOKEN`.
-
-| Workflow | Trigger | What it does |
-|----------|---------|--------------|
-| `add-benefit.yml` | Issue labeled `new-benefit` | Validates + deduplicates, then opens its own standalone PR (branch `add-benefit-{issue}`). A failed run retries itself once, then hands the issue to the maintainer (see below) |
-| `add-event.yml` | Issue labeled `new-event` | Validates against the event quality bar + deduplicates, then opens its own standalone PR (branch `add-event-{issue}`). Same failure handling |
-| `consolidate-pending.yml` | Every 6h or manual | Deterministic, no LLM. Folds open standalone `add-benefit-N`/`add-event-N` PRs into one review-ready PR per data file, carrying the newest run trace with it |
-| `discover-benefits.yml` | 1st and 15th, or manual | Searches for new student benefits, opens issues for the best finds |
-| `discover-events.yml` | 3rd and 17th, or manual | Searches for notable student events, removes expired entries, opens one PR |
-| `maintain-benefits.yml` | Weekly (Sunday) or manual | Audits link health and quality, fixes findings, opens one PR (closes any still-open prior `[Maintenance]` PR of its own first) |
-| `validate-data.yml` | PR touching `data/` or the validator | Runs `scripts/validate_data.py` — the deterministic data-integrity gate. |
-| `pr-concierge.yml` | Daily (13:00 UTC) or manual | Sweeps open PRs; once a PR's required checks are green, @-mentions the maintainer (from CODEOWNERS) and labels it `ready-for-review` (idempotent dedup marker). Surfaces Copilot's verdict but gates only on CI; never merges. Deterministic — no LLM. |
-
-Edit a workflow's `prompt:` directly to change Grant's behavior — no compile step.
-
-When adding a new issue template that introduces a new label, create the GitHub label first — templates auto-apply labels, but only if the label already exists in the repo.
-
-No router/orchestrator yet: the two label-triggered workflows (add-benefit, add-event) both fire on any label event and the non-matching one skips correctly. Revisit a dispatcher at 3+ label-triggered workflows.
-
-**Per-issue PRs, consolidated deterministically** (redesigned 2026-08-11 — see #320). `add-benefit`/`add-event` each open their own standalone PR per issue rather than a shared branch — a shared branch needed a `git reset --hard` fallback for concurrent-push races, and `claude-code-action`'s headless mode has a built-in, non-configurable restriction on exactly that command shape, which was silently stalling runs (`success` with no comment, no PR). Full rationale: `scripts/consolidate_pending.py`'s docstring, nearest the code it explains.
-
-`consolidate-pending.yml` (plain Python, no Claude, every 6h) folds every open standalone PR into one review-ready PR per data file — matched structurally (branch pattern **and** `app/claude` authorship, never title text, which anyone can set). Never silently drops a submission: an id collision or post-merge validation failure leaves the source PR open, unfolded, for manual attention. Consolidation never merges anything; the merge stays the human trust boundary.
-
-**Failure handling rides the run, not a cron.** Each `add-*` workflow ends in an `on-failure` job (`if: !success()`, so a timeout counts): a failed label-triggered run is retried once through `workflow_dispatch` — which `claude-code-action` exempts from its actor check, the fix for #267 (non-collaborator label events fail the GitHub App token exchange before the agent step starts; no override exists) — and the issue is labeled `redispatched`; a failed retry gets `needs-manual-review` plus one `@maintainer` comment carrying the by-hand command. This replaced the hourly `redispatch-stalled` sweep on 2026-09-02: 314 runs in its final month, zero redispatches, never exercised end-to-end.
-
-### Falsifiability (scheduled workflows)
-
-Every cron workflow carries, in its YAML, a **working-when** criterion + an **N-cycle teardown** clause (the "running systems" convention). **Criteria are contract** (in the files); **cycle history is state** (the Actions run log) — don't restate run history here. The criteria are silence-tolerant by design: these are discovery/maintenance surfacers that *may legitimately find nothing* some cycles, so the test is **the pipeline being alive**, never an output count. Working-when = a scheduled run *completes and leaves a positive trace of having looked* (an issue/PR, or a dated heartbeat in its state file). Default N = **8 cycles at that workflow's own cadence** — total elapsed time varies (the twice-monthly workflows use N=4 for the same ~2-month window; the deterministic 6h/daily mechanisms are pure plumbing with no content-volume signal, so their N is about the mechanism erroring, not finding nothing).
-
-| Workflow | Working-when (positive trace) | N |
+| Workflow | Trigger | Does |
 |---|---|---|
-| `discover-benefits` | `new-benefit` issue opened **or** `last-benefits-discovery.json` timestamp bumped | 4 × half-month |
-| `discover-events` | PR opened **or** `last-events-discovery.json` timestamp bumped | 4 × half-month |
-| `maintain-benefits` | `[Maintenance]` PR **or** `link-health` issues closed with outcome; else green scheduled run in Actions log | 8 wk |
-| `consolidate-pending` | Green scheduled run in Actions log (most runs legitimately find nothing to fold) | 8 × 6h |
-| `pr-concierge` | Green scheduled run in Actions log (most days legitimately find nothing newly ready) | 8 × 1d |
+| `add-benefit.yml` | issue labeled `new-benefit`, or dispatch | Validates, dedupes against `benefits.json` and `rejected.json`, opens and merges its own PR (branch `add-benefit-{issue}`) |
+| `add-event.yml` | issue labeled `new-event`, or dispatch | Same for events against the event quality bar (branch `add-event-{issue}`) |
+| `discover-benefits.yml` | 1st and 15th, or dispatch | Searches for new programs; opens `new-benefit` issues for the best finds |
+| `discover-events.yml` | 3rd and 17th, or dispatch | Finds events, removes expired ones; opens and merges one PR |
+| `maintain-benefits.yml` | Sunday, or dispatch | `check_links.py > flags.json`, then Claude fixes only the flagged entries, opens and merges one `[Maintenance]` PR, and closes open `link-health` issues with the outcome |
+| `validate-data.yml` | PR or push to `main` touching `data/` or the validator | Runs `scripts/validate_data.py` |
 
-**The criterion's FIRST job is catching a cron that silently isn't running** — not weak output. Verify each working-when against the live Actions run history before trusting any "stays current automatically" claim; a missing/stale state file is the alarm, not noise. (Scar 2026-08-11: two different failure shapes hid behind the same symptom. `last-benefits-discovery.json` sat 2 months stale — not because the cron wasn't firing, but because its PRs weren't being merged, masking a real backlog. `reddit-state.json` was stuck since March for a genuine reason — `scout-reddit.yml`'s commit step ran after `claude-code-action` revoked its own push token, so every scheduled run hard-failed for 10 straight weeks. Diagnosed and removed rather than fixed, since it had never produced a usable find in that time. Lesson: a stale heartbeat means "go find out why," not "assume the obvious cause.")
+- `check_links.py` records HTTP status and final hostname for every link; when the `TYPESAFE_API_KEY` secret is set, Jev (TypeSafe's classifier model) judges each loaded page against its description. Without the key, loaded pages are flagged `unjudged` and Claude reviews them.
+- `validate_data.py` checks structure and URL shape offline and never fetches links; liveness is the weekly audit.
+- Failure path (`add-*`): a failed run retries once via `workflow_dispatch` (label `redispatched`), then labels the issue `needs-manual-review` and @-mentions `vars.MAINTAINER`. The retry goes through `workflow_dispatch` because `claude-code-action` exempts it from the actor check that fails non-collaborator label events (#267).
+- A new issue template's label must exist in the repo first; templates apply only existing labels.
+- Each cron workflow's working-when criterion and teardown N are in its YAML header.
 
-### Agent state files
+## Agent state (`agent/state/`)
 
-Workflows write these; `agent/index.html` reads them to render run history. Never hand-edit — they're regenerated each run. Each carries `model` (the `CLAUDE_MODEL` repo variable at run time) so the page reads it instead of hardcoding it, and `timestamp` comes from the runner's clock (a `now` step), not the model's guess. A submission's trace is written on its per-issue branch, so `consolidate-pending` carries the newest one onto the consolidated PR — without that it died with the folded PR and the page froze.
+Written by workflows, read by `agent/index.html`; never hand-edit. `timestamp` comes from the runner clock; `model` records `CLAUDE_MODEL` at run time.
 
-- `agent/state/last-run.json` — last add-benefit run
-- `agent/state/last-events-submission.json` — last add-event run
-- `agent/state/last-events-discovery.json` — last discover-events run
-- `agent/state/rejected.json` — rejected programs, used for deduplication by add-benefit
-
----
-
-## PR review checklist
-
-`scripts/validate_data.py` (run in CI by `validate-data.yml` on any PR touching
-the data files) enforces the structural rules below automatically: schema,
-`id`/`category`/`offer_type` validity, ≤120-char descriptions, canonical
-formatting, and the forbidden-link rule (no `help.`/`support.`/`docs.`/`blog.`
-subdomains, `/articles/` paths, or bare homepages). A red check means the data
-is invalid — don't merge. (The data-writing workflows now run this same
-validator in-loop and fix what it flags before opening a PR, so a red check
-should be rare — CI is the backstop, not the first line.) The remaining items
-below still need a human eye (liveness, duplicates, whether the link is
-genuinely the signup page).
-
-When reviewing PRs (especially those created by the add-benefit workflow):
-
-- [ ] `id` is unique, URL-safe, matches the name
-- [ ] `category` exactly matches a value in `data/categories.json`
-- [ ] `offer_type` is set and accurate (`free`, `discount`, `credits`, or `trial`)
-- [ ] `description` is ≤ 120 chars and specific about what students get
-- [ ] `link` goes to the actual student signup page, not a marketing page
-- [ ] No duplicate: same name or same hostname doesn't already exist
-- [ ] JSON is valid and preserves 2-space indent, trailing newline
-- [ ] `popularity` is set (default 5 for new entries)
-
-Flag the issue and stop — do not approve PRs that fail any of these.
-
----
-
-## Handling link-health issues mid-week
-
-The `maintain-benefits` workflow runs every Sunday and closes open `link-health` issues automatically. If one appears mid-week (filed via the report-broken template or a prior run), either wait for Sunday or trigger the workflow manually:
-
-```
-gh workflow run maintain-benefits.yml --repo student-benefits/student-benefits.github.io
-```
-
----
-
-## Git workflow
-
-- All changes go through PRs — never push directly to `main`
-- PRs must have a written Summary (not just a template placeholder)
-- GitHub Pages serves the site directly from the `main` branch root
-- Every PR automatically requests review from the maintainer (via CODEOWNERS)
-- Branch protection requires maintainer approval (CODEOWNERS) before any PR can merge
-- **Authorship: the agent authors, the maintainer approves and merges** — the merge is the trust boundary. A PR's GitHub author is fixed by the token that opens it: workflow-opened PRs are authored by the Claude GitHub App (`app/claude`), the intended state. A PR opened from a locally maintainer-authenticated `gh` is authored by the maintainer instead — so to keep the agent as author, push commits onto an existing `app/claude` branch (e.g. when consolidating) rather than opening a fresh PR, and author commits as `Claude <noreply@anthropic.com>`. Never self-approve or self-merge.
-
----
-
-## Before opening or reviewing a PR
-
-Run the `audit` agent on any changed files:
-
-```
-audit
-```
+| File | Written by |
+|---|---|
+| `last-run.json` | add-benefit |
+| `last-events-submission.json` | add-event |
+| `last-benefits-discovery.json` | discover-benefits (heartbeat) |
+| `last-events-discovery.json` | discover-events (heartbeat) |
+| `rejected.json` | add-benefit; read by add-benefit and discover-benefits for dedup |

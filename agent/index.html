@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f0">
-  <meta name="description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows, a deterministic gate, and a human in the loop. See the loop, in the field's own terms.">
+  <meta name="description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows and a deterministic gate that every change must pass before it merges. See the loop, in the field's own terms.">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <title>Grant · How the loop works · Student Benefits Hub</title>
   <link rel="canonical" href="https://student-benefits.github.io/agent/">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Student Benefits Hub">
   <meta property="og:title" content="How an agentic curation loop actually works">
-  <meta property="og:description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows, a deterministic gate, and a human in the loop. See the loop, in the field's own terms.">
+  <meta property="og:description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows and a deterministic gate that every change must pass before it merges. See the loop, in the field's own terms.">
   <meta property="og:url" content="https://student-benefits.github.io/agent/">
   <meta property="og:image" content="https://student-benefits.github.io/assets/og-cover.png">
   <meta property="og:image:width" content="1200">
@@ -19,7 +19,7 @@
   <meta property="og:image:alt" content="Student Benefits Hub — free dev tools, cloud credits, and AI for students">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How an agentic curation loop actually works">
-  <meta name="twitter:description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows, a deterministic gate, and a human in the loop. See the loop, in the field's own terms.">
+  <meta name="twitter:description" content="Grant curates Student Benefits Hub with Claude — an agentic system built from workflows and a deterministic gate that every change must pass before it merges. See the loop, in the field's own terms.">
   <meta name="twitter:image" content="https://student-benefits.github.io/assets/og-cover.png">
   <link rel="stylesheet" href="/agent/agent.css">
 </head>
@@ -47,15 +47,15 @@
       The directory Grant curates — the actual content — is <a href="/benefits/">Student Benefits Hub</a>;
       this page is its engineering explainer. It’s tempting to call Grant “an AI agent,” but the honest
       version is smaller and more interesting: a few <strong>workflows</strong> that each run Claude on a
-      fixed path, a deterministic <strong>gate</strong> that checks every change, and a <strong>human</strong>
-      who merges. That restraint is the design.
+      fixed path, a deterministic <strong>gate</strong> that checks every change, and a merge that happens only when
+      the gate passes. That restraint is the design.
     </p>
   </section>
 
   <!-- ── the loop (thesis) ────────────────────────────── -->
   <section class="section">
     <p class="section-label">The loop</p>
-    <div class="loop" role="img" aria-label="The build loop: Claude generates a change, a gate verifies it, the loop iterates on failure, and a human merges a passing change to go live.">
+    <div class="loop" role="img" aria-label="The build loop: Claude generates a change, a gate verifies it, the loop iterates on failure, and Grant merges a passing change to go live.">
       <div class="loop-stage loop-stage--gen">
         <span class="loop-stage-k">generate</span>
         <span class="loop-stage-v">Claude writes a change</span>
@@ -66,15 +66,15 @@
         <span class="loop-stage-v">the gate checks it</span>
       </div>
       <span class="loop-link loop-link--pass"><span class="loop-link-l">pass</span></span>
-      <div class="loop-stage loop-stage--human">
+      <div class="loop-stage loop-stage--merge">
         <span class="loop-stage-k">merge</span>
-        <span class="loop-stage-v">a human ships it</span>
+        <span class="loop-stage-v">Grant merges the PR</span>
       </div>
       <span class="loop-live">live</span>
       <span class="loop-iterate"><span class="loop-iterate-l">fail → iterate</span></span>
     </div>
     <p class="loop-caption">
-      Generate, verify, and iterate until the gate passes — then a person merges. Everything below is this loop, in detail.
+      Generate, verify, and iterate until the gate passes, then merge. Everything below is this loop, in detail.
     </p>
   </section>
 
@@ -144,19 +144,7 @@
         <div class="arch-node-wrap">
           <button class="arch-node arch-node--github" id="node-output" aria-expanded="false" aria-controls="panel-output">
             <span class="arch-node-label">GitHub</span>
-            <span class="arch-node-sublabel">PR · comment</span>
-          </button>
-        </div>
-
-        <div class="arch-connector" id="conn-pr" aria-hidden="true">
-          <span class="packet packet-req"></span>
-          <span class="arch-connector-label">PR for review</span>
-        </div>
-
-        <div class="arch-node-wrap">
-          <button class="arch-node arch-node--human" id="node-human" aria-expanded="false" aria-controls="panel-human">
-            <span class="arch-node-label">Reviewer</span>
-            <span class="arch-node-sublabel">merge decision</span>
+            <span class="arch-node-sublabel">PR · merge</span>
           </button>
         </div>
 
@@ -169,11 +157,12 @@
         </div>
         <div id="panel-schedule" class="node-panel" hidden>
           <p class="node-panel-title">Scheduled workflows</p>
-          <p>Scheduled workflows run without a human prompting them, on cadences that fit each job: <code>discover-benefits</code> and <code>discover-events</code> search twice a month for new programs and events; <code>maintain-benefits</code> audits every link weekly and fixes what it can. Each is a <strong>workflow</strong> — Claude on a fixed path, not a free-roaming agent. Two more run on a schedule with no Claude involved at all: <code>consolidate-pending</code> (every 6h) folds standalone submission PRs into one for review, and <code>pr-concierge</code> (daily) flags CI-green PRs for the maintainer.</p>
+          <p>Scheduled workflows run without a human prompting them, on cadences that fit each job: <code>discover-benefits</code> and <code>discover-events</code> search twice a month for new programs and events; <code>maintain-benefits</code> audits every link weekly and fixes what it can. Each is a <strong>workflow</strong> — Claude on a fixed path, not a free-roaming agent.</p>
+          <p>The weekly audit starts without Claude: <code>check_links.py</code> records each link’s HTTP status and final hostname, and Jev, TypeSafe’s small classifier model, returns a probability for whether the loaded page is the program’s own student offer page and whether it still offers what the description says. Claude works only the entries those checks flag; when Jev is not configured, Claude reviews every loaded page itself.</p>
         </div>
         <div id="panel-grant" class="node-panel" hidden>
           <p class="node-panel-title">Grant · the augmented LLM</p>
-          <p>The building block Anthropic calls the <em>augmented LLM</em>: Claude plus a few tools, reasoning step by step. It reads the issue, decides which tool to call next, and writes the change — but it can’t publish. Its instructions are a plain Markdown prompt checked into the repo.</p>
+          <p>The building block Anthropic calls the <em>augmented LLM</em>: Claude plus a few tools, reasoning step by step. It reads the issue, decides which tool to call next, and writes the change, which merges only if the gate passes. Its instructions are a plain Markdown prompt checked into the repo.</p>
         </div>
         <div id="panel-search" class="node-panel" hidden>
           <p class="node-panel-title">Web Search</p>
@@ -185,15 +174,11 @@
         </div>
         <div id="panel-gate" class="node-panel" hidden>
           <p class="node-panel-title">The gate · <code>validate_data.py</code></p>
-          <p>A deterministic check — no LLM. It runs against every change and exits <code>0</code> (pass) or <code>1</code> (fail) on schema, link shape, and sort order. This is the loop’s <strong>verifiable environment</strong>: <em>resettable</em> (re-runs each attempt), <em>efficient</em> (offline, sub-second), and <em>rewardable</em> (an automatic pass/fail). It’s what lets Grant iterate against a real signal instead of grading its own work.</p>
+          <p>A deterministic check — no LLM. It runs against every change and exits <code>0</code> (pass) or <code>1</code> (fail) on schema, link shape, and sort order. This is the loop’s <strong>verifiable environment</strong>: <em>resettable</em> (re-runs each attempt), <em>efficient</em> (offline, sub-second), and <em>rewardable</em> (an automatic pass/fail). It’s what lets Grant iterate against a real signal instead of grading its own work. It is the only check before merge: <code>validate-data</code> also runs it on every PR and every push to <code>main</code>.</p>
         </div>
         <div id="panel-output" class="node-panel" hidden>
           <p class="node-panel-title">GitHub output</p>
-          <p>Once the gate passes, Grant opens a pull request and comments on the issue. For a rejection or duplicate it comments the reason and closes the issue. Every write goes through GitHub’s API — and stops short of merging.</p>
-        </div>
-        <div id="panel-human" class="node-panel" hidden>
-          <p class="node-panel-title">Human reviewer</p>
-          <p>Grant can’t merge its own PRs. Each workflow runs with a scoped <code>permissions:</code> block — enough to branch, open a PR, and comment, never to merge. The merge is held by <code>CODEOWNERS</code> and branch protection, so going live is always a person’s call. Grant handles correctness; the reviewer handles judgment.</p>
+          <p>Once the gate passes, Grant opens a pull request, squash-merges it, and comments on the issue; the change is live on merge. For a rejection or duplicate Grant comments the reason and closes the issue. A run that fails twice labels the issue <code>needs-manual-review</code> and mentions the maintainer.</p>
         </div>
       </div>
     </div>

@@ -112,18 +112,19 @@ jobs:
 
             ## Step 6.5: Validate (required — this closes the loop)
 
-            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/events.json`, and run again — repeat until it exits 0. Never open the PR while the validator is red: it is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
+            Run `python3 scripts/validate_data.py`. If it exits non-zero, read the errors, fix `data/events.json`, and run again — repeat until it exits 0. Never open a PR while the validator is red: it is the deterministic gate for schema, link shape, and date order, so let it catch what you missed instead of guessing.
 
-            ## Step 7: Open a PR, then comment
+            ## Step 7: Open a PR, merge it, then comment
 
-            Every run gets its own branch and its own standalone PR — never share a branch with another run, and never force-push or reset one. A separate deterministic workflow (`consolidate-pending.yml`, no Claude involved) batches these into one PR for the maintainer to review on its own schedule; your only job here is a clean, self-contained PR for this one entry.
+            Every run gets its own branch and its own PR — never share a branch with another run. The validator is the gate: a green run merges itself.
 
             - `git checkout -B add-event-${{ github.event.issue.number || github.event.inputs.issue }} origin/main`
             - Insert the entry into `data/events.json` in date order (earliest first), per Step 6, and replace `agent/state/last-events-submission.json` per Step 6.
             - Run `python3 scripts/validate_data.py` until it exits 0.
-            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-event-${{ github.event.issue.number || github.event.inputs.issue }}`. This branch is new and unique to this issue — the push should never be rejected; if it somehow is, stop and comment "**Could not open a PR:** {reason}" rather than attempting any reset/force-push recovery.
-            - `gh pr create --title "Add 1 student event: {name}"` (no label — `consolidate-pending.yml` matches candidate PRs by branch name and author, not by label; the `pending-events` label is reserved for the consolidated PR) with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
-            - Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}". The merge stays a human decision.
+            - Commit with `--author="Claude <noreply@anthropic.com>"`, then `git push -u origin add-event-${{ github.event.issue.number || github.event.inputs.issue }}`. If the push is rejected, comment "**Could not open a PR:** {reason}" and stop.
+            - `gh pr create --title "Add student event: {name}"` with a body holding `- {name} ({category}, {date})` and a plain-text `Closes #${{ github.event.issue.number || github.event.inputs.issue }}` line.
+            - `gh pr merge --squash --delete-branch`. If the merge fails (another submission landed first and conflicts), run `git fetch origin main && git rebase origin/main`, resolve by keeping both entries in order, re-run the validator, `git push --force-with-lease`, and merge again — once. If it still fails, comment "**Could not merge:** {reason}" and stop.
+            - Comment on the issue: "Added **{name}** ({category}, {date}) — {why}\n\nPR: {pr_url}".
 
   on-failure:
     needs: add-event
@@ -152,9 +153,7 @@ jobs:
             gh workflow run add-event.yml --repo "$GITHUB_REPOSITORY" -f issue="$ISSUE"
             echo "retried #$ISSUE via workflow_dispatch"
           else
-            owner=$(gh api "repos/$GITHUB_REPOSITORY/contents/.github/CODEOWNERS" \
-              --jq '.content' | base64 -d | grep -oE '@[A-Za-z0-9-]+' | head -1 | tr -d '@')
             gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --add-label needs-manual-review
             gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" \
-              --body "@$owner the automated run failed twice ($RUN_URL). Process by hand: \`gh workflow run add-event.yml -f issue=$ISSUE\`."
+              --body "@${{ vars.MAINTAINER }} the automated run failed twice ($RUN_URL). Process by hand: \`gh workflow run add-event.yml -f issue=$ISSUE\`."
           fi
