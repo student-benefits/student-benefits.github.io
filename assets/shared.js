@@ -1,4 +1,4 @@
-/* shared.js — utilities used across multiple pages */
+/* shared.js — helpers for /benefits/, /events/ and /how-it-works/. */
 
 function escapeHtml(str) {
   return String(str)
@@ -6,28 +6,21 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-// djb2-variant hash: maps a string to a stable index into the given palette array.
-// Used to assign consistent colors to categories (index.html) and organizers (events/index.html).
-function hashColor(name, palette) {
-  let h = 0;
-  for (let i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) & 0xffff;
-  return palette[h % palette.length];
+// The category hue is the category's position in its categories file (--cat-1 … --cat-8), so one
+// category keeps one hue on every page and in both colour schemes.
+function catVar(list, cat) {
+  var i = list.indexOf(cat);
+  return i < 0 ? 'var(--muted)' : 'var(--cat-' + ((i % 8) + 1) + ')';
 }
 
-// Runs `renderFn` (an innerHTML-replacing render), then restores keyboard
-// focus to the equivalent new element if the focus was inside `container`
-// beforehand — an innerHTML swap destroys the focused node outright, which
-// otherwise drops a keyboard user back to the start of the page on every
-// filter click, toggle, or sort change.
+// Runs an innerHTML-replacing render, then puts keyboard focus back on the equivalent new element:
+// the swap destroys the focused node, which otherwise drops a keyboard user to the top of the page.
 function withFocusPreserved(container, renderFn) {
   var active = document.activeElement;
   var selector = null;
   if (active && container.contains(active)) {
-    if (active.id) {
-      selector = '#' + CSS.escape(active.id);
-    } else if (active.dataset && active.dataset.cat !== undefined) {
-      selector = '[data-cat="' + CSS.escape(active.dataset.cat) + '"]';
-    }
+    if (active.id) selector = '#' + CSS.escape(active.id);
+    else if (active.dataset && active.dataset.cat !== undefined) selector = '[data-cat="' + CSS.escape(active.dataset.cat) + '"]';
   }
   renderFn();
   if (selector) {
@@ -36,61 +29,99 @@ function withFocusPreserved(container, renderFn) {
   }
 }
 
-// Renders filter tab buttons into `container`.
-// `categories` is an array of category strings.
-// `activeCategory` is the currently selected value.
-// `labelFn` is an optional function(cat) => string for display text; defaults to identity.
-// `tooltipFn` is an optional function(cat) => string for tooltip text.
-function renderFilterTabs(container, categories, activeCategory, labelFn, tooltipFn) {
-  var label = labelFn || function (c) { return c; };
-  container.innerHTML = categories.map(function (cat) {
-    var tooltip = tooltipFn ? (' title="' + escapeHtml(tooltipFn(cat)) + '"') : '';
-    return '<button class="filter-tab" aria-pressed="' + (cat === activeCategory) + '" data-cat="' + escapeHtml(cat) + '"' + tooltip + '>' + escapeHtml(label(cat)) + '</button>';
-  }).join('');
+/* ── motion ─────────────────────────────────────────────────
+   Every animation moves between two states the page already has, on the springs shared.css defines.
+   Reduced motion skips the travel and lands on the end state. */
+var reduceMotion = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+
+function springOf(name) {
+  var s = getComputedStyle(document.documentElement);
+  return {
+    easing: s.getPropertyValue('--' + name).trim() || 'ease-out',
+    duration: parseFloat(s.getPropertyValue('--' + name + '-t')) || 250
+  };
 }
 
-// Renders an empty-state block into `container`.
-// `message` is the body text shown under the heading.
-function renderEmptyState(container, message) {
-  container.innerHTML = '<div class="empty"><h2>No results</h2><p>' + escapeHtml(message) + '</p></div>';
+function play(el, frames, opts) {
+  if (reduceMotion.matches || !el || !el.animate) return Promise.resolve();
+  var o = Object.assign(springOf('snappy'), opts || {});
+  return el.animate(frames, o).finished.catch(function () {});
 }
 
-function prefersReducedMotion() {
-  return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
-// Fades+lifts each element matching `selector` in as it scrolls into view
-// (each render() rebuilds the grid, so this re-observes every call — no
-// state to track between renders). No-ops under reduced motion or without
-// IntersectionObserver, leaving elements at their normal opacity — the
-// [data-reveal] attribute this depends on is never set in that case.
-function revealOnScroll(container, selector) {
-  if (prefersReducedMotion() || !('IntersectionObserver' in window)) return;
-  var els = container.querySelectorAll(selector);
-  if (!els.length) return;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (!entry.isIntersecting) return;
-      entry.target.setAttribute('data-reveal', 'in');
-      io.unobserve(entry.target);
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.1 });
-  els.forEach(function (el) {
-    el.setAttribute('data-reveal', '');
-    io.observe(el);
+// Content arriving on its own rises in, a few items apart. Used on first load only.
+function rise(els) {
+  Array.prototype.slice.call(els, 0, 9).forEach(function (el, k) {
+    play(el, [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }],
+      Object.assign(springOf('soft'), { delay: k * 30, fill: 'backwards' }));
   });
 }
 
-// Cross-fades filter/sort/toggle renders (not keystrokes) via View Transitions;
-// falls back to a plain call when unsupported or reduced-motion.
-function renderWithTransition(renderFn) {
-  if (prefersReducedMotion() || !document.startViewTransition) {
+// A number that changed swaps with a short blur, so the eye catches that it moved.
+function setCount(el, n) {
+  if (!el || el.textContent === String(n)) return;
+  el.textContent = n;
+  play(el, [{ opacity: 0, filter: 'blur(2px)', transform: 'translateY(-3px)' }, { opacity: 1, filter: 'none', transform: 'none' }]);
+}
+
+// Swaps a result list after a filter click: the old list leaves in one ease-in keyframe (90 ms), the
+// new one settles on the spring. A newer swap started mid-swap wins; the older one never paints.
+var swapSeq = 0;
+function swapList(container, renderFn) {
+  var id = ++swapSeq;
+  var current = container.firstElementChild;
+  var exit = current
+    ? play(current, [{ opacity: 0, filter: 'blur(4px)' }], { duration: 90, easing: 'ease-in', fill: 'forwards' })
+    : Promise.resolve();
+  return exit.then(function () {
+    if (id !== swapSeq) return;
     renderFn();
-    return;
+    play(container.firstElementChild, [{ opacity: 0, filter: 'blur(4px)', transform: 'translateY(4px)' },
+      { opacity: 1, filter: 'none', transform: 'none' }]);
+  });
+}
+
+// Filter chips with one sliding indicator. The chips are rebuilt only when the set changes; a
+// selection change only flips aria-pressed and moves the indicator, so it can travel.
+function renderChips(container, cats, active, opts) {
+  opts = opts || {};
+  var label = opts.label || function (c) { return c; };
+  var tip = opts.tooltip;
+  var key = cats.join('\u0000');
+  if (container.dataset.key !== key) {
+    container.dataset.key = key;
+    container.innerHTML = cats.map(function (cat) {
+      var dot = opts.hue && cat !== 'All' ? '<span class="dot" style="--c:' + opts.hue(cat) + '" aria-hidden="true"></span>' : '';
+      var title = tip && tip(cat) ? ' title="' + escapeHtml(tip(cat)) + '"' : '';
+      return '<button type="button" class="chip" data-cat="' + escapeHtml(cat) + '"' + title + '>' + dot + escapeHtml(label(cat)) + '</button>';
+    }).join('') + '<span class="chip-ind" aria-hidden="true"></span>';
   }
-  var transition = document.startViewTransition(renderFn);
-  // Silences a failed *animation* (renderFn already ran) so it isn't an unhandled rejection.
-  transition.ready.catch(function () {});
-  transition.finished.catch(function () {});
-  transition.updateCallbackDone.catch(function () {});
+  container.querySelectorAll('.chip').forEach(function (b) {
+    b.setAttribute('aria-pressed', String(b.dataset.cat === active));
+  });
+  placeIndicator(container, !!opts.animate);
+}
+
+// Leading edge on the snappy spring, trailing edge on the soft one, so the indicator stretches
+// toward where it is going and catches up. Placed without travel on first paint and on resize.
+function placeIndicator(container, animate) {
+  var on = container.querySelector('.chip[aria-pressed="true"]');
+  var bar = container.querySelector('.chip-ind');
+  if (!on || !bar) return;
+  var L = on.offsetLeft, R = on.offsetLeft + on.offsetWidth;
+  var pl = parseFloat(bar.style.getPropertyValue('--l')), pr = parseFloat(bar.style.getPropertyValue('--r'));
+  var forward = L + R > pl + pr;
+  var lead = 'var(--snappy-t) var(--snappy)', trail = 'var(--soft-t) var(--soft)';
+  var sameRow = Math.abs(on.offsetTop - parseFloat(bar.style.top || '0')) < 1;
+  bar.style.transition = animate && sameRow && !reduceMotion.matches && !isNaN(pl)
+    ? '--l ' + (forward ? trail : lead) + ', --r ' + (forward ? lead : trail)
+    : 'none';
+  bar.style.top = on.offsetTop + 'px';
+  bar.style.height = on.offsetHeight + 'px';
+  bar.style.setProperty('--l', L + 'px');
+  bar.style.setProperty('--r', R + 'px');
+  if (animate) on.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+}
+
+function renderEmptyState(container, title, message) {
+  container.innerHTML = '<div class="empty"><h2>' + escapeHtml(title) + '</h2><p>' + escapeHtml(message) + '</p></div>';
 }

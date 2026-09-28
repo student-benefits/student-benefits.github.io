@@ -1,8 +1,4 @@
-// Excludes #34d399 (remote pill green) and #fbbf24 (countdown amber)
-// so organizer color never collides with semantic UI colors in the same card.
-const ORG_PALETTE = ['#818cf8','#60a5fa','#c084fc','#e879f9','#f472b6','#fb923c','#a78bfa','#38bdf8'];
-
-let categories = ['All'];
+let categories = [];
 let events = [];
 let activeCategory = 'All';
 let remoteOnly = false;
@@ -17,58 +13,64 @@ const categoryTooltips = {
   'workshop': 'Hands-on training sessions and skill-building'
 };
 
-function orgColor(name) { return hashColor(name, ORG_PALETTE); }
+const filterBar = document.getElementById('filter-bar');
+const content = document.getElementById('content');
+const countEl = document.getElementById('count');
+const countLabel = document.getElementById('count-label');
+const remoteToggle = document.getElementById('remote-toggle');
 
 const DATE_RANGE_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+const DAY_FMT = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' });
+
+const capitalize = function (c) { return c.charAt(0).toUpperCase() + c.slice(1); };
 
 function fmtDate(date, dateEnd) {
   const start = new Date(date + 'T12:00:00');
-  if (!dateEnd || dateEnd === date) {
-    return DATE_RANGE_FMT.format(start);
-  }
+  if (!dateEnd || dateEnd === date) return DATE_RANGE_FMT.format(start);
   return DATE_RANGE_FMT.formatRange(start, new Date(dateEnd + 'T12:00:00'));
+}
+
+function daysUntil(ymd) {
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  return Math.round((new Date(ymd + 'T00:00:00') - now) / 86400000);
 }
 
 // An application deadline, when known, outranks the event date: a student
 // reading "45 days away" about a program that stopped accepting applications
-// last month has been told the wrong thing.
+// last month has been told the wrong thing. Colour follows the site rule:
+// amber = closes within 14 days, red = closed. Nothing else is coloured.
 function applyState(e) {
   if (!e.deadline) return null;
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const days = Math.round((new Date(e.deadline + 'T00:00:00') - now) / 86400000);
-  if (days < 0) return { closed: true, text: 'Applications closed', cls: 'event-countdown--closed' };
-  if (days === 0) return { closed: false, text: 'Apply by today', cls: 'event-countdown--soon', urgent: true };
-  if (days === 1) return { closed: false, text: 'Apply by tomorrow', cls: 'event-countdown--soon', urgent: true };
-  if (days <= 14) return { closed: false, text: 'Apply within ' + days + ' days', cls: 'event-countdown--soon', urgent: true };
-  return { closed: false, text: 'Apply within ' + days + ' days', cls: 'event-countdown--upcoming', urgent: false };
+  const days = daysUntil(e.deadline);
+  const on = ' (' + DAY_FMT.format(new Date(e.deadline + 'T12:00:00')) + ')';
+  if (days < 0) return { closed: true, text: 'Applications closed' + on, cls: 'st--closed' };
+  if (days === 0) return { text: 'Applications close today', cls: 'st--soon' };
+  if (days === 1) return { text: 'Applications close tomorrow', cls: 'st--soon' };
+  if (days <= 14) return { text: 'Applications close in ' + days + ' days' + on, cls: 'st--soon' };
+  return { text: 'Apply by ' + DATE_RANGE_FMT.format(new Date(e.deadline + 'T12:00:00')), cls: '' };
 }
 
-function countdown(date, expires) {
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const start = new Date(date + 'T00:00:00');
-  const days = Math.round((start - now) / 86400000);
+// Without a stated deadline the status is timing only, never coloured.
+function timing(e) {
+  const days = daysUntil(e.date);
   if (days < 0) {
-    // Started — show time remaining if available
-    if (expires) {
-      const end = new Date(expires + 'T00:00:00');
-      const left = Math.round((end - now) / 86400000);
-      if (left === 0) return { text: 'Ends today', cls: 'event-countdown--soon', urgent: true };
-      if (left === 1) return { text: 'Ends tomorrow', cls: 'event-countdown--soon', urgent: true };
-      if (left <= 14) return { text: 'Ends in ' + left + ' days', cls: 'event-countdown--soon', urgent: true };
+    const end = e.expires || e.date_end;
+    if (end) {
+      const left = daysUntil(end);
+      if (left === 0) return 'Ends today';
+      if (left === 1) return 'Ends tomorrow';
+      if (left <= 14) return 'Ends in ' + left + ' days';
     }
-    return { text: 'Ongoing', cls: 'event-countdown--upcoming', urgent: false };
+    return 'Ongoing';
   }
-  if (days === 0) return { text: 'Today', cls: 'event-countdown--soon', urgent: true };
-  if (days === 1) return { text: 'Tomorrow', cls: 'event-countdown--soon', urgent: true };
-  if (days <= 14) return { text: days + ' days away', cls: 'event-countdown--soon', urgent: true };
-  return { text: days + ' days away', cls: 'event-countdown--upcoming', urgent: false };
+  if (days === 0) return 'Starts today';
+  if (days === 1) return 'Starts tomorrow';
+  return 'Starts in ' + days + ' days';
 }
 
 function isExpired(e) {
-  // Only `expires` is authoritative — the discover-events schema always sets it.
-  // Entries without `expires` are treated as not expired.
+  // Only `expires` is authoritative: the discover-events schema always sets it.
   if (!e.expires) return false;
   return new Date(e.expires + 'T23:59:59') < new Date();
 }
@@ -82,100 +84,83 @@ function getFiltered() {
 }
 
 function renderCard(e) {
-  const color = orgColor(e.organizer);
   const applied = applyState(e);
-  const cd = applied || countdown(e.date, e.expires || e.date_end);
-  const locationPill = e.remote
-    ? `<span class="event-location-pill event-location-pill--remote">Remote</span>`
-    : e.location
-    ? `<span class="event-location-pill event-location-pill--in-person">${escapeHtml(e.location)}</span>`
-    : '';
-
-  return `<article class="event-card">
-    <a class="event-card-link" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
-      <div class="event-card-top">
-        <span class="event-organizer" style="color:${color}">${escapeHtml(e.organizer)}</span>
-        <span class="event-cat">${escapeHtml(e.category)}</span>
-        ${locationPill}
-      </div>
-      <h2 class="event-name">${escapeHtml(e.name)}</h2>
-      <div class="event-meta">
-        <span class="event-meta-line">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          ${escapeHtml(fmtDate(e.date, e.date_end))}
-        </span>
-        <span class="event-meta-line">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-          ${escapeHtml(e.eligibility)}
-        </span>
-      </div>
-      <p class="event-why">${escapeHtml(e.why)}</p>
-    </a>
-    <div class="event-footer">
-      <span class="event-countdown ${escapeHtml(cd.cls)}">${cd.urgent ? '<span class="sr-only">Time-sensitive: </span>' : ''}${escapeHtml(cd.text)}</span>
-      ${applied && applied.closed ? '' : `<a class="event-apply" href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">
-        Apply
-        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-      </a>`}
+  const status = applied || { text: timing(e), cls: '' };
+  const where = e.remote ? 'Remote' : (e.location || '');
+  return `<article class="card">
+    <div class="card-top">
+      <span class="cat"><span class="dot" style="--c:${catVar(categories, e.category)}" aria-hidden="true"></span>${escapeHtml(capitalize(e.category))}</span>
+      ${where ? `<span class="where">${escapeHtml(where)}</span>` : ''}
     </div>
+    <h2 class="card-name"><a href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.name)}</a></h2>
+    <p class="when">${escapeHtml(fmtDate(e.date, e.date_end))}</p>
+    <p class="st ${status.cls}">${escapeHtml(status.text)}</p>
+    <p class="card-desc">${escapeHtml(e.why)}</p>
+    <dl class="facts">
+      <dt>Organizer</dt><dd>${escapeHtml(e.organizer)}</dd>
+      <dt>Eligibility</dt><dd>${escapeHtml(e.eligibility)}</dd>
+    </dl>
+    ${applied && applied.closed ? '' : '<span class="apply" aria-hidden="true">Apply or register →</span>'}
   </article>`;
 }
 
-function renderFilters() {
-  const filterBar = document.getElementById('filter-bar');
-  const usedCats = new Set(events.filter(function(e) { return !isExpired(e); }).map(function(e) { return e.category; }));
-  const visibleCategories = categories.filter(function(c) { return c === 'All' || usedCats.has(c); });
+function visibleCategories() {
+  const used = new Set(events.filter(function (e) { return !isExpired(e); }).map(function (e) { return e.category; }));
+  return categories.filter(function (c) { return used.has(c); });
+}
+
+function renderFilters(animate) {
   withFocusPreserved(filterBar, function () {
-    renderFilterTabs(filterBar, visibleCategories, activeCategory, function(c) {
-      return c === 'All' ? 'All' : c.charAt(0).toUpperCase() + c.slice(1);
-    }, function(c) {
-      return categoryTooltips[c] || '';
+    renderChips(filterBar, ['All'].concat(visibleCategories()), activeCategory, {
+      label: function (c) { return c === 'All' ? 'All' : capitalize(c); },
+      tooltip: function (c) { return categoryTooltips[c] || ''; },
+      hue: function (c) { return catVar(categories, c); },
+      animate: animate
     });
   });
 }
 
-function render() {
-  const filtered = getFiltered();
-  const resultsBar = document.getElementById('results-bar');
-  const content = document.getElementById('content');
-  const label = filtered.length === 1 ? 'event' : 'events';
-  withFocusPreserved(resultsBar, function () {
-    resultsBar.innerHTML = `<span class="results-count"><strong>${filtered.length}</strong> upcoming ${label}</span>` +
-      `<button class="remote-toggle" id="remote-toggle" aria-pressed="${remoteOnly}">Remote only</button>`;
-  });
-
+function renderGrid(filtered) {
   if (filtered.length > 0) {
     content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
   } else {
-    content.innerHTML = `<div class="empty"><h2>Nothing upcoming</h2><p>Check back soon — new events get added when they clear the bar.</p></div>`;
+    renderEmptyState(content, 'Nothing upcoming', 'New events are added when they clear the quality bar.');
   }
 }
 
-document.getElementById('filter-bar').addEventListener('click', function(e) {
-  const tab = e.target.closest('.filter-tab');
-  if (tab) {
-    activeCategory = tab.dataset.cat;
-    renderWithTransition(function () { renderFilters(); render(); });
-  }
+function render(animate) {
+  const filtered = getFiltered();
+  setCount(countEl, filtered.length);
+  countLabel.textContent = 'upcoming ' + (filtered.length === 1 ? 'event' : 'events');
+  remoteToggle.setAttribute('aria-pressed', String(remoteOnly));
+  if (animate) swapList(content, function () { renderGrid(filtered); });
+  else renderGrid(filtered);
+}
+
+filterBar.addEventListener('click', function (e) {
+  const chip = e.target.closest('.chip');
+  if (!chip || chip.dataset.cat === activeCategory) return;
+  activeCategory = chip.dataset.cat;
+  renderFilters(true);
+  render(true);
 });
 
-document.getElementById('results-bar').addEventListener('click', function(e) {
-  if (e.target.closest('.remote-toggle')) {
-    remoteOnly = !remoteOnly;
-    renderWithTransition(render);
-  }
+remoteToggle.addEventListener('click', function () {
+  remoteOnly = !remoteOnly;
+  render(true);
 });
+
+addEventListener('resize', function () { placeIndicator(filterBar, false); });
 
 Promise.all([
-  fetch('/data/events.json').then(function(r) { return r.json(); }),
-  fetch('/data/event-categories.json').then(function(r) { return r.json(); })
-]).then(function(results) {
+  fetch('/data/events.json').then(function (r) { return r.json(); }),
+  fetch('/data/event-categories.json').then(function (r) { return r.json(); })
+]).then(function (results) {
   events = results[0];
-  categories = ['All'].concat(results[1]);
-  renderFilters();
-  render();
-  revealOnScroll(document.getElementById('content'), '.event-card'); // entrance only — later render()s don't replay it
-}).catch(function() {
-  document.getElementById('content').innerHTML =
-    '<div class="empty"><h2>Failed to load</h2><p>Could not fetch event data. Please refresh.</p></div>';
+  categories = results[1];
+  renderFilters(false);
+  render(false);
+  rise(content.querySelectorAll('.card')); // first load only
+}).catch(function () {
+  renderEmptyState(content, 'Failed to load', 'Could not fetch event data. Please refresh.');
 });

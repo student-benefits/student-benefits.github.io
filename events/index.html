@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#22272e" media="(prefers-color-scheme: dark)">
   <meta name="description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
   <title>Student Events — Hackathons, Fellowships and Grants · Student Benefits Hub</title>
@@ -45,56 +46,55 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to content</a>
-  <div class="page">
-    <div class="container">
-
-      <header>
-        <div class="header-row">
-          <div>
-            <div class="site-id">
-              <a href="/" class="site-alt">Student Benefits Hub</a>
-              <span class="site-sep" aria-hidden="true">|</span>
-              <h1>Events</h1>
-            </div>
-            <a href="/agent/" class="grant-badge">
-              Auto-validated · how this works
-            </a>
-          </div>
-          <div class="header-actions">
-            <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-event.yml" target="_blank" rel="noopener noreferrer" class="contribute-banner" aria-label="Suggest a missing event">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              Suggest a missing one
-            </a>
-          </div>
-        </div>
-        <p class="subtitle">Hackathons, grants, fellowships, and conferences — curated, not aggregated.</p>
-
-        <div class="filter-wrap">
-          <div id="filter-bar" class="filter-bar" role="group" aria-label="Filter events"></div>
-        </div>
-      </header>
-
-      <main id="main-content">
-        <div id="results-bar" class="results-bar" aria-live="polite" aria-atomic="true"></div>
-
-        <noscript>
-          <div class="empty">
-            <h2>This listing needs JavaScript</h2>
-            <p>Every event — dates, eligibility, and application link — is also served as plain JSON at
-              <a href="/data/events.json">/data/events.json</a>, which needs no scripting to read.</p>
-          </div>
-        </noscript>
-        <div id="content">
-          <div class="skeleton">
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-          </div>
-        </div>
-      </main>
-
-      <footer><a href="https://jonasneves.com" target="_blank" rel="noopener">jonasneves.com</a></footer>
+  <header class="site-header">
+    <div class="wrap site-bar">
+      <a class="brand" href="/benefits/">Student Benefits Hub</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="/benefits/">Benefits</a>
+        <a href="/events/" aria-current="page">Events</a>
+        <a href="/how-it-works/">How it works</a>
+      </nav>
     </div>
+  </header>
+
+  <div class="wrap">
+    <div class="page-head head-row">
+      <div>
+        <h1>Events</h1>
+        <p class="lede">Hackathons, grants, fellowships, and conferences, curated rather than aggregated. Submissions are validated automatically; <a href="/how-it-works/">how this works</a>.</p>
+      </div>
+      <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-event.yml" target="_blank" rel="noopener noreferrer" class="suggest">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Suggest a missing event
+      </a>
+    </div>
+
+    <div class="controls">
+      <span class="filter-label" id="cat-label">Category</span>
+      <div id="filter-bar" class="chips" role="group" aria-labelledby="cat-label"></div>
+    </div>
+
+    <main id="main-content">
+      <div class="results-bar">
+        <p class="count" aria-live="polite" aria-atomic="true"><b id="count">…</b> <span id="count-label">upcoming events</span></p>
+        <div class="bar-right">
+          <button type="button" id="remote-toggle" class="toggle" aria-pressed="false"><span class="box" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Remote only</button>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="empty">
+          <h2>This listing needs JavaScript</h2>
+          <p>Every event (dates, eligibility, and application link) is also served as plain JSON at
+            <a href="/data/events.json">/data/events.json</a>.</p>
+        </div>
+      </noscript>
+      <div id="content">
+        <div class="skeleton" aria-hidden="true"><div></div><div></div><div></div></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">Data: <a href="/data/events.json">/data/events.json</a> (MIT) · <a href="https://github.com/student-benefits/student-benefits.github.io" target="_blank" rel="noopener noreferrer">Source on GitHub</a> · <a href="https://jonasneves.com" target="_blank" rel="noopener">jonasneves.com</a></footer>
   </div>
 
   <script src="/assets/shared.js"></script>

@@ -1,4 +1,4 @@
-let categories = ['All'];
+let categories = [];
 let benefits = [];
 let activeCategory = 'All';
 let searchQuery = '';
@@ -6,11 +6,16 @@ let sortOrder = 'popularity';
 let freeOnly = false;
 
 const OFFER_LABELS = { free: 'Free', discount: 'Discount', credits: 'Credits', trial: 'Trial' };
+const OWN_TAG = "Maintainer's own";
 
 const searchInput = document.getElementById('search');
 const filterBar = document.getElementById('filter-bar');
-const resultsBar = document.getElementById('results-bar');
 const content = document.getElementById('content');
+const countEl = document.getElementById('count');
+const countLabel = document.getElementById('count-label');
+const freeToggle = document.getElementById('free-toggle');
+const sortSelect = document.getElementById('sort-select');
+const clearBtn = document.getElementById('clear-btn');
 const copyStatus = document.getElementById('copy-status');
 
 // replaceState, not pushState: the back button should point at wherever the
@@ -27,7 +32,7 @@ function readUrlState() {
 }
 
 // keepHash: writeUrlState must not clobber #id before revealHashCard reads it.
-// A filter the visitor changes themselves does drop it — the anchored card may
+// A filter the visitor changes themselves does drop it: the anchored card may
 // no longer be on screen.
 function writeUrlState(keepHash) {
   const p = new URLSearchParams();
@@ -63,133 +68,118 @@ function getFilteredAndSorted() {
     });
 }
 
-function renderFilters() {
+function renderFilters(animate) {
   withFocusPreserved(filterBar, function () {
-    renderFilterTabs(filterBar, categories, activeCategory);
+    renderChips(filterBar, ['All'].concat(categories), activeCategory, {
+      hue: function (c) { return catVar(categories, c); },
+      animate: animate
+    });
   });
 }
 
+const ICON_REPO = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+const ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>';
+
 function renderCard(b) {
-  // Surfaced on the card itself, not left to a tag a skimming reader never reads:
-  // an undisclosed maintainer entry inside a curated directory is the kind of
-  // thing a reader should find from us rather than discover on their own.
-  const own = b.tags.indexOf("Maintainer's own") !== -1
-    ? `<span class="offer-pill offer-own" title="Built by this site's maintainer">Maintainer's own</span>`
+  // Stated on the card, not left to a tag a skimming reader never reads: an
+  // undisclosed maintainer entry inside a curated directory is something a
+  // reader should learn from the directory itself.
+  const own = b.tags.indexOf(OWN_TAG) !== -1
+    ? '<p class="own">Built by this site\'s maintainer</p>'
     : '';
-  const tags = b.tags.slice(0, 3).map(function (t) {
-    return `<button class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</button>`;
+  const tags = b.tags.filter(function (t) { return t !== OWN_TAG; }).slice(0, 3).map(function (t) {
+    return `<button type="button" class="tag" data-tag="${escapeHtml(t)}" aria-label="Search for ${escapeHtml(t)}">#${escapeHtml(t)}</button>`;
   }).join('');
-  const pill = b.offer_type
-    ? `<span class="offer-pill offer-${b.offer_type}">${OFFER_LABELS[b.offer_type]}</span>`
+  const offer = OFFER_LABELS[b.offer_type]
+    ? `<span class="offer offer--${escapeHtml(b.offer_type)}">${OFFER_LABELS[b.offer_type]}</span>`
     : '';
   const repoLink = b.repo
-    ? `<a class="repo-link" href="https://github.com/${escapeHtml(b.repo)}" target="_blank" rel="noopener noreferrer" title="Open source: ${escapeHtml(b.repo)}">
-        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      </a>`
+    ? `<a class="icon-link" href="https://github.com/${escapeHtml(b.repo)}" target="_blank" rel="noopener noreferrer" aria-label="Source code: ${escapeHtml(b.repo)}" title="Open source: ${escapeHtml(b.repo)}">${ICON_REPO}</a>`
     : '';
-  const share = `<a class="card-share" href="#${escapeHtml(b.id)}" data-id="${escapeHtml(b.id)}" aria-label="Copy link to ${escapeHtml(b.name)}" title="Copy link to this benefit">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
-      </a>`;
+  const share = `<a class="icon-link card-share" href="#${escapeHtml(b.id)}" data-id="${escapeHtml(b.id)}" aria-label="Copy link to ${escapeHtml(b.name)}" title="Copy link to this benefit">${ICON_LINK}</a>`;
   return `<article class="card" id="${escapeHtml(b.id)}">
-    <div class="card-body">
-      <a class="card-link" href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">
-        <div class="card-top">
-          <span class="badge" style="color:${catColor(b.category)}">${escapeHtml(b.category)}</span>
-          <span class="card-pills">${own}${pill}</span>
-        </div>
-        <h2 class="card-name">${escapeHtml(b.name)}</h2>
-        <p class="card-desc">${escapeHtml(b.description)}</p>
-      </a>
-      <div class="card-footer">
-        <div class="tags">${tags}</div>
-        <div class="card-actions">${repoLink}${share}</div>
-      </div>
+    <div class="card-top">
+      <span class="cat"><span class="dot" style="--c:${catVar(categories, b.category)}" aria-hidden="true"></span>${escapeHtml(b.category)}</span>
+      ${offer}
+    </div>
+    <h2 class="card-name"><a href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.name)}</a></h2>
+    <p class="card-desc">${escapeHtml(b.description)}</p>
+    ${own}
+    <div class="card-foot">
+      <div class="tags">${tags}</div>
+      <div class="card-actions">${repoLink}${share}</div>
     </div>
   </article>`;
-}
-
-function renderResultsBar(filtered) {
-  const count = filtered.length;
-  const label = count === 1 ? 'resource' : 'resources';
-  let bar = `<span class="results-count">Found <strong>${count}</strong> ${label}</span>`;
-  bar += `<div class="bar-right">`;
-  bar += `<button id="free-toggle" class="free-toggle" aria-pressed="${freeOnly}">Free only</button>`;
-  bar += `<select class="sort-select" id="sort-select" aria-label="Sort order">
-    <option value="popularity"${sortOrder === 'popularity' ? ' selected' : ''}>Recommended</option>
-    <option value="alpha"${sortOrder === 'alpha' ? ' selected' : ''}>A-Z</option>
-  </select>`;
-  if (searchQuery) {
-    bar += `<button class="clear-btn" id="clear-btn">
-      <span>Clear</span>
-      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>`;
-  }
-  bar += `</div>`;
-  resultsBar.innerHTML = bar;
 }
 
 function renderGrid(filtered) {
   if (filtered.length > 0) {
     content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
   } else {
-    renderEmptyState(content, 'Try a different search or category.');
+    renderEmptyState(content, 'No benefits match', 'Try a different search or category.');
   }
 }
 
-function render() {
+function renderCount(filtered) {
+  setCount(countEl, filtered.length);
+  const unfiltered = filtered.length === benefits.length;
+  countLabel.textContent = (unfiltered ? '' : 'of ' + benefits.length + ' ') + (benefits.length === 1 ? 'benefit' : 'benefits');
+  clearBtn.hidden = !searchQuery;
+}
+
+// animate: a click (filter, toggle, sort, tag) swaps the list; typing repaints at once.
+function render(animate) {
   const filtered = getFilteredAndSorted();
-  withFocusPreserved(resultsBar, function () { renderResultsBar(filtered); });
-  renderGrid(filtered);
+  renderCount(filtered);
+  freeToggle.setAttribute('aria-pressed', String(freeOnly));
+  sortSelect.value = sortOrder;
+  if (animate) swapList(content, function () { renderGrid(filtered); });
+  else { swapSeq++; renderGrid(filtered); }
 }
 
-resultsBar.addEventListener('change', function (e) {
-  if (e.target.id === 'sort-select') {
-    sortOrder = e.target.value;
-    writeUrlState();
-    renderWithTransition(render);
-  }
+sortSelect.addEventListener('change', function () {
+  sortOrder = sortSelect.value;
+  writeUrlState();
+  render(true);
 });
 
-resultsBar.addEventListener('click', function (e) {
-  if (e.target.closest('#free-toggle')) {
-    freeOnly = !freeOnly;
-    writeUrlState();
-    renderWithTransition(render);
-    return;
-  }
-  if (e.target.closest('#clear-btn')) {
-    searchQuery = '';
-    searchInput.value = '';
-    writeUrlState();
-    renderWithTransition(render);
-    searchInput.focus(); // the clear button itself no longer exists post-render
-  }
+freeToggle.addEventListener('click', function () {
+  freeOnly = !freeOnly;
+  writeUrlState();
+  render(true);
+});
+
+clearBtn.addEventListener('click', function () {
+  searchQuery = '';
+  searchInput.value = '';
+  writeUrlState();
+  render(true);
+  searchInput.focus(); // the clear button hides itself
 });
 
 filterBar.addEventListener('click', function (e) {
-  const btn = e.target.closest('.filter-tab');
-  if (!btn) return;
+  const btn = e.target.closest('.chip');
+  if (!btn || btn.dataset.cat === activeCategory) return;
   activeCategory = btn.dataset.cat;
   writeUrlState();
-  renderWithTransition(function () { renderFilters(); render(); });
+  renderFilters(true);
+  render(true);
 });
 
 let urlWriteTimer = null;
 searchInput.addEventListener('input', function () {
   searchQuery = searchInput.value;
   // Safari throws SecurityError past 100 replaceState calls in 30s and then
-  // disables the API — reachable by typing. The other call sites are clicks.
+  // disables the API, which typing can reach. The other call sites are clicks.
   clearTimeout(urlWriteTimer);
   urlWriteTimer = setTimeout(writeUrlState, 250);
-  render();
+  render(false);
 });
 
 document.addEventListener('keydown', function (e) {
   if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) return;
   if (e.metaKey || e.ctrlKey || e.altKey) return;
-  if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) {
-    searchInput.focus();
-  }
+  if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) searchInput.focus();
 });
 
 content.addEventListener('click', function (e) {
@@ -204,15 +194,15 @@ content.addEventListener('click', function (e) {
   searchQuery = tag.dataset.tag;
   searchInput.value = searchQuery;
   writeUrlState();
-  renderWithTransition(render);
-  searchInput.focus(); // the clicked tag itself no longer exists post-render
+  render(true);
+  searchInput.focus(); // the clicked tag itself is replaced by the render
 });
 
 // The href is a real link, so right-click -> Copy Link Address still works where
 // the clipboard API is unavailable or denied.
 function copyPermalink(el) {
   const url = location.origin + location.pathname + '#' + el.dataset.id;
-  const FAILED = 'Copy failed — right-click the icon to copy the link';
+  const FAILED = 'Copy failed. Right-click the icon to copy the link.';
   const done = function (msg, cls) {
     copyStatus.textContent = msg;
     el.classList.add(cls);
@@ -220,16 +210,16 @@ function copyPermalink(el) {
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(url).then(
-      function () { done('Link copied', 'card-share--copied'); },
-      function () { done(FAILED, 'card-share--failed'); }
+      function () { done('Link copied', 'is-copied'); },
+      function () { done(FAILED, 'is-failed'); }
     );
   } else {
-    done(FAILED, 'card-share--failed');
+    done(FAILED, 'is-failed');
   }
 }
 
 // A permalink must win over a filter it would otherwise be hidden behind,
-// or a shared card link silently lands on an empty grid.
+// or a shared card link lands on a list without that card.
 function revealHashCard() {
   const id = decodeURIComponent(location.hash.slice(1));
   if (!id) return;
@@ -240,8 +230,8 @@ function revealHashCard() {
     searchInput.value = '';
     freeOnly = false;
     writeUrlState(true);
-    renderFilters();
-    render();
+    renderFilters(false);
+    render(false);
   }
   const el = document.getElementById(id);
   if (!el) return;
@@ -249,10 +239,7 @@ function revealHashCard() {
   el.classList.add('card--targeted');
 }
 
-// Excludes offer-type colors (#a78bfa trial, #60a5fa credits, #fbbf24 discount, #4ade80 free)
-// so category badges never share a hue with an offer pill on the same card.
-const CAT_PALETTE = ['#c084fc','#22d3ee','#38bdf8','#14b8a6','#f472b6','#e879f9','#fb923c','#f87171','#34d399','#818cf8'];
-function catColor(name) { return hashColor(name, CAT_PALETTE); }
+addEventListener('resize', function () { placeIndicator(filterBar, false); });
 
 readUrlState();
 
@@ -261,14 +248,14 @@ Promise.all([
   fetch('/data/categories.json').then(function (r) { return r.json(); })
 ]).then(function (results) {
   benefits = results[0];
-  categories = ['All'].concat(results[1]);
+  categories = results[1];
   // A ?cat= naming a category that no longer exists would filter everything out.
-  if (categories.indexOf(activeCategory) === -1) activeCategory = 'All';
+  if (activeCategory !== 'All' && categories.indexOf(activeCategory) === -1) activeCategory = 'All';
   writeUrlState(true);
-  renderFilters();
-  render();
-  revealOnScroll(content, '.card'); // entrance only — later render()s (filter/search/sort) don't replay it
+  renderFilters(false);
+  render(false);
+  rise(content.querySelectorAll('.card')); // first load only; later renders do not replay it
   revealHashCard();
 }).catch(function () {
-  content.innerHTML = '<div class="empty"><h2>Failed to load</h2><p>Could not fetch benefit data. Please refresh.</p></div>';
+  renderEmptyState(content, 'Failed to load', 'Could not fetch benefit data. Please refresh.');
 });
