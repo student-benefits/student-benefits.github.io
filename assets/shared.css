@@ -2,8 +2,9 @@
 
    Channel map: each visual property carries one meaning.
    - hue       = category (benefit or event category, trace actor), shown only as a small dot beside its word;
-                 hues share one OKLCH lightness (navy excepted) and chroma stays within 0.10-0.15, so no
-                 category reads much louder than another
+                 chroma stays within 0.12-0.17 so no category reads much louder than another; lightness sits
+                 at OKLCH 0.68 (dark 0.76) except where a pair needs it to stay apart (teal darker, cyan
+                 lighter) or a hue needs it to stay clean (gold and lime lighter, or they turn olive)
    - accent    = interactivity: links and the focus ring
    - neutral ink (--sel) = the selected control
    - green     = passed / free;  red = failed / closed;  amber = application deadline within 14 days
@@ -13,30 +14,31 @@
 
 :root {
   color-scheme: light dark;
-  --bg: #f6f5f2;
+  --bg: #f4f5f7;
   --card: #ffffff;
-  --fg: #22262b;
-  --muted: #5b636d;
-  --line: #e2e0da;
-  --line-strong: #8f8a80;
-  --subtle: #efede8;
-  --sel: #e7e4dd;
-  --accent: #5c42ca;
-  --green: #16702f;
-  --red: #c3282e;
+  --fg: #1a202c;
+  --muted: #4a5568;
+  --line: #e2e8f0;
+  --line-strong: #7b8594;
+  --subtle: #edf0f3;
+  --sel: #e8ebf0;
+  --accent: #00539b;
+  --green: #1b7a34;
+  --red: #c53030;
   --amber: #8a5a00;
 
   /* Category hues. shared.js (CATEGORY_HUE) picks one per category by name, from the hues at least 25
-     degrees (OKLCH) from the accent and from every status colour on that category's page. */
-  --hue-copper: #ac5d00;  /* oklch(0.56 0.133 59) */
-  --hue-ochre: #8f7000;   /* oklch(0.56 0.115 89) */
-  --hue-olive: #6d7e00;   /* oklch(0.56 0.132 119) */
-  --hue-teal: #008964;    /* oklch(0.56 0.116 166) */
-  --hue-cyan: #008f95;    /* oklch(0.59 0.100 200) */
-  --hue-navy: #025f86;    /* oklch(0.46 0.12 235), deeper so it stays apart from cyan and blue */
-  --hue-blue: #2076c9;    /* oklch(0.56 0.150 252) */
-  --hue-orchid: #9a53aa;  /* oklch(0.56 0.150 320) */
-  --hue-pink: #b54879;    /* oklch(0.56 0.150 355) */
+     degrees (OKLCH) from the accent and from every status colour on that category's page. A dot is
+     aria-hidden and sits beside its category's name, so it is decoration (no 3:1 floor); that lets
+     warm hues stay bright instead of darkening to brown. */
+  --hue-orange: #e2781f;  /* oklch(0.68 0.160 54) */
+  --hue-gold: #ebb517;    /* oklch(0.80 0.160 86) */
+  --hue-lime: #a2b80c;    /* oklch(0.74 0.170 118) */
+  --hue-teal: #009d82;    /* oklch(0.62 0.117 175) */
+  --hue-cyan: #00c8d8;    /* oklch(0.76 0.130 205) */
+  --hue-violet: #9585f4;  /* oklch(0.68 0.160 288) */
+  --hue-magenta: #c474d3; /* oklch(0.68 0.160 321) */
+  --hue-pink: #e169a1;    /* oklch(0.68 0.160 353) */
 
   --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -62,29 +64,28 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Neutrals at OKLCH hue 90, the hue of the light theme's surfaces. */
-    --bg: #1f1e1b;
-    --card: #292824;
-    --fg: #e3e1db;
-    --muted: #b3b1ab;
-    --line: #41403c;
-    --line-strong: #797773;
-    --subtle: #302f2c;
-    --sel: #3d3c38;
-    --accent: #a9a5ff;
-    --green: #6bc46d;
-    --red: #ff8078;
+    /* Neutrals and accent from the house panel palette (cool gray, navy accent). */
+    --bg: #15171a;
+    --card: #1f2226;
+    --fg: #e9ecef;
+    --muted: #b0b9c3;
+    --line: #2c3137;
+    --line-strong: #6e7782;
+    --subtle: #25292e;
+    --sel: #30353c;
+    --accent: #6fa8dc;
+    --green: #7bc47f;
+    --red: #f08a8a;
     --amber: #daaa3f;
 
-    --hue-copper: #f59c50;
-    --hue-ochre: #d8af36;
-    --hue-olive: #abc050;
-    --hue-teal: #42d0a0;
-    --hue-cyan: #00cdd5;
-    --hue-navy: #369dd1;
-    --hue-blue: #63aeff;
-    --hue-orchid: #db96eb;
-    --hue-pink: #f98cb9;
+    --hue-orange: #f9944b;
+    --hue-gold: #dba91b;
+    --hue-lime: #b0bb38;
+    --hue-teal: #00b89a;
+    --hue-cyan: #1ee4f6;
+    --hue-violet: #ada3ff;
+    --hue-magenta: #dc8feb;
+    --hue-pink: #f886b9;
   }
 }
 

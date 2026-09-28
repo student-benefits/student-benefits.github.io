@@ -10,9 +10,9 @@ function escapeHtml(str) {
 // the accent, green (Free) and red; events avoid the accent, red and amber (deadlines). A category
 // missing here shows a muted dot until it is added.
 var CATEGORY_HUE = {
-  'AI Tools': 'orchid', 'Dev Tools': 'cyan', 'Cloud & Hosting': 'copper', 'Learning': 'blue',
-  'Design': 'pink', 'Productivity': 'olive', 'Security': 'navy', 'Hardware': 'ochre',
-  conference: 'blue', grant: 'olive', hackathon: 'orchid', fellowship: 'teal', summit: 'pink', workshop: 'cyan'
+  'AI Tools': 'violet', 'Dev Tools': 'teal', 'Cloud & Hosting': 'gold', 'Learning': 'pink',
+  'Design': 'orange', 'Productivity': 'lime', 'Security': 'magenta', 'Hardware': 'cyan',
+  conference: 'violet', grant: 'lime', hackathon: 'magenta', fellowship: 'teal', summit: 'pink', workshop: 'cyan'
 };
 function catVar(cat) {
   var hue = CATEGORY_HUE[cat];
