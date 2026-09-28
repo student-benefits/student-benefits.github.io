@@ -8,7 +8,7 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
 
 ## Operating rules
 
-- Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. The validator is the only gate.
+- Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. That in-loop run is the only check before merge: `main` has no required status checks (they would also reject the direct `agent/state/` pushes), so the CI run of `validate-data` reports after the fact.
 - Commits are authored `Claude <noreply@anthropic.com>`. `data/` changes go through a PR; `agent/state/` files are pushed directly to `main`.
 - Claude Code runs on subscription auth (no per-token billing); the Jev call in `check_links.py` is the only metered call.
 - No personal names in docs, context, or agent surfaces; the maintainer is `vars.MAINTAINER`, referenced as "the maintainer".

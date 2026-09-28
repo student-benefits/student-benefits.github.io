@@ -6,7 +6,7 @@
 
 A program earns an entry only if it advances building, learning, shipping, or research. That bar is the whole product: a genuine, well-priced music subscription is still a reject.
 
-The directory is kept current by **Grant** — a set of GitHub Actions workflows running Claude and a deterministic validation gate. It discovers new programs twice a month, validates community submissions opened as issues, and audits link health weekly. Grant merges its own PRs; no change merges unless `scripts/validate_data.py` passes, and that gate is the only check. Run logs and tool traces are open at [/how-it-works/](https://student-benefits.github.io/how-it-works/).
+The directory is kept current by **Grant** — a set of GitHub Actions workflows running Claude. It discovers new programs twice a month, validates community submissions opened as issues, and audits link health weekly. Grant merges its own PRs after running `scripts/validate_data.py` until it exits 0; CI reruns the same check on every PR and push to `main`. No person reviews a change before it merges. Run logs and tool traces are open at [/how-it-works/](https://student-benefits.github.io/how-it-works/).
 
 [![Live](https://img.shields.io/badge/live-student--benefits.github.io-blue)](https://student-benefits.github.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
