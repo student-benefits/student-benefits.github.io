@@ -1,7 +1,9 @@
 /* shared.css — the one visual system for /benefits/, /events/ and /how-it-works/.
 
    Channel map: each visual property carries one meaning.
-   - hue       = category (benefit or event category, trace actor), shown only as a small dot beside its word
+   - hue       = category (benefit or event category, trace actor), shown only as a small dot beside its word;
+                 hues share one OKLCH lightness (navy excepted) and chroma stays within 0.10-0.15, so no
+                 category reads much louder than another
    - accent    = interactivity: links and the focus ring
    - neutral ink (--sel) = the selected control
    - green     = passed / free;  red = failed / closed;  amber = application deadline within 14 days
@@ -19,22 +21,22 @@
   --line-strong: #8f8a80;
   --subtle: #efede8;
   --sel: #e7e4dd;
-  --accent: #0a5fc2;
+  --accent: #5c42ca;
   --green: #16702f;
   --red: #c3282e;
   --amber: #8a5a00;
 
-  /* Category hues, assigned by position in data/categories.json or data/event-categories.json.
-     Slots 1-6 (the six event categories) avoid the accent blue and the amber/red status hues;
-     the blue and brown slots go to the two smallest benefit categories. */
-  --cat-1: #8250df;
-  --cat-2: #bf3989;
-  --cat-3: #0f8aa8;
-  --cat-4: #66707b;
-  --cat-5: #4b4fc4;
-  --cat-6: #0d7f73;
-  --cat-7: #8c5a2b;
-  --cat-8: #2f6fdb;
+  /* Category hues. shared.js (CATEGORY_HUE) picks one per category by name, from the hues at least 25
+     degrees (OKLCH) from the accent and from every status colour on that category's page. */
+  --hue-copper: #ac5d00;  /* oklch(0.56 0.133 59) */
+  --hue-ochre: #8f7000;   /* oklch(0.56 0.115 89) */
+  --hue-olive: #6d7e00;   /* oklch(0.56 0.132 119) */
+  --hue-teal: #008964;    /* oklch(0.56 0.116 166) */
+  --hue-cyan: #008f95;    /* oklch(0.59 0.100 200) */
+  --hue-navy: #025f86;    /* oklch(0.46 0.12 235), deeper so it stays apart from cyan and blue */
+  --hue-blue: #2076c9;    /* oklch(0.56 0.150 252) */
+  --hue-orchid: #9a53aa;  /* oklch(0.56 0.150 320) */
+  --hue-pink: #b54879;    /* oklch(0.56 0.150 355) */
 
   --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -60,27 +62,29 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #22272e;
-    --card: #2d333b;
-    --fg: #cdd9e5;
-    --muted: #a2afbc;
-    --line: #444c56;
-    --line-strong: #768390;
-    --subtle: #373e47;
-    --sel: #3d444d;
-    --accent: #6cb6ff;
+    /* Neutrals at OKLCH hue 90, the hue of the light theme's surfaces. */
+    --bg: #1f1e1b;
+    --card: #292824;
+    --fg: #e3e1db;
+    --muted: #b3b1ab;
+    --line: #41403c;
+    --line-strong: #797773;
+    --subtle: #302f2c;
+    --sel: #3d3c38;
+    --accent: #a9a5ff;
     --green: #6bc46d;
     --red: #ff8078;
     --amber: #daaa3f;
 
-    --cat-1: #b083f0;
-    --cat-2: #e275ad;
-    --cat-3: #39c5cf;
-    --cat-4: #909dab;
-    --cat-5: #8b8ff0;
-    --cat-6: #3fb8a8;
-    --cat-7: #c4935e;
-    --cat-8: #539bf5;
+    --hue-copper: #f59c50;
+    --hue-ochre: #d8af36;
+    --hue-olive: #abc050;
+    --hue-teal: #42d0a0;
+    --hue-cyan: #00cdd5;
+    --hue-navy: #369dd1;
+    --hue-blue: #63aeff;
+    --hue-orchid: #db96eb;
+    --hue-pink: #f98cb9;
   }
 }
 

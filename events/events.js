@@ -89,7 +89,7 @@ function renderCard(e) {
   const where = e.remote ? 'Remote' : (e.location || '');
   return `<article class="card">
     <div class="card-top">
-      <span class="cat"><span class="dot" style="--c:${catVar(categories, e.category)}" aria-hidden="true"></span>${escapeHtml(capitalize(e.category))}</span>
+      <span class="cat"><span class="dot" style="--c:${catVar(e.category)}" aria-hidden="true"></span>${escapeHtml(capitalize(e.category))}</span>
       ${where ? `<span class="where">${escapeHtml(where)}</span>` : ''}
     </div>
     <h2 class="card-name"><a href="${escapeHtml(e.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(e.name)}</a></h2>
@@ -114,7 +114,7 @@ function renderFilters(animate) {
     renderChips(filterBar, ['All'].concat(visibleCategories()), activeCategory, {
       label: function (c) { return c === 'All' ? 'All' : capitalize(c); },
       tooltip: function (c) { return categoryTooltips[c] || ''; },
-      hue: function (c) { return catVar(categories, c); },
+      hue: function (c) { return catVar(c); },
       animate: animate
     });
   });
