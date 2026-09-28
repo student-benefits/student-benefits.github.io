@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#22272e" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Grant is the set of GitHub Actions workflows that curates Student Benefits Hub: each runs Claude on a fixed path, and a change merges only when the deterministic validator passes.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <title>How it works · Student Benefits Hub</title>
+  <link rel="canonical" href="https://student-benefits.github.io/how-it-works/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Student Benefits Hub">
+  <meta property="og:title" content="How Student Benefits Hub is curated: Grant, the workflows running Claude">
+  <meta property="og:description" content="Grant is the set of GitHub Actions workflows that curates Student Benefits Hub: each runs Claude on a fixed path, and a change merges only when the deterministic validator passes.">
+  <meta property="og:url" content="https://student-benefits.github.io/how-it-works/">
+  <meta property="og:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Student Benefits Hub — free dev tools, cloud credits, and AI for students">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Student Benefits Hub is curated: Grant, the workflows running Claude">
+  <meta name="twitter:description" content="Grant is the set of GitHub Actions workflows that curates Student Benefits Hub: each runs Claude on a fixed path, and a change merges only when the deterministic validator passes.">
+  <meta name="twitter:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <link rel="stylesheet" href="/assets/shared.css">
+  <link rel="stylesheet" href="/how-it-works/how-it-works.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<header class="site-header">
+  <div class="wrap site-bar">
+    <a class="brand" href="/benefits/">Student Benefits Hub</a>
+    <nav class="site-nav" aria-label="Site">
+      <a href="/benefits/">Benefits</a>
+      <a href="/events/">Events</a>
+      <a href="/how-it-works/" aria-current="page">How it works</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<main id="main-content">
+
+  <div class="page-head">
+    <h1>How it works</h1>
+    <p class="byline">Grant · GitHub Actions workflows running <span id="identity-model">Claude</span></p>
+    <p class="lede">
+      The <a href="/benefits/">benefits</a> and <a href="/events/">events</a> lists are kept current by
+      <strong>Grant</strong>, a set of GitHub Actions workflows. The workflows that change <code>data/</code> run Claude
+      on a fixed path: Claude writes the change, runs the deterministic check <code>scripts/validate_data.py</code>
+      until it exits 0, then opens a pull request and merges it. No person reviews the change before it merges.
+    </p>
+  </div>
+
+  <!-- the loop -->
+  <section class="section" aria-labelledby="h-loop">
+    <h2 id="h-loop">The loop</h2>
+    <div class="loop" role="img" aria-label="Claude writes a change, the validator checks it, a failure goes back to Claude, and a pass is merged and goes live.">
+      <div class="loop-row">
+        <div class="loop-stage"><span class="loop-k">Generate</span><span class="loop-v">Claude writes a change</span></div>
+        <span class="loop-arrow" aria-hidden="true"></span>
+        <div class="loop-stage"><span class="loop-k">Verify</span><span class="loop-v"><code>validate_data.py</code> checks it</span></div>
+        <span class="loop-arrow loop-arrow--pass" aria-hidden="true"><span>pass</span></span>
+        <div class="loop-stage"><span class="loop-k">Merge</span><span class="loop-v">Claude opens and merges the PR; the change is live</span></div>
+      </div>
+      <div class="loop-back" aria-hidden="true"><span>fail: Claude fixes the change and the check runs again</span></div>
+    </div>
+  </section>
+
+  <!-- architecture -->
+  <section class="section" aria-labelledby="h-arch">
+    <h2 id="h-arch">Architecture</h2>
+    <p class="section-note">Select a part to read what it does.</p>
+    <div class="arch">
+      <div class="arch-flow">
+        <div class="arch-col">
+          <button type="button" class="arch-node" id="node-issue" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">GitHub issue</span><span class="arch-v">submission trigger</span></button>
+          <button type="button" class="arch-node" id="node-schedule" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Schedule</span><span class="arch-v">cron trigger</span></button>
+          <button type="button" class="arch-node" id="node-linkcheck" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Link check</span><span class="arch-v mono">check_links.py + Jev</span></button>
+        </div>
+        <span class="arch-arrow" aria-hidden="true"></span>
+        <div class="arch-col">
+          <button type="button" class="arch-node" id="node-claude" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Claude</span><span class="arch-v">model with tools</span></button>
+        </div>
+        <span class="arch-arrow" aria-hidden="true"></span>
+        <div class="arch-col">
+          <button type="button" class="arch-node" id="node-search" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Web Search</span><span class="arch-v">live results</span></button>
+          <button type="button" class="arch-node" id="node-web" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Web Fetch</span><span class="arch-v">page content</span></button>
+        </div>
+        <span class="arch-arrow" aria-hidden="true"></span>
+        <div class="arch-col">
+          <button type="button" class="arch-node" id="node-gate" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">Validator</span><span class="arch-v mono">validate_data.py</span></button>
+        </div>
+        <span class="arch-arrow" aria-hidden="true"></span>
+        <div class="arch-col">
+          <button type="button" class="arch-node" id="node-output" aria-expanded="false" aria-controls="arch-panel"><span class="arch-k">GitHub</span><span class="arch-v">PR and merge</span></button>
+        </div>
+      </div>
+
+      <div id="arch-panel" class="arch-panel" role="region" aria-live="polite" hidden>
+        <div class="arch-panel-inner"></div>
+      </div>
+
+      <div hidden>
+        <template id="panel-issue">
+          <h3>GitHub issue</h3>
+          <p>Anyone can suggest a benefit or event by opening an issue. When the issue is labeled <code>new-benefit</code> or <code>new-event</code>, the matching workflow (<code>add-benefit.yml</code> or <code>add-event.yml</code>) starts. The issue title and body are its only inputs.</p>
+        </template>
+        <template id="panel-schedule">
+          <h3>Scheduled workflows</h3>
+          <p><code>discover-benefits</code> runs on the 1st and 15th and opens <code>new-benefit</code> issues for the programs it finds. <code>discover-events</code> runs on the 3rd and 17th, adds new events, removes expired ones, and merges one PR. <code>maintain-benefits</code> runs every Sunday and starts with the link check.</p>
+        </template>
+        <template id="panel-linkcheck">
+          <h3>Weekly link check</h3>
+          <p><code>maintain-benefits</code> first runs <code>scripts/check_links.py</code>, which requests every benefit link and records its HTTP status and final hostname. A dead link, an unreachable host, or a redirect to another hostname is flagged; a 401, 403, or 429 response is treated as bot-blocking, not as a dead page. Jev, TypeSafe's classifier model, then judges each page that loaded against the entry: whether it is the program's own student offer page, whether it still offers what the description says, whether the description names a concrete plan, amount, or duration, whether a student can claim the offer without an institution, and whether the page's offer matches the stored offer type.</p>
+          <p>The script writes the entries that fail a check to <code>flags.json</code>. Claude opens only those entries, fixes a link or description when the case is unambiguous, and merges one <code>[Maintenance]</code> PR. When Jev is not configured or cannot read a page, the entry is flagged <code>unjudged</code> and Claude reviews it itself.</p>
+        </template>
+        <template id="panel-claude">
+          <h3>Claude</h3>
+          <p>Each workflow runs Claude through <code>anthropics/claude-code-action</code> with a fixed set of tools. The instructions are the workflow's <code>prompt:</code>, plain text checked into the repository. Claude reads the input, calls tools, writes the change to <code>data/</code>, and runs the validator.</p>
+        </template>
+        <template id="panel-search">
+          <h3>Web Search</h3>
+          <p>Claude's built-in <code>WebSearch</code> tool. It is used to confirm that a student program exists on the live web and to find its official page.</p>
+        </template>
+        <template id="panel-web">
+          <h3>Web Fetch</h3>
+          <p>Claude's built-in <code>WebFetch</code> tool. It opens the program's page to confirm the terms and the signup link. The recorded link must be a URL loaded in the same run, never a path guessed from the name.</p>
+        </template>
+        <template id="panel-gate">
+          <h3>Validator: <code>validate_data.py</code></h3>
+          <p>A deterministic script with no model in it. It checks schema, URL shape, and sort order offline and exits <code>0</code> (pass) or <code>1</code> (fail). It never fetches links; link liveness is the weekly check. Claude re-runs it after each fix until it exits <code>0</code>, and only then opens the PR; it is the only check before merge. The <code>validate-data</code> workflow also runs it on every PR and every push to <code>main</code> that touches <code>data/</code> or the validator, and reports the result without blocking the merge.</p>
+        </template>
+        <template id="panel-output">
+          <h3>GitHub output</h3>
+          <p>After the validator exits 0, Claude opens a pull request and squash-merges it in the same run; the change is live on merge. Branch protection does not require the <code>validate-data</code> check, so the merge does not wait for that run. For a rejected or duplicate submission it comments the reason and closes the issue. A submission run that fails is retried once; a second failure labels the issue <code>needs-manual-review</code> and mentions the maintainer.</p>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- workflows -->
+  <section class="section" aria-labelledby="h-wf">
+    <h2 id="h-wf">Workflows <span class="tag-live">live from the Actions API</span></h2>
+    <p class="section-note">The five workflows marked Claude run it on a path written in advance; Claude does not choose which steps to take. Status is each file's most recent run.</p>
+    <div id="workflows-live" class="wf-list" aria-live="polite">
+      <p class="state">Loading workflow status…</p>
+    </div>
+  </section>
+
+  <!-- ledger -->
+  <section class="section" aria-labelledby="h-ledger">
+    <h2 id="h-ledger">Pull requests and the validator <span class="tag-live">live from the GitHub API</span></h2>
+    <div id="ledger-live" class="ledger" aria-live="polite">
+      <p class="state">Loading counts…</p>
+    </div>
+  </section>
+
+  <!-- simulated run -->
+  <section class="section" aria-labelledby="h-sim">
+    <h2 id="h-sim">A submission, step by step <span class="tag-live">simulated</span></h2>
+    <div class="sim-task">
+      <span class="sim-task-k">GitHub issue #67</span>
+      <span class="sim-task-v">“Vercel has a free plan for students”</span>
+    </div>
+    <ol class="trace" id="sim-trace" aria-live="polite" aria-label="Simulated run"></ol>
+    <div class="sim-controls">
+      <button type="button" class="btn" id="sim-btn">Start</button>
+      <span class="sim-hint" id="sim-hint"></span>
+    </div>
+  </section>
+
+  <!-- last run -->
+  <section class="section">
+    <details class="fold">
+      <summary><span class="fold-k">Last real submission run</span><span class="fold-meta" id="run-summary-meta"></span></summary>
+      <div id="run-output" class="run-output">
+        <p class="state">Loading the last run…</p>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Design references: <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener noreferrer">Building Effective Agents</a>,
+    <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener noreferrer">Effective Harnesses</a>,
+    <a href="https://karpathy.bearblog.dev/verifiability/" target="_blank" rel="noopener noreferrer">Verifiability</a>.
+    The workflows are <a href="https://github.com/student-benefits/student-benefits.github.io/tree/main/.github/workflows" target="_blank" rel="noopener noreferrer">open source</a>.</p>
+</footer>
+</div>
+
+<script src="/assets/shared.js"></script>
+<script src="/how-it-works/how-it-works.js"></script>
+</body>
+</html>

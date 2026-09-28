@@ -1,6 +1,6 @@
 # AGENTS.md — student-benefits.github.io
 
-A community-curated directory of student benefits that help students build, learn, and ship. Static HTML/JS on GitHub Pages (served from `main` root), no build step: `/benefits/` renders `data/benefits.json`, `/events/` renders `data/events.json`, `/agent/` shows how Grant (the Claude workflows) works from `agent/state/*.json` and the public GitHub API.
+A community-curated directory of student benefits that help students build, learn, and ship. Static HTML/JS on GitHub Pages (served from `main` root), no build step: `/benefits/` renders `data/benefits.json`, `/events/` renders `data/events.json`, `/how-it-works/` shows how Grant (the Claude workflows) works from `agent/state/*.json` and the public GitHub API. `/agent/` is a redirect stub to it; `agent/state/` stays where the workflows write it.
 
 ## Curation thesis
 
@@ -8,11 +8,11 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
 
 ## Operating rules
 
-- Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. The validator is the only gate.
+- Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. That in-loop run is the only check before merge: `main` has no required status checks (they would also reject the direct `agent/state/` pushes), so the CI run of `validate-data` reports after the fact.
 - Commits are authored `Claude <noreply@anthropic.com>`. `data/` changes go through a PR; `agent/state/` files are pushed directly to `main`.
 - Claude Code runs on subscription auth (no per-token billing); the Jev call in `check_links.py` is the only metered call.
 - No personal names in docs, context, or agent surfaces; the maintainer is `vars.MAINTAINER`, referenced as "the maintainer".
-- `agent/index.html` must match workflow behavior (logic, validation rules, schema, triggers). A mismatch is a bug.
+- `how-it-works/index.html` must match workflow behavior (logic, validation rules, schema, triggers). A mismatch is a bug.
 
 ## `data/benefits.json`
 
@@ -86,7 +86,7 @@ Plain Actions YAML in `.github/workflows/`; the agent step is `anthropics/claude
 
 ## Agent state (`agent/state/`)
 
-Written by workflows, read by `agent/index.html`; never hand-edit. `timestamp` comes from the runner clock; `model` records `CLAUDE_MODEL` at run time.
+Written by workflows, read by `how-it-works/index.html` (via `how-it-works/how-it-works.js`); never hand-edit. `timestamp` comes from the runner clock; `model` records `CLAUDE_MODEL` at run time.
 
 | File | Written by |
 |---|---|

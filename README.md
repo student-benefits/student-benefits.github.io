@@ -6,7 +6,7 @@
 
 A program earns an entry only if it advances building, learning, shipping, or research. That bar is the whole product: a genuine, well-priced music subscription is still a reject.
 
-The directory is kept current by **Grant** — a set of GitHub Actions workflows running Claude and a deterministic validation gate. It discovers new programs twice a month, validates community submissions opened as issues, and audits link health weekly. Grant merges its own PRs; no change merges unless `scripts/validate_data.py` passes, and that gate is the only check. Run logs and tool traces are open at [/agent/](https://student-benefits.github.io/agent/).
+The directory is kept current by **Grant** — a set of GitHub Actions workflows running Claude. It discovers new programs twice a month, validates community submissions opened as issues, and audits link health weekly. Grant merges its own PRs after running `scripts/validate_data.py` until it exits 0; CI reruns the same check on every PR and push to `main`. No person reviews a change before it merges. Run logs and tool traces are open at [/how-it-works/](https://student-benefits.github.io/how-it-works/).
 
 [![Live](https://img.shields.io/badge/live-student--benefits.github.io-blue)](https://student-benefits.github.io)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
@@ -17,7 +17,7 @@ The directory is kept current by **Grant** — a set of GitHub Actions workflows
 
 Content enters through multiple paths: humans submit issues and Grant validates them, while scheduled workflows discover new programs and events and audit link health on their own. Whatever the path, Grant opens a PR, runs the gate until it passes, and merges; the change is live on merge. A submission that fails twice is labeled `needs-manual-review` for the maintainer. The full roster of workflows (triggers and what each does) is the table in [`AGENTS.md`](AGENTS.md#automated-workflows) — the canonical source.
 
-The **[/agent/](https://student-benefits.github.io/agent/)** page shows the loop, every workflow with its live run status, the PR and gate ledger read from the GitHub API, and the last real run trace — so the system can be checked, not just described.
+The **[/how-it-works/](https://student-benefits.github.io/how-it-works/)** page shows the loop, every workflow with its live run status, the PR and gate ledger read from the GitHub API, and the last real run trace — so the system can be checked, not just described.
 
 ---
 
