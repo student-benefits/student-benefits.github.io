@@ -47,7 +47,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model ${{ vars.CLAUDE_MODEL }} --allowedTools 'Edit,MultiEdit,Write,Read,Glob,Grep,LS,WebSearch,WebFetch,Bash(git:*),Bash(gh:*),Bash(python3 scripts/validate_data.py)'"
           prompt: |
-            You fix the benefits in `data/benefits.json` that this week's audit flagged, validate, and open and merge a single PR.
+            You remove expired benefits and fix the benefits in `data/benefits.json` that this week's audit flagged, validate, and open and merge a single PR. Today is ${{ steps.now.outputs.date }} (UTC).
 
             ## Input: `flags.json`
 
@@ -60,6 +60,10 @@ jobs:
 
             Only act on unambiguous cases; when uncertain, leave the entry unchanged.
 
+            ## Step 0: Remove expired
+
+            Remove every entry whose `expires` is strictly before today. Do not check its link; the claim window has closed.
+
             ## Step 1: Fix
 
             For a dead, redirected, or wrong link: WebSearch `"{name}" student discount signup`, WebFetch the best result, and set `link` to the program's own signup/pricing/overview page (copy the loaded URL verbatim). If the program no longer offers a student benefit, remove the entry. Fix `offer_type` mismatches and vague descriptions in place, keeping the offer specifics and ≤120 chars. Preserve 2-space indent, trailing newline, and id-sort order.
@@ -70,7 +74,7 @@ jobs:
 
             ## Step 3: Open a PR and merge it (only if you changed the file)
 
-            Branch `maintain-benefits-${{ steps.now.outputs.date }}`, title `[Maintenance]: Fix {N} benefit(s)`. Body: a one-sentence Summary, a table of what changed (benefit, problem, fix), and separately anything removed and why. Omit empty sections. Commit with `--author="Claude <noreply@anthropic.com>"`, push, `gh pr create`, then `gh pr merge --squash --delete-branch`.
+            Branch `maintain-benefits-${{ steps.now.outputs.date }}`, title `[Maintenance]: Fix {N} benefit(s)`. Count removed entries in {N}. Body: a one-sentence Summary, a table of what changed (benefit, problem, fix), and separately anything removed and why (`expired {date}` for Step 0). Omit empty sections. Commit with `--author="Claude <noreply@anthropic.com>"`, push, `gh pr create`, then `gh pr merge --squash --delete-branch`.
 
             ## Step 4: Close `link-health` issues
 

@@ -298,7 +298,8 @@
       "Research",
       "Study"
     ],
-    "popularity": 5
+    "popularity": 5,
+    "expires": "2026-10-31"
   },
   {
     "id": "clerk",

@@ -102,6 +102,7 @@ jobs:
             - `category`: read `data/categories.json` for the authoritative list, match exactly
             - `tags`: 2–4 relevant tags. If body contains `**Pack**: GitHub Student Pack`, include `"GitHub Student Pack"`
             - Add `"repo": "owner/repo"` if open source
+            - Add `"expires": "YYYY-MM-DD"` only when the program's page states a last day to claim the offer; never guess
 
             Start from the user-provided link if present; otherwise find the official student signup URL. Either way, the link is a candidate to verify in Step 4.5 — not a value to trust as-is.
 

@@ -45,6 +45,11 @@ function writeUrlState(keepHash) {
   history.replaceState(null, '', (qs ? '?' + qs : location.pathname) + hash);
 }
 
+// A claim window that has closed hides the card until maintain-benefits removes the entry.
+function isExpired(b) {
+  return !!b.expires && new Date(b.expires + 'T23:59:59') < new Date();
+}
+
 function getFilteredAndSorted() {
   const q = searchQuery.toLowerCase();
   return benefits
@@ -247,7 +252,7 @@ Promise.all([
   fetch('/data/benefits.json').then(function (r) { return r.json(); }),
   fetch('/data/categories.json').then(function (r) { return r.json(); })
 ]).then(function (results) {
-  benefits = results[0];
+  benefits = results[0].filter(function (b) { return !isExpired(b); });
   categories = results[1];
   // A ?cat= naming a category that no longer exists would filter everything out.
   if (activeCategory !== 'All' && categories.indexOf(activeCategory) === -1) activeCategory = 'All';
