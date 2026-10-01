@@ -94,11 +94,12 @@ jobs:
               "description": "What students get — be specific (max 120 chars)",
               "link": "Direct URL to the student signup page",
               "tags": ["Tag1", "Tag2"],
-              "popularity": 5
+              "popularity": 1–10
             }
             ```
 
             - `id`: lowercase, non-alphanumeric → hyphens, unique in data/benefits.json
+            - `popularity`: rank it 1–10 with the rubric under `popularity` in `AGENTS.md`, from the terms you confirmed on the program's page: how generous the offer is (free > credits or trial > discount, scaled by dollar value and duration) and how central the tool is to building or learning. Never leave the unranked default of 5.
             - `category`: read `data/categories.json` for the authoritative list, match exactly
             - `tags`: 2–4 relevant tags. If body contains `**Pack**: GitHub Student Pack`, include `"GitHub Student Pack"`
             - Add `"repo": "owner/repo"` if open source

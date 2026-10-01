@@ -298,7 +298,7 @@
       "Research",
       "Study"
     ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "clerk",
@@ -560,24 +560,24 @@
   },
   {
     "id": "github-copilot",
-    "name": "GitHub Copilot Pro",
+    "name": "GitHub Copilot Student",
     "category": "AI Tools",
     "offer_type": "free",
-    "description": "Free Copilot Pro while you're a student. AI pair programmer with unlimited completions and chat.",
+    "description": "Free while enrolled: unlimited code completions and 200 AI credits/month for chat and agents; model auto-selected.",
     "link": "https://github.com/education/students",
     "tags": [
       "AI",
       "Coding",
       "GitHub"
     ],
-    "popularity": 10
+    "popularity": 7
   },
   {
     "id": "github-student-pack",
     "name": "GitHub Student Developer Pack",
     "category": "Dev Tools",
     "offer_type": "free",
-    "description": "100+ free tools including Copilot Pro, JetBrains IDEs, DigitalOcean credits, domains, and more.",
+    "description": "100+ free tools including Copilot Student, JetBrains IDEs, DigitalOcean credits, domains, and more.",
     "link": "https://education.github.com/pack",
     "tags": [
       "Free Tools",
@@ -612,7 +612,7 @@
       "Research",
       "Study"
     ],
-    "popularity": 5
+    "popularity": 10
   },
   {
     "id": "google-cloud",
@@ -785,7 +785,7 @@
       "Credits",
       "Student Verification"
     ],
-    "popularity": 5
+    "popularity": 8
   },
   {
     "id": "linear",
@@ -841,7 +841,7 @@
       "Full-Stack",
       "App Builder"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "lucidchart",
@@ -1040,7 +1040,7 @@
       "Credits",
       "Coding Assistant"
     ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "oracle-cloud",
@@ -1083,7 +1083,7 @@
       "Search",
       "Research"
     ],
-    "popularity": 8
+    "popularity": 6
   },
   {
     "id": "poeditor",
@@ -1241,7 +1241,7 @@
       "Analytics",
       "Cloud"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "scrimba",
@@ -1484,7 +1484,7 @@
       "Experiment Tracking",
       "Research"
     ],
-    "popularity": 5,
+    "popularity": 7,
     "repo": "wandb/wandb"
   },
   {
