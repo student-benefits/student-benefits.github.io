@@ -34,7 +34,10 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
 - `category`: exactly one value from `data/categories.json`.
 - `offer_type`: required; `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period, then paid).
 - `description`: specific ("Free Pro plan for 1 year", not "Student discount available"); max 120 chars.
-- `popularity`: integer 1–10, default 5. An editorial priority, never a usage count (nothing counts clicks); 5 means "not yet ranked", so the UI labels the sort "Recommended" and breaks ties free-first, then A–Z. Raise only for an unusually generous offer or an unusually central tool.
+- `popularity`: integer 1–10. An editorial priority, never a usage count (nothing counts clicks), so the UI labels the sort "Recommended" and breaks ties free-first, then A–Z. 5 marks an entry not yet ranked; a new entry gets its rank from this rubric, which weighs how generous the offer is (free > credits or trial > discount, scaled by dollar value and duration) against how central the tool is to building or learning:
+  - **9–10**: free use or credits worth roughly $75 or more, on a tool central to building or learning. 10 is a year or more of a flagship paid plan.
+  - **6–8**: a real but bounded offer: free use with tight caps, a smaller or shorter trial or credit grant, a ≥50% discount on a central tool, a free plan of a specialised tool, or a generous offer limited to a named list of schools.
+  - **1–4**: a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning.
 - `repo`: optional, open-source projects only.
 - Entries are sorted by `id`; insert in sorted position, never append. Sorted insertion spreads concurrent additions across the file so parallel add-benefit PRs merge without conflicting. The UI re-sorts client-side.
 
