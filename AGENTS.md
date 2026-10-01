@@ -6,6 +6,14 @@ A community-curated directory of student benefits that help students build, lear
 
 A benefit qualifies if it helps a student create, learn, ship, or research: dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Consumption perks are rejected however good the deal: entertainment (music, video streaming), shopping, broad discount aggregators, consumer VPNs. The test is "does this advance building or learning?", never "is this a real student discount?".
 
+A qualifying benefit is listed only if it also clears the bar for value:
+
+- It ranks 6 or higher on the `popularity` rubric below. An entry ranking 1–4 is rejected, not listed low; `validate_data.py` rejects any entry under 6.
+- A GitHub Student Pack offer gets its own entry only if it ranks 9 or higher. The `github-student-pack` entry covers the rest.
+- A new entry in a category that already holds 10 or more entries must rank 8 or higher.
+
+A rejected program goes in `agent/state/rejected.json` with its reason, so discovery does not propose it again.
+
 ## Operating rules
 
 - Claude owns the merge: each data-writing workflow opens a PR and squash-merges it once `scripts/validate_data.py` exits 0 in-loop. That in-loop run is the only check before merge: `main` has no required status checks (they would also reject the direct `agent/state/` pushes), so the CI run of `validate-data` reports after the fact.
@@ -35,10 +43,10 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
 - `category`: exactly one value from `data/categories.json`.
 - `offer_type`: required; `free` (no cost), `discount` (reduced price), `credits` (cloud/platform credits), `trial` (free period, then paid).
 - `description`: specific ("Free Pro plan for 1 year", not "Student discount available"); max 120 chars.
-- `popularity`: integer 1–10. An editorial priority, never a usage count (nothing counts clicks), so the UI labels the sort "Recommended" and breaks ties free-first, then A–Z. 5 marks an entry not yet ranked; a new entry gets its rank from this rubric, which weighs how generous the offer is (free > credits or trial > discount, scaled by dollar value and duration) against how central the tool is to building or learning:
+- `popularity`: integer 6–10 for a listed entry (1–4 is a rejection; see the curation thesis). An editorial priority, never a usage count (nothing counts clicks), so the UI labels the sort "Recommended" and breaks ties free-first, then A–Z. Every entry gets its rank from this rubric, which weighs how generous the offer is (free > credits or trial > discount, scaled by dollar value and duration) against how central the tool is to building or learning:
   - **9–10**: free use or credits worth roughly $75 or more, on a tool central to building or learning. 10 is a year or more of a flagship paid plan.
   - **6–8**: a real but bounded offer: free use with tight caps, a smaller or shorter trial or credit grant, a ≥50% discount on a central tool, a free plan of a specialised tool, or a generous offer limited to a named list of schools.
-  - **1–4**: a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning.
+  - **1–4** (not listed): a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning.
 - `repo`: optional, open-source projects only.
 - `expires`: optional; the last day a student can claim a time-limited offer, when the program states one. Omit for ongoing programs; never guess. The validator rejects a description that states a claim deadline ("claim by", "redeem until") without this field. The UI hides an entry after this date, and `maintain-benefits` removes it on its next run.
 - Entries are sorted by `id`; insert in sorted position, never append. Sorted insertion spreads concurrent additions across the file so parallel add-benefit PRs merge without conflicting. The UI re-sorts client-side.
@@ -84,7 +92,7 @@ Plain Actions YAML in `.github/workflows/`; the agent step is `anthropics/claude
 | `validate-data.yml` | PR or push to `main` touching `data/` or the validator | Runs `scripts/validate_data.py` |
 
 - `check_links.py` records HTTP status and final hostname for every link; when the `TYPESAFE_API_KEY` secret is set, Jev (TypeSafe's classifier model) judges each loaded page against its description. Without the key, loaded pages are flagged `unjudged` and Claude reviews them.
-- `validate_data.py` checks structure and URL shape offline and never fetches links; liveness is the weekly audit.
+- `validate_data.py` checks structure, URL shape, and the popularity floor offline and never fetches links; liveness is the weekly audit.
 - Failure path (`add-*`): a failed run retries once via `workflow_dispatch` (label `redispatched`), then labels the issue `needs-manual-review` and @-mentions `vars.MAINTAINER`. The retry goes through `workflow_dispatch` because `claude-code-action` exempts it from the actor check that fails non-collaborator label events (#267).
 - A new issue template's label must exist in the repo first; templates apply only existing labels.
 - Each cron workflow's working-when criterion and teardown N are in its YAML header.
@@ -99,4 +107,4 @@ Written by workflows, read by `how-it-works/index.html` (via `how-it-works/how-i
 | `last-events-submission.json` | add-event |
 | `last-benefits-discovery.json` | discover-benefits (heartbeat) |
 | `last-events-discovery.json` | discover-events (heartbeat) |
-| `rejected.json` | add-benefit; read by add-benefit and discover-benefits for dedup |
+| `rejected.json` | add-benefit (and catalog audits); read by add-benefit and discover-benefits for dedup |

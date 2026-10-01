@@ -30,6 +30,8 @@ DATA = ROOT / "data"
 ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 OFFER_TYPES = {"free", "discount", "credits", "trial"}
+# The listing floor of the popularity rubric in AGENTS.md: an entry that ranks 1-4 is not listed.
+POPULARITY_FLOOR = 6
 # Deliberately narrow: only phrasings about the entry's own application. A bare
 # "deadline" also describes a travel grant or a funding round attached to an
 # otherwise open event (NeurIPS), where a `deadline` field would wrongly close it.
@@ -116,6 +118,8 @@ def validate_benefits() -> None:
         pop = b.get("popularity")
         if not isinstance(pop, int) or not (1 <= pop <= 10):
             err(f"{name}: popularity must be an integer 1-10, got {pop!r}")
+        elif pop < POPULARITY_FLOOR:
+            err(f"{name}: popularity {pop} is below the listing floor of {POPULARITY_FLOOR} (AGENTS.md rubric); reject the entry instead")
         tags = b.get("tags")
         if not isinstance(tags, list) or not tags:
             err(f"{name}: tags must be a non-empty list")

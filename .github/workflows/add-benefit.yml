@@ -62,7 +62,7 @@ jobs:
 
             Read `data/benefits.json` and `agent/state/rejected.json`.
 
-            If the program's name or domain is in `agent/state/rejected.json`, comment "**Previously checked:** No student program was found for **{name}** when last verified on {date}. If this has changed, reply with a direct link to the student signup page." Then close the issue and stop.
+            If the program's name or domain is in `agent/state/rejected.json`, comment "**Previously checked:** **{name}** was reviewed on {date} and not added: {reason}. If the offer has changed, reply with a direct link to the student signup page." Then close the issue and stop.
 
             If duplicate in `data/benefits.json` (name match case-insensitive, or hostname match ignoring `www.`), comment "**Duplicate:** Already in the directory as **{existing}**. If this is different, add more details." Then close the issue and stop.
 
@@ -71,6 +71,13 @@ jobs:
             Use WebSearch ("{product} student discount" or "{product} education program") and WebFetch on the top result to confirm a real student program exists. Don't rely solely on training data.
 
             **Build & grow (the curation thesis):** the benefit must help a student *create, learn, ship, or research* — dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Reject consumption perks regardless of how good the deal is: entertainment (music, video streaming), shopping, consumer subscriptions (e.g. a consumer VPN), and broad discount aggregators (Student Beans / UNiDAYS-style). The test isn't "is this a real student discount?" but "does this advance building or learning?" — if it doesn't, it's a reject even when the offer is genuine and well-priced.
+
+            **Value:** rank the offer with the `popularity` rubric in `AGENTS.md`, from the terms you confirmed on the program's page. The benefit is invalid if:
+            - it ranks 1–4 (a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning);
+            - it is a GitHub Student Pack offer ranking below 9 (the directory's GitHub Student Pack entry already covers it);
+            - its category already holds 10 or more entries in `data/benefits.json` and it ranks below 8.
+
+            A real, well-priced student program can still fail this bar; the directory lists only high-value offers.
 
             If invalid, comment "**Cannot add:** {reason}". Then append to `agent/state/rejected.json` and commit it (see "Committing `rejected.json`" below):
             ```json
@@ -94,12 +101,12 @@ jobs:
               "description": "What students get — be specific (max 120 chars)",
               "link": "Direct URL to the student signup page",
               "tags": ["Tag1", "Tag2"],
-              "popularity": 1–10
+              "popularity": 6–10
             }
             ```
 
             - `id`: lowercase, non-alphanumeric → hyphens, unique in data/benefits.json
-            - `popularity`: rank it 1–10 with the rubric under `popularity` in `AGENTS.md`, from the terms you confirmed on the program's page: how generous the offer is (free > credits or trial > discount, scaled by dollar value and duration) and how central the tool is to building or learning. Never leave the unranked default of 5.
+            - `popularity`: the rank from Step 3 (6–10; anything lower was rejected there).
             - `category`: read `data/categories.json` for the authoritative list, match exactly
             - `tags`: 2–4 relevant tags. If body contains `**Pack**: GitHub Student Pack`, include `"GitHub Student Pack"`
             - Add `"repo": "owner/repo"` if open source

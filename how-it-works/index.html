@@ -118,7 +118,7 @@
         <template id="panel-claude">
           <h3>Claude</h3>
           <p>Each workflow runs Claude through <code>anthropics/claude-code-action</code> with a fixed set of tools. The instructions are the workflow's <code>prompt:</code>, plain text checked into the repository. Claude reads the input, calls tools, writes the change to <code>data/</code>, and runs the validator.</p>
-          <p>A new benefit gets a <code>popularity</code> rank from 1 to 10, which orders the Recommended sort. Claude assigns it from the rubric in <code>AGENTS.md</code>: how generous the offer is (free before credits or a trial, before a discount, scaled by dollar value and duration) and how central the tool is to building or learning.</p>
+          <p>A new benefit gets a <code>popularity</code> rank from 1 to 10, which orders the Recommended sort. Claude assigns it from the rubric in <code>AGENTS.md</code>: how generous the offer is (free before credits or a trial, before a discount, scaled by dollar value and duration) and how central the tool is to building or learning. The rank is also the bar for being listed: an offer ranking 1 to 4 is rejected, a GitHub Student Pack offer needs 9 or more (the Pack has its own entry), and a category that already holds 10 entries takes a new one only at 8 or more. A rejection is recorded in <code>agent/state/rejected.json</code> so it is not proposed again.</p>
         </template>
         <template id="panel-search">
           <h3>Web Search</h3>
@@ -130,7 +130,7 @@
         </template>
         <template id="panel-gate">
           <h3>Validator: <code>validate_data.py</code></h3>
-          <p>A deterministic script with no model in it. It checks schema, URL shape, sort order, and date formats offline, and rejects a benefit whose description states a claim deadline without an <code>expires</code> date. It exits <code>0</code> (pass) or <code>1</code> (fail). It never fetches links; link liveness is the weekly check. Claude re-runs it after each fix until it exits <code>0</code>, and only then opens the PR; it is the only check before merge. The <code>validate-data</code> workflow also runs it on every PR and every push to <code>main</code> that touches <code>data/</code> or the validator, and reports the result without blocking the merge.</p>
+          <p>A deterministic script with no model in it. It checks schema, URL shape, sort order, and date formats offline, rejects a benefit ranked below 6, and rejects a benefit whose description states a claim deadline without an <code>expires</code> date. It exits <code>0</code> (pass) or <code>1</code> (fail). It never fetches links; link liveness is the weekly check. Claude re-runs it after each fix until it exits <code>0</code>, and only then opens the PR; it is the only check before merge. The <code>validate-data</code> workflow also runs it on every PR and every push to <code>main</code> that touches <code>data/</code> or the validator, and reports the result without blocking the merge.</p>
         </template>
         <template id="panel-output">
           <h3>GitHub output</h3>

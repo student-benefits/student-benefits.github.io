@@ -143,25 +143,15 @@ const SIM_STEPS = [
   { actor: 'web', head: 'web_fetch', detail: 'vercel.com/docs/plans/hobby',
     primary: 'Confirmed: free Hobby plan for personal, non-commercial projects; no student verification required.',
     note: 'Opens the page to read the exact terms and the signup URL.' },
-  { actor: 'grant', head: 'edit', detail: 'data/benefits.json',
-    primary: 'Wrote <strong>Vercel</strong> · Cloud &amp; Hosting',
-    code: `{
-  "id": "vercel",
-  "name": "Vercel",
-  "category": "Cloud &amp; Hosting",
-  "offer_type": "free",
-  "popularity": 4
-}`,
-    note: 'Inserts the entry into data/benefits.json in sorted position. Ranks it 4 from the rubric: free, but the same plan anyone gets.' },
-  { actor: 'gate', head: 'validate_data.py', detail: 'exit 0',
-    primary: 'Schema, URL shape, and sort order <strong class="ok">pass</strong>.',
-    note: 'On a fail, Claude fixes the entry and runs the validator again.' },
-  { actor: 'github', head: 'create_pull_request', detail: 'PR #68',
-    primary: 'Opened PR #68, “Add 1 student benefit: Vercel”, on branch <code>add-benefit-67</code>, and squash-merged it.',
-    note: 'The benefit is live on merge.' },
+  { actor: 'grant', head: 'rank', detail: '4 of 10',
+    primary: 'Ranks it <strong>4</strong> from the rubric: free, but the same Hobby plan anyone gets.',
+    note: 'An offer ranking 1 to 4 is below the bar for the directory, however real the program is.' },
   { actor: 'github', head: 'add_comment', detail: 'issue #67',
-    primary: 'Commented on issue #67 with the PR link.',
-    note: 'Reports the outcome to the submitter.' }
+    primary: '<strong class="bad">Cannot add:</strong> the free Hobby plan is not a student offer; it ranks 4, below the bar of 6.',
+    note: 'Explains the rejection to the submitter and closes the issue.' },
+  { actor: 'grant', head: 'edit', detail: 'agent/state/rejected.json',
+    primary: 'Recorded <code>vercel.com</code> with the reason, and pushed it to <code>main</code>.',
+    note: 'Discovery and later submissions skip a recorded rejection unless the offer has changed.' }
 ];
 
 let simStep = 0;

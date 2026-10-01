@@ -77,7 +77,7 @@ jobs:
             | Kiro students | `https://kiro.dev/students/` |
             | Hugging Face education | `https://huggingface.co/education` |
 
-            Extract relevant tools/programs from each.
+            Extract relevant tools/programs from each. From the GitHub Student Pack, take only offers that would rank 9 or higher on their own (see the quality bar); the directory's GitHub Student Pack entry already covers the rest.
 
             ## Step 3: Keyword pass (WebSearch)
 
@@ -96,11 +96,14 @@ jobs:
 
             Quality bar — reject on any failure:
             1. **Build & grow** (the curation thesis): the benefit must help a student *create, learn, ship, or research* — dev tools, infrastructure, cloud/AI credits, design and learning platforms, the hardware students build on. Reject consumption perks regardless of how good the deal is: entertainment (music, video streaming), shopping, consumer subscriptions (e.g. a consumer VPN), and broad discount aggregators (Student Beans / UNiDAYS-style). If it doesn't advance building or learning, skip it.
-            2. Substantial offer: free tier, 50%+ discount, or meaningful credits — reject token discounts <30% with no free tier
-            3. Recognizable product with real student community
-            4. Self-serve student program page (not "contact us" / institutional purchase)
-            5. Fills a gap (avoid 4th entry in saturated categories)
-            6. Active signup page
+            2. **Value**: rank it with the `popularity` rubric in `AGENTS.md`, from the terms on the program page. Reject anything that ranks 1–4: a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning.
+            3. **GitHub Student Pack**: an offer reached through the Pack must rank 9 or higher on its own.
+            4. **Fills a gap**: in a category that already holds 10 or more entries in `data/benefits.json`, the candidate must rank 8 or higher.
+            5. Recognizable product with real student community
+            6. Self-serve student program page (not "contact us" / institutional purchase)
+            7. Active signup page
+
+            Fewer issues is the expected outcome: open none rather than one that misses the bar.
 
             Shortlist up to **5 new benefits** across both passes.
 
@@ -113,6 +116,7 @@ jobs:
             - **Body**:
               ```
               **What students get**: <one specific sentence — plan, amount, or duration>
+              **Rank**: <6–10 from the rubric, with one clause on why>
               **Signup**: <direct URL — must be one you loaded successfully in Step 4, copied verbatim>
               **Discovered via**: <known-source | keyword>
               **Pack**: GitHub Student Pack

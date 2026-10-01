@@ -1,1 +1,344 @@
-[]
+[
+  {
+    "name": "1Password",
+    "domain": "1password.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Adafruit",
+    "domain": "adafruit.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Algolia",
+    "domain": null,
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Appfigures",
+    "domain": "appfigures.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Apple Education Pricing",
+    "domain": "apple.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Arduino Cloud",
+    "domain": "arduino.cc",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Astra Security",
+    "domain": "getastra.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Bootstrap Studio",
+    "domain": "bootstrapstudio.io",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "BrowserStack",
+    "domain": "browserstack.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Camber",
+    "domain": "cambercloud.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Clerk",
+    "domain": "clerk.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Codecov",
+    "domain": "about.codecov.io",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Codédex",
+    "domain": "codedex.io",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "CodeScene",
+    "domain": "codescene.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "ConfigCat",
+    "domain": "configcat.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Dashlane",
+    "domain": "dashlane.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Datadog",
+    "domain": "studentpack.datadoghq.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "DevoLens",
+    "domain": "app.cryptolens.io",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Doppler",
+    "domain": "doppler.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Evernote Student",
+    "domain": "evernote.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "GitKraken",
+    "domain": "gitkraken.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "GoRails",
+    "domain": "gorails.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Grammarly",
+    "domain": "grammarly.com",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Hack The Box Student",
+    "domain": "academy.hackthebox.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Honeybadger",
+    "domain": "honeybadger.io",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "IBM SkillsBuild",
+    "domain": "skillsbuild.org",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Icons8",
+    "domain": "icons8.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Loom Education",
+    "domain": "atlassian.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "LUMIX EDU",
+    "domain": "shop.panasonic.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Name.com",
+    "domain": "name.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Namecheap",
+    "domain": "nc.me",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "NVIDIA Education",
+    "domain": "developer.nvidia.com",
+    "reason": "Ranks 1-4 on the popularity rubric: no concrete student offer stated",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Obsidian",
+    "domain": "obsidian.md",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Oracle Cloud",
+    "domain": "academy.oracle.com",
+    "reason": "Student credits require an Oracle Academy member institution; not claimable by an individual student",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Pageclip",
+    "domain": "pageclip.co",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "POEditor",
+    "domain": "poeditor.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Polypane",
+    "domain": "polypane.app",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "PopSQL",
+    "domain": "popsql.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Postman Student Expert",
+    "domain": "academy.postman.com",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Raycast Pro",
+    "domain": "raycast.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Requestly",
+    "domain": "requestly.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Samsung Education",
+    "domain": "samsung.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Scrimba",
+    "domain": "scrimba.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Simple Analytics",
+    "domain": "dashboard.simpleanalytics.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Stripe",
+    "domain": null,
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "SymfonyCasts",
+    "domain": "symfonycasts.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Testmail",
+    "domain": "testmail.app",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "TestMu AI",
+    "domain": "testmuai.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "ToDiagram",
+    "domain": "todiagram.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Tower",
+    "domain": "git-tower.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Travis CI",
+    "domain": "travis-ci.com",
+    "reason": "Ranks 1-4 on the popularity rubric: little beyond what anyone gets free",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "TryHackMe Student",
+    "domain": "tryhackme.com",
+    "reason": "Ranks 1-4 on the popularity rubric: discount under 50%",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Visme",
+    "domain": "visme.co",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Wispr Flow",
+    "domain": "wisprflow.ai",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Working Copy",
+    "domain": "workingcopyapp.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Xojo",
+    "domain": "xojo.com",
+    "reason": "Ranks 1-4 on the popularity rubric: peripheral to building or learning",
+    "checked": "2026-10-01"
+  },
+  {
+    "name": "Zyte",
+    "domain": "zyte.com",
+    "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
+    "checked": "2026-10-01"
+  }
+]

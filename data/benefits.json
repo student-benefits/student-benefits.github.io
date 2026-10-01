@@ -1,33 +1,5 @@
 [
   {
-    "id": "1password",
-    "name": "1Password",
-    "category": "Security",
-    "offer_type": "free",
-    "description": "Free for 1 year via GitHub Student Pack. Password manager with SSH agent and CLI integration.",
-    "link": "https://1password.com/developers/students",
-    "tags": [
-      "Security",
-      "Passwords",
-      "GitHub"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "adafruit",
-    "name": "Adafruit",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free 1-year Adafruit IO+ membership and 30% off select Circuit Playground hardware.",
-    "link": "https://www.adafruit.com/github-students",
-    "tags": [
-      "Hardware",
-      "IoT",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
     "id": "adobe-creative-cloud",
     "name": "Adobe Creative Cloud",
     "category": "Design",
@@ -40,7 +12,7 @@
       "Video",
       "Creative"
     ],
-    "popularity": 9
+    "popularity": 7
   },
   {
     "id": "airtable-student",
@@ -57,49 +29,6 @@
     "popularity": 7
   },
   {
-    "id": "algolia",
-    "name": "Algolia",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "100k records and 1M search operations/month free for 1 year via GitHub Student Pack.",
-    "link": "https://education.github.com/pack",
-    "tags": [
-      "Search",
-      "API",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "appfigures",
-    "name": "Appfigures",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free app analytics and ASO tools for 1 year — metrics, keyword intelligence, and competitor analysis.",
-    "link": "https://appfigures.com/landing/github-student",
-    "tags": [
-      "Analytics",
-      "App Store",
-      "Mobile",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "apple-education",
-    "name": "Apple Education Pricing",
-    "category": "Hardware",
-    "offer_type": "discount",
-    "description": "Save up to $200 on Mac and $50 on iPad. Free AirPods during back-to-school season.",
-    "link": "https://www.apple.com/us-edu/store",
-    "tags": [
-      "Hardware",
-      "Apple",
-      "MacBook"
-    ],
-    "popularity": 9
-  },
-  {
     "id": "appwrite",
     "name": "Appwrite Education",
     "category": "Cloud & Hosting",
@@ -111,22 +40,7 @@
       "BaaS",
       "GitHub Student Pack"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "arduino-cloud",
-    "name": "Arduino Cloud",
-    "category": "Dev Tools",
-    "offer_type": "trial",
-    "description": "Free 6-month Arduino Cloud Maker Plan plus hardware discounts (25–50% off select boards) via GitHub Student Pack.",
-    "link": "https://www.arduino.cc/education/github-students",
-    "tags": [
-      "IoT",
-      "Hardware",
-      "Cloud",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "asana-student",
@@ -140,21 +54,7 @@
       "Tasks",
       "Collaboration"
     ],
-    "popularity": 7
-  },
-  {
-    "id": "astra-security",
-    "name": "Astra Security",
-    "category": "Security",
-    "offer_type": "free",
-    "description": "Free Pro Plan for 6 months (worth $144) via GitHub Student Pack. Vulnerability and security scanning.",
-    "link": "https://www.getastra.com/github-student-developer-pack/",
-    "tags": [
-      "Security",
-      "Vulnerability Scanning",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "autodesk",
@@ -168,7 +68,7 @@
       "CAD",
       "Engineering"
     ],
-    "popularity": 8
+    "popularity": 10
   },
   {
     "id": "aws-educate",
@@ -197,7 +97,7 @@
       "PHP",
       "Python"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "boot-dev",
@@ -211,50 +111,7 @@
       "Backend",
       "Courses"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "bootstrap-studio",
-    "name": "Bootstrap Studio",
-    "category": "Design",
-    "offer_type": "free",
-    "description": "Free desktop app license for building responsive Bootstrap websites while enrolled.",
-    "link": "https://bootstrapstudio.io/students",
-    "tags": [
-      "Web Design",
-      "Bootstrap",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "browserstack",
-    "name": "BrowserStack",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free 1-year Live and Automate Mobile plan (worth $2,388). Test on 3,000+ real browsers and devices.",
-    "link": "https://www.browserstack.com/github-students",
-    "tags": [
-      "Testing",
-      "Browsers",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "camber",
-    "name": "Camber",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Free Student plan: 200 CPU hours, 75 GB storage, and 200 LLM messages/month for scientific computing.",
-    "link": "https://www.cambercloud.com/github-student-pack",
-    "tags": [
-      "GitHub Student Pack",
-      "Cloud",
-      "HPC",
-      "AI"
-    ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "canva",
@@ -283,7 +140,7 @@
       "Data Analytics",
       "GitHub Student Pack"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "chatgpt-plus-students",
@@ -302,20 +159,6 @@
     "expires": "2026-10-31"
   },
   {
-    "id": "clerk",
-    "name": "Clerk",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Pro plan until graduation ($240/yr value) — 50K MAUs, MFA, SSO, and Organizations.",
-    "link": "https://clerk.com/github-student-developer-pack",
-    "tags": [
-      "Authentication",
-      "Identity",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
     "id": "cloudflare-workers",
     "name": "Cloudflare Workers",
     "category": "Cloud & Hosting",
@@ -327,79 +170,7 @@
       "Edge",
       "Hosting"
     ],
-    "popularity": 8
-  },
-  {
-    "id": "codecov",
-    "name": "Codecov",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free code coverage forever on public and private repositories. Included in GitHub Student Pack.",
-    "link": "https://about.codecov.io/solution/students",
-    "tags": [
-      "Code Coverage",
-      "Testing",
-      "CI/CD",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "codedex",
-    "name": "Codédex",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 6-month Codédex Club premium with interactive Python, JavaScript, HTML/CSS, and Git courses.",
-    "link": "https://www.codedex.io/github-students",
-    "tags": [
-      "GitHub Student Pack",
-      "Coding",
-      "Courses"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "codescene",
-    "name": "CodeScene",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free student account with code health analysis, technical debt visualization, IDE extensions, and automated PR reviews.",
-    "link": "https://codescene.com/github-students",
-    "tags": [
-      "GitHub Student Pack",
-      "Code Analysis",
-      "IDE Extensions",
-      "Code Quality"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "configcat",
-    "name": "ConfigCat",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Pro plan while enrolled — manage up to 1,000 feature flags with unlimited seats for classmates.",
-    "link": "https://configcat.com/student/",
-    "tags": [
-      "Feature Flags",
-      "Dev Tools",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "dashlane",
-    "name": "Dashlane",
-    "category": "Security",
-    "offer_type": "free",
-    "description": "Free Premium for 1 year with student email. Password manager with auto-login and dark web monitoring.",
-    "link": "https://www.dashlane.com/students",
-    "tags": [
-      "Passwords",
-      "Security",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 7
   },
   {
     "id": "datacamp",
@@ -413,21 +184,7 @@
       "Courses",
       "GitHub Student Pack"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "datadog",
-    "name": "Datadog",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Pro for 2 years. Monitor 10 hosts, 500 GB logs, 1,000 browser tests, 15-month data retention.",
-    "link": "https://studentpack.datadoghq.com/signup",
-    "tags": [
-      "Monitoring",
-      "Observability",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "deepnote",
@@ -442,36 +199,7 @@
       "Collaboration",
       "GitHub Student Pack"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "devolens",
-    "name": "DevoLens",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free 10 licenses and unlimited end users while enrolled. License and sell your software with analytics.",
-    "link": "https://app.cryptolens.io/user/githubstudent",
-    "tags": [
-      "Software Licensing",
-      "Dev Tools",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "doppler",
-    "name": "Doppler",
-    "category": "Security",
-    "offer_type": "free",
-    "description": "Free Team subscription for secrets management while enrolled. Sync environment variables, prevent leaks.",
-    "link": "https://www.doppler.com/secretsops-for-students",
-    "tags": [
-      "Security",
-      "Secrets",
-      "GitHub Student Pack",
-      "DevOps"
-    ],
-    "popularity": 5
+    "popularity": 7
   },
   {
     "id": "educative",
@@ -485,21 +213,7 @@
       "Interview Prep",
       "GitHub"
     ],
-    "popularity": 8
-  },
-  {
-    "id": "evernote-student",
-    "name": "Evernote Student",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "40% off Evernote Advanced Annual plan via UNiDAYS verification. Note-taking with AI search, PDF annotation, and sync.",
-    "link": "https://evernote.com/unidays",
-    "tags": [
-      "Notes",
-      "Organization",
-      "Productivity"
-    ],
-    "popularity": 6
+    "popularity": 9
   },
   {
     "id": "figma",
@@ -528,7 +242,7 @@
       "AI",
       "RAG"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "framer",
@@ -542,7 +256,7 @@
       "Web Design",
       "No-Code"
     ],
-    "popularity": 5
+    "popularity": 7
   },
   {
     "id": "frontend-masters",
@@ -557,7 +271,7 @@
       "Web Development",
       "Courses"
     ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "github-copilot",
@@ -588,20 +302,6 @@
     "popularity": 10
   },
   {
-    "id": "gitkraken",
-    "name": "GitKraken",
-    "category": "Dev Tools",
-    "offer_type": "trial",
-    "description": "6 months free via GitHub Student Pack, then 80% off while a student. Git GUI client with GitLens VS Code extension.",
-    "link": "https://www.gitkraken.com/github-student-developer-pack-bundle",
-    "tags": [
-      "Git",
-      "GitHub",
-      "Dev Tools"
-    ],
-    "popularity": 7
-  },
-  {
     "id": "google-ai-plus",
     "name": "Google AI Plus",
     "category": "AI Tools",
@@ -620,57 +320,14 @@
     "name": "Google Cloud Credits",
     "category": "Cloud & Hosting",
     "offer_type": "credits",
-    "description": "$300 free credits for students plus always-free tier. Access through Google for Education or the standard free trial.",
+    "description": "200 free Google Skills credits for hands-on cloud labs, skill badges, and courses. Credits last 1 year.",
     "link": "https://cloud.google.com/edu/students",
     "tags": [
       "Cloud",
       "Google",
       "GCP"
     ],
-    "popularity": 9
-  },
-  {
-    "id": "gorails",
-    "name": "GoRails",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "12 months free via GitHub Student Pack. 300+ Ruby on Rails video tutorials covering full-stack development.",
-    "link": "https://gorails.com/github-students",
-    "tags": [
-      "GitHub Student Pack",
-      "Ruby on Rails",
-      "Web Development",
-      "Courses"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "grammarly",
-    "name": "Grammarly",
-    "category": "Productivity",
-    "offer_type": "free",
-    "description": "Free AI writing assistant for students with grammar check, style suggestions, and AI-powered writing tools.",
-    "link": "https://www.grammarly.com/students",
-    "tags": [
-      "Writing",
-      "AI",
-      "Grammar"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "hack-the-box",
-    "name": "Hack The Box Student",
-    "category": "Learning",
-    "offer_type": "discount",
-    "description": "10-20% off student subscription for cybersecurity training. Hands-on labs, challenges, and career-focused content.",
-    "link": "https://academy.hackthebox.com/faq",
-    "tags": [
-      "Cybersecurity",
-      "Hacking",
-      "Labs"
-    ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "heroku",
@@ -684,50 +341,7 @@
       "Hosting",
       "GitHub"
     ],
-    "popularity": 6
-  },
-  {
-    "id": "honeybadger",
-    "name": "Honeybadger",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Small plan for 1 year (worth $700+) — 225K errors/month, 60 uptime checks, unlimited apps.",
-    "link": "https://www.honeybadger.io/github-students/",
-    "tags": [
-      "Error Monitoring",
-      "Uptime",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "ibm-skillsbuild",
-    "name": "IBM SkillsBuild",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 1000+ courses in AI, cybersecurity, cloud, and data science. Earn industry-recognized credentials.",
-    "link": "https://skillsbuild.org/college-students",
-    "tags": [
-      "Courses",
-      "Certifications",
-      "IBM"
-    ],
-    "popularity": 8
-  },
-  {
-    "id": "icons8",
-    "name": "Icons8",
-    "category": "Design",
-    "offer_type": "trial",
-    "description": "Free 3-month subscription to icons, illustrations, music, and stock photos.",
-    "link": "https://icons8.com/github-students",
-    "tags": [
-      "GitHub Student Pack",
-      "Design Assets",
-      "Icons",
-      "Graphics"
-    ],
-    "popularity": 5
+    "popularity": 9
   },
   {
     "id": "jetbrains-ides",
@@ -756,7 +370,7 @@
       "Animation",
       "Motion Design"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "kandue",
@@ -771,7 +385,7 @@
       "Deadlines",
       "Planning"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "kiro-students",
@@ -800,7 +414,7 @@
       "Issue Tracking",
       "Team Collaboration"
     ],
-    "popularity": 5
+    "popularity": 7
   },
   {
     "id": "localstack",
@@ -814,21 +428,7 @@
       "Cloud",
       "GitHub Student Pack"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "loom-education",
-    "name": "Loom Education",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "75% off Loom Business plan for eligible students and educators. Apply via Atlassian classroom license form.",
-    "link": "https://www.atlassian.com/software/loom/pricing",
-    "tags": [
-      "Video",
-      "Recording",
-      "Communication"
-    ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "lovable",
@@ -856,21 +456,7 @@
       "Collaboration",
       "Design"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "lumix-edu",
-    "name": "LUMIX EDU",
-    "category": "Design",
-    "offer_type": "discount",
-    "description": "15% off cameras and lenses, plus free curriculum resources, equipment borrowing, and training workshops.",
-    "link": "https://shop.panasonic.com/pages/lumix-education-program",
-    "tags": [
-      "Photography",
-      "Cameras",
-      "Education"
-    ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "microsoft-365",
@@ -930,35 +516,6 @@
     "repo": "mongodb/mongo"
   },
   {
-    "id": "name-com",
-    "name": "Name.com",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Free 1-year domain (15+ TLDs: .dev, .app, .live, .studio, .software, .engineer) plus SSL and Advanced Security.",
-    "link": "https://www.name.com/github-students",
-    "tags": [
-      "Domain",
-      "SSL",
-      "GitHub Student Pack",
-      "Hosting"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "namecheap",
-    "name": "Namecheap",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Free .me domain and SSL certificate for 1 year via GitHub Student Pack.",
-    "link": "https://nc.me/landing/github",
-    "tags": [
-      "Domain",
-      "SSL",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
     "id": "navicat",
     "name": "Navicat",
     "category": "Dev Tools",
@@ -970,7 +527,7 @@
       "SQL",
       "Dev Tools"
     ],
-    "popularity": 5
+    "popularity": 7
   },
   {
     "id": "new-relic",
@@ -984,7 +541,7 @@
       "Observability",
       "GitHub Student Pack"
     ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "notion",
@@ -1001,35 +558,6 @@
     "popularity": 10
   },
   {
-    "id": "nvidia-education",
-    "name": "NVIDIA Education",
-    "category": "Learning",
-    "offer_type": "discount",
-    "description": "Academic GPU discounts, free DLI courses, and research grants. Reduced prices on Jetson developer kits.",
-    "link": "https://developer.nvidia.com/higher-education-and-research",
-    "tags": [
-      "GPU",
-      "AI",
-      "Hardware"
-    ],
-    "popularity": 7
-  },
-  {
-    "id": "obsidian",
-    "name": "Obsidian",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "App is free for everyone. Students get 40% off Sync ($29/year) and Publish for cloud backup and publishing.",
-    "link": "https://obsidian.md/pricing",
-    "tags": [
-      "Notes",
-      "Markdown",
-      "PKM"
-    ],
-    "popularity": 9,
-    "repo": "obsidianmd/obsidian-releases"
-  },
-  {
     "id": "openai-codex-students",
     "name": "OpenAI Codex for Students",
     "category": "AI Tools",
@@ -1042,35 +570,6 @@
       "Coding Assistant"
     ],
     "popularity": 9
-  },
-  {
-    "id": "oracle-cloud",
-    "name": "Oracle Cloud",
-    "category": "Cloud & Hosting",
-    "offer_type": "credits",
-    "description": "$300 free credits plus always-free tier via Oracle Academy. Includes Autonomous Database, VMs, and storage.",
-    "link": "https://academy.oracle.com/en/solutions-cloud-program.html",
-    "tags": [
-      "Cloud",
-      "Database",
-      "Enterprise"
-    ],
-    "popularity": 6
-  },
-  {
-    "id": "pageclip",
-    "name": "Pageclip",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Basic plan with unlimited forms and 20,000 submissions/month via GitHub Student Pack.",
-    "link": "https://pageclip.co/github-students",
-    "tags": [
-      "Forms",
-      "GitHub Student Pack",
-      "Static Sites",
-      "Backend"
-    ],
-    "popularity": 5
   },
   {
     "id": "perplexity-pro",
@@ -1087,64 +586,6 @@
     "popularity": 6
   },
   {
-    "id": "poeditor",
-    "name": "POEditor",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Plus plan for 1 year via GitHub Student Pack. Manage software translations and localization.",
-    "link": "https://poeditor.com/register/github_education",
-    "tags": [
-      "Localization",
-      "Translation",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "polypane",
-    "name": "Polypane",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free for 1 year for non-commercial work via GitHub Student Pack. Dev browser with responsive testing.",
-    "link": "https://polypane.app/github-students/",
-    "tags": [
-      "Browser",
-      "GitHub Student Pack",
-      "Web Development",
-      "Accessibility"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "popsql",
-    "name": "PopSQL",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Business plan — SQL editor with dashboards, scheduled queries, and connections to BigQuery, Snowflake, and more.",
-    "link": "https://popsql.com/github-students",
-    "tags": [
-      "SQL",
-      "Database",
-      "GitHub Student Pack",
-      "Collaboration"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "postman-student",
-    "name": "Postman Student Expert",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free API training and certification. Learn API fundamentals, earn a digital badge, and join the community.",
-    "link": "https://academy.postman.com/page/students",
-    "tags": [
-      "API",
-      "Certification",
-      "Dev Tools"
-    ],
-    "popularity": 8
-  },
-  {
     "id": "protopie",
     "name": "ProtoPie",
     "category": "Design",
@@ -1156,21 +597,7 @@
       "Prototyping",
       "UI/UX"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "raycast-pro",
-    "name": "Raycast Pro",
-    "category": "Productivity",
-    "offer_type": "discount",
-    "description": "50% student discount ($5/month). Mac productivity launcher with AI, cloud sync, and custom themes.",
-    "link": "https://www.raycast.com/pricing",
-    "tags": [
-      "Mac",
-      "Productivity",
-      "AI"
-    ],
-    "popularity": 7
+    "popularity": 8
   },
   {
     "id": "replit",
@@ -1184,22 +611,7 @@
       "Cloud Hosting",
       "AI"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "requestly",
-    "name": "Requestly",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Professional plan for 1 year (worth $270). Intercept requests, mock APIs, and redirect URLs.",
-    "link": "https://requestly.com/github-education/",
-    "tags": [
-      "GitHub Student Pack",
-      "API",
-      "Networking",
-      "Dev Tools"
-    ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "retool",
@@ -1213,21 +625,7 @@
       "No-Code",
       "Internal Tools"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "samsung-education",
-    "name": "Samsung Education",
-    "category": "Hardware",
-    "offer_type": "discount",
-    "description": "Up to 30% off Galaxy phones, tablets, laptops, and accessories. Verify with .edu email or ID.me.",
-    "link": "https://www.samsung.com/us/shop/offer-program/education/",
-    "tags": [
-      "Hardware",
-      "Phones",
-      "Laptops"
-    ],
-    "popularity": 8
+    "popularity": 7
   },
   {
     "id": "sas-viya-for-learners",
@@ -1245,20 +643,6 @@
     "popularity": 6
   },
   {
-    "id": "scrimba",
-    "name": "Scrimba",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 1-month Pro access via GitHub Student Pack. Interactive coding screencasts and Pro Discord.",
-    "link": "https://scrimba.com/github-education",
-    "tags": [
-      "Courses",
-      "Coding",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
     "id": "sentry",
     "name": "Sentry",
     "category": "Dev Tools",
@@ -1270,21 +654,7 @@
       "Monitoring",
       "GitHub Student Pack"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "simple-analytics",
-    "name": "Simple Analytics",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Starter plan for 1 year — up to 10 websites and 100,000 pageviews/month, no cookies, GDPR-compliant.",
-    "link": "https://dashboard.simpleanalytics.com/students",
-    "tags": [
-      "Analytics",
-      "Privacy",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "sketch",
@@ -1298,36 +668,7 @@
       "UI/UX",
       "Mac"
     ],
-    "popularity": 7
-  },
-  {
-    "id": "stripe",
-    "name": "Stripe",
-    "category": "Dev Tools",
-    "offer_type": "credits",
-    "description": "$25 in Stripe credits to offset fees on Stripe Payments, Billing, and more via GitHub Student Pack.",
-    "link": "https://education.github.com/pack",
-    "tags": [
-      "Payments",
-      "Dev Tools",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "symfonycasts",
-    "name": "SymfonyCasts",
-    "category": "Learning",
-    "offer_type": "trial",
-    "description": "Free 3-month subscription to all PHP and Symfony video tutorial courses (worth $75).",
-    "link": "https://symfonycasts.com/github-student",
-    "tags": [
-      "PHP",
-      "Symfony",
-      "Video Tutorials",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
+    "popularity": 8
   },
   {
     "id": "termius-pro",
@@ -1341,92 +682,7 @@
       "Terminal",
       "GitHub"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "testmail",
-    "name": "Testmail",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Essential Plan (worth $12/month) via GitHub Student Pack. Test email inboxes with API access for automated testing.",
-    "link": "https://testmail.app/github-students",
-    "tags": [
-      "Testing",
-      "Email",
-      "API",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "testmu-ai",
-    "name": "TestMu AI",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Live-1 parallel plan for 1 year — unlimited manual cross-browser testing, screenshots, and local tunnel testing.",
-    "link": "https://www.testmuai.com/github-students/",
-    "tags": [
-      "Cross-Browser Testing",
-      "GitHub Student Pack",
-      "Testing"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "todiagram",
-    "name": "ToDiagram",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Pro plan via GitHub Student Pack — convert JSON, YAML, CSV, and XML to interactive diagrams; 200 cloud docs.",
-    "link": "https://todiagram.com/education",
-    "tags": [
-      "Diagrams",
-      "Data Visualization",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "tower",
-    "name": "Tower",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Tower Pro Git client for 12 months, renewable annually while enrolled. No credit card required.",
-    "link": "https://www.git-tower.com/students",
-    "tags": [
-      "Git",
-      "GitHub Student Pack",
-      "Dev Tools"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "travis-ci",
-    "name": "Travis CI",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free private repo builds with 1 concurrent job, auto-activated via GitHub Student Developer Pack.",
-    "link": "https://www.travis-ci.com/education/",
-    "tags": [
-      "CI/CD",
-      "Automation",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "tryhackme",
-    "name": "TryHackMe Student",
-    "category": "Learning",
-    "offer_type": "discount",
-    "description": "20% off annual subscription. Beginner-friendly cybersecurity training with guided learning paths and virtual labs.",
-    "link": "https://tryhackme.com/discounts",
-    "tags": [
-      "Cybersecurity",
-      "Learning",
-      "Labs"
-    ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "unity-student",
@@ -1440,7 +696,7 @@
       "3D",
       "Engine"
     ],
-    "popularity": 8
+    "popularity": 9
   },
   {
     "id": "vaadin",
@@ -1455,22 +711,7 @@
       "GitHub Student Pack",
       "Web Development"
     ],
-    "popularity": 5
-  },
-  {
-    "id": "visme",
-    "name": "Visme",
-    "category": "Design",
-    "offer_type": "trial",
-    "description": "Free Starter plan for 3 months. Create presentations, infographics, and social media graphics.",
-    "link": "https://www.visme.co/github-students/",
-    "tags": [
-      "Design",
-      "Presentations",
-      "GitHub Student Pack",
-      "Graphics"
-    ],
-    "popularity": 5
+    "popularity": 6
   },
   {
     "id": "weights-and-biases",
@@ -1489,49 +730,6 @@
     "repo": "wandb/wandb"
   },
   {
-    "id": "wispr-flow",
-    "name": "Wispr Flow",
-    "category": "Productivity",
-    "offer_type": "trial",
-    "description": "3 months free (new users), then 50% off at $6/mo with .edu email. Voice-to-text AI dictation.",
-    "link": "https://wisprflow.ai/students",
-    "tags": [
-      "AI",
-      "Dictation",
-      "Productivity"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "working-copy",
-    "name": "Working Copy",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Pro features while enrolled via GitHub Student Pack. Full-featured iOS/iPadOS Git client.",
-    "link": "https://workingcopyapp.com/education",
-    "tags": [
-      "Git",
-      "iOS",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
-    "id": "xojo",
-    "name": "Xojo",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Desktop license via GitHub Student Pack to compile and distribute native desktop apps for Mac, Windows, and Linux",
-    "link": "https://xojo.com/educators/",
-    "tags": [
-      "IDE",
-      "Desktop",
-      "Cross-Platform",
-      "GitHub Student Pack"
-    ],
-    "popularity": 5
-  },
-  {
     "id": "zed",
     "name": "Zed",
     "category": "Dev Tools",
@@ -1543,22 +741,7 @@
       "AI",
       "Collaboration"
     ],
-    "popularity": 5,
+    "popularity": 9,
     "repo": "zed-industries/zed"
-  },
-  {
-    "id": "zyte",
-    "name": "Zyte",
-    "category": "Dev Tools",
-    "offer_type": "free",
-    "description": "Free Scrapy Cloud: unlimited projects & team members, 120-day data caching, and auto-scaling spider deployment.",
-    "link": "https://www.zyte.com/scrapy-cloud-student-backpack/",
-    "tags": [
-      "GitHub Student Pack",
-      "Web Scraping",
-      "Cloud",
-      "Python"
-    ],
-    "popularity": 5
   }
 ]

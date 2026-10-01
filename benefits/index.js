@@ -253,7 +253,8 @@ Promise.all([
   fetch('/data/categories.json').then(function (r) { return r.json(); })
 ]).then(function (results) {
   benefits = results[0].filter(function (b) { return !isExpired(b); });
-  categories = results[1];
+  // A category with no live entry gets no chip: it would filter to an empty page.
+  categories = results[1].filter(function (c) { return benefits.some(function (b) { return b.category === c; }); });
   // A ?cat= naming a category that no longer exists would filter everything out.
   if (activeCategory !== 'All' && categories.indexOf(activeCategory) === -1) activeCategory = 'All';
   writeUrlState(true);
