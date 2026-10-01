@@ -150,9 +150,9 @@ const SIM_STEPS = [
   "name": "Vercel",
   "category": "Cloud &amp; Hosting",
   "offer_type": "free",
-  "popularity": 5
+  "popularity": 4
 }`,
-    note: 'Inserts the entry into data/benefits.json in sorted position.' },
+    note: 'Inserts the entry into data/benefits.json in sorted position. Ranks it 4 from the rubric: free, but the same plan anyone gets.' },
   { actor: 'gate', head: 'validate_data.py', detail: 'exit 0',
     primary: 'Schema, URL shape, and sort order <strong class="ok">pass</strong>.',
     note: 'On a fail, Claude fixes the entry and runs the validator again.' },
