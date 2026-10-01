@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-01T19:08:30Z",
+  "timestamp": "2026-10-01T19:15:23Z",
   "model": "claude-sonnet-5-5",
-  "known_sources_checked": ["https://education.github.com/pack/offers", "https://www.jetbrains.com/community/education/", "https://buildyourfuture.withgoogle.com/programs", "https://www.microsoft.com/en-us/education", "https://aws.amazon.com/education/awseducate/", "https://www.figma.com/education/", "https://www.notion.com/product/notion-for-education", "https://www.canva.com/education/", "https://www.autodesk.com/education/edu-software/overview", "https://claude.com/solutions/education", "https://developers.openai.com/community/students", "https://gemini.google/students/", "https://kiro.dev/students/", "https://huggingface.co/education"],
-  "keyword_queries": ["\"student plan\" OR \"education plan\" developer tools software 2026 free", "\"free for students\" OR \"academic license\" AI tools cloud 2026", "productivity OR domains student discount OR \"free for students\" 2026", "student grant OR credits developer tools 2026 apply individual", "site:reddit.com \"free for students\" software tools list 2026", "site:reddit.com \"student discount\" developer OR design tools 2026"],
-  "discovered": [],
-  "issues_created": 0
+  "known_sources_checked": ["https://education.github.com/pack/offers", "https://huggingface.co/education", "https://www.anthropic.com/education", "https://claude.com/solutions/education"],
+  "keyword_queries": ["\"free for students\" OR \"academic license\" AI tools cloud 2026", "student grant OR credits developer tools 2026 apply individual"],
+  "discovered": [{ "name": "GitHub Codespaces", "link": "https://github.com/features/codespaces", "source": "known-source" }],
+  "issues_created": 1
 }
