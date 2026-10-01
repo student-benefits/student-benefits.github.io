@@ -20,6 +20,7 @@ Exit 0 if clean, 1 if any error.
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -34,6 +35,10 @@ OFFER_TYPES = {"free", "discount", "credits", "trial"}
 # otherwise open event (NeurIPS), where a `deadline` field would wrongly close it.
 DEADLINE_PROSE_RE = re.compile(
     r"appl(?:y|ications?)\s+(?:by|close[sd]?|due)|application\s+deadline", re.I
+)
+# A benefit's claim window stated in its description ("claim by Oct 31").
+CLAIM_PROSE_RE = re.compile(
+    r"\b(?:claim|redeem|apply|sign\s+up|enroll)\w*\s+(?:by|before|until)\b", re.I
 )
 # subdomains/paths that are documentation, not signup destinations (see PR #197)
 FORBIDDEN_SUBDOMAINS = ("help.", "support.", "docs.", "blog.")
@@ -116,6 +121,17 @@ def validate_benefits() -> None:
             err(f"{name}: tags must be a non-empty list")
         if isinstance(b.get("link"), str):
             check_link(name, b["link"])
+        exp = b.get("expires")
+        if exp is not None:
+            try:
+                ok = bool(DATE_RE.match(str(exp))) and bool(date.fromisoformat(exp))
+            except ValueError:
+                ok = False
+            if not ok:
+                err(f"{name}: expires '{exp}' must be a valid YYYY-MM-DD date")
+        # A claim window stated only in prose is never removed when it closes.
+        elif CLAIM_PROSE_RE.search(desc):
+            err(f"{name}: states a claim deadline in its description but has no 'expires' field")
 
     ids = [b.get("id", "") for b in data if b.get("id")]
     if ids != sorted(ids):

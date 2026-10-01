@@ -26,7 +26,8 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
   "link": "Direct URL to student signup or discount page",
   "tags": ["Tag1", "Tag2"],
   "popularity": 5,
-  "repo": "owner/repo"
+  "repo": "owner/repo",
+  "expires": "YYYY-MM-DD"
 }
 ```
 
@@ -39,6 +40,7 @@ A benefit qualifies if it helps a student create, learn, ship, or research: dev 
   - **6–8**: a real but bounded offer: free use with tight caps, a smaller or shorter trial or credit grant, a ≥50% discount on a central tool, a free plan of a specialised tool, or a generous offer limited to a named list of schools.
   - **1–4**: a discount under 50%, an offer little beyond the public free tier, or a tool peripheral to building or learning.
 - `repo`: optional, open-source projects only.
+- `expires`: optional; the last day a student can claim a time-limited offer, when the program states one. Omit for ongoing programs; never guess. The validator rejects a description that states a claim deadline ("claim by", "redeem until") without this field. The UI hides an entry after this date, and `maintain-benefits` removes it on its next run.
 - Entries are sorted by `id`; insert in sorted position, never append. Sorted insertion spreads concurrent additions across the file so parallel add-benefit PRs merge without conflicting. The UI re-sorts client-side.
 
 ## `data/events.json`
@@ -78,7 +80,7 @@ Plain Actions YAML in `.github/workflows/`; the agent step is `anthropics/claude
 | `add-event.yml` | issue labeled `new-event`, or dispatch | Same for events against the event quality bar (branch `add-event-{issue}`) |
 | `discover-benefits.yml` | 1st and 15th, or dispatch | Searches for new programs; opens `new-benefit` issues for the best finds |
 | `discover-events.yml` | 3rd and 17th, or dispatch | Finds events, removes expired ones; opens and merges one PR |
-| `maintain-benefits.yml` | Sunday, or dispatch | `check_links.py > flags.json`, then Claude fixes only the flagged entries, opens and merges one `[Maintenance]` PR, and closes open `link-health` issues with the outcome |
+| `maintain-benefits.yml` | Sunday, or dispatch | `check_links.py > flags.json`, then Claude removes entries past `expires`, fixes only the flagged entries, opens and merges one `[Maintenance]` PR, and closes open `link-health` issues with the outcome |
 | `validate-data.yml` | PR or push to `main` touching `data/` or the validator | Runs `scripts/validate_data.py` |
 
 - `check_links.py` records HTTP status and final hostname for every link; when the `TYPESAFE_API_KEY` secret is set, Jev (TypeSafe's classifier model) judges each loaded page against its description. Without the key, loaded pages are flagged `unjudged` and Claude reviews them.
