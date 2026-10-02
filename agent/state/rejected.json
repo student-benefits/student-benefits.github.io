@@ -340,5 +340,23 @@
     "domain": "zyte.com",
     "reason": "GitHub Student Pack offer ranking below 9; covered by the GitHub Student Pack entry",
     "checked": "2026-10-01"
+  },
+  {
+    "name": "Appwrite Education",
+    "domain": "appwrite.io",
+    "reason": "GitHub Student Pack offer ranking below 9 (serves one backend platform); covered by the GitHub Student Pack entry",
+    "checked": "2026-10-02"
+  },
+  {
+    "name": "Boot.dev",
+    "domain": "boot.dev",
+    "reason": "GitHub Student Pack offer ranking below 9 (3-month trial); covered by the GitHub Student Pack entry",
+    "checked": "2026-10-02"
+  },
+  {
+    "name": "DataCamp",
+    "domain": "datacamp.com",
+    "reason": "GitHub Student Pack offer ranking below 9 (3-month trial); covered by the GitHub Student Pack entry",
+    "checked": "2026-10-02"
   }
 ]

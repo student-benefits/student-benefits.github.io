@@ -29,20 +29,6 @@
     "popularity": 7
   },
   {
-    "id": "appwrite",
-    "name": "Appwrite Education",
-    "category": "Cloud & Hosting",
-    "offer_type": "free",
-    "description": "Free Pro plan with 2 projects while enrolled via GitHub Student Pack. Worth $40/month.",
-    "link": "https://appwrite.io/education",
-    "tags": [
-      "Backend",
-      "BaaS",
-      "GitHub Student Pack"
-    ],
-    "popularity": 9
-  },
-  {
     "id": "asana-student",
     "name": "Asana Student",
     "category": "Productivity",
@@ -68,7 +54,7 @@
       "CAD",
       "Engineering"
     ],
-    "popularity": 10
+    "popularity": 8
   },
   {
     "id": "aws-educate",
@@ -98,20 +84,6 @@
       "Python"
     ],
     "popularity": 6
-  },
-  {
-    "id": "boot-dev",
-    "name": "Boot.dev",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "Free 3 months of backend development curriculum (Python, Go, TypeScript).",
-    "link": "https://www.boot.dev/try/github-education-pack",
-    "tags": [
-      "GitHub Student Pack",
-      "Backend",
-      "Courses"
-    ],
-    "popularity": 9
   },
   {
     "id": "canva",
@@ -155,7 +127,7 @@
       "Research",
       "Study"
     ],
-    "popularity": 9,
+    "popularity": 10,
     "expires": "2026-10-31"
   },
   {
@@ -171,20 +143,6 @@
       "Hosting"
     ],
     "popularity": 7
-  },
-  {
-    "id": "datacamp",
-    "name": "DataCamp",
-    "category": "Learning",
-    "offer_type": "free",
-    "description": "3 months free access to data science courses and interactive learning paths with GitHub Student Pack.",
-    "link": "https://www.datacamp.com/github-students",
-    "tags": [
-      "Data Science",
-      "Courses",
-      "GitHub Student Pack"
-    ],
-    "popularity": 9
   },
   {
     "id": "deepnote",
@@ -256,7 +214,7 @@
       "Web Design",
       "No-Code"
     ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "frontend-masters",
@@ -285,7 +243,7 @@
       "Coding",
       "GitHub"
     ],
-    "popularity": 7
+    "popularity": 9
   },
   {
     "id": "github-student-pack",
@@ -355,7 +313,7 @@
       "Programming",
       "Java"
     ],
-    "popularity": 9,
+    "popularity": 10,
     "repo": "JetBrains/intellij-community"
   },
   {
@@ -415,7 +373,7 @@
       "Credits",
       "Student Verification"
     ],
-    "popularity": 8
+    "popularity": 7
   },
   {
     "id": "linear",
@@ -513,7 +471,7 @@
       "Collaboration",
       "Planning"
     ],
-    "popularity": 8
+    "popularity": 7
   },
   {
     "id": "mongodb-atlas",
@@ -542,7 +500,7 @@
       "SQL",
       "Dev Tools"
     ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "new-relic",
@@ -570,7 +528,7 @@
       "Planning",
       "Knowledge"
     ],
-    "popularity": 10
+    "popularity": 9
   },
   {
     "id": "openai-codex-students",
@@ -612,7 +570,7 @@
       "Prototyping",
       "UI/UX"
     ],
-    "popularity": 8
+    "popularity": 7
   },
   {
     "id": "replit",
@@ -640,7 +598,7 @@
       "No-Code",
       "Internal Tools"
     ],
-    "popularity": 7
+    "popularity": 6
   },
   {
     "id": "sas-viya-for-learners",
@@ -683,7 +641,7 @@
       "UI/UX",
       "Mac"
     ],
-    "popularity": 8
+    "popularity": 6
   },
   {
     "id": "termius-pro",
@@ -711,7 +669,7 @@
       "3D",
       "Engine"
     ],
-    "popularity": 9
+    "popularity": 8
   },
   {
     "id": "vaadin",
@@ -756,7 +714,7 @@
       "AI",
       "Collaboration"
     ],
-    "popularity": 9,
+    "popularity": 8,
     "repo": "zed-industries/zed"
   }
 ]
