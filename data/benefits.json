@@ -388,6 +388,21 @@
     "popularity": 6
   },
   {
+    "id": "kandue-graders",
+    "name": "Kandue for Graders on Canvas LMS",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Chrome extension for TAs: a read-only Canvas grading queue, longest-waiting students first.",
+    "link": "https://chromewebstore.google.com/detail/jimgnnnfaicmhhjlpgdejbnajbhjokdp",
+    "tags": [
+      "Maintainer's own",
+      "Canvas",
+      "Grading",
+      "TAs"
+    ],
+    "popularity": 6
+  },
+  {
     "id": "kiro-students",
     "name": "Kiro Students",
     "category": "AI Tools",
