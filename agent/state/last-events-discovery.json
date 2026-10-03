@@ -1,15 +1,12 @@
 {
-  "timestamp": "2026-09-17T17:52:26Z",
-  "model": "claude-sonnet-4-6",
+  "timestamp": "2026-10-03T17:41:42Z",
+  "model": "claude-sonnet-5-5",
   "known_sources_checked": [
     "https://events.ycombinator.com",
     "https://mlh.io/seasons/2026/events",
     "https://a16z.com/programs",
-    "https://www.anthropic.com/news",
-    "https://openai.com/news",
-    "https://buildyourfuture.withgoogle.com/programs",
     "https://education.github.com/events",
-    "https://hack.mit.edu"
+    "https://buildyourfuture.withgoogle.com/programs"
   ],
   "keyword_queries": [
     "student hackathon 2026 free apply open",
@@ -18,23 +15,12 @@
     "student residency OR cohort OR program 2026 free technical AI"
   ],
   "expired_removed": [
-    "breakthrough-junior-challenge-2026",
-    "agentic-cinema-hackathon-2026",
-    "ethonline-2026"
+    "richard-tapia-2026",
+    "hackmit-2026",
+    "hack-the-north-2026",
+    "mhacks-2026",
+    "ethglobal-tokyo-2026"
   ],
-  "discovered": [
-    {
-      "name": "DubHacks '26",
-      "date": "2026-10-17",
-      "link": "https://dh26.dubhacks.co",
-      "source": "keyword"
-    },
-    {
-      "name": "TreeHacks 2027",
-      "date": "2027-02-12",
-      "link": "https://treehacks.com",
-      "source": "keyword"
-    }
-  ],
+  "discovered": [],
   "pr_opened": true
 }
