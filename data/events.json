@@ -120,62 +120,6 @@
     "expires": "2026-12-14"
   },
   {
-    "id": "richard-tapia-2026",
-    "name": "Richard Tapia Celebration of Diversity in Computing",
-    "organizer": "CMD-IT / ACM",
-    "category": "conference",
-    "date": "2026-09-16",
-    "date_end": "2026-09-18",
-    "location": "Atlanta, GA",
-    "remote": false,
-    "eligibility": "Students from underrepresented groups in computing; scholarships available",
-    "why": "Full scholarships covering travel, hotel, and registration. Career fair access to Google, Microsoft, and Meta engineers that is difficult to replicate any other way.",
-    "link": "https://tapiaconference.cmd-it.org/registration/",
-    "expires": "2026-09-18"
-  },
-  {
-    "id": "hackmit-2026",
-    "name": "HackMIT 2026",
-    "organizer": "HackMIT / MIT",
-    "category": "hackathon",
-    "date": "2026-09-16",
-    "date_end": "2026-09-17",
-    "location": "Cambridge, MA",
-    "remote": false,
-    "eligibility": "Undergraduate and graduate students from any university worldwide; applications open in August",
-    "why": "MIT's flagship 24-hour hackathon with 1,000+ college hackers. Sponsor challenges include cash prizes and direct internship and full-time interview pipelines at top tech companies.",
-    "link": "https://hackmit.org/",
-    "expires": "2026-09-17"
-  },
-  {
-    "id": "hack-the-north-2026",
-    "name": "Hack the North 2026",
-    "organizer": "Hack the North / University of Waterloo",
-    "category": "hackathon",
-    "date": "2026-09-18",
-    "date_end": "2026-09-20",
-    "location": "Waterloo, Ontario, Canada",
-    "remote": false,
-    "eligibility": "Students at any education level worldwide (13+); travel and accommodation covered for non-Waterloo attendees",
-    "why": "Canada's largest hackathon. 36 hours, free admission, travel and lodging covered for non-local attendees. Cash sponsor prizes and direct interview pipelines at top tech companies.",
-    "link": "https://hackthenorth.com/",
-    "expires": "2026-09-20"
-  },
-  {
-    "id": "mhacks-2026",
-    "name": "MHacks 2026",
-    "organizer": "Michigan Hackers / University of Michigan",
-    "category": "hackathon",
-    "date": "2026-09-20",
-    "date_end": "2026-09-22",
-    "location": "Ann Arbor, MI",
-    "remote": false,
-    "eligibility": "Students currently enrolled in or recently left any high school, college, or university worldwide",
-    "why": "$30,000+ in prizes at one of the world's largest collegiate hackathons. 1,000+ hackers from 100+ universities over 36 hours with strong alumni-to-company placement track record.",
-    "link": "https://www.mhacks.org/",
-    "expires": "2026-09-22"
-  },
-  {
     "id": "recurse-center-fall-2026",
     "name": "Recurse Center Fall 2 2026",
     "organizer": "Recurse Center",
@@ -189,20 +133,6 @@
     "why": "Tuition-free 12-week programming retreat in Brooklyn (or remote) in a peer cohort of ~30. Integrated recruiting places alumni at Stripe, Google, and top startups.",
     "link": "https://www.recurse.com/apply",
     "expires": "2026-12-11"
-  },
-  {
-    "id": "ethglobal-tokyo-2026",
-    "name": "ETHGlobal Tokyo 2026",
-    "organizer": "ETHGlobal",
-    "category": "hackathon",
-    "date": "2026-09-25",
-    "date_end": "2026-09-27",
-    "location": "Tokyo, Japan",
-    "remote": false,
-    "eligibility": "Open to all builders worldwide",
-    "why": "Elite Web3 hackathon in Asia's tech capital. Large prize pool, beginner-friendly mentorship, and access to leading blockchain innovators. Refundable ETH stake ensures participant commitment.",
-    "link": "https://ethglobal.com/events/tokyo2026",
-    "expires": "2026-09-27"
   },
   {
     "id": "knight-hacks-ix-2026",
