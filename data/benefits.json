@@ -60,8 +60,8 @@
     "id": "aws-educate",
     "name": "AWS Educate",
     "category": "Cloud & Hosting",
-    "offer_type": "credits",
-    "description": "$100 in AWS credits for students, no credit card required. Access to hands-on labs, learning paths, and job board.",
+    "offer_type": "free",
+    "description": "Free hands-on cloud labs, self-paced training, and digital badges, no credit card required. Job board for 18+.",
     "link": "https://aws.amazon.com/education/awseducate/",
     "tags": [
       "AWS",
@@ -321,7 +321,7 @@
     "name": "Jitter for Education",
     "category": "Design",
     "offer_type": "free",
-    "description": "Free advanced export features: GIF, Video, ProRes, WebM, Lottie, 4K/120fps quality, no watermark.",
+    "description": "Free Pro plan for students and educators: 1080p/60fps, ProRes and WebM exports.",
     "link": "https://jitter.video/pricing",
     "tags": [
       "Video",
@@ -591,7 +591,7 @@
     "name": "Retool",
     "category": "Dev Tools",
     "offer_type": "free",
-    "description": "Free Team or Business plan for students with .edu email — build internal tools, admin panels, and dashboards.",
+    "description": "Free Business plan for students and educators — build internal tools, admin panels, and dashboards.",
     "link": "https://retool.com/pricing",
     "tags": [
       "Dev Tools",
