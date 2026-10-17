@@ -135,20 +135,6 @@
     "expires": "2026-12-11"
   },
   {
-    "id": "knight-hacks-ix-2026",
-    "name": "Knight Hacks IX",
-    "organizer": "Knight Hacks / University of Central Florida",
-    "category": "hackathon",
-    "date": "2026-10-09",
-    "date_end": "2026-10-11",
-    "location": "Orlando, FL",
-    "remote": false,
-    "eligibility": "College students at any skill level; beginners welcome; free for accepted hackers with meals provided",
-    "why": "Florida's top collegiate hackathon — 36 hours across AI/ML, app dev, game dev, and embedded software tracks with cash sponsor prizes. Free admission, meals included.",
-    "link": "https://2026.knighthacks.org",
-    "expires": "2026-10-11"
-  },
-  {
     "id": "hackharvard-2026",
     "name": "HackHarvard 2026",
     "organizer": "HackHarvard / Harvard University",
