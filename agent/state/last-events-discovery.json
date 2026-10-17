@@ -1,26 +1,12 @@
 {
-  "timestamp": "2026-10-03T17:41:42Z",
+  "timestamp": "2026-10-17T16:45:33Z",
   "model": "claude-sonnet-5-5",
-  "known_sources_checked": [
-    "https://events.ycombinator.com",
-    "https://mlh.io/seasons/2026/events",
-    "https://a16z.com/programs",
-    "https://education.github.com/events",
-    "https://buildyourfuture.withgoogle.com/programs"
-  ],
+  "known_sources_checked": ["https://www.mlh.com/seasons/2026/events"],
   "keyword_queries": [
     "student hackathon 2026 free apply open",
-    "\"open to students\" conference 2026 free OR fellowship application",
-    "student grant OR \"build grant\" 2026 apply individual cash stipend",
-    "student residency OR cohort OR program 2026 free technical AI"
+    "\"open to students\" conference 2026 free OR fellowship application"
   ],
-  "expired_removed": [
-    "richard-tapia-2026",
-    "hackmit-2026",
-    "hack-the-north-2026",
-    "mhacks-2026",
-    "ethglobal-tokyo-2026"
-  ],
+  "expired_removed": ["knight-hacks-ix-2026"],
   "discovered": [],
   "pr_opened": true
 }
