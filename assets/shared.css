@@ -125,18 +125,6 @@ a { color: var(--accent); text-underline-offset: 2px; }
 .page-head { padding: var(--s10) 0 var(--s6); }
 h1 { font-size: 28px; line-height: 1.2; font-weight: 700; letter-spacing: -0.01em; }
 .lede { margin-top: var(--s2); color: var(--muted); max-width: var(--prose); }
-.lede a { color: var(--accent); }
-.head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s4); flex-wrap: wrap; }
-
-.suggest {
-  display: inline-flex; align-items: center; gap: var(--s2); min-height: 40px;
-  padding: var(--s2) var(--s4); border: 1px solid var(--line-strong); border-radius: var(--radius);
-  background: var(--card); color: var(--fg); font-size: 15px; font-weight: 500; text-decoration: none;
-  transition: border-color var(--fade), transform var(--snappy-t) var(--snappy);
-}
-.suggest:hover { border-color: var(--muted); }
-.suggest:active { transform: scale(0.97); }
-.suggest svg { width: 16px; height: 16px; flex: none; }
 
 footer.site-footer {
   margin-top: var(--s16); padding: var(--s8) 0; border-top: 1px solid var(--line);
