@@ -1,0 +1,16 @@
+.where { font-size: 13px; color: var(--muted); text-align: right; }
+.when { font-size: 15px; font-weight: 600; }
+
+.st { font-size: 14px; font-weight: 500; color: var(--muted); }
+.st--soon { color: var(--amber); font-weight: 600; }
+.st--closed { color: var(--red); font-weight: 600; }
+
+.facts { display: grid; grid-template-columns: auto 1fr; gap: var(--s1) var(--s3); font-size: 14px; }
+.facts dt { color: var(--muted); }
+.facts dd { color: var(--fg); }
+
+.apply {
+  align-self: flex-start; margin-top: auto; padding-top: var(--s2);
+  font-size: 15px; font-weight: 600; color: var(--accent); text-decoration: none;
+}
+.card:hover .apply { text-decoration: underline; }

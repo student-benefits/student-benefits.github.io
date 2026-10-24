@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#15171a" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <title>Student Events — Hackathons, Fellowships and Grants · Student Benefits Hub</title>
+  <link rel="canonical" href="https://student-benefits.github.io/events/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Student Benefits Hub">
+  <meta property="og:title" content="Student Events — Hackathons, Fellowships and Grants">
+  <meta property="og:description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <meta property="og:url" content="https://student-benefits.github.io/events/">
+  <meta property="og:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Student Benefits Hub — free dev tools, cloud credits, and AI for students">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Student Events — Hackathons, Fellowships and Grants">
+  <meta name="twitter:description" content="The best events, hackathons, and conferences worth a student's time — curated, not aggregated.">
+  <meta name="twitter:image" content="https://student-benefits.github.io/assets/og-cover.png">
+  <link rel="alternate" type="application/json" href="https://student-benefits.github.io/data/events.json" title="Every event as JSON">
+  <link rel="stylesheet" href="/assets/shared.css">
+  <link rel="stylesheet" href="/events/events.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Student Benefits Hub — Events",
+  "description": "Hackathons, fellowships, grants, and conferences worth a student's time, with dates and eligibility.",
+  "url": "https://student-benefits.github.io/events/",
+  "license": "https://github.com/student-benefits/student-benefits.github.io/blob/main/LICENSE",
+  "isAccessibleForFree": true,
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://student-benefits.github.io/data/events.json"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap site-bar">
+      <a class="brand" href="/benefits/">Student Benefits Hub</a>
+      <nav class="site-nav" aria-label="Site">
+        <a href="/benefits/">Benefits</a>
+        <a href="/events/" aria-current="page">Events</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="page-head head-row">
+      <div>
+        <h1>Events</h1>
+        <p class="lede">Hackathons, grants, fellowships, and conferences, curated rather than aggregated.</p>
+      </div>
+      <a href="https://github.com/student-benefits/student-benefits.github.io/issues/new?template=new-event.yml" target="_blank" rel="noopener noreferrer" class="suggest">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Suggest a missing event
+      </a>
+    </div>
+
+    <div class="controls">
+      <span class="filter-label" id="cat-label">Category</span>
+      <div id="filter-bar" class="chips" role="group" aria-labelledby="cat-label"></div>
+    </div>
+
+    <main id="main-content">
+      <div class="results-bar">
+        <p class="count" aria-live="polite" aria-atomic="true"><b id="count">…</b> <span id="count-label">upcoming events</span></p>
+        <div class="bar-right">
+          <button type="button" id="remote-toggle" class="toggle" aria-pressed="false"><span class="box" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 8.5l3 3 7-7"/></svg></span>Remote only</button>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="empty">
+          <h2>This listing needs JavaScript</h2>
+          <p>Every event (dates, eligibility, and application link) is also served as plain JSON at
+            <a href="/data/events.json">/data/events.json</a>.</p>
+        </div>
+      </noscript>
+      <div id="content">
+        <div class="skeleton" aria-hidden="true"><div></div><div></div><div></div></div>
+      </div>
+    </main>
+
+    <footer class="site-footer">Data: <a href="/data/events.json">/data/events.json</a> (MIT) · <a href="https://github.com/student-benefits/student-benefits.github.io" target="_blank" rel="noopener noreferrer">Source on GitHub</a> · <a href="https://jonasneves.com" target="_blank" rel="noopener">jonasneves.com</a></footer>
+  </div>
+
+  <script src="/assets/shared.js"></script>
+  <script src="/events/events.js"></script>
+</body>
+</html>

@@ -1,0 +1,720 @@
+[
+  {
+    "id": "adobe-creative-cloud",
+    "name": "Adobe Creative Cloud",
+    "category": "Design",
+    "offer_type": "discount",
+    "description": "60%+ off 20+ apps including Photoshop, Illustrator, and Premiere. $19.99/month for the first year.",
+    "link": "https://www.adobe.com/creativecloud/buy/students.html",
+    "tags": [
+      "Design",
+      "Photography",
+      "Video",
+      "Creative"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "airtable-student",
+    "name": "Airtable Student",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Team plan for 6-24 months. Instant 120-day trial with .edu email, then apply for extended access.",
+    "link": "https://airtable.com/pricing",
+    "tags": [
+      "Database",
+      "No-Code",
+      "Spreadsheet"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "asana-student",
+    "name": "Asana Student",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Starter plan via Goodstack verification. Project management with timelines, boards, and team collaboration.",
+    "link": "https://asana.com/industry/students",
+    "tags": [
+      "Project Management",
+      "Tasks",
+      "Collaboration"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "autodesk",
+    "name": "Autodesk",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free 1-year access to AutoCAD, Revit, Maya, 3ds Max, Fusion, and 100+ products. Renewable while enrolled.",
+    "link": "https://www.autodesk.com/education/home",
+    "tags": [
+      "3D",
+      "CAD",
+      "Engineering"
+    ],
+    "popularity": 8
+  },
+  {
+    "id": "aws-educate",
+    "name": "AWS Educate",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free hands-on cloud labs, self-paced training, and digital badges, no credit card required. Job board for 18+.",
+    "link": "https://aws.amazon.com/education/awseducate/",
+    "tags": [
+      "AWS",
+      "Cloud",
+      "Learning"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "blackfire",
+    "name": "Blackfire",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Developer plan for 1 year (€348 value) — PHP and Python profiling with SQL and HTTP request analysis.",
+    "link": "https://www.blackfire.io/students",
+    "tags": [
+      "GitHub Student Pack",
+      "Profiling",
+      "PHP",
+      "Python"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "canva",
+    "name": "Canva for Education",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Pro with .edu email. Premium templates, stock content, brand kit, and collaboration tools for students.",
+    "link": "https://www.canva.com/education/students/",
+    "tags": [
+      "Design",
+      "Graphics",
+      "Marketing"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "carto",
+    "name": "CARTO",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free account with increased storage, real-time data, Location Data Services credits, and premium features for 2 years.",
+    "link": "https://app.carto.com/students",
+    "tags": [
+      "Geospatial",
+      "Maps",
+      "Data Analytics",
+      "GitHub Student Pack"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "chatgpt-plus-students",
+    "name": "ChatGPT Plus for Students",
+    "category": "AI Tools",
+    "offer_type": "trial",
+    "description": "Free 4 months of ChatGPT Plus (worth $80) for U.S. college students. Verify enrollment via SheerID; claim by Oct 31.",
+    "link": "https://chatgpt.com/students/2026/",
+    "tags": [
+      "AI",
+      "ChatGPT",
+      "Research",
+      "Study"
+    ],
+    "popularity": 10,
+    "expires": "2026-10-31"
+  },
+  {
+    "id": "cloudflare-workers",
+    "name": "Cloudflare Workers",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free Workers Paid Plan for 1 year. Includes Workers, Pages Functions, KV, and Durable Objects.",
+    "link": "https://www.cloudflare.com/students/",
+    "tags": [
+      "Serverless",
+      "Edge",
+      "Hosting"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "deepnote",
+    "name": "Deepnote",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Education plan for students while enrolled. Browser-based collaborative notebooks with unlimited team members.",
+    "link": "https://deepnote.com/education",
+    "tags": [
+      "Data Science",
+      "Jupyter",
+      "Collaboration",
+      "GitHub Student Pack"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "educative",
+    "name": "Educative.io",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "6 months free via GitHub Student Pack. 70+ interactive courses on programming, system design, and interviews.",
+    "link": "https://www.educative.io/github-students",
+    "tags": [
+      "Courses",
+      "Interview Prep",
+      "GitHub"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "figma",
+    "name": "Figma Education",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Figma Professional for 2 years. Unlimited files, version history, and team libraries. Verify with school email.",
+    "link": "https://www.figma.com/education/",
+    "tags": [
+      "Design",
+      "UI/UX",
+      "Collaboration"
+    ],
+    "popularity": 10
+  },
+  {
+    "id": "firecrawl",
+    "name": "Firecrawl",
+    "category": "Dev Tools",
+    "offer_type": "credits",
+    "description": "10,000 free API credits for web scraping and crawling; sign up with academic email, redeem code STUDENTEDU",
+    "link": "https://www.firecrawl.dev/student-program",
+    "tags": [
+      "API",
+      "Web Scraping",
+      "AI",
+      "RAG"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "framer",
+    "name": "Framer",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Basic plan for 1 year (worth $120/year), renewable every 11 months while enrolled.",
+    "link": "https://www.framer.com/education/students/",
+    "tags": [
+      "Design",
+      "Web Design",
+      "No-Code"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "frontend-masters",
+    "name": "Frontend Masters",
+    "category": "Learning",
+    "offer_type": "free",
+    "description": "6 months free access to all Frontend Masters courses and workshops (worth ~$234).",
+    "link": "https://master.dev/welcome/github-student-developers/",
+    "tags": [
+      "GitHub Student Pack",
+      "Frontend",
+      "Web Development",
+      "Courses"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "github-copilot",
+    "name": "GitHub Copilot Student",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free while enrolled: unlimited code completions and 200 AI credits/month for chat and agents; model auto-selected.",
+    "link": "https://github.com/education/students",
+    "tags": [
+      "AI",
+      "Coding",
+      "GitHub"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "github-student-pack",
+    "name": "GitHub Student Developer Pack",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "100+ free tools including Copilot Student, JetBrains IDEs, DigitalOcean credits, domains, and more.",
+    "link": "https://education.github.com/pack",
+    "tags": [
+      "Free Tools",
+      "Dev Pack",
+      "Essential"
+    ],
+    "popularity": 10
+  },
+  {
+    "id": "google-ai-plus",
+    "name": "Google AI Plus",
+    "category": "AI Tools",
+    "offer_type": "trial",
+    "description": "Free 1 year of Google AI Pro (US) or AI Plus (140+ countries). Sign in with enrolled student email.",
+    "link": "https://gemini.google.com/students",
+    "tags": [
+      "AI",
+      "Research",
+      "Study"
+    ],
+    "popularity": 10
+  },
+  {
+    "id": "google-cloud",
+    "name": "Google Cloud Credits",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "200 free Google Skills credits for hands-on cloud labs, skill badges, and courses. Credits last 1 year.",
+    "link": "https://cloud.google.com/edu/students",
+    "tags": [
+      "Cloud",
+      "Google",
+      "GCP"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "heroku",
+    "name": "Heroku",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "$13/month platform credit for 24 months via GitHub Student Pack. Easy app deployment with managed infrastructure.",
+    "link": "https://www.heroku.com/github-students",
+    "tags": [
+      "PaaS",
+      "Hosting",
+      "GitHub"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "jetbrains-ides",
+    "name": "JetBrains IDEs",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free access to all JetBrains professional IDEs (IntelliJ, PyCharm, WebStorm, etc.). Renewable annually.",
+    "link": "https://www.jetbrains.com/community/education/#students",
+    "tags": [
+      "IDE",
+      "Programming",
+      "Java"
+    ],
+    "popularity": 10,
+    "repo": "JetBrains/intellij-community"
+  },
+  {
+    "id": "jitter",
+    "name": "Jitter for Education",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Pro plan for students and educators: 1080p/60fps, ProRes and WebM exports.",
+    "link": "https://jitter.video/pricing",
+    "tags": [
+      "Video",
+      "Animation",
+      "Motion Design"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "kandue",
+    "name": "Kandue for Students on Canvas LMS",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Chrome extension: every Canvas deadline in one panel, practice quizzes on-device.",
+    "link": "https://chromewebstore.google.com/detail/plodbfednbjngcmckbcilgpkhgijgado",
+    "tags": [
+      "Maintainer's own",
+      "Canvas",
+      "Deadlines",
+      "Planning"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "kandue-graders",
+    "name": "Kandue for Graders on Canvas LMS",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Chrome extension for TAs: a read-only Canvas grading queue, longest-waiting students first.",
+    "link": "https://chromewebstore.google.com/detail/jimgnnnfaicmhhjlpgdejbnajbhjokdp",
+    "tags": [
+      "Maintainer's own",
+      "Canvas",
+      "Grading",
+      "TAs"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "kiro-students",
+    "name": "Kiro Students",
+    "category": "AI Tools",
+    "offer_type": "credits",
+    "description": "1,000 credits/month free for one year; AI coding agent with spec-driven development and CLI tools.",
+    "link": "https://kiro.dev/students/",
+    "tags": [
+      "AI Coding",
+      "Amazon",
+      "Credits",
+      "Student Verification"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "linear",
+    "name": "Linear",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Basic or Business plan for 1 year for full-time students. Apply via email with .edu address.",
+    "link": "https://linear.app/docs/billing-and-plans",
+    "tags": [
+      "Project Management",
+      "Issue Tracking",
+      "Team Collaboration"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "localstack",
+    "name": "LocalStack",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free AWS emulator with all services, 1,000 monthly CI/CD credits via GitHub Student Pack.",
+    "link": "https://www.localstack.cloud/localstack-for-students",
+    "tags": [
+      "AWS",
+      "Cloud",
+      "GitHub Student Pack"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "lovable",
+    "name": "Lovable",
+    "category": "AI Tools",
+    "offer_type": "discount",
+    "description": "50% off Lovable Pro for 12 months ($12.50/month); build full-stack apps with AI from text prompts.",
+    "link": "https://lovable.dev/students",
+    "tags": [
+      "AI",
+      "Full-Stack",
+      "App Builder"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "lucidchart",
+    "name": "Lucidchart",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Education account auto-upgraded with school email. Real-time collaboration, custom templates, and revision history.",
+    "link": "https://lucid.co/lucidchart/use-cases/education",
+    "tags": [
+      "Diagramming",
+      "Collaboration",
+      "Design"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "microsoft-365",
+    "name": "Microsoft 365 Education",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Word, Excel, PowerPoint, OneNote, Teams, and 1TB OneDrive storage with valid school email address.",
+    "link": "https://www.microsoft.com/en-us/education/products/office",
+    "tags": [
+      "Office",
+      "Documents",
+      "Microsoft"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "microsoft-azure",
+    "name": "Microsoft Azure",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "$100 free credits yearly (renewable while enrolled), no credit card required. 55+ Azure services.",
+    "link": "https://azure.microsoft.com/en-us/free/students",
+    "tags": [
+      "Azure",
+      "Microsoft",
+      "Cloud"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "miro-education",
+    "name": "Miro Education",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free for 2 years. Unlimited boards, high-res exports, and custom templates. Apply with student documentation.",
+    "link": "https://miro.com/education-whiteboard/",
+    "tags": [
+      "Whiteboard",
+      "Collaboration",
+      "Planning"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "mongodb-atlas",
+    "name": "MongoDB Atlas",
+    "category": "Cloud & Hosting",
+    "offer_type": "credits",
+    "description": "$50 in credits plus free MongoDB University access via GitHub Student Pack. Cloud database with generous free tier.",
+    "link": "https://www.mongodb.com/students",
+    "tags": [
+      "Database",
+      "NoSQL",
+      "Cloud"
+    ],
+    "popularity": 7,
+    "repo": "mongodb/mongo"
+  },
+  {
+    "id": "navicat",
+    "name": "Navicat",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year non-commercial license for Navicat Premium, Data Modeler, and Monitor, plus Cloud Pro Plan.",
+    "link": "https://www.navicat.com/en/sponsorship/education/student",
+    "tags": [
+      "Database",
+      "SQL",
+      "Dev Tools"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "new-relic",
+    "name": "New Relic",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free observability platform while enrolled (500 GB/month, 3 users, worth $300/month).",
+    "link": "https://newrelic.com/students",
+    "tags": [
+      "Monitoring",
+      "Observability",
+      "GitHub Student Pack"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "notion",
+    "name": "Notion Education",
+    "category": "Productivity",
+    "offer_type": "free",
+    "description": "Free Plus plan with unlimited blocks, file uploads, and 30-day version history. Just sign in with your .edu email.",
+    "link": "https://www.notion.com/product/notion-for-education",
+    "tags": [
+      "Notes",
+      "Planning",
+      "Knowledge"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "openai-codex-students",
+    "name": "OpenAI Codex for Students",
+    "category": "AI Tools",
+    "offer_type": "credits",
+    "description": "$100 in ChatGPT credits for AI-powered coding via Codex; valid 12 months. US and Canada only.",
+    "link": "https://developers.openai.com/community/students",
+    "tags": [
+      "AI Coding",
+      "Credits",
+      "Coding Assistant"
+    ],
+    "popularity": 9
+  },
+  {
+    "id": "perplexity-pro",
+    "name": "Perplexity Pro",
+    "category": "AI Tools",
+    "offer_type": "discount",
+    "description": "50% off Pro for students with .edu email. Includes Study Mode, unlimited uploads, and Research Mode.",
+    "link": "https://www.perplexity.ai/students",
+    "tags": [
+      "AI",
+      "Search",
+      "Research"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "protopie",
+    "name": "ProtoPie",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free 1-year Pro license via student verification. Build high-fidelity interactive prototypes without code.",
+    "link": "https://www.protopie.io/plans/education",
+    "tags": [
+      "Design",
+      "Prototyping",
+      "UI/UX"
+    ],
+    "popularity": 7
+  },
+  {
+    "id": "replit",
+    "name": "Replit",
+    "category": "Dev Tools",
+    "offer_type": "discount",
+    "description": "50% off Replit Core ($10/mo) with .edu email. Cloud-based IDE, hosting, and AI coding agent.",
+    "link": "https://replit.com/edu/students",
+    "tags": [
+      "IDE",
+      "Cloud Hosting",
+      "AI"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "retool",
+    "name": "Retool",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Business plan for students and educators — build internal tools, admin panels, and dashboards.",
+    "link": "https://retool.com/pricing",
+    "tags": [
+      "Dev Tools",
+      "No-Code",
+      "Internal Tools"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "sas-viya-for-learners",
+    "name": "SAS Viya for Learners",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free SAS Viya cloud platform: 2 CPU cores, 10 GB storage, Python/R, AI/ML tools. Renews annually with student email.",
+    "link": "https://www.sas.com/en_us/learn/academic-programs/students.html",
+    "tags": [
+      "AI Tools",
+      "Data Science",
+      "Analytics",
+      "Cloud"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "sentry",
+    "name": "Sentry",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free 1-year education plan with 50K errors/month, unlimited team members, and AI debugging.",
+    "link": "https://sentry.io/for/education",
+    "tags": [
+      "Error Tracking",
+      "Monitoring",
+      "GitHub Student Pack"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "sketch",
+    "name": "Sketch",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free for 1 year. Professional UI/UX design tool for Mac with prototyping, collaboration, and plugins.",
+    "link": "https://www.sketch.com/education/",
+    "tags": [
+      "Design",
+      "UI/UX",
+      "Mac"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "termius-pro",
+    "name": "Termius Pro",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro and Team features via GitHub Student Pack. SSH client with sync, SFTP, and team sharing.",
+    "link": "https://termius.com/education",
+    "tags": [
+      "SSH",
+      "Terminal",
+      "GitHub"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "unity-student",
+    "name": "Unity Student",
+    "category": "Design",
+    "offer_type": "free",
+    "description": "Free Unity Pro features for students. Includes Odin Inspector license and 20% off assets. Renewable.",
+    "link": "https://unity.com/products/unity-student",
+    "tags": [
+      "Game Dev",
+      "3D",
+      "Engine"
+    ],
+    "popularity": 8
+  },
+  {
+    "id": "vaadin",
+    "name": "Vaadin",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Pro subscription while enrolled via GitHub Student Pack. Java UI framework with Charts, Designer, and TestBench.",
+    "link": "https://vaadin.com/student-program",
+    "tags": [
+      "Java",
+      "UI Components",
+      "GitHub Student Pack",
+      "Web Development"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "weights-and-biases",
+    "name": "Weights & Biases",
+    "category": "AI Tools",
+    "offer_type": "free",
+    "description": "Free ML experiment tracking, visualization, and collaboration for students, educators, and researchers. Always free.",
+    "link": "https://wandb.ai/site/research/",
+    "tags": [
+      "AI",
+      "Machine Learning",
+      "Experiment Tracking",
+      "Research"
+    ],
+    "popularity": 7,
+    "repo": "wandb/wandb"
+  },
+  {
+    "id": "zed",
+    "name": "Zed",
+    "category": "Dev Tools",
+    "offer_type": "free",
+    "description": "Free Zed Pro for 12 months incl. $10/mo AI credits. AI-native code editor, 18+ students only.",
+    "link": "https://zed.dev/education",
+    "tags": [
+      "Code Editor",
+      "AI",
+      "Collaboration"
+    ],
+    "popularity": 8,
+    "repo": "zed-industries/zed"
+  }
+]

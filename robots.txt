@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://student-benefits.github.io/sitemap.xml

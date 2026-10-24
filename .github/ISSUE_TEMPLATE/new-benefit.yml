@@ -1,0 +1,27 @@
+name: Submit New Benefit
+description: Suggest a student benefit to add
+title: "[Benefit]: "
+labels: ["new-benefit"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A name is enough; the signup page and details are looked up for you.
+
+        In scope: benefits that help students **build, learn, and ship** (dev tools, cloud/AI credits, design and learning resources). Out of scope however good the deal: consumption perks such as music, video streaming, shopping and broad discount aggregators.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's the benefit?
+      placeholder: |
+        "Notion is free for students"
+        "Cursor offers one free year of Cursor Pro for verified university students. Sign up at cursor.com/students"
+    validations:
+      required: true
+
+  - type: input
+    id: link
+    attributes:
+      label: Link (optional)
+      placeholder: https://example.com/students

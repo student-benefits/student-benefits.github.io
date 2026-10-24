@@ -1,0 +1,263 @@
+let categories = [];
+let benefits = [];
+let activeCategory = 'All';
+let searchQuery = '';
+let sortOrder = 'popularity';
+let freeOnly = false;
+
+const OFFER_LABELS = { free: 'Free', discount: 'Discount', credits: 'Credits', trial: 'Trial' };
+const OWN_TAG = "Maintainer's own";
+
+const searchInput = document.getElementById('search');
+const filterBar = document.getElementById('filter-bar');
+const content = document.getElementById('content');
+const countEl = document.getElementById('count');
+const countLabel = document.getElementById('count-label');
+const freeToggle = document.getElementById('free-toggle');
+const sortSelect = document.getElementById('sort-select');
+const clearBtn = document.getElementById('clear-btn');
+const copyStatus = document.getElementById('copy-status');
+
+// replaceState, not pushState: the back button should point at wherever the
+// visitor came from, not at their own filter clicks.
+function readUrlState() {
+  const p = new URLSearchParams(location.search);
+  const q = p.get('q');
+  if (q) { searchQuery = q; searchInput.value = q; }
+  const cat = p.get('cat');
+  if (cat) activeCategory = cat;
+  if (p.get('free') === '1') freeOnly = true;
+  const sort = p.get('sort');
+  if (sort === 'alpha' || sort === 'popularity') sortOrder = sort;
+}
+
+// keepHash: writeUrlState must not clobber #id before revealHashCard reads it.
+// A filter the visitor changes themselves does drop it: the anchored card may
+// no longer be on screen.
+function writeUrlState(keepHash) {
+  const p = new URLSearchParams();
+  if (activeCategory !== 'All') p.set('cat', activeCategory);
+  if (searchQuery) p.set('q', searchQuery);
+  if (freeOnly) p.set('free', '1');
+  if (sortOrder !== 'popularity') p.set('sort', sortOrder);
+  const qs = p.toString();
+  const hash = keepHash ? location.hash : '';
+  history.replaceState(null, '', (qs ? '?' + qs : location.pathname) + hash);
+}
+
+// A claim window that has closed hides the card until maintain-benefits removes the entry.
+function isExpired(b) {
+  return !!b.expires && new Date(b.expires + 'T23:59:59') < new Date();
+}
+
+function getFilteredAndSorted() {
+  const q = searchQuery.toLowerCase();
+  return benefits
+    .filter(function (b) {
+      const catMatch = activeCategory === 'All' || b.category === activeCategory;
+      const searchMatch = b.name.toLowerCase().includes(q) ||
+        b.description.toLowerCase().includes(q) ||
+        b.category.toLowerCase().includes(q) ||
+        b.tags.some(function (t) { return t.toLowerCase().includes(q); });
+      return catMatch && searchMatch && (!freeOnly || b.offer_type === 'free');
+    })
+    .sort(function (x, y) {
+      if (sortOrder === 'alpha') return x.name.localeCompare(y.name);
+      if (y.popularity !== x.popularity) return y.popularity - x.popularity;
+      // Without a tie-break the stable sort falls back to id order. Free first, then A-Z.
+      const free = function (b) { return b.offer_type === 'free' ? 0 : 1; };
+      if (free(x) !== free(y)) return free(x) - free(y);
+      return x.name.localeCompare(y.name);
+    });
+}
+
+function renderFilters(animate) {
+  withFocusPreserved(filterBar, function () {
+    renderChips(filterBar, ['All'].concat(categories), activeCategory, {
+      hue: function (c) { return catVar(c); },
+      animate: animate
+    });
+  });
+}
+
+const ICON_REPO = '<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>';
+const ICON_LINK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>';
+
+function renderCard(b) {
+  // A maintainer's own entry is disclosed on the card, not left to a tag.
+  const own = b.tags.indexOf(OWN_TAG) !== -1
+    ? '<p class="own">Built by this site\'s maintainer</p>'
+    : '';
+  const tags = b.tags.filter(function (t) { return t !== OWN_TAG; }).slice(0, 3).map(function (t) {
+    return `<button type="button" class="tag" data-tag="${escapeHtml(t)}" aria-label="Search for ${escapeHtml(t)}">#${escapeHtml(t)}</button>`;
+  }).join('');
+  const offer = OFFER_LABELS[b.offer_type]
+    ? `<span class="offer offer--${escapeHtml(b.offer_type)}">${OFFER_LABELS[b.offer_type]}</span>`
+    : '';
+  const repoLink = b.repo
+    ? `<a class="icon-link" href="https://github.com/${escapeHtml(b.repo)}" target="_blank" rel="noopener noreferrer" aria-label="Source code: ${escapeHtml(b.repo)}" title="Open source: ${escapeHtml(b.repo)}">${ICON_REPO}</a>`
+    : '';
+  const share = `<a class="icon-link card-share" href="#${escapeHtml(b.id)}" data-id="${escapeHtml(b.id)}" aria-label="Copy link to ${escapeHtml(b.name)}" title="Copy link to this benefit">${ICON_LINK}</a>`;
+  return `<article class="card" id="${escapeHtml(b.id)}">
+    <div class="card-top">
+      <span class="cat"><span class="dot" style="--c:${catVar(b.category)}" aria-hidden="true"></span>${escapeHtml(b.category)}</span>
+      ${offer}
+    </div>
+    <h2 class="card-name"><a href="${escapeHtml(b.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(b.name)}</a></h2>
+    <p class="card-desc">${escapeHtml(b.description)}</p>
+    ${own}
+    <div class="card-foot">
+      <div class="tags">${tags}</div>
+      <div class="card-actions">${repoLink}${share}</div>
+    </div>
+  </article>`;
+}
+
+function renderGrid(filtered) {
+  if (filtered.length > 0) {
+    content.innerHTML = `<div class="grid">${filtered.map(renderCard).join('')}</div>`;
+  } else {
+    renderEmptyState(content, 'No benefits match', 'Try a different search or category.');
+  }
+}
+
+function renderCount(filtered) {
+  setCount(countEl, filtered.length);
+  const unfiltered = filtered.length === benefits.length;
+  countLabel.textContent = (unfiltered ? '' : 'of ' + benefits.length + ' ') + (benefits.length === 1 ? 'benefit' : 'benefits');
+  clearBtn.hidden = !searchQuery;
+}
+
+// animate: a click (filter, toggle, sort, tag) swaps the list; typing repaints at once.
+function render(animate) {
+  const filtered = getFilteredAndSorted();
+  renderCount(filtered);
+  freeToggle.setAttribute('aria-pressed', String(freeOnly));
+  sortSelect.value = sortOrder;
+  if (animate) swapList(content, function () { renderGrid(filtered); });
+  else { swapSeq++; renderGrid(filtered); }
+}
+
+sortSelect.addEventListener('change', function () {
+  sortOrder = sortSelect.value;
+  writeUrlState();
+  render(true);
+});
+
+freeToggle.addEventListener('click', function () {
+  freeOnly = !freeOnly;
+  writeUrlState();
+  render(true);
+});
+
+clearBtn.addEventListener('click', function () {
+  searchQuery = '';
+  searchInput.value = '';
+  writeUrlState();
+  render(true);
+  searchInput.focus(); // the clear button hides itself
+});
+
+filterBar.addEventListener('click', function (e) {
+  const btn = e.target.closest('.chip');
+  if (!btn || btn.dataset.cat === activeCategory) return;
+  activeCategory = btn.dataset.cat;
+  writeUrlState();
+  renderFilters(true);
+  render(true);
+});
+
+let urlWriteTimer = null;
+searchInput.addEventListener('input', function () {
+  searchQuery = searchInput.value;
+  // Safari throws SecurityError past 100 replaceState calls in 30s and then
+  // disables the API, which typing can reach. The other call sites are clicks.
+  clearTimeout(urlWriteTimer);
+  urlWriteTimer = setTimeout(writeUrlState, 250);
+  render(false);
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.target instanceof HTMLSelectElement) return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key.length === 1 && /[a-zA-Z0-9]/.test(e.key)) searchInput.focus();
+});
+
+content.addEventListener('click', function (e) {
+  const share = e.target.closest('.card-share');
+  if (share) {
+    e.preventDefault();
+    copyPermalink(share);
+    return;
+  }
+  const tag = e.target.closest('.tag');
+  if (!tag) return;
+  searchQuery = tag.dataset.tag;
+  searchInput.value = searchQuery;
+  writeUrlState();
+  render(true);
+  searchInput.focus(); // the clicked tag itself is replaced by the render
+});
+
+// The href is a real link, so right-click -> Copy Link Address still works where
+// the clipboard API is unavailable or denied.
+function copyPermalink(el) {
+  const url = location.origin + location.pathname + '#' + el.dataset.id;
+  const FAILED = 'Copy failed. Right-click the icon to copy the link.';
+  const done = function (msg, cls) {
+    copyStatus.textContent = msg;
+    el.classList.add(cls);
+    setTimeout(function () { el.classList.remove(cls); }, 1400);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(
+      function () { done('Link copied', 'is-copied'); },
+      function () { done(FAILED, 'is-failed'); }
+    );
+  } else {
+    done(FAILED, 'is-failed');
+  }
+}
+
+// A permalink must win over a filter it would otherwise be hidden behind,
+// or a shared card link lands on a list without that card.
+function revealHashCard() {
+  const id = decodeURIComponent(location.hash.slice(1));
+  if (!id) return;
+  if (!benefits.some(function (b) { return b.id === id; })) return;
+  if (!document.getElementById(id)) {
+    activeCategory = 'All';
+    searchQuery = '';
+    searchInput.value = '';
+    freeOnly = false;
+    writeUrlState(true);
+    renderFilters(false);
+    render(false);
+  }
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ block: 'center' });
+  el.classList.add('card--targeted');
+}
+
+addEventListener('resize', function () { placeIndicator(filterBar, false); });
+
+readUrlState();
+
+Promise.all([
+  fetch('/data/benefits.json').then(function (r) { return r.json(); }),
+  fetch('/data/categories.json').then(function (r) { return r.json(); })
+]).then(function (results) {
+  benefits = results[0].filter(function (b) { return !isExpired(b); });
+  // A category with no live entry gets no chip: it would filter to an empty page.
+  categories = results[1].filter(function (c) { return benefits.some(function (b) { return b.category === c; }); });
+  // A ?cat= naming a category that no longer exists would filter everything out.
+  if (activeCategory !== 'All' && categories.indexOf(activeCategory) === -1) activeCategory = 'All';
+  writeUrlState(true);
+  renderFilters(false);
+  render(false);
+  rise(content.querySelectorAll('.card'));
+  revealHashCard();
+}).catch(function () {
+  renderEmptyState(content, 'Failed to load', 'Could not fetch benefit data. Please refresh.');
+});
