@@ -272,6 +272,20 @@
     "popularity": 6
   },
   {
+    "id": "google-colab-pro",
+    "name": "Google Colab Pro",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free 1-year Colab Pro for verified US higher-ed students: more compute and GPU access for notebooks. Limited supply.",
+    "link": "https://colab.research.google.com/signup",
+    "tags": [
+      "Notebooks",
+      "GPU",
+      "Machine Learning"
+    ],
+    "popularity": 7
+  },
+  {
     "id": "heroku",
     "name": "Heroku",
     "category": "Cloud & Hosting",
