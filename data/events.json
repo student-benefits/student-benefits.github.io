@@ -1,18 +1,5 @@
 [
   {
-    "id": "paul-daisy-soros-fellowship-2027",
-    "name": "Paul & Daisy Soros Fellowships for New Americans",
-    "organizer": "Paul & Daisy Soros Fellowships",
-    "category": "fellowship",
-    "date": "2026-04-01",
-    "date_end": "2026-10-30",
-    "remote": true,
-    "eligibility": "New Americans (immigrants and children of immigrants) age 32 or younger pursuing graduate degrees",
-    "why": "$90,000 over two years for graduate school. Join a network of 835+ Fellows across 103 countries making significant contributions to US society, culture and academia.",
-    "link": "https://pdsoros.org/",
-    "expires": "2026-10-30"
-  },
-  {
     "id": "thiel-fellowship-2026",
     "name": "Thiel Fellowship",
     "organizer": "Thiel Foundation",
@@ -37,19 +24,6 @@
     "why": "One-year paid residency at Apple working on ML products that impact millions. Residents publish at premier venues like NeurIPS while gaining direct Apple mentor access.",
     "link": "https://machinelearning.apple.com/updates/aiml-residency-program-application-2026",
     "expires": "2027-06-30"
-  },
-  {
-    "id": "anthropic-ai-safety-fellows-2026",
-    "name": "Anthropic AI Safety Fellows",
-    "organizer": "Anthropic",
-    "category": "fellowship",
-    "date": "2026-07-01",
-    "date_end": "2026-10-31",
-    "remote": true,
-    "eligibility": "Engineers and researchers with strong Python background; must have right to work in US, UK, or Canada",
-    "why": "$3,850/week stipend and $15k/month in compute for full-time AI safety research. 80%+ of past fellows published a paper; 40%+ received a full-time Anthropic offer.",
-    "link": "https://airtable.com/appiuxxfhf5moRwTx/pagULi7KjbpUaOdIg/form",
-    "expires": "2026-10-31"
   },
   {
     "id": "iaps-ai-policy-fellowship-2026",
@@ -77,20 +51,6 @@
     "why": "$20k equity-free grant + $250k follow-on on the startup track, or full-time placement at Substack, Sesame AI, and other a16z portfolio companies. Cohort 2 opens September 2026.",
     "link": "https://alpha.a16zspeedrun.com/apply",
     "expires": "2027-08-31"
-  },
-  {
-    "id": "ai-alignment-research-fellowship-2026",
-    "name": "AI Alignment Research Fellowship 2026",
-    "organizer": "AI Alignment Foundation",
-    "category": "fellowship",
-    "date": "2026-09-08",
-    "date_end": "2026-10-30",
-    "deadline": "2026-08-17",
-    "remote": true,
-    "eligibility": "Any career stage with strong ML background and AI safety interest; full-time 40 hrs/week; contractor payment capability required; apply by August 17",
-    "why": "$12,000 stipend plus cloud compute budget for 8 weeks of full-time AI safety research with AE Studio mentors. Six spots per cohort; demo day with travel covered in Los Angeles.",
-    "link": "https://www.aialignmentfoundation.org/fellowship/apply",
-    "expires": "2026-10-30"
   },
   {
     "id": "mlh-fellowship-fall-2026",
@@ -135,48 +95,6 @@
     "expires": "2026-12-11"
   },
   {
-    "id": "hackharvard-2026",
-    "name": "HackHarvard 2026",
-    "organizer": "HackHarvard / Harvard University",
-    "category": "hackathon",
-    "date": "2026-10-16",
-    "date_end": "2026-10-18",
-    "location": "Cambridge, MA",
-    "remote": false,
-    "eligibility": "Undergraduate and graduate students worldwide; teams up to 4",
-    "why": "Harvard's 36-hour flagship hackathon. Themes span health, climate, and civic tech. Significant prize pool and industry mentorship; free for all student applicants worldwide.",
-    "link": "https://hhuh.io/",
-    "expires": "2026-10-18"
-  },
-  {
-    "id": "nsf-grfp-2026",
-    "name": "NSF Graduate Research Fellowship Program 2026",
-    "organizer": "National Science Foundation",
-    "category": "fellowship",
-    "date": "2026-10-16",
-    "date_end": "2026-10-23",
-    "deadline": "2026-10-23",
-    "remote": true,
-    "eligibility": "Early-career US graduate students or those planning to enroll in a STEM research degree; US citizen or permanent resident",
-    "why": "$37,000/year stipend plus $16,000 tuition allowance for 3 years — the US's most prestigious graduate STEM fellowship. Field-specific deadlines Oct 16–23.",
-    "link": "https://www.nsf.gov/funding/initiatives/grfp",
-    "expires": "2026-10-23"
-  },
-  {
-    "id": "dubhacks-2026",
-    "name": "DubHacks '26",
-    "organizer": "DubHacks / University of Washington",
-    "category": "hackathon",
-    "date": "2026-10-17",
-    "date_end": "2026-10-18",
-    "location": "Seattle, WA",
-    "remote": false,
-    "eligibility": "All collegiate students worldwide across all disciplines; beginners welcome; individual entry with team formation available",
-    "why": "$44,000+ in prizes at UW's flagship 36-hour hackathon. AWS, Google Cloud, Meta sponsors plus career fair with direct recruiter access. 1,100+ hackers.",
-    "link": "https://dh26.dubhacks.co",
-    "expires": "2026-10-18"
-  },
-  {
     "id": "claude-corps-2026",
     "name": "Claude Corps",
     "organizer": "Anthropic / CodePath",
@@ -192,21 +110,6 @@
     "expires": "2027-10-19"
   },
   {
-    "id": "cal-hacks-13",
-    "name": "Cal Hacks 13.0",
-    "organizer": "Hackathons @ Berkeley",
-    "category": "hackathon",
-    "date": "2026-10-23",
-    "date_end": "2026-10-25",
-    "deadline": "2026-09-20",
-    "location": "San Francisco, CA",
-    "remote": false,
-    "eligibility": "Undergraduates, graduate students, and new grads within 1 year of graduation; apply by Sep 13 (priority) or Sep 20 (regular)",
-    "why": "$100,000 in prizes at Berkeley's flagship 36-hour hackathon in SF. Priority application deadline Sep 13; decisions out Sep 17.",
-    "link": "https://www.calhacks.io/",
-    "expires": "2026-10-25"
-  },
-  {
     "id": "ai-genesis-hackathon-2026",
     "name": "AI Genesis Hackathon 2026",
     "organizer": "Deriv & /function1",
@@ -219,20 +122,6 @@
     "why": "$45,500+ across six AI tracks — security, generative AI, Web3, collaboration tools, autonomous agents, and industry solutions. Online build phase is global; top teams earn a trip to the Dubai finale.",
     "link": "https://fnctn1.com/ai_genesis_hackathon",
     "expires": "2026-11-03"
-  },
-  {
-    "id": "grace-hopper-celebration-2026",
-    "name": "Grace Hopper Celebration 2026",
-    "organizer": "AnitaB.org",
-    "category": "conference",
-    "date": "2026-10-27",
-    "date_end": "2026-10-30",
-    "location": "Anaheim, CA",
-    "remote": false,
-    "eligibility": "Students and professionals who identify as women or non-binary in tech; scholarships available",
-    "why": "The world's largest gathering of women in tech (~30,000 attendees). AnitaB.org scholarships cover full attendance. Career fair is a direct path to top company offers.",
-    "link": "https://ghc.anitab.org/",
-    "expires": "2026-10-30"
   },
   {
     "id": "ethglobal-mumbai-2026",
