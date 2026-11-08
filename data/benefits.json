@@ -61,7 +61,7 @@
     "name": "AWS Educate",
     "category": "Cloud & Hosting",
     "offer_type": "free",
-    "description": "Free hands-on cloud labs, self-paced training, and digital badges, no credit card required. Job board for 18+.",
+    "description": "Free AWS labs (S3, EC2, VPC, RDS), self-paced training, and digital badges; no credit card. Job board for 18+.",
     "link": "https://aws.amazon.com/education/awseducate/",
     "tags": [
       "AWS",
