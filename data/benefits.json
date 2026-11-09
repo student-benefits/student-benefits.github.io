@@ -487,6 +487,32 @@
     "repo": "mongodb/mongo"
   },
   {
+    "id": "name-com",
+    "name": "Name.com",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "One first-year domain free from 15+ dev TLDs (.app, .dev, .live) with SSL and WHOIS privacy, via GitHub Student Pack.",
+    "link": "https://www.name.com/partner/github-students",
+    "tags": [
+      "Domains",
+      "GitHub Student Pack"
+    ],
+    "popularity": 8
+  },
+  {
+    "id": "namecheap-education",
+    "name": "Namecheap Education",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "Free .me domain for 1 year with GitHub Pages setup, for listed US, UK, Canada and Australia universities.",
+    "link": "https://nc.me/faq",
+    "tags": [
+      "Domains",
+      "GitHub Pages"
+    ],
+    "popularity": 7
+  },
+  {
     "id": "navicat",
     "name": "Navicat",
     "category": "Dev Tools",
@@ -638,6 +664,19 @@
       "Design",
       "UI/UX",
       "Mac"
+    ],
+    "popularity": 6
+  },
+  {
+    "id": "tech-domains",
+    "name": ".TECH Domains",
+    "category": "Cloud & Hosting",
+    "offer_type": "free",
+    "description": "One standard .tech domain free for 1 year via GitHub Student Pack; renews at the standard price.",
+    "link": "https://get.tech/github-student-developer-pack",
+    "tags": [
+      "Domains",
+      "GitHub Student Pack"
     ],
     "popularity": 6
   },
